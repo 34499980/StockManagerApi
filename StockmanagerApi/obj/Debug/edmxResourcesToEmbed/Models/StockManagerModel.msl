@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StockManagerDBModelStoreContainer" CdmEntityContainer="StockManagerDBEntities">
+    <EntitySetMapping Name="DISPATCH">
+      <EntityTypeMapping TypeName="StockManagerDBModel.DISPATCH">
+        <MappingFragment StoreEntitySet="DISPATCH">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Origin" ColumnName="Origin" />
+          <ScalarProperty Name="Destiny" ColumnName="Destiny" />
+          <ScalarProperty Name="IdState" ColumnName="IdState" />
+          <ScalarProperty Name="DateDispatched" ColumnName="DateDispatched" />
+          <ScalarProperty Name="DateRecived" ColumnName="DateRecived" />
+          <ScalarProperty Name="Unity" ColumnName="Unity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DISPATCH_STATE">
+      <EntityTypeMapping TypeName="StockManagerDBModel.DISPATCH_STATE">
+        <MappingFragment StoreEntitySet="DISPATCH_STATE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALE">
+      <EntityTypeMapping TypeName="StockManagerDBModel.SALE">
+        <MappingFragment StoreEntitySet="SALE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DateProces" ColumnName="DateProces" />
+          <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Refer" ColumnName="Refer" />
+          <ScalarProperty Name="IdSUcursal" ColumnName="IdSUcursal" />
+          <ScalarProperty Name="IdState" ColumnName="IdState" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALE_STATE">
+      <EntityTypeMapping TypeName="StockManagerDBModel.SALE_STATE">
+        <MappingFragment StoreEntitySet="SALE_STATE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STOCK">
+      <EntityTypeMapping TypeName="StockManagerDBModel.STOCK">
+        <MappingFragment StoreEntitySet="STOCK">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="QR" ColumnName="QR" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+          <ScalarProperty Name="IdState" ColumnName="IdState" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STOCK_STATE">
+      <EntityTypeMapping TypeName="StockManagerDBModel.STOCK_STATE">
+        <MappingFragment StoreEntitySet="STOCK_STATE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SUCURSAL">
+      <EntityTypeMapping TypeName="StockManagerDBModel.SUCURSAL">
+        <MappingFragment StoreEntitySet="SUCURSAL">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO">
+      <EntityTypeMapping TypeName="StockManagerDBModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="DateBorn" ColumnName="DateBorn" />
+          <ScalarProperty Name="DateAdmission" ColumnName="DateAdmission" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="STOCK_SUCURSAL">
+      <EntityTypeMapping TypeName="StockManagerDBModel.STOCK_SUCURSAL">
+        <MappingFragment StoreEntitySet="STOCK_SUCURSAL">
+          <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+          <ScalarProperty Name="IdStock" ColumnName="IdStock" />
+          <ScalarProperty Name="Unity" ColumnName="Unity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SALE_STOCK" TypeName="StockManagerDBModel.SALE_STOCK" StoreEntitySet="SALE_STOCK">
+      <EndProperty Name="SALE">
+        <ScalarProperty Name="ID" ColumnName="IdSale" />
+      </EndProperty>
+      <EndProperty Name="SUCURSAL">
+        <ScalarProperty Name="ID" ColumnName="IdStock" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
