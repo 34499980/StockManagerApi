@@ -13,14 +13,30 @@ namespace StockmanagerApi.Controllers
         StockManagerDBEntities db = new StockManagerDBEntities();
         // GET: api/Stock
         public IEnumerable<STOCK> Get()
-        {
-            return db.STOCK.ToList<STOCK>();
+        {            
+            try
+            {
+                return db.STOCK.ToList<STOCK>();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+           
         }
 
         // GET: api/Stock/5
-        public STOCK Get(string Code)
+        public STOCK Get(int id)
         {
-            return (STOCK)db.STOCK.Where(x => x.Code == Code);
+            try
+            {
+                return db.STOCK.Where(x => x.Code == id.ToString()).FirstOrDefault();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         // POST: api/Stock
@@ -31,13 +47,30 @@ namespace StockmanagerApi.Controllers
         // PUT: api/Stock/5
         public void Put(STOCK stock)
         {
-            db.STOCK.Add(stock);
-            db.SaveChanges();
+            try
+            {
+                db.STOCK.Add(stock);
+                db.SaveChanges();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         // DELETE: api/Stock/5
         public void Delete(int id)
         {
+            try
+            {
+                 STOCK result = db.STOCK.Where(x => x.Code == id.ToString()).FirstOrDefault();
+                 result.IdState = 2;
+                db.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
