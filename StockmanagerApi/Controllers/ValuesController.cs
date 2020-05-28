@@ -27,6 +27,7 @@ namespace StockmanagerApi.Controllers
         // POST api/values
         public void Post([FromBody]string value)
         {
+            var hola = " hola";
         }
 
         // PUT api/values/5

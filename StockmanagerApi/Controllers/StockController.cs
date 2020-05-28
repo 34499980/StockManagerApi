@@ -40,8 +40,18 @@ namespace StockmanagerApi.Controllers
         }
 
         // POST: api/Stock
-        public void Post([FromBody]string value)
+        [HttpPost]
+        public void Post([FromBody] STOCK stock)
         {
+            try
+            {
+                db.STOCK.Add(stock);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // PUT: api/Stock/5
