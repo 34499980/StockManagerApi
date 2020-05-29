@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace StockmanagerApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class StockController : ApiController
     {
         StockManagerDBEntities db = new StockManagerDBEntities();
@@ -40,7 +42,7 @@ namespace StockmanagerApi.Controllers
         }
 
         // POST: api/Stock
-        [HttpPost]
+        [HttpPost]        
         public void Post([FromBody] STOCK stock)
         {
             try
