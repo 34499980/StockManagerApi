@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 using StockmanagerApi.Models;
 
 namespace StockmanagerApi.Controllers
@@ -25,13 +26,13 @@ namespace StockmanagerApi.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([Microsoft.AspNetCore.Mvc.FromBody] string value)
         {
-            var hola = " hola";
+           
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [Microsoft.AspNetCore.Mvc.FromBody] string value)
         {
         }
 
