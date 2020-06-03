@@ -28,11 +28,11 @@ namespace StockmanagerApi.Controllers
         }
 
         // GET: api/Stock/5
-        public STOCK Get(int id)
+        public STOCK Get(string id)
         {
             try
             {
-                return db.STOCK.Where(x => x.Code == id.ToString()).FirstOrDefault();
+                return db.STOCK.Where(x => x.Code == id).FirstOrDefault();
             }
             catch(Exception ex)
             {
