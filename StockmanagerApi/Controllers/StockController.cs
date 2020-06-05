@@ -9,7 +9,7 @@ using System.Web.Http.Cors;
 
 namespace StockmanagerApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class StockController : ApiController
     {
         StockManagerDBEntities db = new StockManagerDBEntities();

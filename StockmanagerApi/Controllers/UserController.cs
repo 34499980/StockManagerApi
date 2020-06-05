@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using StockmanagerApi.Class;
 using StockmanagerApi.Models;
 
 namespace StockmanagerApi.Controllers
@@ -16,17 +17,36 @@ namespace StockmanagerApi.Controllers
     {
         StockManagerDBEntities db = new StockManagerDBEntities();
         // GET api/values
-        public IEnumerable<string> Get()
+        public IEnumerable<UsuarioDTO> Get()
         {
-            db.USUARIO.ToList();
-            return new string[] { "value1", "value2" };
+            List<UsuarioDTO> result = new List<UsuarioDTO>();
+            UsuarioDTO user = null;
+           // var result = (IEnumerable<UsuarioDTO>)db.USUARIO.ToList<USUARIO>();
+            foreach (var item in db.USUARIO.ToList<USUARIO>())
+            {
+                user = new UsuarioDTO();
+                user.ID = item.ID;
+                user.UserName = item.UserName;
+                user.LASTNAME = item.LASTNAME;
+                user.Name = item.Name;
+                user.Password = item.Password;
+                user.PostalCode = item.PostalCode;             
+                user.IdSucursal = item.IdSucursal;
+                result.Add(user);
+            }
+
+            return result;
         }
 
         // GET api/values/5
-        public USUARIO Get(string id)
+        public USUARIO Get([FromUri] string id)
         {
+            foreach(var item in id)
+            {
+                var asd = "";
+            }
 
-            var input = JsonConvert.DeserializeObject<USUARIO>(id);
+          //  var input = JsonConvert.DeserializeObject<USUARIO>(id);
 
             dynamic result = "";            
             try
@@ -45,7 +65,7 @@ namespace StockmanagerApi.Controllers
         }
 
         // POST api/values
-        public USUARIO Post([Microsoft.AspNetCore.Mvc.FromBody] USUARIO value)
+        public dynamic Post([Microsoft.AspNetCore.Mvc.FromBody] USUARIO value)
         {
             //var input = JsonConvert.DeserializeObject<USUARIO>(value);
 
@@ -55,9 +75,19 @@ namespace StockmanagerApi.Controllers
                 result = (USUARIO)db.USUARIO.Where(x => x.UserName == value.UserName).FirstOrDefault();
                 if(result != null)
                 {
-                    if (result.password == value.Password)
+                    if (result.Password == value.Password)
                     {
-                        return result;
+                        UsuarioDTO user = new UsuarioDTO();
+                        user = new UsuarioDTO();
+                        user.ID = result.ID;
+                        user.UserName = result.UserName;
+                        user.LASTNAME = result.LASTNAME;
+                        user.Name = result.Name;
+                        user.Password = result.Password;
+                        user.PostalCode = result.PostalCode;
+                        user.IdSucursal = result.IdSucursal;
+
+                        return user;
                     }
                     throw new Exception("Usuario o contraseña incorrecta");
                 }
