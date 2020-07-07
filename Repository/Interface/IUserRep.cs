@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface IUserRep
     {
         IEnumerable<UserDto> GetAllUsers();
+        UserDto GetUserById(string userName);
     }
 }

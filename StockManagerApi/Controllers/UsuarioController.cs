@@ -25,7 +25,8 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                return _userBL.GetAllUsers();
+                var result = _userBL.GetAllUsers();
+                return result;
             }
             catch(Exception ex)
             {
@@ -36,9 +37,17 @@ namespace StockManagerApi.Controllers
 
         // GET api/<UsuarioController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public UserDto Get(string value)
         {
-            return "value";
+            try
+            {
+              var result = _userBL.GetUserById(value);
+                return result;
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+           
         }
 
         // POST api/<UsuarioController>

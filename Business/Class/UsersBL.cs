@@ -15,11 +15,31 @@ namespace Business.Class
         {
             this._userRep = userRep;
         }
+        /// <summary>
+        /// Trae todos los usuarios
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<UserDto> GetAllUsers()
         {
             try
             {
                return _userRep.GetAllUsers();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Trae los usuarios por nombre de usuario.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public UserDto GetUserById(string userName)
+        {
+            try
+            {
+              return _userRep.GetUserById(userName);
             }catch(Exception ex)
             {
                 throw ex;
