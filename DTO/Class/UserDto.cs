@@ -10,6 +10,7 @@ namespace DTO.Class
     public class UserDto
     {
         [Key]
+        public int ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string First_name { get; set; }
@@ -19,6 +20,10 @@ namespace DTO.Class
         public string Email { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
+        public int IdSucursal { get; set; }
 
+        [ForeignKey("IdSucursal")]
+
+        public virtual SucursalDto Sucursal { get; set; }
     }
 }
