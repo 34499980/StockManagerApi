@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,10 +22,12 @@ namespace StockManagerApi.Controllers
         }
         // GET: api/<UsuarioController>
         [HttpGet]
+  
         public IEnumerable<UserDto> Get()
         {
             try
             {
+                var header = Request.Headers["environment"];
                 var result = _userBL.GetAllUsers();
                 return result;
             }
@@ -54,6 +57,7 @@ namespace StockManagerApi.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            var result = "llego";
         }
 
         // PUT api/<UsuarioController>/5

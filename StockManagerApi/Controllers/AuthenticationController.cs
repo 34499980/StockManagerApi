@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ServiceStack.Web;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -37,9 +39,10 @@ namespace StockManagerApi.Controllers
 
         // POST api/<AuthenticationController>
         [HttpPost]
-        public bool Post([FromBody] Object value)
-        {
-            bool result = false;
+        
+        public ActionResult<bool> Post(Object value)
+        {            
+            bool ok = false;            
             try
             {
                UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
@@ -47,13 +50,17 @@ namespace StockManagerApi.Controllers
 
                 if(userInput.Password == userOutput.Password)
                 {
-                    result = true;
+                    ok = true;
+                 
+                   
                 }
                 else
                 {
-                    result = false;
+                    ok = false;
+                   
                 }
-                return result;
+               
+                return ok;
             }catch(Exception ex)
             {
                 throw ex;

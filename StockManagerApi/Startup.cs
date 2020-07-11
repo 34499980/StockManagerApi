@@ -36,11 +36,16 @@ namespace StockManagerApi
         {
             services.AddControllers();
             services.AddMvc();
+            
             services.AddDbContext<StockManagerContext>(op => op.UseSqlServer(Configuration["ConnectionString:StockManagerDB"]));
             var builder = new ContainerBuilder();
-            builder.Populate(services);
+            services.AddCors(options => {
+                options.AddDefaultPolicy(x => { x.WithOrigins("*"); });
+            }) ;
+           
             services.AddScoped<IUserRep, UserRep>();
             services.AddScoped<IUsersBL, UsersBL>();
+            builder.Populate(services);
             this.ApplicationContainer = builder.Build();
         }
 
@@ -53,8 +58,13 @@ namespace StockManagerApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseRouting();
+
+            //app.UseCors(builder => builder    
+            //     .AllowAnyOrigin()
+            //    .AllowAnyMethod()                
+            //    .WithHeaders( "Content-Type"));
 
             app.UseAuthorization();
 
