@@ -58,7 +58,7 @@ namespace StockManagerApi
             }
 
             app.UseHttpsRedirection();
-            app.UseCors();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
 
             //app.UseCors(builder => builder    

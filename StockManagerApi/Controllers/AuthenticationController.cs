@@ -14,6 +14,7 @@ using ServiceStack.Web;
 
 namespace StockManagerApi.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
@@ -38,9 +39,8 @@ namespace StockManagerApi.Controllers
         }
 
         // POST api/<AuthenticationController>
-        [HttpPost]
-        
-        public ActionResult<bool> Post(Object value)
+        [HttpPost]        
+        public async Task<IActionResult> Post(Object value)
         {            
             bool ok = false;            
             try
@@ -48,19 +48,19 @@ namespace StockManagerApi.Controllers
                UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
                UserDto userOutput = _userBL.GetUserById(userInput.UserName);
 
-                if(userInput.Password == userOutput.Password)
+                if(userOutput != null && userInput.Password == userOutput.Password)
                 {
-                    ok = true;
+                    return Ok(true);
                  
                    
                 }
                 else
                 {
-                    ok = false;
+                    throw new Exception("Usuario o contraseña incorrecta");
                    
                 }
                
-                return ok;
+                return Ok(ok);
             }catch(Exception ex)
             {
                 throw ex;
