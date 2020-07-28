@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DTO.Class
 {
-    [Table("USUARIO", Schema = "dbo")]
+    [Table("USERS", Schema = "dbo")]
     public class UserDto
     {
         [Key]

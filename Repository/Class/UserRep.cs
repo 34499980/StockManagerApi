@@ -24,7 +24,7 @@ namespace Repository.Class
         {
             try
             {
-                return _context.USUARIO.ToList();
+                return _context.USERS.ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -40,7 +40,7 @@ namespace Repository.Class
         {
             try
             {
-              var result =  _context.USUARIO.Where(x => x.UserName == userName).FirstOrDefault();
+              var result =  _context.USERS.Where(x => x.UserName == userName).FirstOrDefault();
                 return result;
             }catch(Exception ex)
             {

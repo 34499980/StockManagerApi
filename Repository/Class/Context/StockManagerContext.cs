@@ -17,7 +17,7 @@ namespace Repository.Class.Context
         {
             Database.Migrate();
         }
-        public DbSet<UserDto> USUARIO { get; set; }
+        public DbSet<UserDto> USERS { get; set; }
         public IEnumerable<TEntity> ExecuteStoredProcedure<TEntity>(string storedProcedure, params object[] parameters) where TEntity : class
         {
             bool first = true;

@@ -62,6 +62,11 @@ C:\Users\aribr\Desktop\StockManagerApi2\StockManagerApi\obj\Debug\netcoreapp3.1\
 C:\Users\aribr\Desktop\StockManagerApi2\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.dll
 C:\Users\aribr\Desktop\StockManagerApi2\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.pdb
 C:\Users\aribr\Desktop\StockManagerApi2\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.genruntimeconfig.cache
+C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.csprojAssemblyReference.cache
+C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.AssemblyInfoInputs.cache
+C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.AssemblyInfo.cs
+C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.csproj.CoreCompileInputs.cache
+C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -116,11 +121,6 @@ C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Repository.
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Business.pdb
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\DTO.pdb
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Repository.pdb
-C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.csprojAssemblyReference.cache
-C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.AssemblyInfoInputs.cache
-C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.AssemblyInfo.cs
-C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.csproj.CoreCompileInputs.cache
-C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.RazorTargetAssemblyInfo.cache
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.csproj.CopyComplete
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\staticwebassets\StockManagerApi.StaticWebAssets.Manifest.cache

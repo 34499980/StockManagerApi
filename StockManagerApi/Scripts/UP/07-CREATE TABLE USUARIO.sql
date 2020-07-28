@@ -1,5 +1,5 @@
 
-CREATE TABLE USUARIO(
+CREATE TABLE USERS(
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[UserName] [nvarchar](100) NOT NULL,
 	[Password] [nvarchar](10) NOT NULL,
