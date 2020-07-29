@@ -57,7 +57,7 @@ namespace StockManagerApi.Controllers
         [HttpPost]
         public void Post([FromBody] string value)
         {
-            var result = "llego";
+            
         }
 
         // PUT api/<UsuarioController>/5
