@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Text;
 
 namespace DTO.Class
@@ -21,9 +22,11 @@ namespace DTO.Class
         public string Address { get; set; }
         public int PostalCode { get; set; }
         public int IdSucursal { get; set; }
+        public int IdRule { get; set; }
 
         [ForeignKey("IdSucursal")]
 
         public virtual SucursalDto Sucursal { get; set; }
+        public virtual RulesDto Rule { get; set; }
     }
 }
