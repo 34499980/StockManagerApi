@@ -12,7 +12,8 @@ namespace DTO.Class
         [Key]
         public int ID { get; set; }
         public DateTime DateCreate { get; set; }
-        public string IdUser { get; set; }
+        public int IdUser { get; set; }
+        public string User { get; set; }
         public int Origin { get; set; }
         public int Destiny { get; set; }
         public int IdState { get; set; }
@@ -20,9 +21,13 @@ namespace DTO.Class
         public DateTime DateRecived { get; set; }
         public int Unity { get; set; }
 
+        [ForeignKey("IdUser")]
         public virtual UserDto Usuario { get; set; }
+        [ForeignKey("Origin")]
         public virtual SucursalDto SucOrigin { get; set; }
+        [ForeignKey("Destiny")]
         public virtual SucursalDto SucDestiny { get; set; }
+        [ForeignKey("IdState")]
         public virtual Dispatch_StateDto State { get; set; }
     }
 }

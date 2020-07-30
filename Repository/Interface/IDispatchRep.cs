@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface IDispatchRep
     {
         int saveDispatch(DispatchDto dispatch);
+        IEnumerable<Dispatch_StateDto> GetStates();
     }
 }

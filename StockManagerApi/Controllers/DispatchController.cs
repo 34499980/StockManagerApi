@@ -36,7 +36,7 @@ namespace StockManagerApi.Controllers
 
         // POST api/<DispatchController>
         [HttpPost]
-        public int Post([FromBody] Object value)
+        public int Post(Object value)
         {           
             try
             {

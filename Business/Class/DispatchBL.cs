@@ -3,6 +3,7 @@ using DTO.Class;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Class
@@ -20,11 +21,23 @@ namespace Business.Class
         {
             try
             {
-              dispatch.IdUser =  this._userhRep.GetUserById(dispatch.IdUser).ID.ToString();
+              dispatch.IdUser =  this._userhRep.GetUserById(dispatch.User).ID;
                 dispatch.DateCreate = DateTime.Now;
+                dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.Description == "Creado").FirstOrDefault().ID;
                return  this._dispatchRep.saveDispatch(dispatch);
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<Dispatch_StateDto> GetStates()
+        {
+            try
+            {
+                return this._dispatchRep.GetStates();
+            }catch(Exception ex)
             {
                 throw ex;
             }
