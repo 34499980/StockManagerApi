@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Interface;
+using DTO.Class;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,6 +15,11 @@ namespace StockManagerApi.Controllers
     [ApiController]
     public class DispatchController : ControllerBase
     {
+        private readonly IDispatchBL _dispatchBL;
+        public DispatchController(IDispatchBL dispatch)
+        {
+            this._dispatchBL = dispatch;
+        }
         // GET: api/<DispatchController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -28,8 +36,18 @@ namespace StockManagerApi.Controllers
 
         // POST api/<DispatchController>
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
+        public int Post([FromBody] Object value)
+        {           
+            try
+            {
+                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(value.ToString());
+               return this._dispatchBL.saveDispatch(dispatchInput);
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // PUT api/<DispatchController>/5

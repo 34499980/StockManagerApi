@@ -12,7 +12,7 @@ namespace DTO.Class
         [Key]
         public int ID { get; set; }
         public DateTime DateCreate { get; set; }
-        public int IdUser { get; set; }
+        public string IdUser { get; set; }
         public int Origin { get; set; }
         public int Destiny { get; set; }
         public int IdState { get; set; }

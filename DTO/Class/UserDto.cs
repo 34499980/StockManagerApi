@@ -27,6 +27,7 @@ namespace DTO.Class
         [ForeignKey("IdSucursal")]
 
         public virtual SucursalDto Sucursal { get; set; }
+        [ForeignKey("IdRule")]
         public virtual RulesDto Rule { get; set; }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Interface;
+using DTO.Class;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,11 +14,24 @@ namespace StockManagerApi.Controllers
     [ApiController]
     public class SucursalController : ControllerBase
     {
+        private readonly ISucursalBL _sucursalBL;
+        public SucursalController(ISucursalBL sucursalBL)
+        {
+            this._sucursalBL = sucursalBL;
+        }
         // GET: api/<SucursalController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<SucursalDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return this._sucursalBL.GetAllSucursal();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Error al recuperar las sucursales!");
+            }
+           
         }
 
         // GET api/<SucursalController>/5
