@@ -36,13 +36,25 @@ namespace Repository.Class
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public UserDto GetUserById(string userName)
+        public UserDto GetUserByUserName(string userName)
         {
             try
             {
               var result =  _context.USERS.Where(x => x.UserName == userName).FirstOrDefault();
                 return result;
             }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public UserDto GetUserById(int id)
+        {
+            try
+            {
+                var result = _context.USERS.Where(x => x.ID == id).FirstOrDefault();
+                return result;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

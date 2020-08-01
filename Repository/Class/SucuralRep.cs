@@ -25,5 +25,15 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        public SucursalDto GetSucursalById(int id)
+        {
+            try
+            {
+                return this._context.SUCURSAL.Where(x => x.ID == id).FirstOrDefault();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

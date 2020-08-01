@@ -9,5 +9,7 @@ namespace Repository.Interface
     {
         int saveDispatch(DispatchDto dispatch);
         IEnumerable<Dispatch_StateDto> GetStates();
+        IEnumerable<DispatchDto> GetAllDispatches();
+        DispatchDto GetDispatchById(int id);
     }
 }

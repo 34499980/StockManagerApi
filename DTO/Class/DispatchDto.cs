@@ -9,16 +9,16 @@ namespace DTO.Class
     [Table("DISPATCH", Schema = "dbo")]
     public class DispatchDto
     {
+        
         [Key]
         public int ID { get; set; }
         public DateTime DateCreate { get; set; }
-        public int IdUser { get; set; }
-        public string User { get; set; }
+        public int IdUser { get; set; }       
         public int Origin { get; set; }
         public int Destiny { get; set; }
         public int IdState { get; set; }
-        public DateTime DateDispatched { get; set; }
-        public DateTime DateRecived { get; set; }
+        public DateTime? DateDispatched { get; set; }
+        public DateTime? DateRecived { get; set; }
         public int Unity { get; set; }
 
         [ForeignKey("IdUser")]

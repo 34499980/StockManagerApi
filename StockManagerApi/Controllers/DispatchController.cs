@@ -22,16 +22,32 @@ namespace StockManagerApi.Controllers
         }
         // GET: api/<DispatchController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<DispatchDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return this._dispatchBL.GetAllDispatches();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+            
         }
 
         // GET api/<DispatchController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public DispatchDto Get(int id)
         {
-            return "value";
+            try
+            {
+              return  this._dispatchBL.GetDispatchById(id);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         // POST api/<DispatchController>
@@ -40,8 +56,9 @@ namespace StockManagerApi.Controllers
         {           
             try
             {
-                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(value.ToString());
-               return this._dispatchBL.saveDispatch(dispatchInput);
+                var input = JsonConvert.DeserializeObject<Dictionary<string,object>>(value.ToString());
+                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
+               return this._dispatchBL.saveDispatch(dispatchInput, input["user"].ToString());
 
             }
             catch(Exception ex)

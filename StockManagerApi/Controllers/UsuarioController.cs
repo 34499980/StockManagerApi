@@ -44,7 +44,7 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-              var result = _userBL.GetUserById(value);
+              var result = _userBL.GetUserByName(value);
                 return result;
             }catch(Exception ex)
             {

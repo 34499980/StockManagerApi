@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface ISucursalRep
     {
         IEnumerable<SucursalDto> GetAllSucursal();
+        SucursalDto GetSucursalById(int id);
     }
 }

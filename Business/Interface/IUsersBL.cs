@@ -8,6 +8,7 @@ namespace Business.Interface
     public interface IUsersBL
     {
         IEnumerable<UserDto> GetAllUsers();
-        UserDto GetUserById(string userName);
+        UserDto GetUserByName(string userName);
+        UserDto GetUserById(int id);
     }
 }

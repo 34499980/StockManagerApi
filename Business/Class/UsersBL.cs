@@ -35,12 +35,35 @@ namespace Business.Class
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public UserDto GetUserById(string userName)
+        public UserDto GetUserById(int id)
         {
             try
             {
-              return _userRep.GetUserById(userName);
+              return _userRep.GetUserById(id);
             }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public UserDto GetUserByName(string userName)
+        {
+            try
+            {
+                return _userRep.GetUserByUserName(userName);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public UserDto GetUserByUserName(string userName)
+        {
+            try
+            {
+                
+                return this._userRep.GetUserByUserName(userName);
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

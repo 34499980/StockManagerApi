@@ -12,16 +12,18 @@ namespace Business.Class
     {
         private readonly IDispatchRep _dispatchRep;
         private readonly IUserRep _userhRep;
-        public DispatchBL(IDispatchRep dispatchRep, IUserRep userRep)
+        private readonly ISucursalRep _sucursalRep;
+        public DispatchBL(IDispatchRep dispatchRep, IUserRep userRep, ISucursalRep sucursalRep)
         {
             this._dispatchRep = dispatchRep;
             this._userhRep = userRep;
+            this._sucursalRep = sucursalRep;
         }
-        public int saveDispatch(DispatchDto dispatch)
+        public int saveDispatch(DispatchDto dispatch,string user)
         {
             try
             {
-              dispatch.IdUser =  this._userhRep.GetUserById(dispatch.User).ID;
+              dispatch.IdUser =  this._userhRep.GetUserByUserName(user).ID;
                 dispatch.DateCreate = DateTime.Now;
                 dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.Description == "Creado").FirstOrDefault().ID;
                return  this._dispatchRep.saveDispatch(dispatch);
@@ -37,6 +39,37 @@ namespace Business.Class
             try
             {
                 return this._dispatchRep.GetStates();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<DispatchDto> GetAllDispatches()
+        {
+            try
+            {
+                var listDispatches = this._dispatchRep.GetAllDispatches();
+                foreach (var item in listDispatches)
+                {
+                    item.Usuario = this._userhRep.GetUserById(item.IdUser);
+                    item.SucDestiny = this._sucursalRep.GetSucursalById(item.Destiny);
+                    item.SucOrigin = this._sucursalRep.GetSucursalById(item.Origin);
+                    item.State = this._dispatchRep.GetStates().Where(x => x.ID == item.IdState).FirstOrDefault(); ;
+                }
+                return listDispatches;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DispatchDto GetDispatchById(int id)
+        {
+            try
+            {
+                return this._dispatchRep.GetDispatchById(id);
             }catch(Exception ex)
             {
                 throw ex;

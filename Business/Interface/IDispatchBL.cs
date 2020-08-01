@@ -7,7 +7,9 @@ namespace Business.Interface
 {
     public interface IDispatchBL
     {
-       int saveDispatch(DispatchDto dispatch);
+       int saveDispatch(DispatchDto dispatch,string user);
         IEnumerable<Dispatch_StateDto> GetStates();
+        IEnumerable<DispatchDto> GetAllDispatches();
+        DispatchDto GetDispatchById(int id);
     }
 }

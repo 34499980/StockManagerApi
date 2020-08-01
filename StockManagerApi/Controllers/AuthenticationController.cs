@@ -46,7 +46,7 @@ namespace StockManagerApi.Controllers
             try
             {
                UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
-               UserDto userOutput = _userBL.GetUserById(userInput.UserName);
+               UserDto userOutput = _userBL.GetUserByName(userInput.UserName);
 
                 if(userOutput != null && userInput.Password == userOutput.Password)
                 {

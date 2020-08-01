@@ -39,5 +39,26 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        public IEnumerable<DispatchDto> GetAllDispatches()
+        {
+            try
+            {
+               return this._context.DISPATCH.ToList();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public DispatchDto GetDispatchById(int id)
+        {
+            try
+            {
+                return this._context.DISPATCH.Where(x => x.ID == id).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
