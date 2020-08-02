@@ -22,5 +22,6 @@ namespace DTO.Class
 
         public virtual Stock_StateDto State { get; set; }
         public virtual SucursalDto Sucursal { get; set; }
+        public virtual int Unity { get; set; }
     }
 }

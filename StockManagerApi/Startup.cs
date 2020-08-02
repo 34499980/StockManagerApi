@@ -49,6 +49,8 @@ namespace StockManagerApi
             services.AddScoped<ISucursalBL, SucursalBL>();
             services.AddScoped<IDispatchRep, DispatchRep>();
             services.AddScoped<IDispatchBL, DispatchBL>();
+            services.AddScoped<IStockRep, StockRep>();
+            services.AddScoped<IStockBL, StockBL>();
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
         }

@@ -13,11 +13,13 @@ namespace Business.Class
         private readonly IDispatchRep _dispatchRep;
         private readonly IUserRep _userhRep;
         private readonly ISucursalRep _sucursalRep;
-        public DispatchBL(IDispatchRep dispatchRep, IUserRep userRep, ISucursalRep sucursalRep)
+        private readonly IStockRep _stockRep;
+        public DispatchBL(IDispatchRep dispatchRep, IUserRep userRep, ISucursalRep sucursalRep, IStockRep stockRep)
         {
             this._dispatchRep = dispatchRep;
             this._userhRep = userRep;
             this._sucursalRep = sucursalRep;
+            this._stockRep = stockRep;
         }
         public int saveDispatch(DispatchDto dispatch,string user)
         {
@@ -69,7 +71,16 @@ namespace Business.Class
         {
             try
             {
-                return this._dispatchRep.GetDispatchById(id);
+                DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
+                var stockList = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
+                foreach (var item in stockList)
+                {
+                  StockDto stock =  this._stockRep.GetStockById(item.IdStock);
+                  stock.Unity = item.Unity;
+                  dispatch.Stock.Add(stock);
+
+                }
+                return dispatch;
             }catch(Exception ex)
             {
                 throw ex;

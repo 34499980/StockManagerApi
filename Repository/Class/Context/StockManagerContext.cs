@@ -25,6 +25,7 @@ namespace Repository.Class.Context
         public DbSet<Rules_PermissionDto> RULES_PERMISSION { get; set; }
         public DbSet<SucursalDto> SUCURSAL { get; set; }
         public DbSet<Dispatch_StateDto> DISPATCH_STATE { get; set; }
+        public DbSet<Dispatch_StockDto> DISPATCH_STOCK { get; set; }
         public IEnumerable<TEntity> ExecuteStoredProcedure<TEntity>(string storedProcedure, params object[] parameters) where TEntity : class
         {
             bool first = true;

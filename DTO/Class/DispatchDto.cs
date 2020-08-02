@@ -29,5 +29,6 @@ namespace DTO.Class
         public virtual SucursalDto SucDestiny { get; set; }
         [ForeignKey("IdState")]
         public virtual Dispatch_StateDto State { get; set; }
+        public virtual ICollection<StockDto> Stock { get; set; }
     }
 }

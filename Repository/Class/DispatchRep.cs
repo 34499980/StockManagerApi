@@ -60,5 +60,15 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        public IEnumerable<Dispatch_StockDto> GetStockIdByDispatch(int id)
+        {
+            try
+            {
+                return this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == id).ToList();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
