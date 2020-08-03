@@ -8,5 +8,6 @@ namespace Business.Interface
     public interface IStockBL
     {
         StockDto GetStockById(int id);
+        IEnumerable<StockDto> GetAllStock();
     }
 }

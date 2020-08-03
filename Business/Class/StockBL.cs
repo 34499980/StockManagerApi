@@ -18,8 +18,22 @@ namespace Business.Class
         {
             try
             {
+                var stock = this._stockRep.GetAllStock();
                 return this._stockRep.GetStockById(id);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IEnumerable<StockDto> GetAllStock()
+        {
+            try
+            {
+                return this._stockRep.GetAllStock();
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

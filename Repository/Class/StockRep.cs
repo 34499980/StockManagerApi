@@ -25,5 +25,16 @@ namespace Repository.Class
                 throw ex;
             }
         }
+
+        public IEnumerable<StockDto> GetAllStock()
+        {
+            try
+            {
+                return this._context.STOCK.ToList();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

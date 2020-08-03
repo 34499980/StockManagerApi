@@ -8,5 +8,6 @@ namespace Repository.Interface
     public interface IStockRep
     {
         StockDto GetStockById(int id);
+        IEnumerable<StockDto> GetAllStock();
     }
 }

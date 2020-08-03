@@ -75,10 +75,10 @@ namespace Business.Class
                 var stockList = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
                 foreach (var item in stockList)
                 {
-                  StockDto stock =  this._stockRep.GetStockById(item.IdStock);
-                  stock.Code = stock.Code.PadLeft(10, '0');
-                  stock.Unity = item.Unity;
-                  dispatch.Stock.Add(stock);
+                    StockDto stock = this._stockRep.GetStockById(item.ID);
+                    stock.Code = stock.Code.PadLeft(10, '0');
+                    //stock.Unity = item.Unity;
+                    dispatch.Stock.Add(stock);
 
                 }
                 return dispatch;
