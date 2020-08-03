@@ -60,11 +60,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
-        public IEnumerable<DispatchDto> GetStockIdByDispatch(int id)
+        public IEnumerable<StockDto> GetStockIdByDispatch(int id)
         {
             try
             {
-                return this._context.DISPATCH.Where(x => x.ID == id).ToList();
+                return this._context.STOCK.Where(x => x.ID == id).ToList();
             }catch(Exception ex)
             {
                 throw ex;

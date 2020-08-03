@@ -15,7 +15,7 @@ namespace Repository.Class
         {
             this._context = context;
         }
-        public StockDto GetStockById(int id)
+        public StockDto GetStockById(long id)
         {
             try
             {

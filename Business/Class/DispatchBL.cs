@@ -26,8 +26,9 @@ namespace Business.Class
             try
             {
               dispatch.IdUser =  this._userhRep.GetUserByUserName(user).ID;
-                dispatch.DateCreate = DateTime.Now;
-                dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.Description == "Creado").FirstOrDefault().ID;
+              dispatch.DateCreate = DateTime.Now;
+              dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.Description == "Creado").FirstOrDefault().ID;
+              dispatch.Unity = 0;
                return  this._dispatchRep.saveDispatch(dispatch);
             }
             catch(Exception ex)
@@ -77,7 +78,7 @@ namespace Business.Class
                 {
                     StockDto stock = this._stockRep.GetStockById(item.ID);
                     stock.Code = stock.Code.PadLeft(10, '0');
-                    //stock.Unity = item.Unity;
+                    stock.Unity = item.Unity;
                     dispatch.Stock.Add(stock);
 
                 }

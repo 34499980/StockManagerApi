@@ -11,7 +11,7 @@ namespace DTO.Class
     public class StockDto
     {
         [Key]
-        public int ID { get; set; }
+        public Int64 ID { get; set; }
         public string Code { get { return ID.ToString().PadLeft(10, '0'); } set { Code = value; } }
         public string QR { get; set; }
         public string Name { get; set; }
@@ -26,5 +26,6 @@ namespace DTO.Class
         [ForeignKey("IdSucursal")]
         public virtual SucursalDto Sucursal { get; set; }
         public virtual int Unity { get; set; }
+ 
     }
 }

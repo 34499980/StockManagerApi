@@ -18,8 +18,14 @@ namespace DTO.Class
         public int IdSucursal { get; set; }
         public int IdState { get; set; }
 
+
+        [ForeignKey("IdSucursal")]
         public virtual SucursalDto Sucursal { get; set; }
+
+        [ForeignKey("IdState")]
         public virtual Sale_StateDto State { get; set; }
+        [ForeignKey("IdUser")]
+        public virtual UserDto User { get; set; }
 
     }
 }
