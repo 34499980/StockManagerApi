@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Interface;
+using DTO.Class;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,6 +14,11 @@ namespace StockManagerApi.Controllers
     [ApiController]
     public class StockController : ControllerBase
     {
+        private readonly IStockBL _stockBL;
+        public StockController(IStockBL stockBL)
+        {
+            this._stockBL = stockBL;
+        }
         // GET: api/<StockController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -21,9 +28,15 @@ namespace StockManagerApi.Controllers
 
         // GET api/<StockController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public StockDto Get(int id)
         {
-            return "value";
+            try
+            {
+                return this._stockBL.GetStockById(id);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // POST api/<StockController>

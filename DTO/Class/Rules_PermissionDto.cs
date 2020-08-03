@@ -14,7 +14,10 @@ namespace DTO.Class
         public int IdPermission {get;set;}
         public int Read { get; set; }
         public int Write { get; set; }
+
+        [ForeignKey("IdRule")]
         public virtual RulesDto Rule { get; set; }
+        [ForeignKey("IdPermission")]
         public virtual PermissionDto Permission { get; set; }
     }
 }

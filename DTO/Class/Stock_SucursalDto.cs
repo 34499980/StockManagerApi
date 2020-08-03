@@ -13,10 +13,10 @@ namespace DTO.Class
         public int IdStock { get; set; }
         public int Unity { get; set; }
 
-          
 
+        [ForeignKey("IdSucursal")]
         public virtual SucursalDto Sucursal { get; set; }
-
+        [ForeignKey("IdStock")]
         public virtual StockDto Stock { get; set; }
     }
 

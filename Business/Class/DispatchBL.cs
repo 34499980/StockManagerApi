@@ -53,7 +53,7 @@ namespace Business.Class
             {
                 var listDispatches = this._dispatchRep.GetAllDispatches();
                 foreach (var item in listDispatches)
-                {
+                {                    
                     item.Usuario = this._userhRep.GetUserById(item.IdUser);
                     item.SucDestiny = this._sucursalRep.GetSucursalById(item.Destiny);
                     item.SucOrigin = this._sucursalRep.GetSucursalById(item.Origin);
@@ -71,11 +71,12 @@ namespace Business.Class
         {
             try
             {
-                DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
+                DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);               
                 var stockList = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
                 foreach (var item in stockList)
                 {
                   StockDto stock =  this._stockRep.GetStockById(item.IdStock);
+                  stock.Code = stock.Code.PadLeft(10, '0');
                   stock.Unity = item.Unity;
                   dispatch.Stock.Add(stock);
 

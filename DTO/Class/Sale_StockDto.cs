@@ -11,8 +11,9 @@ namespace DTO.Class
         public int IdSale { get; set; }
         public int IdStock { get; set; }
 
+        [ForeignKey("IdSale")]
         public virtual SaleDto Sale { get; set; }
-
+        [ForeignKey("IdStock")]
         public virtual StockDto Stock { get; set; }
     }
 }

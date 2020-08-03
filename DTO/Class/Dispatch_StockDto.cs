@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace DTO.Class
 {
@@ -13,5 +14,12 @@ namespace DTO.Class
         public int IdDispatch { get; set; }
         public int IdStock { get; set; }
         public int Unity { get; set; }
+
+        [JsonIgnore]
+        [ForeignKey("IdDispatch")]
+        public virtual DispatchDto Dispatch { get; set; }
+        [JsonIgnore]
+        [ForeignKey("IdStock")]
+        public virtual StockDto Stock { get; set; }
     }
 }
