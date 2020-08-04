@@ -25,7 +25,8 @@ namespace DTO.Class
         public virtual Stock_StateDto State { get; set; }
         [ForeignKey("IdSucursal")]
         public virtual SucursalDto Sucursal { get; set; }
-        public virtual int Unity { get; set; }
+        [NotMapped]
+        public  int Unity { get; set; }
  
     }
 }

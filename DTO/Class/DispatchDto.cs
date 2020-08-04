@@ -31,8 +31,8 @@ namespace DTO.Class
         public virtual SucursalDto SucDestiny { get; set; }
         [ForeignKey("IdState")]
         public virtual Dispatch_StateDto State { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<StockDto> Stock { get; set; }
+        [NotMapped]
+        public  ICollection<StockDto> Stock { get; set; }
         public virtual string Code
         {
             get { return ID.ToString().PadLeft(10,'0'); }
