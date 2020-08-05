@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,8 +42,20 @@ namespace StockManagerApi.Controllers
 
         // POST api/<StockController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(Object value)
         {
+            try
+            {
+                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
+                StockDto stockInput = JsonConvert.DeserializeObject<StockDto>(input["stock"].ToString());
+                this._stockBL.SaveStock(stockInput, input["user"].ToString());
+               
+               
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // PUT api/<StockController>/5

@@ -11,22 +11,25 @@ namespace DTO.Class
     public class StockDto
     {
         [Key]
-        public Int64 ID { get; set; }
-        public string Code { get { return ID.ToString().PadLeft(10, '0'); } set { Code = value; } }
+        public long ID { get; set; }
+        public string Code { get; set; }
         public string QR { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public int IdSucursal { get; set; }
         public int IdState { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [ForeignKey("IdState")]
         public virtual Stock_StateDto State { get; set; }
         [ForeignKey("IdSucursal")]
         public virtual SucursalDto Sucursal { get; set; }
         [NotMapped]
+        public  IEnumerable<Stock_SucursalDto> Stock_Sucursal { get; set; }
+        [NotMapped]
         public  int Unity { get; set; }
- 
+       
+
     }
 }

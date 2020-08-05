@@ -9,7 +9,7 @@ namespace DTO.Class
     public class Sale_StockDto
     {
         public int IdSale { get; set; }
-        public int IdStock { get; set; }
+        public long IdStock { get; set; }
 
         [ForeignKey("IdSale")]
         public virtual SaleDto Sale { get; set; }

@@ -18,7 +18,8 @@ namespace Repository.Class.Context
             Database.Migrate();
         }
         public DbSet<UserDto> USERS { get; set; }
-        
+        public DbSet<QRDto> QR { get; set; }
+
         public DbSet<DispatchDto> DISPATCH { get; set; }
         public DbSet<RulesDto> RULES { get; set; }
         public DbSet<SaleDto> SALE { get; set; }       
@@ -27,6 +28,10 @@ namespace Repository.Class.Context
         public DbSet<Dispatch_StateDto> DISPATCH_STATE { get; set; }
         public DbSet<Dispatch_StockDto> DISPATCH_STOCK { get; set; }
         public DbSet<StockDto> STOCK { get; set; }
+        public DbSet<Stock_StateDto> STOCK_STATE { get; set; }
+        public DbSet<Stock_SucursalDto> STOCK_SUCURSAL { get; set; }
+        
+
         public IEnumerable<TEntity> ExecuteStoredProcedure<TEntity>(string storedProcedure, params object[] parameters) where TEntity : class
         {
             bool first = true;

@@ -9,5 +9,12 @@ namespace Repository.Interface
     {
         StockDto GetStockById(long id);
         IEnumerable<StockDto> GetAllStock();
+        void SaveStock(StockDto stock);
+        void UpdateStock(StockDto stock);
+        void UpdateQR(StockDto stock);
+        long GetQR(StockDto stock);
+        IEnumerable<Stock_StateDto> GetAllStates();
+        void saveStockBySucursal(StockDto stock);
+        IEnumerable<Stock_SucursalDto> GetStockBySucursal(StockDto stock);
     }
 }

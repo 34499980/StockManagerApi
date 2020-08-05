@@ -10,5 +10,6 @@ namespace Repository.Interface
         IEnumerable<UserDto> GetAllUsers();
         UserDto GetUserByUserName(string userName);
         UserDto GetUserById(int id);
+      
     }
 }

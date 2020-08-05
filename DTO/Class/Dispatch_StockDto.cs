@@ -12,7 +12,7 @@ namespace DTO.Class
     {
         [Key]
         public int IdDispatch { get; set; }
-        public Int64 IdStock { get; set; }
+        public long IdStock { get; set; }
         public int Unity { get; set; }
 
         [JsonIgnore]
