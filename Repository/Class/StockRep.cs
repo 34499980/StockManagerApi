@@ -16,6 +16,11 @@ namespace Repository.Class
         {
             this._context = context;
         }
+        /// <summary>
+        /// Busca el stock por su id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public StockDto GetStockById(long id)
         {
             try
@@ -26,7 +31,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Busca todo el stock
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StockDto> GetAllStock()
         {
             try
@@ -37,6 +45,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Guarda el stock nuevo
+        /// </summary>
+        /// <param name="stock"></param>
         public void SaveStock(StockDto stock)
         {
             try
@@ -49,7 +61,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Actualiza los datos de stock
+        /// </summary>
+        /// <param name="stock"></param>
         public void UpdateStock(StockDto stock)
         {
             try
@@ -61,6 +76,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Ingresa un codigo QR por stock. Si ya posee uno, devuelve ese.
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <returns></returns>
         public long GetQR(StockDto stock)
         {
             try
@@ -81,6 +101,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Actualiza la relacion de QR-Stock ingresado el stock generado
+        /// </summary>
+        /// <param name="stock"></param>
         public void UpdateQR(StockDto stock)
         {
             try
@@ -95,6 +119,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve los estados que puede tener el stock
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Stock_StateDto> GetAllStates()
         {
             try
@@ -105,6 +133,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Al crear el stock, se genera por cada sucursal por lo menos con valor 0
+        /// </summary>
+        /// <param name="stock"></param>
         public void saveStockBySucursal(StockDto stock)
         {
             try
@@ -133,7 +165,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Devuelve todas las unidades de stock que tiene por sucursal
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <returns></returns>
         public IEnumerable<Stock_SucursalDto> GetStockBySucursal(StockDto stock)
         {
             try

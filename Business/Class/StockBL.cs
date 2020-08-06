@@ -17,6 +17,11 @@ namespace Business.Class
             this._stockRep = stockRep;
             this._userRep = userRep;
         }
+        /// <summary>
+        /// Devuelve stock por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public StockDto GetStockById(int id)
         {
             try
@@ -34,7 +39,10 @@ namespace Business.Class
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Devuelve todo el stock
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<StockDto> GetAllStock()
         {
             try
@@ -46,6 +54,11 @@ namespace Business.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Guarda el nuevo stock
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <param name="userInput"></param>
         public void SaveStock(StockDto stock,string userInput)
         {
             try
@@ -74,6 +87,11 @@ namespace Business.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Actualiza los datos de stock
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <param name="user"></param>
         public void UpdateStock(StockDto stock,string user)
         {
             try

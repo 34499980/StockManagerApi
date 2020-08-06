@@ -15,6 +15,10 @@ namespace Repository.Class
         {
             this._context = context;
         }
+        /// <summary>
+        /// Devuelve todas las sucursales
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<SucursalDto> GetAllSucursal()
         {
             try
@@ -25,6 +29,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve la sucursal por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public SucursalDto GetSucursalById(int id)
         {
             try

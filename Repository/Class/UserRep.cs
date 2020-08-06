@@ -47,6 +47,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve usuario por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public UserDto GetUserById(int id)
         {
             try

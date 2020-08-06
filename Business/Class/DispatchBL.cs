@@ -21,6 +21,12 @@ namespace Business.Class
             this._sucursalRep = sucursalRep;
             this._stockRep = stockRep;
         }
+        /// <summary>
+        /// Guarda despacho nuevo
+        /// </summary>
+        /// <param name="dispatch"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public int saveDispatch(DispatchDto dispatch,string user)
         {
             try
@@ -36,6 +42,10 @@ namespace Business.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Trae todos los estados de un despacho
+        /// </summary>
+        /// <returns></returns>
 
         public IEnumerable<Dispatch_StateDto> GetStates()
         {
@@ -47,6 +57,10 @@ namespace Business.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve todos los despachos
+        /// </summary>
+        /// <returns></returns>
 
         public IEnumerable<DispatchDto> GetAllDispatches()
         {
@@ -67,6 +81,11 @@ namespace Business.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Busca despacho por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public DispatchDto GetDispatchById(int id)
         {

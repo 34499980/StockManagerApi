@@ -31,7 +31,7 @@ namespace Business.Class
         }
 
         /// <summary>
-        /// Trae los usuarios por nombre de usuario.
+        /// Devuelve usuario por id.
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
@@ -45,6 +45,11 @@ namespace Business.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve usuario por nickName
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public UserDto GetUserByName(string userName)
         {
             try
@@ -56,17 +61,6 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public UserDto GetUserByUserName(string userName)
-        {
-            try
-            {
-                
-                return this._userRep.GetUserByUserName(userName);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+       
     }
 }

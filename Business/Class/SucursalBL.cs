@@ -14,6 +14,10 @@ namespace Business.Class
         {
             this._sucursalRep = sucursalRep;
         }
+        /// <summary>
+        /// Devuelve todas las sucursales
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<SucursalDto> GetAllSucursal()
         {
             try

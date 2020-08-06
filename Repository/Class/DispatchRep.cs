@@ -15,6 +15,11 @@ namespace Repository.Class
         {
             this._context = context;
         }
+        /// <summary>
+        /// Graba un nuevo despacho y devuelve su id
+        /// </summary>
+        /// <param name="dispatch"></param>
+        /// <returns></returns>
         public int saveDispatch(DispatchDto dispatch)
         {
             try
@@ -28,6 +33,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve todos los estados que puede tener un despacho
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Dispatch_StateDto> GetStates()
         {
             try
@@ -39,6 +48,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve todos los despachos
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DispatchDto> GetAllDispatches()
         {
             try
@@ -49,6 +62,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Busca despacho por id pasado por parametros
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public DispatchDto GetDispatchById(int id)
         {
             try
@@ -60,6 +78,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Busca el stock que tiene asignado un despacho
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<StockDto> GetStockIdByDispatch(int id)
         {
             try
