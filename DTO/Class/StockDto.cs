@@ -19,7 +19,7 @@ namespace DTO.Class
         public string Model { get; set; }
         public int IdSucursal { get; set; }
         public int IdState { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
         [ForeignKey("IdState")]
         public virtual Stock_StateDto State { get; set; }

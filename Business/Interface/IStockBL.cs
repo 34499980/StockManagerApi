@@ -7,7 +7,7 @@ namespace Business.Interface
 {
     public interface IStockBL
     {
-        StockDto GetStockById(int id);
+        StockDto GetStockByCode(string code);
         IEnumerable<StockDto> GetAllStock();
         void SaveStock(StockDto stock, string userInput);
         void UpdateStock(StockDto stock,string userInput);

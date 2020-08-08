@@ -26,8 +26,8 @@ C:\Proyectos\StockManagerApi\Business\bin\Debug\netcoreapp3.1\Business.dll
 C:\Proyectos\StockManagerApi\Business\bin\Debug\netcoreapp3.1\Business.pdb
 C:\Proyectos\StockManagerApi\Business\bin\Debug\netcoreapp3.1\DTO.dll
 C:\Proyectos\StockManagerApi\Business\bin\Debug\netcoreapp3.1\Repository.dll
-C:\Proyectos\StockManagerApi\Business\bin\Debug\netcoreapp3.1\Repository.pdb
 C:\Proyectos\StockManagerApi\Business\bin\Debug\netcoreapp3.1\DTO.pdb
+C:\Proyectos\StockManagerApi\Business\bin\Debug\netcoreapp3.1\Repository.pdb
 C:\Proyectos\StockManagerApi\Business\obj\Debug\netcoreapp3.1\Business.csprojAssemblyReference.cache
 C:\Proyectos\StockManagerApi\Business\obj\Debug\netcoreapp3.1\Business.AssemblyInfoInputs.cache
 C:\Proyectos\StockManagerApi\Business\obj\Debug\netcoreapp3.1\Business.AssemblyInfo.cs

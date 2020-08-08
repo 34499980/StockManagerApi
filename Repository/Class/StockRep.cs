@@ -21,11 +21,11 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public StockDto GetStockById(long id)
+        public StockDto GetStockByCode(string code)
         {
             try
             {
-                return this._context.STOCK.Where(x => x.ID == id).FirstOrDefault();
+                return this._context.STOCK.Where(x => x.QR == code).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;
@@ -55,6 +55,8 @@ namespace Repository.Class
             {
                 this._context.STOCK.Add(stock);
                 this._context.SaveChanges();
+                stock.Code = stock.ID.ToString().PadLeft(10, '0');
+                this.UpdateStock(stock);
             }
             catch (Exception ex)
             {

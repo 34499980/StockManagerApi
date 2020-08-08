@@ -29,11 +29,11 @@ namespace StockManagerApi.Controllers
 
         // GET api/<StockController>/5
         [HttpGet("{id}")]
-        public StockDto Get(int id)
+        public StockDto Get(string id)
         {
             try
             {
-                return this._stockBL.GetStockById(id);
+                return this._stockBL.GetStockByCode(id);
             }catch(Exception ex)
             {
                 throw ex;

@@ -22,11 +22,11 @@ namespace Business.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public StockDto GetStockById(int id)
+        public StockDto GetStockByCode(string code)
         {
             try
             {
-                StockDto stock =  this._stockRep.GetStockById(id);
+                StockDto stock =  this._stockRep.GetStockByCode(code);
                 if(stock != null)
                 {
                     stock.Stock_Sucursal = this._stockRep.GetStockBySucursal(stock);
@@ -63,16 +63,16 @@ namespace Business.Class
         {
             try
             {
-                StockDto inputStock = this._stockRep.GetStockById(stock.ID);
+                StockDto inputStock = this._stockRep.GetStockByCode(stock.QR);
                 if(inputStock == null)
                 {
                   var user =  this._userRep.GetUserByUserName(userInput);
                   stock.IdSucursal = user.IdSucursal;
-                  stock.QR = this._stockRep.GetQR(stock).ToString();
+                  stock.Code = stock.QR;
                   stock.IdState = this._stockRep.GetAllStates().Where(x => x.Description == "Habilitado").FirstOrDefault().ID;                  
                   this._stockRep.SaveStock(stock);
                   this._stockRep.saveStockBySucursal(stock);
-                  this._stockRep.UpdateQR(stock);
+                 // this._stockRep.UpdateQR(stock);
 
                 }
                 else
@@ -96,7 +96,7 @@ namespace Business.Class
         {
             try
             {
-                StockDto inputStock = this._stockRep.GetStockById(stock.ID);
+                StockDto inputStock = this._stockRep.GetStockByCode(stock.QR);
             }
             catch (Exception ex)
             {

@@ -1309,6 +1309,7 @@
       "Business/1.0.0": {
         "dependencies": {
           "Autofac.Extensions.DependencyInjection": "6.0.0",
+          "DTO": "1.0.0",
           "Repository": "1.0.0"
         },
         "runtime": {
@@ -1330,7 +1331,6 @@
         "dependencies": {
           "Autofac": "5.2.0",
           "DTO": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "3.1.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.5",
           "System.Data.SqlClient": "4.8.1"
         },

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Business\\Business.csproj": {}
+    "C:\\Proyectos\\StockManagerApi\\Business\\Business.csproj": {}
   },
   "projects": {
-    "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Business\\Business.csproj": {
+    "C:\\Proyectos\\StockManagerApi\\Business\\Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Business\\Business.csproj",
+        "projectUniqueName": "C:\\Proyectos\\StockManagerApi\\Business\\Business.csproj",
         "projectName": "Business",
-        "projectPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Business\\Business.csproj",
-        "packagesPath": "C:\\Users\\abrenman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Business\\obj\\",
+        "projectPath": "C:\\Proyectos\\StockManagerApi\\Business\\Business.csproj",
+        "packagesPath": "C:\\Users\\aribr\\.nuget\\packages\\",
+        "outputPath": "C:\\Proyectos\\StockManagerApi\\Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\abrenman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\aribr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,11 +30,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\DTO.csproj": {
-                "projectPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\DTO.csproj"
+              "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj": {
+                "projectPath": "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj"
               },
-              "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Repository\\Repository.csproj"
+              "C:\\Proyectos\\StockManagerApi\\Repository\\Repository.csproj": {
+                "projectPath": "C:\\Proyectos\\StockManagerApi\\Repository\\Repository.csproj"
               }
             }
           }
@@ -63,29 +63,35 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\DTO.csproj": {
+    "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\DTO.csproj",
+        "projectUniqueName": "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj",
         "projectName": "DTO",
-        "projectPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\DTO.csproj",
-        "packagesPath": "C:\\Users\\abrenman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\obj\\",
+        "projectPath": "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj",
+        "packagesPath": "C:\\Users\\aribr\\.nuget\\packages\\",
+        "outputPath": "C:\\Proyectos\\StockManagerApi\\DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\abrenman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\aribr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -118,29 +124,35 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Repository\\Repository.csproj": {
+    "C:\\Proyectos\\StockManagerApi\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Proyectos\\StockManagerApi\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\abrenman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\Repository\\obj\\",
+        "projectPath": "C:\\Proyectos\\StockManagerApi\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\aribr\\.nuget\\packages\\",
+        "outputPath": "C:\\Proyectos\\StockManagerApi\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\abrenman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\aribr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -153,8 +165,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\DTO.csproj": {
-                "projectPath": "C:\\Users\\abrenman\\Documents\\Proyectos\\Services\\StockManagerApi\\DTO\\DTO.csproj"
+              "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj": {
+                "projectPath": "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj"
               }
             }
           }
@@ -171,10 +183,6 @@
             "Autofac": {
               "target": "Package",
               "version": "[5.2.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -195,12 +203,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

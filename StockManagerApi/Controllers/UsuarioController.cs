@@ -40,11 +40,11 @@ namespace StockManagerApi.Controllers
 
         // GET api/<UsuarioController>/5
         [HttpGet("{id}")]
-        public UserDto Get(string value)
+        public UserDto Get(string id)
         {
             try
             {
-              var result = _userBL.GetUserByName(value);
+              var result = _userBL.GetUserByName(id);
                 return result;
             }catch(Exception ex)
             {
