@@ -182,5 +182,22 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve un listado de stock por parametros puestos en un where
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public dynamic GetStockByParams(object[] param,string name)
+        {
+            try
+            {
+                return this._context.ExecuteStoredProcedure<dynamic>(name, param);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

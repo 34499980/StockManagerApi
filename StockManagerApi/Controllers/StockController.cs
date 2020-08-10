@@ -33,7 +33,17 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                return this._stockBL.GetStockByCode(id);
+                dynamic result = null;
+                if (id.Contains("where"))
+                {
+                    result =  this._stockBL.GetStockByParams(id);
+                }
+                else
+                {
+                   // var input = JsonConvert.DeserializeObject<StockDto>(id);
+                    result = this._stockBL.GetStockByCode(id);
+                }
+                return result;
             }catch(Exception ex)
             {
                 throw ex;

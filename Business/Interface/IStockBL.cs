@@ -11,5 +11,6 @@ namespace Business.Interface
         IEnumerable<StockDto> GetAllStock();
         void SaveStock(StockDto stock, string userInput);
         void UpdateStock(StockDto stock,string userInput);
+        IEnumerable<StockDto> GetStockByParams(string param);
     }
 }

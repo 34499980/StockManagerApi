@@ -16,5 +16,6 @@ namespace Repository.Interface
         IEnumerable<Stock_StateDto> GetAllStates();
         void saveStockBySucursal(StockDto stock);
         IEnumerable<Stock_SucursalDto> GetStockBySucursal(StockDto stock);
+        dynamic GetStockByParams(object[] param, string name);
     }
 }

@@ -3,6 +3,7 @@ using DTO.Class;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
@@ -99,6 +100,25 @@ namespace Business.Class
                 StockDto inputStock = this._stockRep.GetStockByCode(stock.QR);
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Devuelve un listado de stock por parametros puestos en un where
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public IEnumerable<StockDto> GetStockByParams(string param)
+        {
+            try
+            {
+                List<SqlParameter> listParameters = new List<SqlParameter>();
+                listParameters.Add(new SqlParameter("@param", param));
+                return this._stockRep.GetStockByParams(listParameters.ToArray(), "Get_StockByParameters");
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

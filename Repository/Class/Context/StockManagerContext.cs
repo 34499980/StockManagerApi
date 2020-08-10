@@ -57,7 +57,7 @@ namespace Repository.Class.Context
 
                     }
                 }
-                // return Database.SqlQuery<TEntity>(sqlQueryBuilder.ToString(), parameters);
+                //return Database.SqlQuery<TEntity>(sqlQueryBuilder.ToString(), parameters);
                 return null;
             }
             catch (Exception ex)
