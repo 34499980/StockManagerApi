@@ -92,7 +92,15 @@ namespace Business.Class
             try
             {
                 DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
+                dispatch.Usuario = this._userhRep.GetUserById(dispatch.IdUser);
                 dispatch.Stock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
+                foreach (var item in dispatch.Stock)
+                {
+                  item.Stock_Sucursal =  this._stockRep.GetStockBySucursal(item);
+                  
+                }
+              
+
                
                 return dispatch;
             }catch(Exception ex)

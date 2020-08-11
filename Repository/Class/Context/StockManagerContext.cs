@@ -17,8 +17,7 @@ namespace Repository.Class.Context
         {
             Database.Migrate();
         }
-        public DbSet<UserDto> USERS { get; set; }
-        public DbSet<QRDto> QR { get; set; }
+        public DbSet<UserDto> USERS { get; set; }       
 
         public DbSet<DispatchDto> DISPATCH { get; set; }
         public DbSet<RulesDto> RULES { get; set; }

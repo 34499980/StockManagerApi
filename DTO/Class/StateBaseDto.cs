@@ -5,12 +5,10 @@ using System.Text;
 
 namespace DTO.Class
 {
-    [Table("QR", Schema = "dbo")]
-    public class QRDto
+   
+    public class StateBaseDto
     {       
-       
-        public long ID { get; set; }
-        public long? IdStock { get; set; }   
+      
        
        
     }

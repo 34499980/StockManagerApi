@@ -23,7 +23,7 @@ namespace DTO.Class
         public int? Unity { get; set; }
 
         
-        [ForeignKey("IdUser")]
+        [NotMapped]
         public virtual UserDto Usuario { get; set; }
         [ForeignKey("Origin")]
         public virtual SucursalDto SucOrigin { get; set; }

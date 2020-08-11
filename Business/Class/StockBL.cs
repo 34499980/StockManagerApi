@@ -136,5 +136,19 @@ namespace Business.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve todos los estados
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Stock_StateDto> GetStates()
+        {
+            try
+            {
+             return  this._stockRep.GetAllStates();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -81,49 +81,8 @@ namespace Repository.Class
                 throw ex;
             }
         }
-        /// <summary>
-        /// Ingresa un codigo QR por stock. Si ya posee uno, devuelve ese.
-        /// </summary>
-        /// <param name="stock"></param>
-        /// <returns></returns>
-        public long GetQR(StockDto stock)
-        {
-            try
-            {
-                QRDto QR;
-                QR = this._context.QR.Where(x => x.IdStock == stock.ID).FirstOrDefault();
-                if(QR == null)
-                {
-                    QR = new QRDto();
-                    QR.IdStock = stock.ID;
-                    this._context.QR.Add(QR);
-                    this._context.SaveChanges();
-                }             
-               
-                return QR.ID;
-            }catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
-        /// <summary>
-        /// Actualiza la relacion de QR-Stock ingresado el stock generado
-        /// </summary>
-        /// <param name="stock"></param>
-        public void UpdateQR(StockDto stock)
-        {
-            try
-            {
-              QRDto QR =  this._context.QR.Where(x => x.ID == long.Parse(stock.QR)).FirstOrDefault();
-                QR.IdStock = stock.ID;
-                this._context.QR.Update(QR);
-                this._context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+      
+      
         /// <summary>
         /// Devuelve los estados que puede tener el stock
         /// </summary>
