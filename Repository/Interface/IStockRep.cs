@@ -7,7 +7,7 @@ namespace Repository.Interface
 {
     public interface IStockRep
     {
-        StockDto GetStockByCode(string code);
+        IEnumerable<StockDto> GetStockByCode(string qr);
         IEnumerable<StockDto> GetAllStock();
         void SaveStock(StockDto stock);
         void UpdateStock(StockDto stock);
@@ -16,6 +16,7 @@ namespace Repository.Interface
         IEnumerable<Stock_StateDto> GetAllStates();
         void saveStockBySucursal(StockDto stock);
         IEnumerable<Stock_SucursalDto> GetStockBySucursal(StockDto stock);
-        dynamic GetStockByParams(object[] param, string name);
+        IEnumerable<StockDto> GetStockByParams(string param, string name);
+        void UpdateStockBySucursal(Stock_SucursalDto stock);
     }
 }

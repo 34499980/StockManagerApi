@@ -32,7 +32,7 @@ namespace DTO.Class
         [ForeignKey("IdState")]
         public virtual Dispatch_StateDto State { get; set; }
         [NotMapped]
-        public  ICollection<StockDto> Stock { get; set; }
+        public  IEnumerable<StockDto> Stock { get; set; }
         public virtual string Code
         {
             get { return ID.ToString().PadLeft(10,'0'); }

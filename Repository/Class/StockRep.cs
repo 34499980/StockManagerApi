@@ -1,8 +1,11 @@
 ﻿using DTO.Class;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Repository.Class.Context;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -21,11 +24,11 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public StockDto GetStockByCode(string code)
+        public IEnumerable<StockDto> GetStockByCode(string qr)
         {
             try
             {
-                return this._context.STOCK.Where(x => x.QR == code).FirstOrDefault();
+                return this._context.STOCK.Where(x => x.QR == qr).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -176,7 +179,8 @@ namespace Repository.Class
         {
             try
             {
-              return  this._context.STOCK_SUCURSAL.Where(x => x.IdStock == stock.ID).ToList();
+              var result =  this._context.STOCK_SUCURSAL.Where(x => x.IdStock == stock.ID).ToList();
+                return result;
             }catch(Exception ex)
             {
                 throw ex;
@@ -188,16 +192,34 @@ namespace Repository.Class
         /// <param name=""></param>
         /// <param name=""></param>
         /// <returns></returns>
-        public dynamic GetStockByParams(object[] param,string name)
+        public IEnumerable<StockDto> GetStockByParams(string param,string name)
         {
             try
-            {
-                return this._context.ExecuteStoredProcedure<dynamic>(name, param);
+            {              
+                var result = this._context.STOCK.FromSqlRaw<StockDto>(name, param).ToList();
+                return result;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+        /// <summary>
+        /// Actualizo unidades de stock por sucursal
+        /// </summary>
+        /// <param name="stock"></param>
+        public void UpdateStockBySucursal(Stock_SucursalDto stock)
+        {
+            try
+            {
+                this._context.STOCK_SUCURSAL.Update(stock);
+                this._context.SaveChanges();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+       
     }
 }

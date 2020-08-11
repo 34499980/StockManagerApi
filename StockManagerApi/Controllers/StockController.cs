@@ -29,7 +29,7 @@ namespace StockManagerApi.Controllers
 
         // GET api/<StockController>/5
         [HttpGet("{id}")]
-        public StockDto Get(string id)
+        public IEnumerable<StockDto> Get(string id)
         {
             try
             {

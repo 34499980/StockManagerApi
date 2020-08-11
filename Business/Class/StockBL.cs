@@ -23,17 +23,21 @@ namespace Business.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public StockDto GetStockByCode(string code)
+        public IEnumerable<StockDto> GetStockByCode(string code)
         {
             try
             {
-                StockDto stock =  this._stockRep.GetStockByCode(code);
-                if(stock != null)
+                var listStock =  this._stockRep.GetStockByCode(code);
+                if(listStock != null)
                 {
-                    stock.Stock_Sucursal = this._stockRep.GetStockBySucursal(stock);
+                    foreach (var item in listStock)
+                    {
+                        item.Stock_Sucursal = this._stockRep.GetStockBySucursal(item);
+                    }
+                    
                 }
                
-                return stock;
+                return listStock;
             }
             catch (Exception ex)
             {
@@ -64,7 +68,7 @@ namespace Business.Class
         {
             try
             {
-                StockDto inputStock = this._stockRep.GetStockByCode(stock.QR);
+                StockDto inputStock = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
                 if(inputStock == null)
                 {
                   var user =  this._userRep.GetUserByUserName(userInput);
@@ -97,7 +101,13 @@ namespace Business.Class
         {
             try
             {
-                StockDto inputStock = this._stockRep.GetStockByCode(stock.QR);
+               // StockDto inputStock = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
+                //UserDto  userId = this._userRep.GetUserByUserName(user);
+                Stock_SucursalDto stock_Sucursal =  this._stockRep.GetStockBySucursal(stock).Where(x => x.IdStock == stock.ID && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
+                stock_Sucursal.Unity = stock.Unity;
+                this._stockRep.UpdateStockBySucursal(stock_Sucursal);
+                this._stockRep.UpdateStock(stock);
+                
             }
             catch (Exception ex)
             {
@@ -113,10 +123,13 @@ namespace Business.Class
         public IEnumerable<StockDto> GetStockByParams(string param)
         {
             try
-            {
-                List<SqlParameter> listParameters = new List<SqlParameter>();
-                listParameters.Add(new SqlParameter("@param", param));
-                return this._stockRep.GetStockByParams(listParameters.ToArray(), "Get_StockByParameters");
+            {                
+                var result =  this._stockRep.GetStockByParams(param, "Get_StockByParameters {0}");
+                foreach (var item in result)
+                {
+                   item.Stock_Sucursal = this._stockRep.GetStockBySucursal(item);                   
+                }
+                return result;
             }
             catch(Exception ex)
             {

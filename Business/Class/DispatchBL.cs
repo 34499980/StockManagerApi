@@ -91,16 +91,9 @@ namespace Business.Class
         {
             try
             {
-                DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);               
-                var stockList = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
-                foreach (var item in stockList)
-                {
-                    StockDto stock = this._stockRep.GetStockByCode(item.QR);
-                    stock.Code = stock.Code.PadLeft(10, '0');
-                    stock.Unity = item.Unity;
-                    dispatch.Stock.Add(stock);
-
-                }
+                DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
+                dispatch.Stock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
+               
                 return dispatch;
             }catch(Exception ex)
             {
