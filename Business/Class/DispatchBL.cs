@@ -27,15 +27,26 @@ namespace Business.Class
         /// <param name="dispatch"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public int saveDispatch(DispatchDto dispatch,string user)
+        public DispatchDto saveDispatch(DispatchDto dispatch,string user)
         {
             try
             {
-              dispatch.IdUser =  this._userhRep.GetUserByUserName(user).ID;
-              dispatch.DateCreate = DateTime.Now;
-              dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.Description == "Creado").FirstOrDefault().ID;
-              dispatch.Unity = 0;
-               return  this._dispatchRep.saveDispatch(dispatch);
+              
+                DispatchDto result = this._dispatchRep.GetDispatchBySucursales(dispatch);
+                if(result == null)
+                {                 
+                    dispatch.IdUser = this._userhRep.GetUserByUserName(user).ID;
+                    dispatch.DateCreate = DateTime.Now;
+                    dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.Description == "Creado").FirstOrDefault().ID;
+                    dispatch.Unity = 0;
+                    result = this._dispatchRep.saveDispatch(dispatch);
+                }
+                else
+                {
+                  result = GetDispatchById(result.ID);
+                }
+
+                return result;
             }
             catch(Exception ex)
             {

@@ -20,13 +20,13 @@ namespace Repository.Class
         /// </summary>
         /// <param name="dispatch"></param>
         /// <returns></returns>
-        public int saveDispatch(DispatchDto dispatch)
+        public DispatchDto saveDispatch(DispatchDto dispatch)
         {
             try
             {
                 this._context.DISPATCH.Add(dispatch);
                 this._context.SaveChanges();
-                return dispatch.ID;
+                return dispatch;
             }
             catch (Exception ex)
             {
@@ -88,6 +88,16 @@ namespace Repository.Class
             try
             {
                 return this._context.STOCK.Where(x => x.ID == id).ToList();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public DispatchDto GetDispatchBySucursales(DispatchDto dispatch)
+        {
+            try
+            {
+               return this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Origin == dispatch.Destiny && x.State.Description == "Creado").FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;

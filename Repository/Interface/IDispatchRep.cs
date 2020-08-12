@@ -7,10 +7,11 @@ namespace Repository.Interface
 {
     public interface IDispatchRep
     {
-        int saveDispatch(DispatchDto dispatch);
+        DispatchDto saveDispatch(DispatchDto dispatch);
         IEnumerable<Dispatch_StateDto> GetStates();
         IEnumerable<DispatchDto> GetAllDispatches();
         DispatchDto GetDispatchById(int id);
         IEnumerable<StockDto> GetStockIdByDispatch(int id);
+        DispatchDto GetDispatchBySucursales(DispatchDto dispatch);
     }
 }
