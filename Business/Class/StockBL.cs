@@ -32,7 +32,7 @@ namespace Business.Class
                 {
                     foreach (var item in listStock)
                     {
-                        item.Stock_Sucursal = this._stockRep.GetStockBySucursal(item);
+                        item.Stock_Sucursal = this._stockRep.GetStockSucursalByIdStock(item);
                     }
                     
                 }
@@ -103,7 +103,7 @@ namespace Business.Class
             {
                // StockDto inputStock = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
                 //UserDto  userId = this._userRep.GetUserByUserName(user);
-                Stock_SucursalDto stock_Sucursal =  this._stockRep.GetStockBySucursal(stock).Where(x => x.IdStock == stock.ID && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
+                Stock_SucursalDto stock_Sucursal =  this._stockRep.GetStockSucursalByIdStock(stock).Where(x => x.IdStock == stock.ID && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
                 stock_Sucursal.Unity = stock.Unity;
                 this._stockRep.UpdateStockBySucursal(stock_Sucursal);
                 this._stockRep.UpdateStock(stock);
@@ -127,7 +127,7 @@ namespace Business.Class
                 var result =  this._stockRep.GetStockByParams(param, "Get_StockByParameters {0}");
                 foreach (var item in result)
                 {
-                   item.Stock_Sucursal = this._stockRep.GetStockBySucursal(item);                   
+                   item.Stock_Sucursal = this._stockRep.GetStockSucursalByIdStock(item);                   
                 }
                 return result;
             }

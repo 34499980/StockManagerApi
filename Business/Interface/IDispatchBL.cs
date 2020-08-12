@@ -11,5 +11,6 @@ namespace Business.Interface
         IEnumerable<Dispatch_StateDto> GetStates();
         IEnumerable<DispatchDto> GetAllDispatches();
         DispatchDto GetDispatchById(int id);
+        void UpdateDispatch(DispatchDto dispatch);
     }
 }

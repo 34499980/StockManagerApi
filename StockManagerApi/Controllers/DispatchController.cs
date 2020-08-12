@@ -69,8 +69,18 @@ namespace StockManagerApi.Controllers
 
         // PUT api/<DispatchController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Object value)
         {
+            try
+            {
+                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(value.ToString());
+                this._dispatchBL.UpdateDispatch(dispatchInput);
+                // = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
+
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // DELETE api/<DispatchController>/5

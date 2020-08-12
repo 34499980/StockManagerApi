@@ -102,18 +102,58 @@ namespace Business.Class
         {
             try
             {
+                List<Stock_SucursalDto> listStock_sucursal = new List<Stock_SucursalDto>();
                 DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
                 dispatch.Usuario = this._userhRep.GetUserById(dispatch.IdUser);
-                dispatch.Stock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
+                var dirStock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
+                dispatch.Dispatch_stock = (IEnumerable<Dispatch_StockDto>)dirStock["dispatch_stock"];
+                dispatch.Stock = (IEnumerable<StockDto>)dirStock["stock"];
                 foreach (var item in dispatch.Stock)
                 {
-                  item.Stock_Sucursal =  this._stockRep.GetStockBySucursal(item);
+                   listStock_sucursal.Add(this._stockRep.GetStock_Sucursal(item.ID,dispatch.Origin));
+                    item.Stock_Sucursal = listStock_sucursal;
                   
                 }
+               
               
 
                
                 return dispatch;
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void UpdateDispatch(DispatchDto dispatch)
+        {
+            try
+            {
+                int countBult = 0;
+                Dispatch_StockDto dispatch_stock;
+                Stock_SucursalDto stock_sucursal;
+                List<Dispatch_StockDto> listDispatch_Stock = new List<Dispatch_StockDto>();
+                foreach (var item in dispatch.Stock)
+                {
+                    dispatch_stock = new Dispatch_StockDto();
+                    dispatch_stock.IdDispatch = dispatch.ID;
+                    dispatch_stock.IdStock = this._stockRep.GetStockByCode(item.QR).FirstOrDefault().ID;
+                    dispatch_stock.Unity = item.Unity;
+                    countBult += item.Unity;
+                    listDispatch_Stock.Add(dispatch_stock);
+                    stock_sucursal = new Stock_SucursalDto();
+                    stock_sucursal.IdStock = dispatch_stock.IdStock;
+                    stock_sucursal.IdSucursal = dispatch.Origin;
+                    stock_sucursal.Unity = item.Unity;
+
+                    Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock,dispatch.Origin);
+                    stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
+                    this._stockRep.UpdateStockBySucursal(stock_sucursalDB);
+
+
+                }
+                dispatch.Dispatch_stock = listDispatch_Stock;
+                dispatch.Unity = countBult;
+                this._dispatchRep.UpdateDispatch(dispatch);
             }catch(Exception ex)
             {
                 throw ex;

@@ -33,6 +33,8 @@ namespace DTO.Class
         public virtual Dispatch_StateDto State { get; set; }
         [NotMapped]
         public  IEnumerable<StockDto> Stock { get; set; }
+        [NotMapped]
+        public IEnumerable<Dispatch_StockDto> Dispatch_stock { get; set; }
         public virtual string Code
         {
             get { return ID.ToString().PadLeft(10,'0'); }

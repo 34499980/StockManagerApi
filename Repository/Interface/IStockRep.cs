@@ -13,8 +13,10 @@ namespace Repository.Interface
         void UpdateStock(StockDto stock);       
         IEnumerable<Stock_StateDto> GetAllStates();
         void saveStockBySucursal(StockDto stock);
-        IEnumerable<Stock_SucursalDto> GetStockBySucursal(StockDto stock);
         IEnumerable<StockDto> GetStockByParams(string param, string name);
         void UpdateStockBySucursal(Stock_SucursalDto stock);
+        StockDto GetStockById(long id);
+        IEnumerable<Stock_SucursalDto> GetStockSucursalByIdStock(StockDto stock);
+        Stock_SucursalDto GetStock_Sucursal(long idStock, int idSucursal);
     }
 }

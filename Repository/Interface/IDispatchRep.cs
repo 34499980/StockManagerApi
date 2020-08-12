@@ -11,7 +11,8 @@ namespace Repository.Interface
         IEnumerable<Dispatch_StateDto> GetStates();
         IEnumerable<DispatchDto> GetAllDispatches();
         DispatchDto GetDispatchById(int id);
-        IEnumerable<StockDto> GetStockIdByDispatch(int id);
+        Dictionary<string, object> GetStockIdByDispatch(int id);
         DispatchDto GetDispatchBySucursales(DispatchDto dispatch);
+        void UpdateDispatch(DispatchDto dispatch);
     }
 }

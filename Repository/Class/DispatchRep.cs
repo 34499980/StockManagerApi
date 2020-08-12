@@ -1,4 +1,5 @@
 ﻿using DTO.Class;
+using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Interface;
 using System;
@@ -83,11 +84,23 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<StockDto> GetStockIdByDispatch(int id)
+        public Dictionary<string,object> GetStockIdByDispatch(int id)
         {
             try
             {
-                return this._context.STOCK.Where(x => x.ID == id).ToList();
+                Dictionary<string, object> result = new Dictionary<string, object>();
+                StockDto stock = null;
+                List<StockDto> listStock = new List<StockDto>();
+               var dispatch_Stock = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == id).ToList();
+
+                foreach (var item in dispatch_Stock)
+                {
+                   stock =  this._context.STOCK.Where(x => x.ID == item.IdStock).FirstOrDefault();
+                   listStock.Add(stock);
+                }
+                result.Add("stock", listStock);
+                result.Add("dispatch_stock", dispatch_Stock);
+                return result;
             }catch(Exception ex)
             {
                 throw ex;
@@ -99,6 +112,32 @@ namespace Repository.Class
             {
                return this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Origin == dispatch.Destiny && x.State.Description == "Creado").FirstOrDefault();
             }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void UpdateDispatch(DispatchDto dispatch)
+        {
+            try
+            {
+              
+                var Dispatch_stock = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
+                foreach (var item in Dispatch_stock)
+                {
+                    this._context.DISPATCH_STOCK.Remove(item);
+                }
+                this._context.SaveChanges();
+               
+                foreach (var item in dispatch.Dispatch_stock)
+                {                    
+                    this._context.DISPATCH_STOCK.Add(item);
+                }               
+               
+                this._context.Entry(dispatch).State = EntityState.Modified;               
+                this._context.SaveChanges();
+
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

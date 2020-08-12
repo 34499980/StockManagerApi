@@ -29,7 +29,7 @@ namespace Repository.Class
             try
             {
                 return this._context.STOCK.Where(x => x.QR == qr).ToList();
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 throw ex;
             }
@@ -43,7 +43,7 @@ namespace Repository.Class
             try
             {
                 return this._context.STOCK.ToList();
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 throw ex;
             }
@@ -76,13 +76,13 @@ namespace Repository.Class
             {
                 this._context.Update(stock);
                 this._context.SaveChanges();
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 throw ex;
             }
         }
-      
-      
+
+
         /// <summary>
         /// Devuelve los estados que puede tener el stock
         /// </summary>
@@ -91,8 +91,8 @@ namespace Repository.Class
         {
             try
             {
-              return  this._context.STOCK_STATE.ToList();
-            }catch(Exception ex)
+                return this._context.STOCK_STATE.ToList();
+            } catch (Exception ex)
             {
                 throw ex;
             }
@@ -113,7 +113,7 @@ namespace Repository.Class
                     stockSucursal.IdSucursal = item.ID;
                     stockSucursal.IdStock = stock.ID;
                     if (item.ID == stock.IdSucursal)
-                    {                       
+                    {
                         stockSucursal.Unity = stock.Unity;
                     }
                     else
@@ -124,7 +124,7 @@ namespace Repository.Class
                     this._context.SaveChanges();
                 }
 
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 throw ex;
             }
@@ -134,13 +134,25 @@ namespace Repository.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <returns></returns>
-        public IEnumerable<Stock_SucursalDto> GetStockBySucursal(StockDto stock)
+        public Stock_SucursalDto GetStock_Sucursal(long idStock, int idSucursal)
         {
             try
             {
-              var result =  this._context.STOCK_SUCURSAL.Where(x => x.IdStock == stock.ID).ToList();
+                var result = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == idStock && x.IdSucursal == idSucursal).FirstOrDefault();
                 return result;
-            }catch(Exception ex)
+            } catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<Stock_SucursalDto> GetStockSucursalByIdStock(StockDto stock)
+        {
+            try
+            {
+                var result = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == stock.ID ).ToList();
+                return result;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -171,8 +183,23 @@ namespace Repository.Class
         {
             try
             {
-                this._context.STOCK_SUCURSAL.Update(stock);
+                this._context.Entry(stock).State = EntityState.Modified;               
                 this._context.SaveChanges();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Devuelve stock por el id de base de datos
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public StockDto GetStockById(long id)
+        {
+            try
+            {
+                return this._context.STOCK.Where(x => x.ID == id).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;
