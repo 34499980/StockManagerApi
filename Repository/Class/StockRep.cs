@@ -73,7 +73,7 @@ namespace Repository.Class
         {
             try
             {
-                this._context.Update(stock);
+                this._context.Entry(stock).State = EntityState.Modified;               
                 this._context.SaveChanges();
             } catch (Exception ex)
             {

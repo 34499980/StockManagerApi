@@ -10,6 +10,7 @@ namespace DTO.Class
     public class Stock_SucursalDto
     {
         [Key]
+        public int ID { get; set; }
         public int IdSucursal { get; set; }
         public long IdStock { get; set; }
         public int Unity { get; set; }

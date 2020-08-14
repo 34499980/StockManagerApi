@@ -69,9 +69,10 @@ namespace Business.Class
             try
             {
                 StockDto inputStock = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
-                if(inputStock == null)
+                var user = this._userRep.GetUserByUserName(userInput);
+                if (inputStock == null)
                 {
-                  var user =  this._userRep.GetUserByUserName(userInput);
+                 
                   stock.IdSucursal = user.IdSucursal;
                   stock.Code = stock.QR;
                   stock.IdState = this._stockRep.GetAllStates().Where(x => x.Description == "Habilitado").FirstOrDefault().ID;                  
