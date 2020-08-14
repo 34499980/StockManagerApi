@@ -39,8 +39,9 @@ namespace StockManagerApi.Controllers
                 if (id.Contains("where"))
                 {
                     var input = id.Split(';');
-                    query = input[0].Replace(":","=");
-                    for(int i = 1; i<input.Length; i++)
+                    query = input[0].Replace("idsucursal", "SS.idsucursal").Replace(":","=");
+                   
+                    for (int i = 1; i<input.Length; i++)
                     {
                         query += " and " + input[i].Replace(":", " like '%");
                         query += "%'";

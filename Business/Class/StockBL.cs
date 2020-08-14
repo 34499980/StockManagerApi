@@ -83,8 +83,15 @@ namespace Business.Class
                 }
                 else
                 {
+                    foreach (var item in stock.Stock_Sucursal)
+                    {
+                        if(item.IdSucursal == user.IdSucursal)
+                        {
+                            this._stockRep.UpdateStockBySucursal(item);
+                        }
 
-                    this._stockRep.UpdateStock(stock);
+                    }
+                    //this._stockRep.UpdateStock(stock);
                 }
                 
             }
