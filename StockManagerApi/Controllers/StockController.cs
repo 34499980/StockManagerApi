@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
@@ -34,9 +35,17 @@ namespace StockManagerApi.Controllers
             try
             {
                 dynamic result = null;
+                string query = "";
                 if (id.Contains("where"))
                 {
-                    result =  this._stockBL.GetStockByParams(id);
+                    var input = id.Split(';');
+                    query = input[0].Replace(":","=");
+                    for(int i = 1; i<input.Length; i++)
+                    {
+                        query += " and " + input[i].Replace(":", " like '%");
+                        query += "%'";
+                    }
+                    result =  this._stockBL.GetStockByParams(query);
                 }
                 else
                 {

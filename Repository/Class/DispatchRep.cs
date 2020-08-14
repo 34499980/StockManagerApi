@@ -1,5 +1,4 @@
 ﻿using DTO.Class;
-using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Interface;
 using System;
@@ -106,6 +105,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve los despachos por sucursal de origen y destino
+        /// </summary>
+        /// <param name="dispatch"></param>
+        /// <returns></returns>
         public DispatchDto GetDispatchBySucursales(DispatchDto dispatch)
         {
             try
@@ -116,25 +120,32 @@ namespace Repository.Class
                 throw ex;
             }
         }
-        public void UpdateDispatch(DispatchDto dispatch)
+        /// <summary>
+        /// Actualiza el stock del despacho
+        /// </summary>
+        /// <param name="dispatch"></param>
+        public  void UpdateDispatch(DispatchDto dispatch)
         {
             try
             {
               
                 var Dispatch_stock = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
-                foreach (var item in Dispatch_stock)
-                {
-                    this._context.DISPATCH_STOCK.Remove(item);
-                }
-                this._context.SaveChanges();
-               
-                foreach (var item in dispatch.Dispatch_stock)
-                {                    
-                    this._context.DISPATCH_STOCK.Add(item);
-                }               
-               
-                this._context.Entry(dispatch).State = EntityState.Modified;               
-                this._context.SaveChanges();
+                //foreach (var item in Dispatch_stock)
+                //{
+                    this._context.DISPATCH_STOCK.RemoveRange(Dispatch_stock);
+                //}
+                //if(Dispatch_stock.Count() > 0)
+                // this._context.SaveChanges();
+
+                //foreach (var item in dispatch.Dispatch_stock)
+                //{                    
+                    this._context.DISPATCH_STOCK.AddRange(dispatch.Dispatch_stock);
+                    //this._context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                //}
+
+                //if (dispatch.Dispatch_stock.Count() > 0)
+                   this._context.SaveChanges();
+              
 
             }
             catch(Exception ex)

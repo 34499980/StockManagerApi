@@ -130,7 +130,7 @@ namespace Business.Class
             {
                 int countBult = 0;
                 Dispatch_StockDto dispatch_stock;
-                Stock_SucursalDto stock_sucursal;
+                //Stock_SucursalDto stock_sucursal;
                 List<Dispatch_StockDto> listDispatch_Stock = new List<Dispatch_StockDto>();
                 foreach (var item in dispatch.Stock)
                 {
@@ -140,14 +140,14 @@ namespace Business.Class
                     dispatch_stock.Unity = item.Unity;
                     countBult += item.Unity;
                     listDispatch_Stock.Add(dispatch_stock);
-                    stock_sucursal = new Stock_SucursalDto();
-                    stock_sucursal.IdStock = dispatch_stock.IdStock;
-                    stock_sucursal.IdSucursal = dispatch.Origin;
-                    stock_sucursal.Unity = item.Unity;
+                    //stock_sucursal = new Stock_SucursalDto();
+                    //stock_sucursal.IdStock = dispatch_stock.IdStock;
+                    //stock_sucursal.IdSucursal = dispatch.Origin;
+                    //stock_sucursal.Unity = item.Unity;
 
                     Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock,dispatch.Origin);
-                    stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
-                    this._stockRep.UpdateStockBySucursal(stock_sucursalDB);
+                    //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
+                    this._stockRep.UpdateStockBySucursal(item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault());
 
 
                 }

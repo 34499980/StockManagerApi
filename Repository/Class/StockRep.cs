@@ -5,7 +5,6 @@ using Repository.Class.Context;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -82,7 +81,6 @@ namespace Repository.Class
             }
         }
 
-
         /// <summary>
         /// Devuelve los estados que puede tener el stock
         /// </summary>
@@ -145,6 +143,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve el stock de todas las sucursales por un idstock
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <returns></returns>
         public IEnumerable<Stock_SucursalDto> GetStockSucursalByIdStock(StockDto stock)
         {
             try
@@ -179,13 +182,25 @@ namespace Repository.Class
         /// Actualizo unidades de stock por sucursal
         /// </summary>
         /// <param name="stock"></param>
-        public void UpdateStockBySucursal(Stock_SucursalDto stock)
+        public  void UpdateStockBySucursal(Stock_SucursalDto stock)
         {
             try
             {
-                this._context.Entry(stock).State = EntityState.Modified;               
-                this._context.SaveChanges();
-            }catch(Exception ex)
+                //var result = this._context.STOCK_SUCURSAL.ToList();
+                var stockDB = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == stock.IdStock && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
+                //var stock1 = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == 1 && x.IdSucursal == 1).FirstOrDefault();
+                //var stock2 = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == 2 && x.IdSucursal == 1).FirstOrDefault();
+                stockDB.Unity = stock.Unity;
+                //this._context.STOCK_SUCURSAL.Remove(stockDB);
+                this._context.Entry(stockDB).State = EntityState.Modified;
+                //this._context.STOCK_SUCURSAL.UpdateRange(stockDB);              
+                //this._context.SaveChanges();
+                //this._context.STOCK_SUCURSAL.Add(stock);
+                 this._context.SaveChanges();
+               
+
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }
