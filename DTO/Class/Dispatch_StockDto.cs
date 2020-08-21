@@ -11,6 +11,7 @@ namespace DTO.Class
     public class Dispatch_StockDto
     {
         [Key]
+        public int ID { get; set; }
         public int IdDispatch { get; set; }
         public long IdStock { get; set; }
         public int Unity { get; set; }

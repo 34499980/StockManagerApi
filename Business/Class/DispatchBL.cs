@@ -102,7 +102,7 @@ namespace Business.Class
         {
             try
             {
-                List<Stock_SucursalDto> listStock_sucursal = new List<Stock_SucursalDto>();
+                List<Stock_SucursalDto> listStock_sucursal;
                 DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
                 dispatch.Usuario = this._userhRep.GetUserById(dispatch.IdUser);
                 var dirStock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
@@ -110,7 +110,8 @@ namespace Business.Class
                 dispatch.Stock = (IEnumerable<StockDto>)dirStock["stock"];
                 foreach (var item in dispatch.Stock)
                 {
-                   listStock_sucursal.Add(this._stockRep.GetStock_Sucursal(item.ID,dispatch.Origin));
+                    listStock_sucursal = new List<Stock_SucursalDto>();
+                    listStock_sucursal.Add(this._stockRep.GetStock_Sucursal(item.ID,dispatch.Origin));
                     item.Stock_Sucursal = listStock_sucursal;
                   
                 }
@@ -147,6 +148,7 @@ namespace Business.Class
 
                     Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock,dispatch.Origin);
                     //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
+                    
                     this._stockRep.UpdateStockBySucursal(item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault());
 
 

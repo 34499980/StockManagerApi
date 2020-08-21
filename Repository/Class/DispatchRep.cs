@@ -1,4 +1,5 @@
 ﻿using DTO.Class;
+using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Interface;
 using System;
@@ -129,23 +130,45 @@ namespace Repository.Class
             try
             {
               
-                var Dispatch_stock = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
-                //foreach (var item in Dispatch_stock)
-                //{
-                    this._context.DISPATCH_STOCK.RemoveRange(Dispatch_stock);
-                //}
-                //if(Dispatch_stock.Count() > 0)
-                // this._context.SaveChanges();
+                var Dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
+                var dispatchD = this._context.DISPATCH.Where(x => x.ID == dispatch.ID).FirstOrDefault();
+                dispatchD.Unity = dispatch.Unity;
+                foreach (var item in dispatch.Dispatch_stock)
+                {
+                   var dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == item.IdDispatch && x.IdStock == item.IdStock).FirstOrDefault();
+                    if(dispatch_stockDB != null)
+                    {
+                        if(item.Unity > 0)
+                        {
+                            dispatch_stockDB.Unity = item.Unity;
+                            this._context.Entry(dispatch_stockDB).State = EntityState.Modified;
+                        }
+                        else
+                        {
+                             this._context.DISPATCH_STOCK.Remove(dispatch_stockDB);
+                        }
+                      
+                    }
+                    else
+                    {
+                        this._context.DISPATCH_STOCK.Add(item);
+                    }
+                    this._context.SaveChanges();
+                }
+              
 
+                //this._context.Entry(dispatchD).State = EntityState.Modified;
                 //foreach (var item in dispatch.Dispatch_stock)
-                //{                    
-                    this._context.DISPATCH_STOCK.AddRange(dispatch.Dispatch_stock);
-                    //this._context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                //{           
+                //    if(item.Unity > 0)
+                //this._context.DISPATCH_STOCK.Add(item);
+
+                //    //this._context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 //}
 
                 //if (dispatch.Dispatch_stock.Count() > 0)
-                   this._context.SaveChanges();
-              
+
+
 
             }
             catch(Exception ex)
