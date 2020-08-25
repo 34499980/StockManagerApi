@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{588793AA-850E-4DFD-92F4-296A05FF3B58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockManagerApi", "StockManagerApi\StockManagerApi.csproj", "{61562F55-A3C5-4084-88C7-487930E66AB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockManagerApi", "StockManagerApi\StockManagerApi.csproj", "{61562F55-A3C5-4084-88C7-487930E66AB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstantControl", "ConstantControl\ConstantControl.csproj", "{DC08F829-1A04-41EA-8699-1442C90D41BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{61562F55-A3C5-4084-88C7-487930E66AB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61562F55-A3C5-4084-88C7-487930E66AB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61562F55-A3C5-4084-88C7-487930E66AB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC08F829-1A04-41EA-8699-1442C90D41BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC08F829-1A04-41EA-8699-1442C90D41BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC08F829-1A04-41EA-8699-1442C90D41BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC08F829-1A04-41EA-8699-1442C90D41BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
