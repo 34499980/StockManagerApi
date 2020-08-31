@@ -5,6 +5,7 @@ using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConstantControl;
 using System.Text;
 
 namespace Repository.Class
@@ -115,7 +116,7 @@ namespace Repository.Class
         {
             try
             {
-               return this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Origin == dispatch.Destiny && x.State.Description == "Creado").FirstOrDefault();
+               return this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Origin == dispatch.Destiny && x.IdState == (int)Constants.Dispatch_State.Creado).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;
@@ -131,8 +132,8 @@ namespace Repository.Class
             {
               
                 var Dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
-                var dispatchD = this._context.DISPATCH.Where(x => x.ID == dispatch.ID).FirstOrDefault();
-                dispatchD.Unity = dispatch.Unity;
+                var dispatchDB = this._context.DISPATCH.Where(x => x.ID == dispatch.ID).FirstOrDefault();
+               
                 foreach (var item in dispatch.Dispatch_stock)
                 {
                    var dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == item.IdDispatch && x.IdStock == item.IdStock).FirstOrDefault();
@@ -155,18 +156,14 @@ namespace Repository.Class
                     }
                     this._context.SaveChanges();
                 }
-              
+                dispatchDB.IdState = dispatch.IdState;
+                dispatchDB.DateDispatched = dispatch.DateDispatched;
+                dispatchDB.DateRecived = dispatch.DateRecived;
+                dispatchDB.IdUserDestiny = dispatch.IdUserDestiny;
 
-                //this._context.Entry(dispatchD).State = EntityState.Modified;
-                //foreach (var item in dispatch.Dispatch_stock)
-                //{           
-                //    if(item.Unity > 0)
-                //this._context.DISPATCH_STOCK.Add(item);
+                this._context.Entry(dispatchDB).State = EntityState.Modified;
 
-                //    //this._context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                //}
-
-                //if (dispatch.Dispatch_stock.Count() > 0)
+                this._context.SaveChanges();
 
 
 

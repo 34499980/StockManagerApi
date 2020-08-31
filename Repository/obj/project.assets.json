@@ -1468,6 +1468,16 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "ConstantControl/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/ConstantControl.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ConstantControl.dll": {}
+        }
+      },
       "DTO/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -5599,6 +5609,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "ConstantControl/1.0.0": {
+      "type": "project",
+      "path": "../ConstantControl/ConstantControl.csproj",
+      "msbuildProject": "../ConstantControl/ConstantControl.csproj"
+    },
     "DTO/1.0.0": {
       "type": "project",
       "path": "../DTO/DTO.csproj",
@@ -5607,6 +5622,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "ConstantControl >= 1.0.0",
       "DTO >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 3.1.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.7"
@@ -5642,6 +5658,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
+            "C:\\Proyectos\\StockManagerApi\\ConstantControl\\ConstantControl.csproj": {
+              "projectPath": "C:\\Proyectos\\StockManagerApi\\ConstantControl\\ConstantControl.csproj"
+            },
             "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj": {
               "projectPath": "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj"
             }

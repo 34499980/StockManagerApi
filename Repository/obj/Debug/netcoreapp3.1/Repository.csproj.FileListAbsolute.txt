@@ -31,3 +31,5 @@ C:\Proyectos\StockManagerApi\Repository\obj\Debug\netcoreapp3.1\Repository.cspro
 C:\Proyectos\StockManagerApi\Repository\bin\Debug\netcoreapp3.1\Repository.pdb
 C:\Proyectos\StockManagerApi\Repository\obj\Debug\netcoreapp3.1\Repository.dll
 C:\Proyectos\StockManagerApi\Repository\obj\Debug\netcoreapp3.1\Repository.pdb
+C:\Proyectos\StockManagerApi\Repository\bin\Debug\netcoreapp3.1\ConstantControl.dll
+C:\Proyectos\StockManagerApi\Repository\bin\Debug\netcoreapp3.1\ConstantControl.pdb

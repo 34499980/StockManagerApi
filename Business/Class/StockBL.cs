@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using ConstantControl;
 
 namespace Business.Class
 {
@@ -75,7 +76,7 @@ namespace Business.Class
                  
                   stock.IdSucursal = user.IdSucursal;
                   stock.Code = stock.QR;
-                  stock.IdState = this._stockRep.GetAllStates().Where(x => x.Description == "Habilitado").FirstOrDefault().ID;                  
+                  stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
                   this._stockRep.SaveStock(stock);
                   this._stockRep.saveStockBySucursal(stock);
                  // this._stockRep.UpdateQR(stock);

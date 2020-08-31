@@ -1,0 +1,7 @@
+ALTER TABLE DISPATCH ADD
+    IdUserDestiny INT 
+    CONSTRAINT FK_DISPATCH_USERDESTINY FOREIGN KEY (IdUserDestiny) REFERENCES USERS (ID)
+
+
+	EXEC sp_rename 'DISPATCH.IdUser', 'IdUserOrigin';  
+    

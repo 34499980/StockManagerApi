@@ -4,6 +4,7 @@ using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ConstantControl;
 using System.Text;
 
 namespace Business.Class
@@ -35,9 +36,9 @@ namespace Business.Class
                 DispatchDto result = this._dispatchRep.GetDispatchBySucursales(dispatch);
                 if(result == null)
                 {                 
-                    dispatch.IdUser = this._userhRep.GetUserByUserName(user).ID;
+                    dispatch.IdUserOrigin = this._userhRep.GetUserByUserName(user).ID;
                     dispatch.DateCreate = DateTime.Now;
-                    dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.Description == "Creado").FirstOrDefault().ID;
+                    dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.ID == (int)Constants.Dispatch_State.Creado).FirstOrDefault().ID;
                     dispatch.Unity = 0;
                     result = this._dispatchRep.saveDispatch(dispatch);
                 }
@@ -80,7 +81,8 @@ namespace Business.Class
                 var listDispatches = this._dispatchRep.GetAllDispatches();
                 foreach (var item in listDispatches)
                 {                    
-                    item.Usuario = this._userhRep.GetUserById(item.IdUser);
+                    item.UsuarioOrigin = this._userhRep.GetUserById(item.IdUserOrigin);
+                    item.UsuarioDestiny = item.IdUserDestiny != null ? this._userhRep.GetUserById(item.IdUserDestiny.Value) : null;
                     item.SucDestiny = this._sucursalRep.GetSucursalById(item.Destiny);
                     item.SucOrigin = this._sucursalRep.GetSucursalById(item.Origin);
                     item.State = this._dispatchRep.GetStates().Where(x => x.ID == item.IdState).FirstOrDefault(); ;
@@ -104,7 +106,8 @@ namespace Business.Class
             {
                 List<Stock_SucursalDto> listStock_sucursal;
                 DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
-                dispatch.Usuario = this._userhRep.GetUserById(dispatch.IdUser);
+                dispatch.UsuarioOrigin = this._userhRep.GetUserById(dispatch.IdUserOrigin);
+                dispatch.UsuarioDestiny = dispatch.IdUserDestiny != null ? this._userhRep.GetUserById(dispatch.IdUserDestiny.Value) : null;
                 var dirStock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
                 dispatch.Dispatch_stock = (IEnumerable<Dispatch_StockDto>)dirStock["dispatch_stock"];
                 dispatch.Stock = (IEnumerable<StockDto>)dirStock["stock"];
@@ -125,7 +128,7 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public void UpdateDispatch(DispatchDto dispatch)
+        public void UpdateDispatch(DispatchDto dispatch, string user)
         {
             try
             {
@@ -155,6 +158,28 @@ namespace Business.Class
                 }
                 dispatch.Dispatch_stock = listDispatch_Stock;
                 dispatch.Unity = countBult;
+                switch (dispatch.IdState)
+                {
+                    case (int)Constants.Dispatch_State.Creado:
+                        dispatch.IdState = (int)Constants.Dispatch_State.Creado;
+                        break;
+                    case (int)Constants.Dispatch_State.Despachado:
+                        dispatch.IdState = (int)Constants.Dispatch_State.Despachado;
+                        dispatch.DateDispatched = DateTime.Now;
+                        break;
+                    case (int)Constants.Dispatch_State.Finalizado:
+                        dispatch.IdState = (int)Constants.Dispatch_State.Finalizado;                        
+                        break;
+                    case (int)Constants.Dispatch_State.Incompleto:
+                        dispatch.IdState = (int)Constants.Dispatch_State.Incompleto;
+                        break;
+                    case (int)Constants.Dispatch_State.Recibido:
+                        dispatch.IdState = (int)Constants.Dispatch_State.Recibido;
+                        dispatch.DateRecived = DateTime.Now;
+                        dispatch.IdUserDestiny = this._userhRep.GetUserByUserName(user).ID;
+
+                        break;
+                }               
                 this._dispatchRep.UpdateDispatch(dispatch);
             }catch(Exception ex)
             {

@@ -56,9 +56,18 @@ namespace StockManagerApi.Controllers
         {           
             try
             {
+                dynamic result = null;
                 var input = JsonConvert.DeserializeObject<Dictionary<string,object>>(value.ToString());
                 DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
-               return this._dispatchBL.saveDispatch(dispatchInput, input["user"].ToString());
+                if (dispatchInput.Origin != dispatchInput.Destiny)
+                {
+                   result = this._dispatchBL.saveDispatch(dispatchInput, input["user"].ToString());
+                }
+                else
+                {
+                    throw new Exception("No se puede crear un despacho con mismo origen y destino.");
+                }
+                return result;
 
             }
             catch(Exception ex)
@@ -73,8 +82,9 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(value.ToString());
-                this._dispatchBL.UpdateDispatch(dispatchInput);
+                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
+                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
+                this._dispatchBL.UpdateDispatch(dispatchInput, input["user"].ToString());
                 // = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
 
             }catch(Exception ex)

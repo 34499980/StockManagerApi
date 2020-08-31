@@ -14,7 +14,8 @@ namespace DTO.Class
         [Key]
         public int ID { get; set; }
         public DateTime DateCreate { get; set; }
-        public int IdUser { get; set; }
+        public int IdUserOrigin { get; set; }
+        public int? IdUserDestiny { get; set; }
         public int Origin { get; set; }
         public int Destiny { get; set; }
         public int IdState { get; set; }
@@ -24,7 +25,9 @@ namespace DTO.Class
 
         
         [NotMapped]
-        public virtual UserDto Usuario { get; set; }
+        public virtual UserDto UsuarioOrigin { get; set; }
+        [NotMapped]
+        public virtual UserDto UsuarioDestiny { get; set; }
         [ForeignKey("Origin")]
         public virtual SucursalDto SucOrigin { get; set; }
         [ForeignKey("Destiny")]

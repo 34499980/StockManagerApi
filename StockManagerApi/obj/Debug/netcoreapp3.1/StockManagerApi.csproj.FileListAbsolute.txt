@@ -131,3 +131,5 @@ C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Microsoft.I
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\ConstantControl.dll
+C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\ConstantControl.pdb
