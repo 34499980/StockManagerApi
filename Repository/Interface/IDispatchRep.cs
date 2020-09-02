@@ -9,7 +9,7 @@ namespace Repository.Interface
     {
         DispatchDto saveDispatch(DispatchDto dispatch);
         IEnumerable<Dispatch_StateDto> GetStates();
-        IEnumerable<DispatchDto> GetAllDispatches();
+        IEnumerable<DispatchDto> GetAllDispatchesBySucursal(int idSucursal);
         DispatchDto GetDispatchById(int id);
         Dictionary<string, object> GetStockIdByDispatch(int id);
         DispatchDto GetDispatchBySucursales(DispatchDto dispatch);

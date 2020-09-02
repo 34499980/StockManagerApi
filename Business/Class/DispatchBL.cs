@@ -44,7 +44,7 @@ namespace Business.Class
                 }
                 else
                 {
-                  result = GetDispatchById(result.ID);
+                  result = GetDispatchById(result.ID).FirstOrDefault();
                 }
 
                 return result;
@@ -74,18 +74,19 @@ namespace Business.Class
         /// </summary>
         /// <returns></returns>
 
-        public IEnumerable<DispatchDto> GetAllDispatches()
+        public IEnumerable<DispatchDto> GetAllDispatchesBySucursal(string user)
         {
             try
             {
-                var listDispatches = this._dispatchRep.GetAllDispatches();
+                UserDto userOrigin = this._userhRep.GetUserByUserName(user);
+                var listDispatches = this._dispatchRep.GetAllDispatchesBySucursal(userOrigin.IdSucursal);
                 foreach (var item in listDispatches)
                 {                    
                     item.UsuarioOrigin = this._userhRep.GetUserById(item.IdUserOrigin);
                     item.UsuarioDestiny = item.IdUserDestiny != null ? this._userhRep.GetUserById(item.IdUserDestiny.Value) : null;
                     item.SucDestiny = this._sucursalRep.GetSucursalById(item.Destiny);
                     item.SucOrigin = this._sucursalRep.GetSucursalById(item.Origin);
-                    item.State = this._dispatchRep.GetStates().Where(x => x.ID == item.IdState).FirstOrDefault(); ;
+                    item.State = this._dispatchRep.GetStates().Where(x => x.ID == item.IdState).FirstOrDefault();
                 }
                 return listDispatches;
             }
@@ -100,10 +101,11 @@ namespace Business.Class
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public DispatchDto GetDispatchById(int id)
+        public IEnumerable<DispatchDto> GetDispatchById(int id)
         {
             try
             {
+                List<DispatchDto> listDispatch = new List<DispatchDto>();
                 List<Stock_SucursalDto> listStock_sucursal;
                 DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
                 dispatch.UsuarioOrigin = this._userhRep.GetUserById(dispatch.IdUserOrigin);
@@ -118,11 +120,11 @@ namespace Business.Class
                     item.Stock_Sucursal = listStock_sucursal;
                   
                 }
-               
+                listDispatch.Add(dispatch);
               
 
                
-                return dispatch;
+                return listDispatch;
             }catch(Exception ex)
             {
                 throw ex;
@@ -136,27 +138,30 @@ namespace Business.Class
                 Dispatch_StockDto dispatch_stock;
                 //Stock_SucursalDto stock_sucursal;
                 List<Dispatch_StockDto> listDispatch_Stock = new List<Dispatch_StockDto>();
-                foreach (var item in dispatch.Stock)
+                if (dispatch.Stock != null)
                 {
-                    dispatch_stock = new Dispatch_StockDto();
-                    dispatch_stock.IdDispatch = dispatch.ID;
-                    dispatch_stock.IdStock = this._stockRep.GetStockByCode(item.QR).FirstOrDefault().ID;
-                    dispatch_stock.Unity = item.Unity;
-                    countBult += item.Unity;
-                    listDispatch_Stock.Add(dispatch_stock);
-                    //stock_sucursal = new Stock_SucursalDto();
-                    //stock_sucursal.IdStock = dispatch_stock.IdStock;
-                    //stock_sucursal.IdSucursal = dispatch.Origin;
-                    //stock_sucursal.Unity = item.Unity;
+                    foreach (var item in dispatch.Stock)
+                    {
+                        dispatch_stock = new Dispatch_StockDto();
+                        dispatch_stock.IdDispatch = dispatch.ID;
+                        dispatch_stock.IdStock = this._stockRep.GetStockByCode(item.QR).FirstOrDefault().ID;
+                        dispatch_stock.Unity = item.Unity;
+                        countBult += item.Unity;
+                        listDispatch_Stock.Add(dispatch_stock);
+                        //stock_sucursal = new Stock_SucursalDto();
+                        //stock_sucursal.IdStock = dispatch_stock.IdStock;
+                        //stock_sucursal.IdSucursal = dispatch.Origin;
+                        //stock_sucursal.Unity = item.Unity;
 
-                    Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock,dispatch.Origin);
-                    //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
-                    
-                    this._stockRep.UpdateStockBySucursal(item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault());
+                        Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock, dispatch.Origin);
+                        //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
+
+                        this._stockRep.UpdateStockBySucursal(item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault());
 
 
+                    }
+                    dispatch.Dispatch_stock = listDispatch_Stock;
                 }
-                dispatch.Dispatch_stock = listDispatch_Stock;
                 dispatch.Unity = countBult;
                 switch (dispatch.IdState)
                 {

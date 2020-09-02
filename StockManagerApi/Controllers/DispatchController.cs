@@ -26,7 +26,7 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                return this._dispatchBL.GetAllDispatches();
+                return null;//this._dispatchBL.GetAllDispatches();
             }
             catch (Exception ex)
             {
@@ -38,11 +38,24 @@ namespace StockManagerApi.Controllers
 
         // GET api/<DispatchController>/5
         [HttpGet("{id}")]
-        public DispatchDto Get(int id)
+        public IEnumerable<DispatchDto> Get(string id)
         {
             try
             {
-              return  this._dispatchBL.GetDispatchById(id);
+                dynamic result = null;
+                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(id.ToString());
+                if (input.ContainsKey("dispatch"))
+                {
+                    int dispatchSearch = int.Parse(input["dispatch"].ToString());
+                    result = this._dispatchBL.GetDispatchById(dispatchSearch);
+                }
+                else
+                {
+
+                    string userSearch = input["UserName"].ToString();
+                    result = this._dispatchBL.GetAllDispatchesBySucursal(userSearch);
+                }
+                return result;
             }catch(Exception ex)
             {
                 throw ex;
@@ -59,14 +72,17 @@ namespace StockManagerApi.Controllers
                 dynamic result = null;
                 var input = JsonConvert.DeserializeObject<Dictionary<string,object>>(value.ToString());
                 DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
-                if (dispatchInput.Origin != dispatchInput.Destiny)
-                {
-                   result = this._dispatchBL.saveDispatch(dispatchInput, input["user"].ToString());
-                }
-                else
-                {
-                    throw new Exception("No se puede crear un despacho con mismo origen y destino.");
-                }
+                
+                    if (dispatchInput.Origin != dispatchInput.Destiny)
+                    {
+                        result = this._dispatchBL.saveDispatch(dispatchInput, input["user"].ToString());
+                    }
+                    else
+                    {
+                        throw new Exception("No se puede crear un despacho con mismo origen y destino.");
+                    }
+                
+               
                 return result;
 
             }

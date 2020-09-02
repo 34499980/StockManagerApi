@@ -9,8 +9,8 @@ namespace Business.Interface
     {
         DispatchDto saveDispatch(DispatchDto dispatch,string user);
         IEnumerable<Dispatch_StateDto> GetStates();
-        IEnumerable<DispatchDto> GetAllDispatches();
-        DispatchDto GetDispatchById(int id);
+        IEnumerable<DispatchDto> GetAllDispatchesBySucursal(string user);
+        IEnumerable<DispatchDto>GetDispatchById(int id);
         void UpdateDispatch(DispatchDto dispatch, string user);
     }
 }

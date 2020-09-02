@@ -54,11 +54,11 @@ namespace Repository.Class
         /// Devuelve todos los despachos
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<DispatchDto> GetAllDispatches()
+        public IEnumerable<DispatchDto> GetAllDispatchesBySucursal(int idSucursal)
         {
             try
             {
-               return this._context.DISPATCH.ToList();
+               return this._context.DISPATCH.Where(x => x.Origin == idSucursal || x.Destiny == idSucursal).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -116,7 +116,10 @@ namespace Repository.Class
         {
             try
             {
-               return this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Origin == dispatch.Destiny && x.IdState == (int)Constants.Dispatch_State.Creado).FirstOrDefault();
+                dynamic result = null;
+                int idState = (int)Constants.Dispatch_State.Creado;
+               result = this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Origin == dispatch.Destiny && x.IdState == idState).FirstOrDefault();
+                return result;
             }catch(Exception ex)
             {
                 throw ex;
@@ -133,28 +136,30 @@ namespace Repository.Class
               
                 var Dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
                 var dispatchDB = this._context.DISPATCH.Where(x => x.ID == dispatch.ID).FirstOrDefault();
-               
-                foreach (var item in dispatch.Dispatch_stock)
+                if (dispatch.Dispatch_stock != null)
                 {
-                   var dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == item.IdDispatch && x.IdStock == item.IdStock).FirstOrDefault();
-                    if(dispatch_stockDB != null)
+                    foreach (var item in dispatch.Dispatch_stock)
                     {
-                        if(item.Unity > 0)
+                        var dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == item.IdDispatch && x.IdStock == item.IdStock).FirstOrDefault();
+                        if (dispatch_stockDB != null)
                         {
-                            dispatch_stockDB.Unity = item.Unity;
-                            this._context.Entry(dispatch_stockDB).State = EntityState.Modified;
+                            if (item.Unity > 0)
+                            {
+                                dispatch_stockDB.Unity = item.Unity;
+                                this._context.Entry(dispatch_stockDB).State = EntityState.Modified;
+                            }
+                            else
+                            {
+                                this._context.DISPATCH_STOCK.Remove(dispatch_stockDB);
+                            }
+
                         }
                         else
                         {
-                             this._context.DISPATCH_STOCK.Remove(dispatch_stockDB);
+                            this._context.DISPATCH_STOCK.Add(item);
                         }
-                      
+                        this._context.SaveChanges();
                     }
-                    else
-                    {
-                        this._context.DISPATCH_STOCK.Add(item);
-                    }
-                    this._context.SaveChanges();
                 }
                 dispatchDB.IdState = dispatch.IdState;
                 dispatchDB.DateDispatched = dispatch.DateDispatched;
