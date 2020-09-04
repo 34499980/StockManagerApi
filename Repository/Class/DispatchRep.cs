@@ -116,9 +116,8 @@ namespace Repository.Class
         {
             try
             {
-                dynamic result = null;
-                int idState = (int)Constants.Dispatch_State.Creado;
-               result = this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Origin == dispatch.Destiny && x.IdState == idState).FirstOrDefault();
+                dynamic result = null;              
+               result = this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Destiny == dispatch.Destiny && x.IdState == (int)Constants.Dispatch_State.Creado).FirstOrDefault();
                 return result;
             }catch(Exception ex)
             {
