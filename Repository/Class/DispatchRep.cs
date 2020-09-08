@@ -160,6 +160,7 @@ namespace Repository.Class
                         this._context.SaveChanges();
                     }
                 }
+                dispatchDB.Unity = dispatch.Unity;
                 dispatchDB.IdState = dispatch.IdState;
                 dispatchDB.DateDispatched = dispatch.DateDispatched;
                 dispatchDB.DateRecived = dispatch.DateRecived;
