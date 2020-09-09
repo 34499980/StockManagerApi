@@ -80,6 +80,10 @@ namespace Business.Class
             {
                 UserDto userOrigin = this._userhRep.GetUserByUserName(user);
                 var listDispatches = this._dispatchRep.GetAllDispatchesBySucursal(userOrigin.IdSucursal);
+                if(listDispatches.Where(x => x.Destiny == userOrigin.IdSucursal).Any())
+                {
+                    listDispatches = listDispatches.Where( x => (x.Origin == userOrigin.IdSucursal) || (x.Destiny == userOrigin.IdSucursal && x.IdState != (int)Constants.Dispatch_State.Creado));
+                }
                 foreach (var item in listDispatches)
                 {                    
                     item.UsuarioOrigin = this._userhRep.GetUserById(item.IdUserOrigin);

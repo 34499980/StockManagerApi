@@ -58,7 +58,9 @@ namespace Repository.Class
         {
             try
             {
-               return this._context.DISPATCH.Where(x => x.Origin == idSucursal || x.Destiny == idSucursal).ToList();
+                dynamic result = null;
+               result = this._context.DISPATCH.Where(x => x.Origin == idSucursal || x.Destiny == idSucursal).ToList();
+                return result;
             }catch(Exception ex)
             {
                 throw ex;
