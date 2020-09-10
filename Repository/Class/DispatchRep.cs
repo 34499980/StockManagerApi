@@ -147,6 +147,7 @@ namespace Repository.Class
                             if (item.Unity > 0)
                             {
                                 dispatch_stockDB.Unity = item.Unity;
+                                dispatch_stockDB.UnityRead = item.UnityRead;
                                 this._context.Entry(dispatch_stockDB).State = EntityState.Modified;
                             }
                             else
@@ -167,6 +168,7 @@ namespace Repository.Class
                 dispatchDB.DateDispatched = dispatch.DateDispatched;
                 dispatchDB.DateRecived = dispatch.DateRecived;
                 dispatchDB.IdUserDestiny = dispatch.IdUserDestiny;
+                dispatchDB.IdState = dispatch.IdState;
 
                 this._context.Entry(dispatchDB).State = EntityState.Modified;
 

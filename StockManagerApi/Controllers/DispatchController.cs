@@ -98,6 +98,7 @@ namespace StockManagerApi.Controllers
         {
             try
             {
+              
                 var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
                 DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
                 this._dispatchBL.UpdateDispatch(dispatchInput, input["user"].ToString());

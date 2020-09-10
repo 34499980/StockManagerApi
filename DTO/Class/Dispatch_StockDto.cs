@@ -15,6 +15,7 @@ namespace DTO.Class
         public int IdDispatch { get; set; }
         public long IdStock { get; set; }
         public int Unity { get; set; }
+        public int UnityRead { get; set; }
 
         [JsonIgnore]
         [ForeignKey("IdDispatch")]

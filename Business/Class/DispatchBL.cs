@@ -142,7 +142,7 @@ namespace Business.Class
                 Dispatch_StockDto dispatch_stock;
                 //Stock_SucursalDto stock_sucursal;
                 List<Dispatch_StockDto> listDispatch_Stock = new List<Dispatch_StockDto>();
-                if (dispatch.Stock != null)
+                if (dispatch.Stock != null && dispatch.IdState == (int)Constants.Dispatch_State.Creado)
                 {
                     foreach (var item in dispatch.Stock)
                     {
@@ -156,21 +156,27 @@ namespace Business.Class
                         //stock_sucursal.IdStock = dispatch_stock.IdStock;
                         //stock_sucursal.IdSucursal = dispatch.Origin;
                         //stock_sucursal.Unity = item.Unity;
+                        if (dispatch.IdState == (int)Constants.Dispatch_State.Creado)
+                        {
+                            Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock, dispatch.Origin);
+                            //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
 
-                        Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock, dispatch.Origin);
-                        //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
+                            this._stockRep.UpdateStockBySucursal(item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault());
 
-                        this._stockRep.UpdateStockBySucursal(item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault());
+                        }
+                        else
+                        {
 
-
+                        }
                     }
                     dispatch.Dispatch_stock = listDispatch_Stock;
                 }
-                dispatch.Unity = countBult;
+                
                 switch (dispatch.IdState)
                 {
                     case (int)Constants.Dispatch_State.Creado:
                         dispatch.IdState = (int)Constants.Dispatch_State.Creado;
+                        dispatch.Unity = countBult;
                         break;
                     case (int)Constants.Dispatch_State.Despachado:
                         dispatch.IdState = (int)Constants.Dispatch_State.Despachado;
