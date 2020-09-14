@@ -41,6 +41,7 @@ namespace Business.Class
                     dispatch.IdState = this._dispatchRep.GetStates().Where(x => x.ID == (int)Constants.Dispatch_State.Creado).FirstOrDefault().ID;
                     dispatch.Unity = 0;
                     result = this._dispatchRep.saveDispatch(dispatch);
+                  
                 }
                 else
                 {
@@ -142,7 +143,8 @@ namespace Business.Class
                 Dispatch_StockDto dispatch_stock;
                 //Stock_SucursalDto stock_sucursal;
                 List<Dispatch_StockDto> listDispatch_Stock = new List<Dispatch_StockDto>();
-                if (dispatch.Stock != null && dispatch.IdState == (int)Constants.Dispatch_State.Creado)
+                if (dispatch.Stock != null && dispatch.IdState == (int)Constants.Dispatch_State.Creado 
+                    || dispatch.IdState == (int)Constants.Dispatch_State.Despachado && dispatch.DateDispatched == null)
                 {
                     foreach (var item in dispatch.Stock)
                     {
@@ -156,12 +158,14 @@ namespace Business.Class
                         //stock_sucursal.IdStock = dispatch_stock.IdStock;
                         //stock_sucursal.IdSucursal = dispatch.Origin;
                         //stock_sucursal.Unity = item.Unity;
-                        if (dispatch.IdState == (int)Constants.Dispatch_State.Creado)
+                        if (dispatch.IdState == (int)Constants.Dispatch_State.Creado
+                            || dispatch.IdState == (int)Constants.Dispatch_State.Despachado && dispatch.DateDispatched == null)
                         {
                             Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock, dispatch.Origin);
-                            //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stock_sucursal.Unity;
-
-                            this._stockRep.UpdateStockBySucursal(item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault());
+                            stock_sucursalDB.Unity = stock_sucursalDB.Unity - item.Unity;
+                           // Stock_SucursalDto stockEdit = item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault();
+                            //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stockEdit.Unity;
+                            this._stockRep.UpdateStockBySucursal(stock_sucursalDB);
 
                         }
                         else
@@ -180,17 +184,26 @@ namespace Business.Class
                         break;
                     case (int)Constants.Dispatch_State.Despachado:
                         dispatch.IdState = (int)Constants.Dispatch_State.Despachado;
+                        if (dispatch.DateDispatched == null)
                         dispatch.DateDispatched = DateTime.Now;
                         break;
                     case (int)Constants.Dispatch_State.Finalizado:
-                        dispatch.IdState = (int)Constants.Dispatch_State.Finalizado;                        
+                        dispatch.IdState = (int)Constants.Dispatch_State.Finalizado;
+                        foreach (var item in dispatch.Dispatch_stock)
+                        {
+                          var stock_sucursalDB =  this._stockRep.GetStock_Sucursal(item.IdStock, dispatch.Destiny);
+                          stock_sucursalDB.Unity += item.UnityRead;
+                          this._stockRep.UpdateStockBySucursal(stock_sucursalDB);
+                        }
+                        
                         break;
                     case (int)Constants.Dispatch_State.Incompleto:
                         dispatch.IdState = (int)Constants.Dispatch_State.Incompleto;
                         break;
                     case (int)Constants.Dispatch_State.Recibido:
                         dispatch.IdState = (int)Constants.Dispatch_State.Recibido;
-                        dispatch.DateRecived = DateTime.Now;
+                        if (dispatch.DateRecived == null)
+                            dispatch.DateRecived = DateTime.Now;
                         dispatch.IdUserDestiny = this._userhRep.GetUserByUserName(user).ID;
 
                         break;
