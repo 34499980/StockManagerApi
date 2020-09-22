@@ -45,9 +45,9 @@ namespace StockManagerApi.Controllers
                     case "stock":
                       result =  this._stockBL.GetStates();
                         break;
-                    //case "user":
-                    //    //this._userBL.
-                    //    break;
+                    case "rules":
+                        result = this._userBL.GetAllRules();
+                        break;
                 }
                 return result;
             }catch(Exception ex)

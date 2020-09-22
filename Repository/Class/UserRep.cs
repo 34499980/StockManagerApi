@@ -64,6 +64,20 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve todos los roles
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<RulesDto> GetAllRules()
+        {
+            try
+            {
+              return  this._context.RULES.ToList();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

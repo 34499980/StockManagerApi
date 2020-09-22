@@ -38,7 +38,7 @@ namespace Business.Class
         public UserDto GetUserById(int id)
         {
             try
-            {
+            {                
               return _userRep.GetUserById(id);
             }catch(Exception ex)
             {
@@ -57,6 +57,16 @@ namespace Business.Class
                 return _userRep.GetUserByUserName(userName);
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<RulesDto> GetAllRules()
+        {
+            try
+            {
+              return  this._userRep.GetAllRules();
+            }catch(Exception ex)
             {
                 throw ex;
             }

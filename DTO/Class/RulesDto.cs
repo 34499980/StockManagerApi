@@ -7,7 +7,7 @@ using System.Text;
 namespace DTO.Class
 {
     [Table("RULES", Schema = "dbo")]
-    public class RulesDto
+    public class RulesDto: StateBaseDto
     {
         [Key]
         public int ID { get; set; }
