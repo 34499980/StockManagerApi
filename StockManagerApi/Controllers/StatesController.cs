@@ -17,11 +17,13 @@ namespace StockManagerApi.Controllers
         private readonly IUsersBL _userBL;
         private readonly IStockBL _stockBL;
         private readonly IDispatchBL _dispatchBL;
-        public StatesController(IUsersBL userBL,IStockBL stockBL, IDispatchBL dispatchBL)
+        private readonly IRuleBL _ruleBL;
+        public StatesController(IUsersBL userBL,IStockBL stockBL, IDispatchBL dispatchBL, IRuleBL ruleBL)
         {
             this._userBL = userBL;
             this._stockBL = stockBL;
             this._dispatchBL = dispatchBL;
+            this._ruleBL = ruleBL;
         }
         // GET: api/<StatesController>
         [HttpGet]
@@ -46,7 +48,7 @@ namespace StockManagerApi.Controllers
                       result =  this._stockBL.GetStates();
                         break;
                     case "rules":
-                        result = this._userBL.GetAllRules();
+                        result = this._ruleBL.GetAllRules();
                         break;
                 }
                 return result;

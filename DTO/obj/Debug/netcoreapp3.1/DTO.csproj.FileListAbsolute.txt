@@ -10,9 +10,9 @@ C:\Users\aribr\Desktop\StockManagerApi2\DTO\obj\Debug\netcoreapp3.1\DTO.csprojAs
 C:\Proyectos\StockManagerApi\DTO\bin\Debug\netcoreapp3.1\DTO.deps.json
 C:\Proyectos\StockManagerApi\DTO\bin\Debug\netcoreapp3.1\DTO.dll
 C:\Proyectos\StockManagerApi\DTO\bin\Debug\netcoreapp3.1\DTO.pdb
-C:\Proyectos\StockManagerApi\DTO\obj\Debug\netcoreapp3.1\DTO.csprojAssemblyReference.cache
 C:\Proyectos\StockManagerApi\DTO\obj\Debug\netcoreapp3.1\DTO.AssemblyInfoInputs.cache
 C:\Proyectos\StockManagerApi\DTO\obj\Debug\netcoreapp3.1\DTO.AssemblyInfo.cs
 C:\Proyectos\StockManagerApi\DTO\obj\Debug\netcoreapp3.1\DTO.csproj.CoreCompileInputs.cache
 C:\Proyectos\StockManagerApi\DTO\obj\Debug\netcoreapp3.1\DTO.dll
 C:\Proyectos\StockManagerApi\DTO\obj\Debug\netcoreapp3.1\DTO.pdb
+C:\Proyectos\StockManagerApi\DTO\obj\Debug\netcoreapp3.1\DTO.csprojAssemblyReference.cache

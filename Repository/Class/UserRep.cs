@@ -1,4 +1,5 @@
 ﻿using DTO.Class;
+using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Interface;
 using System;
@@ -64,16 +65,34 @@ namespace Repository.Class
                 throw ex;
             }
         }
+      
         /// <summary>
-        /// Devuelve todos los roles
+        /// Guardar usuario nuevo
         /// </summary>
-        /// <returns></returns>
-        public IEnumerable<RulesDto> GetAllRules()
+        /// <param name="user"></param>
+        public void SaveUser(UserDto user)
         {
             try
             {
-              return  this._context.RULES.ToList();
+                this._context.USERS.Add(user);
+                this._context.SaveChanges();
             }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Actualiza usuario
+        /// </summary>
+        /// <param name="user"></param>
+        public void UpdateUser(UserDto user)
+        {
+            try
+            {
+                this._context.Entry(user).State = EntityState.Modified;
+                this._context.SaveChanges();
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

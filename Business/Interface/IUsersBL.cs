@@ -10,6 +10,5 @@ namespace Business.Interface
         IEnumerable<UserDto> GetAllUsers();
         UserDto GetUserByName(string userName);
         UserDto GetUserById(int id);
-        IEnumerable<RulesDto> GetAllRules();
     }
 }

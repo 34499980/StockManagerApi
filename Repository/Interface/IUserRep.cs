@@ -10,7 +10,8 @@ namespace Repository.Interface
         IEnumerable<UserDto> GetAllUsers();
         UserDto GetUserByUserName(string userName);
         UserDto GetUserById(int id);
-        IEnumerable<RulesDto> GetAllRules();
+        void UpdateUser(UserDto user);
+        void SaveUser(UserDto user);
 
 
     }

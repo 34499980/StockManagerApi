@@ -61,16 +61,37 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public IEnumerable<RulesDto> GetAllRules()
+        
+        /// <summary>
+        /// Guardar usuario nuevo
+        /// </summary>
+        /// <param name="user"></param>
+        public void SaveUser(UserDto user)
         {
             try
             {
-              return  this._userRep.GetAllRules();
-            }catch(Exception ex)
+                this._userRep.SaveUser(user);
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
-       
+        /// <summary>
+        /// Actualiza usuario
+        /// </summary>
+        /// <param name="user"></param>
+        public void UpdateUser(UserDto user)
+        {
+            try
+            {
+                this._userRep.UpdateUser(user);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
