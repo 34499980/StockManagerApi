@@ -10,5 +10,8 @@ namespace Business.Interface
         IEnumerable<UserDto> GetAllUsers();
         UserDto GetUserByName(string userName);
         UserDto GetUserById(int id);
+        void UpdateUser(UserDto user);
+        void SaveUser(UserDto user);
+
     }
 }

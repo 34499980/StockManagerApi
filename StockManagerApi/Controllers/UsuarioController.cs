@@ -6,6 +6,7 @@ using Business.Interface;
 using DTO.Class;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -55,9 +56,30 @@ namespace StockManagerApi.Controllers
 
         // POST api/<UsuarioController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(Object value)
         {
-            
+            try
+            {
+                dynamic result = null;
+                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
+                UserDto userInput = JsonConvert.DeserializeObject<UserDto>(input["user"].ToString());
+                result = this._userBL.GetUserByName(userInput.UserName);
+                if(result != null)
+                {
+                    this._userBL.UpdateUser(userInput);
+                }
+                else
+                {
+                    this._userBL.SaveUser(userInput);
+                }               
+
+               
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // PUT api/<UsuarioController>/5
