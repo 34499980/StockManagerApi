@@ -40,8 +40,10 @@ namespace Repository.Class
         public UserDto GetUserByUserName(string userName)
         {
             try
-            {
-              var result =  _context.USERS.Where(x => x.UserName == userName).FirstOrDefault();
+            {                
+              var result =  _context.USERS.Include(q => q.Sucursal)
+                                          .Include(q => q.Rule)
+                                          .Where(x => x.UserName == userName).FirstOrDefault();
                 return result;
             }catch(Exception ex)
             {
@@ -57,7 +59,9 @@ namespace Repository.Class
         {
             try
             {
-                var result = _context.USERS.Where(x => x.ID == id).FirstOrDefault();
+                var result = _context.USERS.Include(q => q.Sucursal)
+                                           .Include(q => q.Rule)
+                                           .Where(x => x.ID == id).FirstOrDefault();
                 return result;
             }
             catch (Exception ex)

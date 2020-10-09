@@ -148,7 +148,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <returns></returns>
-        public IEnumerable<Stock_SucursalDto> GetStockSucursalByIdStock(StockDto stock)
+        public ICollection<Stock_SucursalDto> GetStockSucursalByIdStock(StockDto stock)
         {
             try
             {

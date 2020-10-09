@@ -89,6 +89,7 @@ namespace Business.Class
                 {                    
                     item.UsuarioOrigin = this._userhRep.GetUserById(item.IdUserOrigin);
                     item.UsuarioDestiny = item.IdUserDestiny != null ? this._userhRep.GetUserById(item.IdUserDestiny.Value) : null;
+                    //TODO si funciono el traer automatico, sacar
                     item.SucDestiny = this._sucursalRep.GetSucursalById(item.Destiny);
                     item.SucOrigin = this._sucursalRep.GetSucursalById(item.Origin);
                     item.State = this._dispatchRep.GetStates().Where(x => x.ID == item.IdState).FirstOrDefault();
@@ -110,19 +111,15 @@ namespace Business.Class
         {
             try
             {
-                List<DispatchDto> listDispatch = new List<DispatchDto>();
-                List<Stock_SucursalDto> listStock_sucursal;
-                DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);
-                dispatch.UsuarioOrigin = this._userhRep.GetUserById(dispatch.IdUserOrigin);
-                dispatch.UsuarioDestiny = dispatch.IdUserDestiny != null ? this._userhRep.GetUserById(dispatch.IdUserDestiny.Value) : null;
-                var dirStock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);
-                dispatch.Dispatch_stock = (IEnumerable<Dispatch_StockDto>)dirStock["dispatch_stock"];
-                dispatch.Stock = (IEnumerable<StockDto>)dirStock["stock"];
+                List<DispatchDto> listDispatch = new List<DispatchDto>();                
+                DispatchDto dispatch =  this._dispatchRep.GetDispatchById(id);                
+                var dirStock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);             
+                dispatch.Stock = this._dispatchRep.GetStockByIdDispatch(dispatch.ID);
                 foreach (var item in dispatch.Stock)
                 {
-                    listStock_sucursal = new List<Stock_SucursalDto>();
-                    listStock_sucursal.Add(this._stockRep.GetStock_Sucursal(item.ID,dispatch.Origin));
-                    item.Stock_Sucursal = listStock_sucursal;
+                    
+                    item.Stock_Sucursal = new List<Stock_SucursalDto>();
+                    item.Stock_Sucursal.Add(this._stockRep.GetStock_Sucursal(item.ID, dispatch.Origin));
                   
                 }
                 listDispatch.Add(dispatch);
@@ -141,7 +138,7 @@ namespace Business.Class
             {
                 int countBult = 0;
                 Dispatch_StockDto dispatch_stock;
-                //Stock_SucursalDto stock_sucursal;
+             
                 List<Dispatch_StockDto> listDispatch_Stock = new List<Dispatch_StockDto>();
                 if (dispatch.Stock != null && dispatch.IdState == (int)Constants.Dispatch_State.Creado 
                     || dispatch.IdState == (int)Constants.Dispatch_State.Despachado && dispatch.DateDispatched == null)
@@ -153,18 +150,13 @@ namespace Business.Class
                         dispatch_stock.IdStock = this._stockRep.GetStockByCode(item.QR).FirstOrDefault().ID;
                         dispatch_stock.Unity = item.Unity;
                         countBult += item.Unity;
-                        listDispatch_Stock.Add(dispatch_stock);
-                        //stock_sucursal = new Stock_SucursalDto();
-                        //stock_sucursal.IdStock = dispatch_stock.IdStock;
-                        //stock_sucursal.IdSucursal = dispatch.Origin;
-                        //stock_sucursal.Unity = item.Unity;
+                    
                         if (dispatch.IdState == (int)Constants.Dispatch_State.Creado
                             || dispatch.IdState == (int)Constants.Dispatch_State.Despachado && dispatch.DateDispatched == null)
                         {
                             Stock_SucursalDto stock_sucursalDB = this._stockRep.GetStock_Sucursal(dispatch_stock.IdStock, dispatch.Origin);
                             stock_sucursalDB.Unity = stock_sucursalDB.Unity - item.Unity;
-                           // Stock_SucursalDto stockEdit = item.Stock_Sucursal.Where(x => x.IdStock == dispatch_stock.IdStock && x.IdSucursal == dispatch.Origin).FirstOrDefault();
-                            //stock_sucursalDB.Unity = stock_sucursalDB.Unity - stockEdit.Unity;
+                         
                             this._stockRep.UpdateStockBySucursal(stock_sucursalDB);
 
                         }

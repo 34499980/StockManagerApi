@@ -28,16 +28,16 @@ namespace Business.Class
         {
             try
             {
-                var listStock =  this._stockRep.GetStockByCode(code);
-                if(listStock != null)
+                var listStock =  this._stockRep.GetStockByCode(code);              
+                if (listStock != null)
                 {
                     foreach (var item in listStock)
                     {
                         item.Stock_Sucursal = this._stockRep.GetStockSucursalByIdStock(item);
                     }
-                    
+
                 }
-               
+
                 return listStock;
             }
             catch (Exception ex)

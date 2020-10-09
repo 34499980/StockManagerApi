@@ -58,8 +58,13 @@ namespace Repository.Class
         {
             try
             {
+                //TODO probar despacho con sucursal
                 dynamic result = null;
-               result = this._context.DISPATCH.Where(x => x.Origin == idSucursal || x.Destiny == idSucursal).ToList();
+               result = this._context.DISPATCH.Include(q => q.UsuarioDestiny)
+                                              .Include(q => q.UsuarioOrigin)
+                                              .Include(q => q.State)
+                                              .Include(q => q.Dispatch_stock)
+                                              .Where(x => x.Origin == idSucursal || x.Destiny == idSucursal).ToList();
                 return result;
             }catch(Exception ex)
             {
@@ -75,7 +80,12 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.DISPATCH.Where(x => x.ID == id).FirstOrDefault();
+                //TODO PROBAR traer despacho con stock              
+                return this._context.DISPATCH .Include(q => q.UsuarioDestiny)
+                                              .Include(q => q.UsuarioOrigin)
+                                              .Include(q => q.State)
+                                              .Include(q => q.Dispatch_stock)
+                                              .Where(x => x.ID == id).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -87,24 +97,48 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Dictionary<string,object> GetStockIdByDispatch(int id)
+        public ICollection<Dispatch_StockDto> GetStockIdByDispatch(int id)
         {
             try
             {
-                Dictionary<string, object> result = new Dictionary<string, object>();
-                StockDto stock = null;
-                List<StockDto> listStock = new List<StockDto>();
-               var dispatch_Stock = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == id).ToList();
+                //Dictionary<string, object> result = new Dictionary<string, object>();
+                //StockDto stock = null;
+                //List<StockDto> listStock = new List<StockDto>();
+                var result = this._context.DISPATCH_STOCK.Include(q => q.Stock).Where(x => x.IdDispatch == id).ToList();
 
-                foreach (var item in dispatch_Stock)
-                {
-                   stock =  this._context.STOCK.Where(x => x.ID == item.IdStock).FirstOrDefault();
-                   listStock.Add(stock);
-                }
-                result.Add("stock", listStock);
-                result.Add("dispatch_stock", dispatch_Stock);
+                //foreach (var item in dispatch_Stock)
+                //{
+                //   stock =  this._context.STOCK.Where(x => x.ID == item.IdStock).FirstOrDefault();
+                //   listStock.Add(stock);
+                //}
+                //result.Add("stock", listStock);
+                //result.Add("dispatch_stock", dispatch_Stock);
                 return result;
             }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ICollection<StockDto> GetStockByIdDispatch(int id)
+        {
+            try
+            {
+                //Dictionary<string, object> result = new Dictionary<string, object>();
+                //StockDto stock = null;
+                //List<StockDto> listStock = new List<StockDto>();
+                var result = this._context.DISPATCH.Where(x => x.ID == id).SelectMany(q => q.Dispatch_stock).Select(q => q.Stock).ToList();
+                    //this._context.DISPATCH.SelectMany(q => q.Dispatch_stock).Select(q => q.Stock).Where(x => x.ID == id).ToList();
+
+                //foreach (var item in dispatch_Stock)
+                //{
+                //   stock =  this._context.STOCK.Where(x => x.ID == item.IdStock).FirstOrDefault();
+                //   listStock.Add(stock);
+                //}
+                //result.Add("stock", listStock);
+                //result.Add("dispatch_stock", dispatch_Stock);
+                return result;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

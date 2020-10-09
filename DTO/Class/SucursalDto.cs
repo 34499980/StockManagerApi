@@ -15,5 +15,7 @@ namespace DTO.Class
         public string Name { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
+
+      //  public virtual ICollection<Stock_SucursalDto> Stock_Sucursal { get; set; }
     }
 }

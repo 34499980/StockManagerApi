@@ -26,7 +26,8 @@ namespace DTO.Class
         [ForeignKey("IdSucursal")]
         public virtual SucursalDto Sucursal { get; set; }
         [NotMapped]
-        public  IEnumerable<Stock_SucursalDto> Stock_Sucursal { get; set; }
+        public virtual ICollection<Stock_SucursalDto> Stock_Sucursal { get; set; }
+        public virtual ICollection<Dispatch_StockDto> Dispatch_Stock { get; set; }
         [NotMapped]
         public  int Unity { get; set; }
        
