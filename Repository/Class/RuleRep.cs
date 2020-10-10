@@ -1,6 +1,7 @@
-﻿using DTO.Class;
+﻿
 using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
+using Repository.Entities;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace Repository.Class
         /// Devuelve todos los roles
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<RulesDto> GetAllRules()
+        public IEnumerable<Rules> GetAllRules()
         {
             try
             {

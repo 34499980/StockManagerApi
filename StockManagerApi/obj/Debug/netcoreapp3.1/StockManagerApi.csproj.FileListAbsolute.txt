@@ -64,8 +64,6 @@ C:\Users\aribr\Desktop\StockManagerApi2\StockManagerApi\obj\Debug\netcoreapp3.1\
 C:\Users\aribr\Desktop\StockManagerApi2\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.genruntimeconfig.cache
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.AssemblyInfoInputs.cache
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.AssemblyInfo.cs
-C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.csproj.CoreCompileInputs.cache
-C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -133,3 +131,8 @@ C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\staticwebas
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.dll
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.pdb
 C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.genruntimeconfig.cache
+C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Proyectos\StockManagerApi\StockManagerApi\bin\Debug\netcoreapp3.1\StructureMap.dll
+C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.csproj.CoreCompileInputs.cache
+C:\Proyectos\StockManagerApi\StockManagerApi\obj\Debug\netcoreapp3.1\StockManagerApi.MvcApplicationPartsAssemblyInfo.cache

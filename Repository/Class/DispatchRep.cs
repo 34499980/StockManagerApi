@@ -1,5 +1,4 @@
-﻿using DTO.Class;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Interface;
 using System;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ConstantControl;
 using System.Text;
+using Repository.Entities;
 
 namespace Repository.Class
 {
@@ -22,7 +22,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="dispatch"></param>
         /// <returns></returns>
-        public DispatchDto saveDispatch(DispatchDto dispatch)
+        public Dispatch saveDispatch(Dispatch dispatch)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Repository.Class
         /// Devuelve todos los estados que puede tener un despacho
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Dispatch_StateDto> GetStates()
+        public IEnumerable<Dispatch_State> GetStates()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Repository.Class
         /// Devuelve todos los despachos
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<DispatchDto> GetAllDispatchesBySucursal(int idSucursal)
+        public IEnumerable<Dispatch> GetAllDispatchesBySucursal(int idSucursal)
         {
             try
             {
@@ -63,7 +63,6 @@ namespace Repository.Class
                result = this._context.DISPATCH.Include(q => q.UsuarioDestiny)
                                               .Include(q => q.UsuarioOrigin)
                                               .Include(q => q.State)
-                                              .Include(q => q.Dispatch_stock)
                                               .Where(x => x.Origin == idSucursal || x.Destiny == idSucursal).ToList();
                 return result;
             }catch(Exception ex)
@@ -76,7 +75,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public DispatchDto GetDispatchById(int id)
+        public Dispatch GetDispatchById(int id)
         {
             try
             {
@@ -97,11 +96,11 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ICollection<Dispatch_StockDto> GetStockIdByDispatch(int id)
+        public ICollection<Dispatch_Stock> GetStockIdByDispatch(int id)
         {
             try
             {
-                var result = this._context.DISPATCH_STOCK.Include(q => q.Stock).Where(x => x.IdDispatch == id).ToList();
+                var result = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == id).ToList();
 
                 return result;
             }catch(Exception ex)
@@ -114,15 +113,14 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ICollection<StockDto> GetStockByIdDispatch(int id)
+        public ICollection<Stock> GetStockByIdDispatch(int id)
         {
             try
             {
               
-                var result = this._context.DISPATCH.Where(x => x.ID == id)
-                                                    .SelectMany(q => q.Dispatch_stock)
-                                                    .Select(q => q.Stock).ToList();
-            
+                var result = this._context.STOCK.Where(x => x.ID == id).ToList();
+
+
                 return result;
             }
             catch (Exception ex)
@@ -135,7 +133,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="dispatch"></param>
         /// <returns></returns>
-        public DispatchDto GetDispatchBySucursales(DispatchDto dispatch)
+        public Dispatch GetDispatchBySucursales(Dispatch dispatch)
         {
             try
             {
@@ -153,7 +151,7 @@ namespace Repository.Class
         /// Actualiza el stock del despacho
         /// </summary>
         /// <param name="dispatch"></param>
-        public  void UpdateDispatch(DispatchDto dispatch)
+        public  void UpdateDispatch(Dispatch dispatch)
         {
             try
             {

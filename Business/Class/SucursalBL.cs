@@ -1,4 +1,5 @@
-﻿using Business.Interface;
+﻿using AutoMapper;
+using Business.Interface;
 using DTO.Class;
 using Repository.Interface;
 using System;
@@ -10,9 +11,11 @@ namespace Business.Class
     public class SucursalBL: ISucursalBL
     {
         private readonly ISucursalRep _sucursalRep;
-        public SucursalBL(ISucursalRep sucursalRep)
+        private readonly IMapper _mapper;
+        public SucursalBL(ISucursalRep sucursalRep, IMapper mapper)
         {
             this._sucursalRep = sucursalRep;
+            this._mapper = mapper;
         }
         /// <summary>
         /// Devuelve todas las sucursales
@@ -22,7 +25,8 @@ namespace Business.Class
         {
             try
             {
-                return this._sucursalRep.GetAllSucursal();
+                var result = this._sucursalRep.GetAllSucursal();
+                return _mapper.Map<IEnumerable<SucursalDto>>(result);
             }
             catch (Exception ex)
             {

@@ -6,16 +6,16 @@ using System.Text;
 
 namespace DTO.Class
 {
-    [Table("SUCURSAL", Schema = "dbo")]
+   
     public class SucursalDto
     {
        
-        [Key]
+      
         public int ID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
 
-      //  public virtual ICollection<Stock_SucursalDto> Stock_Sucursal { get; set; }
+     
     }
 }

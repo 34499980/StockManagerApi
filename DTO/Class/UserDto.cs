@@ -7,10 +7,10 @@ using System.Text;
 
 namespace DTO.Class
 {
-    [Table("USERS", Schema = "dbo")]
+    
     public class UserDto
     {
-        [Key]
+       
         public int ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -24,10 +24,10 @@ namespace DTO.Class
         public int IdSucursal { get; set; }
         public int IdRule { get; set; }
 
-        [ForeignKey("IdSucursal")]
+      
 
-        public virtual SucursalDto Sucursal { get; set; }
-        [ForeignKey("IdRule")]
-        public virtual RulesDto Rule { get; set; }
+        public  SucursalDto Sucursal { get; set; }
+       
+        public  RulesDto Rule { get; set; }
     }
 }

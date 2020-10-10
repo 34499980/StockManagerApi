@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using ConstantControl;
+using Repository.Entities;
+using AutoMapper;
 
 namespace Business.Class
 {
@@ -14,10 +16,12 @@ namespace Business.Class
     {
         private readonly IStockRep _stockRep;
         private readonly IUserRep _userRep;
-        public StockBL(IStockRep stockRep,IUserRep userRep)
+        private readonly IMapper _mapper;
+        public StockBL(IStockRep stockRep,IUserRep userRep, IMapper mapper)
         {
             this._stockRep = stockRep;
             this._userRep = userRep;
+            this._mapper = mapper;
         }
         /// <summary>
         /// Devuelve stock por id
@@ -38,7 +42,7 @@ namespace Business.Class
 
                 }
 
-                return listStock;
+                return _mapper.Map<IEnumerable<StockDto>>(listStock);
             }
             catch (Exception ex)
             {
@@ -53,7 +57,8 @@ namespace Business.Class
         {
             try
             {
-                return this._stockRep.GetAllStock();
+                var result = this._stockRep.GetAllStock();
+                return _mapper.Map<IEnumerable<StockDto>>(result);
             }
             catch (Exception ex)
             {
@@ -69,22 +74,23 @@ namespace Business.Class
         {
             try
             {
-                StockDto inputStock = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
+                var inputStock = _mapper.Map<Stock>(stock);
+                Stock inputDb = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
                 var user = this._userRep.GetUserByUserName(userInput);
-                if (inputStock == null)
+                if (inputDb == null)
                 {
                  
                   stock.IdSucursal = user.IdSucursal;
                   stock.Code = stock.QR;
                   stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
-                  this._stockRep.SaveStock(stock);
-                  this._stockRep.saveStockBySucursal(stock);
+                  this._stockRep.SaveStock(inputStock);
+                  this._stockRep.saveStockBySucursal(inputStock);
                  // this._stockRep.UpdateQR(stock);
 
                 }
                 else
                 {
-                    foreach (var item in stock.Stock_Sucursal)
+                    foreach (var item in inputStock.Stock_Sucursal)
                     {
                         if(item.IdSucursal == user.IdSucursal)
                         {
@@ -110,12 +116,11 @@ namespace Business.Class
         {
             try
             {
-               // StockDto inputStock = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
-                //UserDto  userId = this._userRep.GetUserByUserName(user);
-                Stock_SucursalDto stock_Sucursal =  this._stockRep.GetStockSucursalByIdStock(stock).Where(x => x.IdStock == stock.ID && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
+                var inputSock = _mapper.Map<Stock>(stock);
+                Stock_Sucursal stock_Sucursal =  this._stockRep.GetStockSucursalByIdStock(inputSock).Where(x => x.IdStock == stock.ID && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
                 stock_Sucursal.Unity = stock.Unity;
                 this._stockRep.UpdateStockBySucursal(stock_Sucursal);
-                this._stockRep.UpdateStock(stock);
+                this._stockRep.UpdateStock(inputSock);
                 
             }
             catch (Exception ex)
@@ -138,7 +143,7 @@ namespace Business.Class
                 {
                    item.Stock_Sucursal = this._stockRep.GetStockSucursalByIdStock(item);                   
                 }
-                return result;
+                return _mapper.Map<IEnumerable<StockDto>>(result);
             }
             catch(Exception ex)
             {
@@ -153,7 +158,8 @@ namespace Business.Class
         {
             try
             {
-             return  this._stockRep.GetAllStates();
+             var result =  this._stockRep.GetAllStates();
+                return _mapper.Map<IEnumerable<Stock_StateDto>>(result);
             }catch(Exception ex)
             {
                 throw ex;

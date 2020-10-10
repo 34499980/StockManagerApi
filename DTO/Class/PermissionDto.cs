@@ -6,10 +6,10 @@ using System.Text;
 
 namespace DTO.Class
 {
-    [Table("PERMISSION", Schema = "dbo")]
+ 
     public class PermissionDto
     {
-        [Key]
+       
         public int ID { get; set; }
         public string Description { get; set; }
     }

@@ -1,6 +1,6 @@
-﻿using DTO.Class;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
+using Repository.Entities;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Repository.Class
         /// Trae todos los usuarios
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<UserDto> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public UserDto GetUserByUserName(string userName)
+        public User GetUserByUserName(string userName)
         {
             try
             {                
@@ -55,7 +55,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public UserDto GetUserById(int id)
+        public User GetUserById(int id)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace Repository.Class
         /// Guardar usuario nuevo
         /// </summary>
         /// <param name="user"></param>
-        public void SaveUser(UserDto user)
+        public void SaveUser(User user)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Repository.Class
         /// Actualiza usuario
         /// </summary>
         /// <param name="user"></param>
-        public void UpdateUser(UserDto user)
+        public void UpdateUser(User user)
         {
             try
             {

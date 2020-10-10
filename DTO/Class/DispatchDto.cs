@@ -7,11 +7,11 @@ using System.Text.Json.Serialization;
 
 namespace DTO.Class
 {
-    [Table("DISPATCH", Schema = "dbo")]
+  
     public class DispatchDto
     {
 
-        [Key]
+  
         public int ID { get; set; }
         public DateTime DateCreate { get; set; }
         public int IdUserOrigin { get; set; }
@@ -24,21 +24,21 @@ namespace DTO.Class
         public int? Unity { get; set; }
 
 
-        [ForeignKey("IdUserOrigin")]
-        public virtual UserDto UsuarioOrigin { get; set; }
-        [ForeignKey("IdUserDestiny")]
-        public virtual UserDto UsuarioDestiny { get; set; }
-        [NotMapped]
-        public virtual SucursalDto SucOrigin { get; set; }
-        [NotMapped]
-        public virtual SucursalDto SucDestiny { get; set; }
-        [ForeignKey("IdState")]
-        public virtual Dispatch_StateDto State { get; set; }
-        [NotMapped]
+     
+        public  UserDto UsuarioOrigin { get; set; }
+      
+        public  UserDto UsuarioDestiny { get; set; }
+        
+        public  SucursalDto SucOrigin { get; set; }
+      
+        public  SucursalDto SucDestiny { get; set; }
+      
+        public  Dispatch_StateDto State { get; set; }
+        
         public  ICollection<StockDto> Stock { get; set; }
        // [NotMapped]
-        public virtual ICollection<Dispatch_StockDto> Dispatch_stock { get; set; }
-        public virtual string Code
+        public  ICollection<Dispatch_StockDto> Dispatch_stock { get; set; }
+        public  string Code
         {
             get { return ID.ToString().PadLeft(10,'0'); }
            

@@ -1,5 +1,5 @@
-﻿using DTO.Class;
-using Repository.Class.Context;
+﻿using Repository.Class.Context;
+using Repository.Entities;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Repository.Class
         /// Devuelve todas las sucursales
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<SucursalDto> GetAllSucursal()
+        public IEnumerable<Sucursal> GetAllSucursal()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public SucursalDto GetSucursalById(int id)
+        public Sucursal GetSucursalById(int id)
         {
             try
             {

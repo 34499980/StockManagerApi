@@ -1,5 +1,7 @@
-﻿using Business.Interface;
+﻿using AutoMapper;
+using Business.Interface;
 using DTO.Class;
+using Repository.Entities;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,11 @@ namespace Business.Class
     public class UsersBL: IUsersBL
     {
         private readonly IUserRep _userRep;
-        public UsersBL(IUserRep userRep)
+        private readonly IMapper _mapper;
+        public UsersBL(IUserRep userRep, IMapper mapper)
         {
             this._userRep = userRep;
+            this._mapper = mapper;
         }
         /// <summary>
         /// Trae todos los usuarios
@@ -23,7 +27,8 @@ namespace Business.Class
         {
             try
             {
-               return _userRep.GetAllUsers();
+               var result = _userRep.GetAllUsers();
+                return _mapper.Map<IEnumerable<UserDto>>(result);
             }catch(Exception ex)
             {
                 throw ex;
@@ -39,7 +44,8 @@ namespace Business.Class
         {
             try
             {                
-              return _userRep.GetUserById(id);
+              var result = _userRep.GetUserById(id);
+                return _mapper.Map<UserDto>(result);
             }catch(Exception ex)
             {
                 throw ex;
@@ -54,7 +60,8 @@ namespace Business.Class
         {
             try
             {
-                return _userRep.GetUserByUserName(userName);
+                var result = _userRep.GetUserByUserName(userName);
+                return _mapper.Map<UserDto>(result);
             }
             catch (Exception ex)
             {
@@ -70,7 +77,8 @@ namespace Business.Class
         {
             try
             {
-                this._userRep.SaveUser(user);
+                var userInput = _mapper.Map<User>(user);
+                this._userRep.SaveUser(userInput);
             }
             catch (Exception ex)
             {
@@ -85,7 +93,8 @@ namespace Business.Class
         {
             try
             {
-                this._userRep.UpdateUser(user);
+                var userInput = _mapper.Map<User>(user);
+                this._userRep.UpdateUser(userInput);
             }
             catch (Exception ex)
             {

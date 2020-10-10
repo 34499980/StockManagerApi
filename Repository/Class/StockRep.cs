@@ -1,7 +1,7 @@
-﻿using DTO.Class;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Repository.Class.Context;
+using Repository.Entities;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<StockDto> GetStockByCode(string qr)
+        public IEnumerable<Stock> GetStockByCode(string qr)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Repository.Class
         /// Busca todo el stock
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<StockDto> GetAllStock()
+        public IEnumerable<Stock> GetAllStock()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Repository.Class
         /// Guarda el stock nuevo
         /// </summary>
         /// <param name="stock"></param>
-        public void SaveStock(StockDto stock)
+        public void SaveStock(Stock stock)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Repository.Class
         /// Actualiza los datos de stock
         /// </summary>
         /// <param name="stock"></param>
-        public void UpdateStock(StockDto stock)
+        public void UpdateStock(Stock stock)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Repository.Class
         /// Devuelve los estados que puede tener el stock
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Stock_StateDto> GetAllStates()
+        public IEnumerable<Stock_State> GetAllStates()
         {
             try
             {
@@ -99,15 +99,15 @@ namespace Repository.Class
         /// Al crear el stock, se genera por cada sucursal por lo menos con valor 0
         /// </summary>
         /// <param name="stock"></param>
-        public void saveStockBySucursal(StockDto stock)
+        public void saveStockBySucursal(Stock stock)
         {
             try
             {
-                Stock_SucursalDto stockSucursal;
+                Stock_Sucursal stockSucursal;
                 var sucursalList = this._context.SUCURSAL.ToList();
                 foreach (var item in sucursalList)
                 {
-                    stockSucursal = new Stock_SucursalDto();
+                    stockSucursal = new Stock_Sucursal();
                     stockSucursal.IdSucursal = item.ID;
                     stockSucursal.IdStock = stock.ID;
                     if (item.ID == stock.IdSucursal)
@@ -132,7 +132,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <returns></returns>
-        public Stock_SucursalDto GetStock_Sucursal(long idStock, int idSucursal)
+        public Stock_Sucursal GetStock_Sucursal(long idStock, int idSucursal)
         {
             try
             {
@@ -148,7 +148,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <returns></returns>
-        public ICollection<Stock_SucursalDto> GetStockSucursalByIdStock(StockDto stock)
+        public ICollection<Stock_Sucursal> GetStockSucursalByIdStock(Stock stock)
         {
             try
             {
@@ -166,11 +166,11 @@ namespace Repository.Class
         /// <param name=""></param>
         /// <param name=""></param>
         /// <returns></returns>
-        public IEnumerable<StockDto> GetStockByParams(string param,string name)
+        public IEnumerable<Stock> GetStockByParams(string param,string name)
         {
             try
             {              
-                var result = this._context.STOCK.FromSqlRaw<StockDto>(name, param).ToList();
+                var result = this._context.STOCK.FromSqlRaw<Stock>(name, param).ToList();
                 return result;
             }
             catch (Exception ex)
@@ -182,7 +182,7 @@ namespace Repository.Class
         /// Actualizo unidades de stock por sucursal
         /// </summary>
         /// <param name="stock"></param>
-        public  void UpdateStockBySucursal(Stock_SucursalDto stock)
+        public  void UpdateStockBySucursal(Stock_Sucursal stock)
         {
             try
             {
@@ -210,7 +210,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public StockDto GetStockById(long id)
+        public Stock GetStockById(long id)
         {
             try
             {

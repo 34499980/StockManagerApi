@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
+using Business.AutoMapper;
 using Business.Class;
 using Business.Interface;
 using Microsoft.AspNetCore.Builder;
@@ -18,6 +20,7 @@ using Microsoft.Extensions.Logging;
 using Repository.Class;
 using Repository.Class.Context;
 using Repository.Interface;
+using StockManagerApi.Extensions;
 
 namespace StockManagerApi
 {
@@ -36,25 +39,19 @@ namespace StockManagerApi
         {
             services.AddControllers();
             services.AddMvc();
+
+
+
+            //DataBase Configuration
+            MiddlewareConfigurations.ConnectionConfiguration(services,Configuration);
+            //AutoMapper
+            MiddlewareConfigurations.AutoMapperConfiguration(services);
+            //Declaracion de inyecciones
+            MiddlewareConfigurations.DependecInjection(services);
+            //Cors Configuration
+            MiddlewareConfigurations.CorsConfiguration(services);
             
-            services.AddDbContext<StockManagerContext>(op => op.UseSqlServer(Configuration["ConnectionString:StockManagerDB"]));
             var builder = new ContainerBuilder();
-            services.AddCors(options => {
-                options.AddDefaultPolicy(x => { x.WithOrigins("*"); });
-            }) ;
-           
-            services.AddScoped<IUserRep, UserRep>();
-            services.AddScoped<ISucursalRep, SucuralRep>();
-            services.AddScoped<IDispatchRep, DispatchRep>();
-            services.AddScoped<IStockRep, StockRep>();
-            services.AddScoped<IRuleRep, RuleRep>();
-
-            services.AddScoped<IUsersBL, UsersBL>();           
-            services.AddScoped<ISucursalBL, SucursalBL>();           
-            services.AddScoped<IDispatchBL, DispatchBL>();           
-            services.AddScoped<IStockBL, StockBL>();
-            services.AddScoped<IRuleBL, RuleBL>();
-
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
         }
