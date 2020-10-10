@@ -164,6 +164,7 @@ namespace Business.Class
                         {
 
                         }
+                        listDispatch_Stock.Add(dispatch_stock);
                     }
                     dispatch.Dispatch_stock = listDispatch_Stock;
                 }

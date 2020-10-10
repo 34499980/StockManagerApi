@@ -28,7 +28,7 @@ namespace Business.Class
         {
             try
             {
-                var listStock =  this._stockRep.GetStockByCode(code);              
+                var listStock =  this._stockRep.GetStockByCode(code);
                 if (listStock != null)
                 {
                     foreach (var item in listStock)

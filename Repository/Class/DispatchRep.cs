@@ -101,41 +101,28 @@ namespace Repository.Class
         {
             try
             {
-                //Dictionary<string, object> result = new Dictionary<string, object>();
-                //StockDto stock = null;
-                //List<StockDto> listStock = new List<StockDto>();
                 var result = this._context.DISPATCH_STOCK.Include(q => q.Stock).Where(x => x.IdDispatch == id).ToList();
 
-                //foreach (var item in dispatch_Stock)
-                //{
-                //   stock =  this._context.STOCK.Where(x => x.ID == item.IdStock).FirstOrDefault();
-                //   listStock.Add(stock);
-                //}
-                //result.Add("stock", listStock);
-                //result.Add("dispatch_stock", dispatch_Stock);
                 return result;
             }catch(Exception ex)
             {
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve el stock que tiene un despacho
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ICollection<StockDto> GetStockByIdDispatch(int id)
         {
             try
             {
-                //Dictionary<string, object> result = new Dictionary<string, object>();
-                //StockDto stock = null;
-                //List<StockDto> listStock = new List<StockDto>();
-                var result = this._context.DISPATCH.Where(x => x.ID == id).SelectMany(q => q.Dispatch_stock).Select(q => q.Stock).ToList();
-                    //this._context.DISPATCH.SelectMany(q => q.Dispatch_stock).Select(q => q.Stock).Where(x => x.ID == id).ToList();
-
-                //foreach (var item in dispatch_Stock)
-                //{
-                //   stock =  this._context.STOCK.Where(x => x.ID == item.IdStock).FirstOrDefault();
-                //   listStock.Add(stock);
-                //}
-                //result.Add("stock", listStock);
-                //result.Add("dispatch_stock", dispatch_Stock);
+              
+                var result = this._context.DISPATCH.Where(x => x.ID == id)
+                                                    .SelectMany(q => q.Dispatch_stock)
+                                                    .Select(q => q.Stock).ToList();
+            
                 return result;
             }
             catch (Exception ex)
@@ -153,7 +140,9 @@ namespace Repository.Class
             try
             {
                 dynamic result = null;              
-               result = this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && x.Destiny == dispatch.Destiny && x.IdState == (int)Constants.Dispatch_State.Creado).FirstOrDefault();
+               result = this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && 
+                                                    x.Destiny == dispatch.Destiny && 
+                                                    x.IdState == (int)Constants.Dispatch_State.Creado).FirstOrDefault();
                 return result;
             }catch(Exception ex)
             {
@@ -168,9 +157,9 @@ namespace Repository.Class
         {
             try
             {
-              
+
                 var Dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
-                var dispatchDB = this._context.DISPATCH.Where(x => x.ID == dispatch.ID).FirstOrDefault();
+                //var dispatchDB = this._context.DISPATCH.Where(x => x.ID == dispatch.ID).FirstOrDefault();
                 if (dispatch.Dispatch_stock != null)
                 {
                     foreach (var item in dispatch.Dispatch_stock)
@@ -197,14 +186,14 @@ namespace Repository.Class
                         this._context.SaveChanges();
                     }
                 }
-                dispatchDB.Unity = dispatch.Unity;
-                dispatchDB.IdState = dispatch.IdState;
-                dispatchDB.DateDispatched = dispatch.DateDispatched;
-                dispatchDB.DateRecived = dispatch.DateRecived;
-                dispatchDB.IdUserDestiny = dispatch.IdUserDestiny;
-                dispatchDB.IdState = dispatch.IdState;
+                //dispatchDB.Unity = dispatch.Unity;
+                //dispatchDB.IdState = dispatch.IdState;
+                //dispatchDB.DateDispatched = dispatch.DateDispatched;
+                //dispatchDB.DateRecived = dispatch.DateRecived;
+                //dispatchDB.IdUserDestiny = dispatch.IdUserDestiny;
+                //dispatchDB.IdState = dispatch.IdState;
 
-                this._context.Entry(dispatchDB).State = EntityState.Modified;
+                this._context.Entry(dispatch).State = EntityState.Modified;
 
                 this._context.SaveChanges();
 
