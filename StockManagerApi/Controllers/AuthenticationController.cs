@@ -56,8 +56,8 @@ namespace StockManagerApi.Controllers
                 }
                 else
                 {
-                    throw new Exception("Usuario o contraseña incorrecta");
-                   
+                    return StatusCode(401, "Usuario o contraseña incorrectos.");
+
                 }
                
                 return Ok(ok);

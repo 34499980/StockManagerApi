@@ -330,6 +330,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Abp": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[8.0.1, )"
