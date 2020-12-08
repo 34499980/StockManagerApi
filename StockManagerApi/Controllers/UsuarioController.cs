@@ -56,21 +56,21 @@ namespace StockManagerApi.Controllers
 
         // POST api/<UsuarioController>
         [HttpPost]
-        public void Post(Object value)
+        public void Post(UserDto value)
         {
             try
             {
                 dynamic result = null;
-                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
-                UserDto userInput = JsonConvert.DeserializeObject<UserDto>(input["user"].ToString());
-                result = this._userBL.GetUserByName(userInput.UserName);
+               // var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
+                //UserDto userInput = JsonConvert.DeserializeObject<UserDto>(input["user"].ToString());
+                result = this._userBL.GetUserByName(value.UserName);
                 if(result != null)
                 {
-                    this._userBL.UpdateUser(userInput);
+                    this._userBL.UpdateUser(value);
                 }
                 else
                 {
-                    this._userBL.SaveUser(userInput);
+                    this._userBL.SaveUser(value);
                 }               
 
                

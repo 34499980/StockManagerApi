@@ -40,12 +40,12 @@ namespace StockManagerApi.Controllers
 
         // POST api/<AuthenticationController>
         [HttpPost]        
-        public async Task<IActionResult> Post(Object value)
+        public async Task<IActionResult> Post(UserDto userInput)
         {            
             bool ok = false;            
             try
             {
-               UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
+             //  UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
                UserDto userOutput = _userBL.GetUserByName(userInput.UserName);
 
                 if(userOutput != null && userInput.Password == userOutput.Password)
