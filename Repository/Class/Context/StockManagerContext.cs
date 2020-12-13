@@ -21,9 +21,9 @@ namespace Repository.Class.Context
         public DbSet<User> USERS { get; set; }       
 
         public DbSet<Dispatch> DISPATCH { get; set; }
-        public DbSet<Rules> RULES { get; set; }
+        public DbSet<Roles> RULES { get; set; }
         public DbSet<Sale> SALE { get; set; }       
-        public DbSet<Rules_Permission> RULES_PERMISSION { get; set; }
+        public DbSet<Roles_Permission> RULES_PERMISSION { get; set; }
         public DbSet<Sucursal> SUCURSAL { get; set; }
         public DbSet<Dispatch_State> DISPATCH_STATE { get; set; }
         public DbSet<Dispatch_Stock> DISPATCH_STOCK { get; set; }

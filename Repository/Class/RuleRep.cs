@@ -20,7 +20,7 @@ namespace Repository.Class
         /// Devuelve todos los roles
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Rules> GetAllRules()
+        public IEnumerable<Roles> GetAllRules()
         {
             try
             {

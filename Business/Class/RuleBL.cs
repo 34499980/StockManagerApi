@@ -18,12 +18,12 @@ namespace Business.Class
             this._mapper = mapper;
 
         }
-        public IEnumerable<RulesDto> GetAllRules()
+        public IEnumerable<RolesDto> GetAllRules()
         {
             try
             {
                 var result = this._ruleRep.GetAllRules();
-                return _mapper.Map<IEnumerable<RulesDto>>(result);
+                return _mapper.Map<IEnumerable<RolesDto>>(result);
             }
             catch (Exception ex)
             {

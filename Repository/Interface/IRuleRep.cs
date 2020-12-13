@@ -8,6 +8,6 @@ namespace Repository.Interface
 {
     public interface IRuleRep
     {
-        IEnumerable<Rules> GetAllRules();
+        IEnumerable<Roles> GetAllRules();
     }
 }

@@ -20,8 +20,8 @@ namespace Business.AutoMapper
             CreateMap<SaleDto, Sale>().ReverseMap();
             CreateMap<Sale_StockDto, Sale_Stock>().ReverseMap();
             CreateMap<Sale_StateDto, Sale_State>().ReverseMap();
-            CreateMap<RulesDto, Rules>().ReverseMap();
-            CreateMap<Rules_PermissionDto, Rules_Permission>().ReverseMap();
+            CreateMap<RolesDto, Roles>().ReverseMap();
+            CreateMap<Roles_PermissionDto, Roles_Permission>().ReverseMap();
             CreateMap<PermissionDto, Permission>().ReverseMap();
             CreateMap<DispatchDto, Dispatch>().ReverseMap();
             CreateMap<Dispatch_StockDto, Dispatch_Stock>().ReverseMap();

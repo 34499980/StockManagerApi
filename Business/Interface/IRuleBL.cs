@@ -7,6 +7,6 @@ namespace Business.Interface
 {
     public interface IRuleBL
     {
-        IEnumerable<RulesDto> GetAllRules();
+        IEnumerable<RolesDto> GetAllRules();
     }
 }

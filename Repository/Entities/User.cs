@@ -22,12 +22,12 @@ namespace Repository.Entities
         public string Address { get; set; }
         public int PostalCode { get; set; }
         public int IdSucursal { get; set; }
-        public int IdRule { get; set; }
+        public int IdRole { get; set; }
 
         [ForeignKey("IdSucursal")]
 
         public virtual Sucursal Sucursal { get; set; }
-        [ForeignKey("IdRule")]
-        public virtual Rules Rule { get; set; }
+        [ForeignKey("IdRole")]
+        public virtual Roles Role { get; set; }
     }
 }

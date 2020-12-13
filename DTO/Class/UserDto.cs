@@ -22,12 +22,12 @@ namespace DTO.Class
         public string Address { get; set; }
         public int PostalCode { get; set; }
         public int IdSucursal { get; set; }
-        public int IdRule { get; set; }
+        public int IdRole { get; set; }
 
       
 
         public  SucursalDto Sucursal { get; set; }
        
-        public  RulesDto Rule { get; set; }
+        public  RolesDto Role { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Repository.Class
         {
             try
             {
-                return _context.USERS.ToList();
+                return _context.USERS.Include(x => x.Role).Include(z => z.Sucursal).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -42,7 +42,7 @@ namespace Repository.Class
             try
             {                
               var result =  _context.USERS.Include(q => q.Sucursal)
-                                          .Include(q => q.Rule)
+                                          .Include(q => q.Role)
                                           .Where(x => x.UserName == userName).FirstOrDefault();
                 return result;
             }catch(Exception ex)
@@ -60,7 +60,7 @@ namespace Repository.Class
             try
             {
                 var result = _context.USERS.Include(q => q.Sucursal)
-                                           .Include(q => q.Rule)
+                                           .Include(q => q.Role)
                                            .Where(x => x.ID == id).FirstOrDefault();
                 return result;
             }

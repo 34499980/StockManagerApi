@@ -1,16 +1,16 @@
-INSERT INTO RULES
+INSERT INTO ROLES
            ([Description])
     SELECT 'Administrador'
 
-	INSERT INTO RULES
+	INSERT INTO ROLES
            ([Description])
     SELECT 'Gerencia'
 
-	INSERT INTO RULES
+	INSERT INTO ROLES
            ([Description])
     SELECT 'Vendedor'
 
 
-	INSERT INTO RULES
+	INSERT INTO ROLES
            ([Description])
     SELECT 'Comprador'

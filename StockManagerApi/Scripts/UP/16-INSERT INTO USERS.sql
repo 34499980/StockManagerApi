@@ -9,7 +9,7 @@ INSERT INTO [dbo].[USERS]
            ,[Address]
            ,[PostalCode]
            ,[IdSucursal]
-           ,[IdRule])
+           ,[IdRole])
    SELECT 'admin',
 		  '123',
 		  'admin',

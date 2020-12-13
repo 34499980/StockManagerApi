@@ -7,7 +7,7 @@ using System.Text;
 namespace DTO.Class
 {
   
-    public class RulesDto: StateBaseDto
+    public class RolesDto: StateBaseDto
     {
        
         public int ID { get; set; }

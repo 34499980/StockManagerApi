@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Repository.Entities
 {
-    [Table("RULES", Schema = "dbo")]
-    public class Rules: StateBase
+    [Table("ROLES", Schema = "dbo")]
+    public class Roles: StateBase
     {
         [Key]
         public int ID { get; set; }

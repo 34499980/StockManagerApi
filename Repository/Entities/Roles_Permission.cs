@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Repository.Entities
 {
-    [Table("RULES_PERMISSION", Schema = "dbo")]
-    public class Rules_Permission
+    [Table("ROLES_PERMISSION", Schema = "dbo")]
+    public class Roles_Permission
     {
         [Key]
         public int IdRule { get; set; }
@@ -15,8 +15,8 @@ namespace Repository.Entities
         public int Read { get; set; }
         public int Write { get; set; }
 
-        [ForeignKey("IdRule")]
-        public virtual Rules Rule { get; set; }
+        [ForeignKey("IdRole")]
+        public virtual Roles Role { get; set; }
         [ForeignKey("IdPermission")]
         public virtual Permission Permission { get; set; }
     }
