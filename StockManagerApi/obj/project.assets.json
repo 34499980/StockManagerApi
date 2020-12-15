@@ -8792,8 +8792,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aribr\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Dell\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -8801,14 +8800,11 @@
       "projectUniqueName": "C:\\Proyectos\\StockManagerApi\\StockManagerApi\\StockManagerApi.csproj",
       "projectName": "StockManagerApi",
       "projectPath": "C:\\Proyectos\\StockManagerApi\\StockManagerApi\\StockManagerApi.csproj",
-      "packagesPath": "C:\\Users\\aribr\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
       "outputPath": "C:\\Proyectos\\StockManagerApi\\StockManagerApi\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\aribr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8820,6 +8816,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {
             "C:\\Proyectos\\StockManagerApi\\Business\\Business.csproj": {
               "projectPath": "C:\\Proyectos\\StockManagerApi\\Business\\Business.csproj"
@@ -8835,6 +8832,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Abp": {
             "target": "Package",
@@ -8867,12 +8865,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.1.2, 3.1.2]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -8881,7 +8873,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

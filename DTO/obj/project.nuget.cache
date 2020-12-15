@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P8qKlairtlTD5kfS8U2J5A6YyF+2T3k/QqPa5Jz5sIkutEtZelrnvaXgQNbi6466mH4X3BZRNGPdL/j+z26vng==",
+  "dgSpecHash": "u2mRI3h1FBllymXPOcWn15aG5Wwwh2KEKrVeSJcdu5mNLRrlM6lW2rxL19ErR59eTD86YQkhRPnRGtCWz1Nh4w==",
   "success": true,
   "projectFilePath": "C:\\Proyectos\\StockManagerApi\\DTO\\DTO.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\aribr\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
