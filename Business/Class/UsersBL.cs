@@ -23,12 +23,12 @@ namespace Business.Class
         /// Trae todos los usuarios
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<UserDto> GetAllUsers()
+        public IEnumerable<UserGetDto> GetAllUsers()
         {
             try
             {
                var result = _userRep.GetAllUsers();
-                return _mapper.Map<IEnumerable<UserDto>>(result);
+                return _mapper.Map<IEnumerable<UserGetDto>>(result);
             }catch(Exception ex)
             {
                 throw ex;
@@ -40,12 +40,12 @@ namespace Business.Class
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public UserDto GetUserById(int id)
+        public UserGetDto GetUserById(int id)
         {
             try
             {                
               var result = _userRep.GetUserById(id);
-                return _mapper.Map<UserDto>(result);
+                return _mapper.Map<UserGetDto>(result);
             }catch(Exception ex)
             {
                 throw ex;
@@ -56,12 +56,12 @@ namespace Business.Class
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public UserDto GetUserByName(string userName)
+        public UserGetDto GetUserByName(string userName)
         {
             try
             {
                 var result = _userRep.GetUserByUserName(userName);
-                return _mapper.Map<UserDto>(result);
+                return _mapper.Map<UserGetDto>(result);
             }
             catch (Exception ex)
             {
@@ -93,8 +93,10 @@ namespace Business.Class
         {
             try
             {
-                var userInput = _mapper.Map<User>(user);
-                this._userRep.UpdateUser(userInput);
+                
+                var userModel = _userRep.GetUserById(user.ID);
+                _mapper.Map<UserDto, User>(user, userModel);
+                this._userRep.UpdateUser(userModel);
             }
             catch (Exception ex)
             {

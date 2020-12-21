@@ -26,7 +26,8 @@ namespace Business.AutoMapper
             CreateMap<DispatchDto, Dispatch>().ReverseMap();
             CreateMap<Dispatch_StockDto, Dispatch_Stock>().ReverseMap();
             CreateMap<Dispatch_StateDto, Dispatch_State>().ReverseMap();
-          
+            CreateMap<UserGetDto, User>().ReverseMap();
+
         }
     }
 }

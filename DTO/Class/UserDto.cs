@@ -23,8 +23,7 @@ namespace DTO.Class
         public int PostalCode { get; set; }
         public int IdSucursal { get; set; }
         public int IdRole { get; set; }
-        public string RoleDescription { get { return Role.Description; } }
-        public string SucursalName { get { return Sucursal.Name; } }
+      
 
 
 

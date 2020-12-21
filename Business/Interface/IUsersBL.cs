@@ -7,9 +7,9 @@ namespace Business.Interface
 {
     public interface IUsersBL
     {
-        IEnumerable<UserDto> GetAllUsers();
-        UserDto GetUserByName(string userName);
-        UserDto GetUserById(int id);
+        IEnumerable<UserGetDto> GetAllUsers();
+        UserGetDto GetUserByName(string userName);
+        UserGetDto GetUserById(int id);
         void UpdateUser(UserDto user);
         void SaveUser(UserDto user);
 

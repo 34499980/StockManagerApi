@@ -41,7 +41,7 @@ namespace StockManagerApi.Controllers
 
         // GET api/<UsuarioController>/5
         [HttpGet("{id}")]
-        public UserDto Get(string id)
+        public UserGetDto Get(string id)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace StockManagerApi.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Error al actualizar o crear usuario!");
             }
         }
 
