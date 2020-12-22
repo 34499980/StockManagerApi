@@ -12,6 +12,7 @@ namespace Business.Interface
         UserGetDto GetUserById(int id);
         void UpdateUser(UserDto user);
         void SaveUser(UserDto user);
+        void RemoveUser(int user);
 
     }
 }

@@ -25,7 +25,7 @@ namespace Repository.Class
         {
             try
             {
-                return _context.USERS.Include(x => x.Role).Include(z => z.Sucursal).ToList();
+                return _context.USERS.Include(x => x.Role).Include(x => x.Sucursal).Where(x => x.Active).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -97,6 +97,19 @@ namespace Repository.Class
                 this._context.SaveChanges();
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void RemoveUser(User user)
+        {
+            try
+            {              
+                this._context.Entry(user).State = EntityState.Modified;
+                this._context.SaveChanges();
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

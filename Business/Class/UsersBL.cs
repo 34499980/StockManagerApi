@@ -93,10 +93,26 @@ namespace Business.Class
         {
             try
             {
-                
-                var userModel = _userRep.GetUserById(user.ID);
+
+                var userModel = _userRep.GetUserByUserName(user.UserName);               
                 _mapper.Map<UserDto, User>(user, userModel);
+                
                 this._userRep.UpdateUser(userModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void RemoveUser(int id)
+        {
+
+            try
+            {
+                var userModel =_userRep.GetUserById(id);
+                userModel.Active = false;
+                _userRep.RemoveUser(userModel);             
+                
             }
             catch (Exception ex)
             {

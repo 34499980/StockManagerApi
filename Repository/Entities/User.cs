@@ -23,6 +23,7 @@ namespace Repository.Entities
         public int PostalCode { get; set; }
         public int IdSucursal { get; set; }
         public int IdRole { get; set; }
+        public bool Active { get; set; }
 
         [ForeignKey("IdSucursal")]
 
