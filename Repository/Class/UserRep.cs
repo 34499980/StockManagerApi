@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DTO.Class;
+using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Entities;
 using Repository.Interface;
@@ -25,7 +26,7 @@ namespace Repository.Class
         {
             try
             {
-                return _context.USERS.Include(x => x.Role).Include(x => x.Sucursal).Where(x => x.Active).ToList();
+                return _context.USERS.Include(x => x.Role).Include(x => x.Sucursal).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -101,7 +102,10 @@ namespace Repository.Class
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Remove user
+        /// </summary>
+        /// <param name="user"></param>
         public void RemoveUser(User user)
         {
             try
