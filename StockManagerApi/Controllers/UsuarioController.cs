@@ -38,7 +38,21 @@ namespace StockManagerApi.Controllers
             }
            
         }
+        [HttpPost("GetUserFilter")]
+        public IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto)
+        {
+            try
+            {
+                var header = Request.Headers["environment"];
+                var result = _userBL.GetUserFilter(dto);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
+        }
         // GET api/<UsuarioController>/5
         [HttpGet("{id}")]
         public UserGetDto Get(string id)

@@ -120,5 +120,18 @@ namespace Business.Class
             }
         }
 
+        public IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto)
+        {
+            try
+            {
+                var result = this._userRep.GetUserFilter(dto);
+               return _mapper.Map<IEnumerable<UserGetDto>>(result);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

@@ -119,6 +119,25 @@ namespace Repository.Class
             }
         }
 
+        public IEnumerable<User> GetUserFilter(UserFilterDto dto)
+        {
+            try
+            {
+              var result  =  this._context.USERS.Include(q => q.Sucursal)
+                                                .Include(q => q.Role)
+                                                .Where(x => (dto.UserName == "" || x.UserName.Contains(dto.UserName)) &&
+                                                      (dto.IdRole == null || x.IdRole == dto.IdRole) &&
+                                                      (dto.IdSucursal == null || x.IdSucursal == dto.IdSucursal) &&
+                                                      (x.Active == dto.Active)
+                                                      ).ToListAsync();
+                return result.Result;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
     }
 }

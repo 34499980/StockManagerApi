@@ -14,6 +14,7 @@ namespace Repository.Interface
         void UpdateUser(User user);
         void SaveUser(User user);
         void RemoveUser(User id);
+        IEnumerable<User> GetUserFilter(UserFilterDto dto);
 
 
     }

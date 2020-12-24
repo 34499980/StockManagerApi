@@ -13,6 +13,7 @@ namespace Business.Interface
         void UpdateUser(UserDto user);
         void SaveUser(UserDto user);
         void RemoveUser(int user);
+        IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto);
 
     }
 }
