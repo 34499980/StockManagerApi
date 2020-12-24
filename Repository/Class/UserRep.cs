@@ -128,7 +128,7 @@ namespace Repository.Class
                                                 .Where(x => (dto.UserName == "" || x.UserName.Contains(dto.UserName)) &&
                                                       (dto.IdRole == null || x.IdRole == dto.IdRole) &&
                                                       (dto.IdSucursal == null || x.IdSucursal == dto.IdSucursal) &&
-                                                      (x.Active == dto.Active)
+                                                      (!dto.Active? x.Active == true: (x.Active == true || x.Active == false))
                                                       ).ToListAsync();
                 return result.Result;
             }

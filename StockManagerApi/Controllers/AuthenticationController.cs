@@ -50,7 +50,7 @@ namespace StockManagerApi.Controllers
 
                 if(userOutput != null && userInput.Password == userOutput.Password)
                 {
-                    return Ok(true);
+                    return Ok(userOutput);
                  
                    
                 }
