@@ -99,16 +99,16 @@ namespace Repository.Class
         /// Al crear el stock, se genera por cada sucursal por lo menos con valor 0
         /// </summary>
         /// <param name="stock"></param>
-        public void saveStockBySucursal(Stock stock)
+        public void saveStockByOffice(Stock stock)
         {
             try
             {
-                Stock_Sucursal stockSucursal;
+                Stock_Office stockSucursal;
                 var sucursalList = this._context.SUCURSAL.ToList();
                 foreach (var item in sucursalList)
                 {
-                    stockSucursal = new Stock_Sucursal();
-                    stockSucursal.IdSucursal = item.ID;
+                    stockSucursal = new Stock_Office();
+                    stockSucursal.IdOffice = item.ID;
                     stockSucursal.IdStock = stock.ID;
                     if (item.ID == stock.IdSucursal)
                     {
@@ -118,7 +118,7 @@ namespace Repository.Class
                     {
                         stockSucursal.Unity = 0;
                     }
-                    this._context.STOCK_SUCURSAL.Add(stockSucursal);
+                    this._context.STOCK_OFFICE.Add(stockSucursal);
                     this._context.SaveChanges();
                 }
 
@@ -132,11 +132,11 @@ namespace Repository.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <returns></returns>
-        public Stock_Sucursal GetStock_Sucursal(long idStock, int idSucursal)
+        public Stock_Office GetStock_Office(long idStock, int idSucursal)
         {
             try
             {
-                var result = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == idStock && x.IdSucursal == idSucursal).FirstOrDefault();
+                var result = this._context.STOCK_OFFICE.Where(x => x.IdStock == idStock && x.IdOffice == idSucursal).FirstOrDefault();
                 return result;
             } catch (Exception ex)
             {
@@ -148,11 +148,11 @@ namespace Repository.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <returns></returns>
-        public ICollection<Stock_Sucursal> GetStockSucursalByIdStock(Stock stock)
+        public ICollection<Stock_Office> GetStockOfficeByIdStock(Stock stock)
         {
             try
             {
-                var result = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == stock.ID ).ToList();
+                var result = this._context.STOCK_OFFICE.Where(x => x.IdStock == stock.ID ).ToList();
                 return result;
             }
             catch (Exception ex)
@@ -182,12 +182,12 @@ namespace Repository.Class
         /// Actualizo unidades de stock por sucursal
         /// </summary>
         /// <param name="stock"></param>
-        public  void UpdateStockBySucursal(Stock_Sucursal stock)
+        public  void UpdateStockByOffice(Stock_Office stock)
         {
             try
             {
                 //var result = this._context.STOCK_SUCURSAL.ToList();
-                var stockDB = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == stock.IdStock && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
+                var stockDB = this._context.STOCK_OFFICE.Where(x => x.IdStock == stock.IdStock && x.IdOffice == stock.IdOffice).FirstOrDefault();
                 //var stock1 = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == 1 && x.IdSucursal == 1).FirstOrDefault();
                 //var stock2 = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == 2 && x.IdSucursal == 1).FirstOrDefault();
                 stockDB.Unity = stock.Unity;

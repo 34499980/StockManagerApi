@@ -26,7 +26,7 @@ namespace Repository.Class
         {
             try
             {
-                return _context.USERS.Include(x => x.Role).Include(x => x.Sucursal).ToList();
+                return _context.USERS.Include(x => x.Role).Include(x => x.Office).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -42,7 +42,7 @@ namespace Repository.Class
         {
             try
             {                
-              var result =  _context.USERS.Include(q => q.Sucursal)
+              var result =  _context.USERS.Include(q => q.Office)
                                           .Include(q => q.Role)
                                           .Where(x => x.UserName == userName).FirstOrDefault();
                 return result;
@@ -60,7 +60,7 @@ namespace Repository.Class
         {
             try
             {
-                var result = _context.USERS.Include(q => q.Sucursal)
+                var result = _context.USERS.Include(q => q.Office)
                                            .Include(q => q.Role)
                                            .Where(x => x.ID == id).FirstOrDefault();
                 return result;
@@ -123,11 +123,11 @@ namespace Repository.Class
         {
             try
             {
-              var result  =  this._context.USERS.Include(q => q.Sucursal)
+              var result  =  this._context.USERS.Include(q => q.Office)
                                                 .Include(q => q.Role)
                                                 .Where(x => (dto.UserName == "" || x.UserName.Contains(dto.UserName)) &&
                                                       (dto.IdRole == null || x.IdRole == dto.IdRole) &&
-                                                      (dto.IdSucursal == null || x.IdSucursal == dto.IdSucursal) &&
+                                                      (dto.IdSucursal == null || x.IdOffice == dto.IdSucursal) &&
                                                       (!dto.Active? x.Active == true: (x.Active == true || x.Active == false))
                                                       ).ToListAsync();
                 return result.Result;

@@ -39,29 +39,29 @@ namespace StockManagerApi.Controllers
         }
 
         // POST api/<AuthenticationController>
-        [HttpPost]        
-        public async Task<IActionResult> Post(UserDto userInput)
-        {            
-            bool ok = false;            
+        [HttpPost]
+        public IActionResult Post(UserDto userInput)
+        {
+
             try
             {
-             //  UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
-               UserDto userOutput = _userBL.GetUserByName(userInput.UserName);
+                //  UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
+                UserDto userOutput = _userBL.GetUserByName(userInput.UserName);
 
-                if(userOutput != null && userInput.Password == userOutput.Password)
+                if (userOutput != null && userInput.Password == userOutput.Password)
                 {
                     return Ok(userOutput);
-                 
-                   
+
+
                 }
                 else
                 {
                     return StatusCode(401, "Usuario o contraseña incorrectos.");
 
                 }
-               
-                return Ok(ok);
-            }catch(Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

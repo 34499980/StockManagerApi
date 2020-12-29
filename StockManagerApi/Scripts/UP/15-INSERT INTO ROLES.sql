@@ -1,16 +1,16 @@
 INSERT INTO ROLES
            ([Description])
-    SELECT 'Administrador'
+    SELECT 'Administrator'
 
 	INSERT INTO ROLES
            ([Description])
-    SELECT 'Gerencia'
+    SELECT 'Manager'
 
 	INSERT INTO ROLES
            ([Description])
-    SELECT 'Vendedor'
+    SELECT 'Seller'
 
 
 	INSERT INTO ROLES
            ([Description])
-    SELECT 'Comprador'
+    SELECT 'Buyer'

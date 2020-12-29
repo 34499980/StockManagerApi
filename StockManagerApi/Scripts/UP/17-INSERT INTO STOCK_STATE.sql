@@ -1,10 +1,10 @@
 
 INSERT INTO STOCK_STATE
            ([Description])
-    SELECT 'Habilitado'
+    SELECT 'Enabled'
 
 INSERT INTO STOCK_STATE
            ([Description])
-    SELECT 'Deshabilitado'
+    SELECT 'Disabled'
 
 

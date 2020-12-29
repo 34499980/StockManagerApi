@@ -6,16 +6,16 @@ using System.Text;
 
 namespace DTO.Class
 {
-   
-    public class SucursalDto
+    public class Stock_OfficeDto
     {
-       
-      
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public int PostalCode { get; set; }
-
      
+        public int ID { get; set; }
+        public int IdOffice { get; set; }
+        public long IdStock { get; set; }
+        public int Unity { get; set; }
+
+
+   
     }
+
 }

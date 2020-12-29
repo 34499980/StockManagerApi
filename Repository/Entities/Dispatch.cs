@@ -29,9 +29,9 @@ namespace Repository.Entities
         [ForeignKey("IdUserDestiny")]
         public virtual User UsuarioDestiny { get; set; }
         [NotMapped]
-        public virtual Sucursal SucOrigin { get; set; }
+        public virtual Office IdOrigin { get; set; }
         [NotMapped]
-        public virtual Sucursal SucDestiny { get; set; }
+        public virtual Office IdDestiny { get; set; }
         [ForeignKey("IdState")]
         public virtual Dispatch_State State { get; set; }
         [NotMapped]

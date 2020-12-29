@@ -30,13 +30,13 @@ namespace StockManagerApi.Extensions
         public static void DependecInjection(IServiceCollection services)
         {
             services.AddScoped<IUserRep, UserRep>();
-            services.AddScoped<ISucursalRep, SucuralRep>();
+            services.AddScoped<IOfficeRep, OfficeRep>();
             services.AddScoped<IDispatchRep, DispatchRep>();
             services.AddScoped<IStockRep, StockRep>();
             services.AddScoped<IRuleRep, RuleRep>();
 
             services.AddScoped<IUsersBL, UsersBL>();
-            services.AddScoped<ISucursalBL, SucursalBL>();
+            services.AddScoped<IOfficeBL, OfficeBL>();
             services.AddScoped<IDispatchBL, DispatchBL>();
             services.AddScoped<IStockBL, StockBL>();
             services.AddScoped<IRuleBL, RuleBL>();

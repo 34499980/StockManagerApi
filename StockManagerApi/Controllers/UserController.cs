@@ -14,10 +14,10 @@ namespace StockManagerApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUsersBL _userBL;
-        public UsuarioController(IUsersBL userBL)
+        public UserController(IUsersBL userBL)
         {
             this._userBL = userBL;
         }
@@ -90,7 +90,7 @@ namespace StockManagerApi.Controllers
                
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception("Error al actualizar o crear usuario!");
             }

@@ -9,7 +9,7 @@ namespace Business.Interface
     {
         DispatchDto saveDispatch(DispatchDto dispatch,string user);
         IEnumerable<Dispatch_StateDto> GetStates();
-        IEnumerable<DispatchDto> GetAllDispatchesBySucursal(string user);
+        IEnumerable<DispatchDto> GetAllDispatchesByOffice(string user);
         IEnumerable<DispatchDto>GetDispatchById(int id);
         void UpdateDispatch(DispatchDto dispatch, string user);
     }

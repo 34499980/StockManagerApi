@@ -17,16 +17,16 @@ namespace DTO.Class
         public string Name { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        public int IdSucursal { get; set; }
+        public int IdOffice { get; set; }
         public int IdState { get; set; }
         public string Description { get; set; }
 
      
         public  Stock_StateDto State { get; set; }
      
-        public  SucursalDto Sucursal { get; set; }
+        public  OfficeDto Sucursal { get; set; }
       
-        public  ICollection<Stock_SucursalDto> Stock_Sucursal { get; set; }
+        public  ICollection<Stock_OfficeDto> Stock_Office { get; set; }
         public  ICollection<Dispatch_StockDto> Dispatch_Stock { get; set; }
       
         public  int Unity { get; set; }

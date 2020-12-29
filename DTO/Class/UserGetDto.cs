@@ -7,6 +7,6 @@ namespace DTO.Class
     public class UserGetDto: UserDto
     {
         public string RoleDescription { get { return Role.Description; } }
-        public string SucursalName { get { return Sucursal.Name; } }
+        public string OfficeName { get { return Office.Name; } }
     }
 }

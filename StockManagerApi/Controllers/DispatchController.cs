@@ -53,7 +53,7 @@ namespace StockManagerApi.Controllers
                 {
 
                     string userSearch = input["UserName"].ToString();
-                    result = this._dispatchBL.GetAllDispatchesBySucursal(userSearch);
+                    result = this._dispatchBL.GetAllDispatchesByOffice(userSearch);
                 }
                 return result;
             }catch(Exception ex)

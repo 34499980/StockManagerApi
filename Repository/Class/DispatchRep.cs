@@ -54,7 +54,7 @@ namespace Repository.Class
         /// Devuelve todos los despachos
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Dispatch> GetAllDispatchesBySucursal(int idSucursal)
+        public IEnumerable<Dispatch> GetAllDispatchesByOffice(int idOffice)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Repository.Class
                result = this._context.DISPATCH.Include(q => q.UsuarioDestiny)
                                               .Include(q => q.UsuarioOrigin)
                                               .Include(q => q.State)
-                                              .Where(x => x.Origin == idSucursal || x.Destiny == idSucursal).ToList();
+                                              .Where(x => x.Origin == idOffice|| x.Destiny == idOffice).ToList();
                 return result;
             }catch(Exception ex)
             {
@@ -133,7 +133,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="dispatch"></param>
         /// <returns></returns>
-        public Dispatch GetDispatchBySucursales(Dispatch dispatch)
+        public Dispatch GetDispatchByOffice(Dispatch dispatch)
         {
             try
             {

@@ -21,13 +21,13 @@ namespace Repository.Entities
         public string Email { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
-        public int IdSucursal { get; set; }
+        public int IdOffice { get; set; }
         public int IdRole { get; set; }
         public bool Active { get; set; }
 
-        [ForeignKey("IdSucursal")]
+        [ForeignKey("IdOffice")]
 
-        public virtual Sucursal Sucursal { get; set; }
+        public virtual Office Office { get; set; }
         [ForeignKey("IdRole")]
         public virtual Roles Role { get; set; }
     }

@@ -8,10 +8,10 @@ using System.Text;
 
 namespace Repository.Class
 {
-    public class SucuralRep: ISucursalRep
+    public class OfficeRep: IOfficeRep
     {
         private readonly StockManagerContext _context;
-        public SucuralRep(StockManagerContext context)
+        public OfficeRep(StockManagerContext context)
         {
             this._context = context;
         }
@@ -19,7 +19,7 @@ namespace Repository.Class
         /// Devuelve todas las sucursales
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Sucursal> GetAllSucursal()
+        public IEnumerable<Office> GetAllOffice()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Sucursal GetSucursalById(int id)
+        public Office GetOfficeById(int id)
         {
             try
             {

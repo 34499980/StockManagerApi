@@ -1,15 +1,15 @@
 INSERT INTO SALE_STATE
            (Description)
-    SELECT 'Inicial'
+    SELECT 'Initiated'
 
 	INSERT INTO SALE_STATE
            (Description)
-    SELECT 'Reservado'
+    SELECT 'Reserved'
 
 	INSERT INTO SALE_STATE
            (Description)
-    SELECT 'Finalizado'
+    SELECT 'Finalized'
 
 	INSERT INTO SALE_STATE
            (Description)
-    SELECT 'Devuelto'
+    SELECT 'Returned'

@@ -24,12 +24,12 @@ namespace Repository.Class.Context
         public DbSet<Roles> RULES { get; set; }
         public DbSet<Sale> SALE { get; set; }       
         public DbSet<Roles_Permission> RULES_PERMISSION { get; set; }
-        public DbSet<Sucursal> SUCURSAL { get; set; }
+        public DbSet<Office> SUCURSAL { get; set; }
         public DbSet<Dispatch_State> DISPATCH_STATE { get; set; }
         public DbSet<Dispatch_Stock> DISPATCH_STOCK { get; set; }
         public DbSet<Stock> STOCK { get; set; }
         public DbSet<Stock_State> STOCK_STATE { get; set; }
-        public DbSet<Stock_Sucursal> STOCK_SUCURSAL { get; set; }
+        public DbSet<Stock_Office> STOCK_OFFICE { get; set; }
         
 
         //public IEnumerable<TEntity> ExecuteStoredProcedure<TEntity>(string storedProcedure, params object[] parameters) where TEntity : class

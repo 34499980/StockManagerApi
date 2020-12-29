@@ -29,9 +29,9 @@ namespace DTO.Class
       
         public  UserDto UsuarioDestiny { get; set; }
         
-        public  SucursalDto SucOrigin { get; set; }
+        public  OfficeDto SucOrigin { get; set; }
       
-        public  SucursalDto SucDestiny { get; set; }
+        public  OfficeDto SucDestiny { get; set; }
       
         public  Dispatch_StateDto State { get; set; }
         

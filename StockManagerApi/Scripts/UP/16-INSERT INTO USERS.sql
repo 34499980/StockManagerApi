@@ -8,8 +8,9 @@ INSERT INTO [dbo].[USERS]
            ,[Email]
            ,[Address]
            ,[PostalCode]
-           ,[IdSucursal]
-           ,[IdRole])
+           ,[IdOffice]
+           ,[IdRole],
+		   [Active])
    SELECT 'admin',
 		  '123',
 		  'admin',
@@ -19,6 +20,7 @@ INSERT INTO [dbo].[USERS]
 		  'admin@StockManager.com',
 		  'Central',
 		  '1426',
+		   1,
 		   1,
 		   1
 

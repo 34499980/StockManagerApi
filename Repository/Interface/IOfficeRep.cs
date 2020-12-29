@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Repository.Interface
 {
-    public interface ISucursalRep
+    public interface IOfficeRep
     {
-        IEnumerable<Sucursal> GetAllSucursal();
-        Sucursal GetSucursalById(int id);
+        IEnumerable<Office> GetAllOffice();
+        Office GetOfficeById(int id);
     }
 }

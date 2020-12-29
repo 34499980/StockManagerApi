@@ -37,7 +37,7 @@ namespace Business.Class
                 {
                     foreach (var item in listStock)
                     {
-                        item.Stock_Sucursal = this._stockRep.GetStockSucursalByIdStock(item);
+                        item.Stock_Office = this._stockRep.GetStockOfficeByIdStock(item);
                     }
 
                 }
@@ -80,21 +80,21 @@ namespace Business.Class
                 if (inputDb == null)
                 {
                  
-                  stock.IdSucursal = user.IdSucursal;
+                  stock.IdOffice = user.IdOffice;
                   stock.Code = stock.QR;
                   stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
                   this._stockRep.SaveStock(inputStock);
-                  this._stockRep.saveStockBySucursal(inputStock);
+                  this._stockRep.saveStockByOffice(inputStock);
                  // this._stockRep.UpdateQR(stock);
 
                 }
                 else
                 {
-                    foreach (var item in inputStock.Stock_Sucursal)
+                    foreach (var item in inputStock.Stock_Office)
                     {
-                        if(item.IdSucursal == user.IdSucursal)
+                        if(item.IdOffice == user.IdOffice)
                         {
-                            this._stockRep.UpdateStockBySucursal(item);
+                            this._stockRep.UpdateStockByOffice(item);
                         }
 
                     }
@@ -117,9 +117,9 @@ namespace Business.Class
             try
             {
                 var inputSock = _mapper.Map<Stock>(stock);
-                Stock_Sucursal stock_Sucursal =  this._stockRep.GetStockSucursalByIdStock(inputSock).Where(x => x.IdStock == stock.ID && x.IdSucursal == stock.IdSucursal).FirstOrDefault();
+                Stock_Office stock_Sucursal =  this._stockRep.GetStockOfficeByIdStock(inputSock).Where(x => x.IdStock == stock.ID && x.IdOffice == stock.IdOffice).FirstOrDefault();
                 stock_Sucursal.Unity = stock.Unity;
-                this._stockRep.UpdateStockBySucursal(stock_Sucursal);
+                this._stockRep.UpdateStockByOffice(stock_Sucursal);
                 this._stockRep.UpdateStock(inputSock);
                 
             }
@@ -141,7 +141,7 @@ namespace Business.Class
                 var result =  this._stockRep.GetStockByParams(param, "Get_StockByParameters {0}");
                 foreach (var item in result)
                 {
-                   item.Stock_Sucursal = this._stockRep.GetStockSucursalByIdStock(item);                   
+                   item.Stock_Office = this._stockRep.GetStockOfficeByIdStock(item);                   
                 }
                 return _mapper.Map<IEnumerable<StockDto>>(result);
             }

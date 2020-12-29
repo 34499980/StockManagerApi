@@ -20,7 +20,7 @@ namespace DTO.Class
 
 
        
-        public  SucursalDto Sucursal { get; set; }
+        public  OfficeDto Sucursal { get; set; }
 
        
         public  Sale_StateDto State { get; set; }

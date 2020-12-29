@@ -1,5 +1,5 @@
 
-INSERT INTO SUCURSAL
+INSERT INTO OFFICE
            ([Name]
            ,[Address]
            ,[PostalCode])

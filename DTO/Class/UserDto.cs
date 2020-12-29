@@ -28,7 +28,7 @@ namespace DTO.Class
 
 
 
-        public  SucursalDto Sucursal { get; set; }
+        public  OfficeDto Office { get; set; }
        
         public  RolesDto Role { get; set; }
     }

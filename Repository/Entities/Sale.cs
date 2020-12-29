@@ -20,7 +20,7 @@ namespace Repository.Entities
 
 
         [ForeignKey("IdSucursal")]
-        public virtual Sucursal Sucursal { get; set; }
+        public virtual Office Sucursal { get; set; }
 
         [ForeignKey("IdState")]
         public virtual Sale_State State { get; set; }

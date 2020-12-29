@@ -12,9 +12,9 @@ SET @query ='SELECT S.ID
 					,S.Name
 					,S.Brand
 					,S.Model
-					,S.IdSucursal
+					,S.IdOffice
 					,S.IdState
 					,S.Description FROM STOCK S WITH(NOLOCK)
-					INNER JOIN STOCK_SUCURSAL SS WITH(NOLOCK) ON S.ID = SS.IdStock'+ @param
+					INNER JOIN STOCK_OFFICE SS WITH(NOLOCK) ON S.ID = SS.IdStock'+ @param
 
 EXEC(@query)

@@ -8,25 +8,25 @@ using System.Text;
 
 namespace Business.Class
 {
-    public class SucursalBL: ISucursalBL
+    public class OfficeBL: IOfficeBL
     {
-        private readonly ISucursalRep _sucursalRep;
+        private readonly IOfficeRep _officeRep;
         private readonly IMapper _mapper;
-        public SucursalBL(ISucursalRep sucursalRep, IMapper mapper)
+        public OfficeBL(IOfficeRep sucursalRep, IMapper mapper)
         {
-            this._sucursalRep = sucursalRep;
+            this._officeRep = sucursalRep;
             this._mapper = mapper;
         }
         /// <summary>
         /// Devuelve todas las sucursales
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<SucursalDto> GetAllSucursal()
+        public IEnumerable<OfficeDto> GetAllOffice()
         {
             try
             {
-                var result = this._sucursalRep.GetAllSucursal();
-                return _mapper.Map<IEnumerable<SucursalDto>>(result);
+                var result = this._officeRep.GetAllOffice();
+                return _mapper.Map<IEnumerable<OfficeDto>>(result);
             }
             catch (Exception ex)
             {

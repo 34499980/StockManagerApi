@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Business.Interface
 {
-    public interface ISucursalBL
+    public interface IOfficeBL
     {
-        IEnumerable<SucursalDto> GetAllSucursal();
+        IEnumerable<OfficeDto> GetAllOffice();
     }
 }

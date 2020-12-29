@@ -12,22 +12,22 @@ namespace StockManagerApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SucursalController : ControllerBase
+    public class OfficeController : ControllerBase
     {
-        private readonly ISucursalBL _sucursalBL;
-        public SucursalController(ISucursalBL sucursalBL)
+        private readonly IOfficeBL _sucursalBL;
+        public OfficeController(IOfficeBL sucursalBL)
         {
             this._sucursalBL = sucursalBL;
         }
         // GET: api/<SucursalController>
         [HttpGet]
-        public IEnumerable<SucursalDto> Get()
+        public IEnumerable<OfficeDto> Get()
         {
             try
             {
-                return this._sucursalBL.GetAllSucursal();
+                return this._sucursalBL.GetAllOffice();
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 throw new Exception("Error al recuperar las sucursales!");
             }

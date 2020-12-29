@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Repository.Entities
 {
-    [Table("SUCURSAL", Schema = "dbo")]
-    public class Sucursal
+    [Table("OFFICE", Schema = "dbo")]
+    public class Office
     {
        
         [Key]
@@ -16,6 +16,6 @@ namespace Repository.Entities
         public string Address { get; set; }
         public int PostalCode { get; set; }
 
-      //  public virtual ICollection<Stock_SucursalDto> Stock_Sucursal { get; set; }
+      //  public virtual ICollection<Stock_OfficeDto> Stock_Sucursal { get; set; }
     }
 }

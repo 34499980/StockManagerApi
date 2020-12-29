@@ -13,9 +13,9 @@ namespace Business.AutoMapper
         public MapProfile()
         {
             CreateMap<UserDto, User>().ReverseMap();
-            CreateMap<SucursalDto, Sucursal>().ReverseMap();
+            CreateMap<OfficeDto, Office>().ReverseMap();
             CreateMap<StockDto, Stock>().ReverseMap();
-            CreateMap<Stock_SucursalDto, Stock_Sucursal>().ReverseMap();
+            CreateMap<Stock_OfficeDto, Stock_Office>().ReverseMap();
             CreateMap<Stock_StateDto, Stock_State>().ReverseMap();
             CreateMap<SaleDto, Sale>().ReverseMap();
             CreateMap<Sale_StockDto, Sale_Stock>().ReverseMap();

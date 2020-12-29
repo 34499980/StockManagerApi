@@ -1,30 +1,30 @@
 INSERT INTO [dbo].[DISPATCH_STATE]
            ([Description])
 
-		   SELECT 'Creado'
+		   SELECT 'Created'
 
 		   INSERT INTO [dbo].[DISPATCH_STATE]
            ([Description])
 
-		   SELECT 'Despachado'
+		   SELECT 'Dispatched'
   
 
   INSERT INTO [dbo].[DISPATCH_STATE]
            ([Description])
 
-		   SELECT 'Recibido'
+		   SELECT 'Received'
   
 
   INSERT INTO [dbo].[DISPATCH_STATE]
            ([Description])
 
-		   SELECT 'Finalizado'
+		   SELECT 'Finalized'
   
 
   INSERT INTO [dbo].[DISPATCH_STATE]
            ([Description])
 
-		   SELECT 'Incompleto'
+		   SELECT 'Incomplete'
   
   
 
