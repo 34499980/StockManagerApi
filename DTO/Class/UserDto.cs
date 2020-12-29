@@ -21,7 +21,7 @@ namespace DTO.Class
         public string Email { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
-        public int IdSucursal { get; set; }
+        public int IdOffice { get; set; }
         public int IdRole { get; set; }
         public bool Active { get; set; }
 
