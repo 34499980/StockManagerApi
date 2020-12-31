@@ -15,6 +15,7 @@ namespace DTO.Class
         public string Name { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
+        public bool Active { get; set; }
 
      
     }

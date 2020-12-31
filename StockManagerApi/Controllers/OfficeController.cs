@@ -14,10 +14,10 @@ namespace StockManagerApi.Controllers
     [ApiController]
     public class OfficeController : ControllerBase
     {
-        private readonly IOfficeBL _sucursalBL;
+        private readonly IOfficeBL _officeBL;
         public OfficeController(IOfficeBL sucursalBL)
         {
-            this._sucursalBL = sucursalBL;
+            this._officeBL = sucursalBL;
         }
         // GET: api/<SucursalController>
         [HttpGet]
@@ -25,7 +25,7 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                return this._sucursalBL.GetAllOffice();
+                return this._officeBL.GetAllOffice();
             }
             catch(Exception)
             {
@@ -36,27 +36,82 @@ namespace StockManagerApi.Controllers
 
         // GET api/<SucursalController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public OfficeDto Get(int id)
         {
-            return "value";
+            try
+            {
+                return this._officeBL.GetOfficeById(id);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpGet("{name}")]
+        public OfficeDto Get(string name)
+        {
+            try
+            {
+                return this._officeBL.GetOfficeByName(name);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // POST api/<SucursalController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] OfficeDto office)
         {
+            try
+            {
+                this._officeBL.Add(office);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // PUT api/<SucursalController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put([FromBody] OfficeDto office)
         {
+            try
+            {
+                this._officeBL.Update(office);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+        [HttpPost("GetUOfficeFilter")]
+        public IEnumerable<OfficeDto> GetOfficeFilter(OfficeFilterDto dto)
+        {
+            try
+            {
+                var header = Request.Headers["environment"];
+                var result = _officeBL.GetOfficeFilter(dto);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
+        }
         // DELETE api/<SucursalController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            try
+            {
+                this._officeBL.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

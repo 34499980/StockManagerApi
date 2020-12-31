@@ -1,4 +1,5 @@
-﻿using Repository.Class.Context;
+﻿using DTO.Class;
+using Repository.Class.Context;
 using Repository.Entities;
 using Repository.Interface;
 using System;
@@ -23,7 +24,7 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.SUCURSAL.ToList();
+                return this._context.OFFICE.ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -38,8 +39,73 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.SUCURSAL.Where(x => x.ID == id).FirstOrDefault();
+                return this._context.OFFICE.Where(x => x.ID == id).FirstOrDefault();
             }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Devuelve sucursal por nombre
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Office GetOfficeByName(string name)
+        {           
+            try
+            {
+                 return this._context.OFFICE.Where(x => x.Name == name).FirstOrDefault();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void Add(Office office)
+        {
+            try
+            {
+                this._context.OFFICE.Add(office);
+                this._context.SaveChangesAsync();                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
+        }
+        public void Delete(Office office)
+        {
+            try
+            {
+                this._context.OFFICE.Update(office);
+                this._context.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void Update(Office office)
+        {
+            try
+            {
+                this._context.OFFICE.Update(office);
+                this._context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<Office> GetOfficeFilter(OfficeFilterDto dto)
+        {
+            try
+            {
+                var result = this._context.OFFICE.Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
+                                                        (!dto.Active ? x.Active == true : (x.Active == true || x.Active == false))).ToList();
+                                                        
+                return result;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

@@ -15,6 +15,7 @@ namespace Repository.Entities
         public string Name { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
+        public Boolean Active { get; set; } 
 
       //  public virtual ICollection<Stock_OfficeDto> Stock_Sucursal { get; set; }
     }
