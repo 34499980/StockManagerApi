@@ -1,4 +1,5 @@
 ﻿using DTO.Class;
+using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Entities;
 using Repository.Interface;
@@ -24,7 +25,7 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.OFFICE.ToList();
+                return this._context.OFFICE.Include(x => x.Country).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -39,7 +40,7 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.OFFICE.Where(x => x.ID == id).FirstOrDefault();
+                return this._context.OFFICE.Include(x => x.Country).Where(x => x.ID == id).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;
@@ -54,7 +55,7 @@ namespace Repository.Class
         {           
             try
             {
-                 return this._context.OFFICE.Where(x => x.Name == name).FirstOrDefault();
+                 return this._context.OFFICE.Include(x => x.Country).Where(x => x.Name == name).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;
@@ -100,7 +101,8 @@ namespace Repository.Class
         {
             try
             {
-                var result = this._context.OFFICE.Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
+                var result = this._context.OFFICE.Include(x => x.Country).Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
+                                                        (dto.IdCountry == null || x.IdCountry == dto.IdCountry) &&
                                                         (!dto.Active ? x.Active == true : (x.Active == true || x.Active == false))).ToList();
                                                         
                 return result;

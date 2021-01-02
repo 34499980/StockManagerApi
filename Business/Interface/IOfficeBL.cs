@@ -10,7 +10,7 @@ namespace Business.Interface
         IEnumerable<OfficeDto> GetAllOffice();
         OfficeDto GetOfficeByName(string name);
         OfficeDto GetOfficeById(int id);
-        IEnumerable<OfficeDto> GetOfficeFilter(OfficeFilterDto dto);
+        IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto);
         void Add(OfficeDto office);
         void Update(OfficeDto office);
         void Delete(int id);

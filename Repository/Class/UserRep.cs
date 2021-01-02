@@ -26,7 +26,9 @@ namespace Repository.Class
         {
             try
             {
-                return _context.USERS.Include(x => x.Role).Include(x => x.Office).ToList();
+                return _context.USERS.Include(x => x.Role)
+                                     .Include(x => x.Office)
+                                     .Include(q => q.Country).ToList();
             }catch(Exception ex)
             {
                 throw ex;
@@ -43,7 +45,8 @@ namespace Repository.Class
             try
             {                
               var result =  _context.USERS.Include(q => q.Office)
-                                          .Include(q => q.Role)
+                                          .Include(q => q.Role) 
+                                          .Include(q => q.Country)
                                           .Where(x => x.UserName == userName).FirstOrDefault();
                 return result;
             }catch(Exception ex)
@@ -62,6 +65,7 @@ namespace Repository.Class
             {
                 var result = _context.USERS.Include(q => q.Office)
                                            .Include(q => q.Role)
+                                           .Include(q => q.Country)
                                            .Where(x => x.ID == id).FirstOrDefault();
                 return result;
             }
@@ -125,8 +129,10 @@ namespace Repository.Class
             {
               var result  =  this._context.USERS.Include(q => q.Office)
                                                 .Include(q => q.Role)
+                                                .Include(q => q.Country)
                                                 .Where(x => (dto.UserName == "" || x.UserName.Contains(dto.UserName)) &&
                                                       (dto.IdRole == null || x.IdRole == dto.IdRole) &&
+                                                       (dto.IdCountry == null || x.IdCountry == dto.IdCountry) &&
                                                       (dto.IdSucursal == null || x.IdOffice == dto.IdSucursal) &&
                                                       (!dto.Active? x.Active == true: (x.Active == true || x.Active == false))
                                                       ).ToListAsync();

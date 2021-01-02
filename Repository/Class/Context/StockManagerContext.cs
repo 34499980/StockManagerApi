@@ -18,10 +18,11 @@ namespace Repository.Class.Context
         {
             Database.Migrate();
         }
-        public DbSet<User> USERS { get; set; }       
+        public DbSet<User> USERS { get; set; }
+        public DbSet<Country> COUNTRY { get; set; }
 
         public DbSet<Dispatch> DISPATCH { get; set; }
-        public DbSet<Roles> RULES { get; set; }
+        public DbSet<Roles> ROLES { get; set; }
         public DbSet<Sale> SALE { get; set; }       
         public DbSet<Roles_Permission> RULES_PERMISSION { get; set; }
         public DbSet<Office> OFFICE { get; set; }

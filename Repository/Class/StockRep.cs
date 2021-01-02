@@ -26,7 +26,7 @@ namespace Repository.Class
         public IEnumerable<Stock> GetStockByCode(string qr)
         {
             try
-            {
+            {               
                 return this._context.STOCK.Where(x => x.QR == qr).ToList();
             } catch (Exception ex)
             {
@@ -104,7 +104,7 @@ namespace Repository.Class
             try
             {
                 Stock_Office stockSucursal;
-                var sucursalList = this._context.SUCURSAL.ToList();
+                var sucursalList = this._context.OFFICE.ToList();
                 foreach (var item in sucursalList)
                 {
                     stockSucursal = new Stock_Office();

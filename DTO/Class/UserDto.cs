@@ -24,9 +24,10 @@ namespace DTO.Class
         public int IdOffice { get; set; }
         public int IdRole { get; set; }
         public bool Active { get; set; }
+        public int IdCountry { get; set; }
 
 
-
+        public CountryDto Country { get; set; }
 
         public  OfficeDto Office { get; set; }
        

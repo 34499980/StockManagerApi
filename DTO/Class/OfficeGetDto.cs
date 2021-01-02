@@ -4,10 +4,8 @@ using System.Text;
 
 namespace DTO.Class
 {
-    public class UserGetDto: UserDto
+    public class OfficeGetDto : OfficeDto
     {
-        public string RoleDescription { get { return Role.Description; } }
-        public string OfficeName { get { return Office.Name; } }
         public string CountryDescription { get { return Country.Description; } }
     }
 }

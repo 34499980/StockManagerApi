@@ -34,12 +34,14 @@ namespace StockManagerApi.Extensions
             services.AddScoped<IDispatchRep, DispatchRep>();
             services.AddScoped<IStockRep, StockRep>();
             services.AddScoped<IRuleRep, RuleRep>();
+            services.AddScoped<IDataSourceRep, DataSourceRep>();
 
             services.AddScoped<IUsersBL, UsersBL>();
             services.AddScoped<IOfficeBL, OfficeBL>();
             services.AddScoped<IDispatchBL, DispatchBL>();
             services.AddScoped<IStockBL, StockBL>();
             services.AddScoped<IRuleBL, RuleBL>();
+            services.AddScoped<IDataSourceBL, DataSourceBL>();
         }
         public static void ConnectionConfiguration(IServiceCollection services, IConfiguration Configuration)
         {

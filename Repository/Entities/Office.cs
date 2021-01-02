@@ -15,8 +15,14 @@ namespace Repository.Entities
         public string Name { get; set; }
         public string Address { get; set; }
         public int PostalCode { get; set; }
-        public Boolean Active { get; set; } 
+        public Boolean Active { get; set; }
+        public int IdCountry { get; set; }
 
-      //  public virtual ICollection<Stock_OfficeDto> Stock_Sucursal { get; set; }
+
+        [ForeignKey("IdCountry")]
+
+        public virtual Country Country { get; set; }
+
+        //  public virtual ICollection<Stock_OfficeDto> Stock_Sucursal { get; set; }
     }
 }

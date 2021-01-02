@@ -6,4 +6,3 @@ C:\Proyectos\StockManagerApi\ConstantControl\obj\Debug\netcoreapp3.1\ConstantCon
 C:\Proyectos\StockManagerApi\ConstantControl\obj\Debug\netcoreapp3.1\ConstantControl.csproj.CoreCompileInputs.cache
 C:\Proyectos\StockManagerApi\ConstantControl\obj\Debug\netcoreapp3.1\ConstantControl.dll
 C:\Proyectos\StockManagerApi\ConstantControl\obj\Debug\netcoreapp3.1\ConstantControl.pdb
-C:\Proyectos\StockManagerApi\ConstantControl\obj\Debug\netcoreapp3.1\ConstantControl.csprojAssemblyReference.cache

@@ -24,7 +24,7 @@ namespace Repository.Class
         {
             try
             {
-                return _context.RULES.ToList();
+                return _context.ROLES.ToList();
             }
             catch (Exception ex)
             {

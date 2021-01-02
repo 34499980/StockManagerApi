@@ -112,17 +112,18 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public IEnumerable<OfficeDto> GetOfficeFilter(OfficeFilterDto dto)
+        public IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto)
         {
             try
             {
                 var result = this._officeRep.GetOfficeFilter(dto);
-                return _mapper.Map<IEnumerable<OfficeDto>>(result);
+                return _mapper.Map<IEnumerable<OfficeGetDto>>(result);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+     
     }
 }

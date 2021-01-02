@@ -24,6 +24,11 @@ namespace Repository.Entities
         public int IdOffice { get; set; }
         public int IdRole { get; set; }
         public bool Active { get; set; }
+        public int IdCountry { get; set; }
+
+        [ForeignKey("IdCountry")]
+
+        public virtual Country Country { get; set; }
 
         [ForeignKey("IdOffice")]
 

@@ -35,8 +35,8 @@ namespace StockManagerApi.Controllers
         }
 
         // GET api/<SucursalController>/5
-        [HttpGet("{id}")]
-        public OfficeDto Get(int id)
+        [HttpGet("GetOfficeById/{id}")]
+        public OfficeDto GetOfficeById(int id)
         {
             try
             {
@@ -46,8 +46,8 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
-        [HttpGet("{name}")]
-        public OfficeDto Get(string name)
+        [HttpGet("GetOfficeByName")]
+        public OfficeDto GetOfficeByName(string name)
         {
             try
             {
@@ -65,7 +65,19 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                this._officeBL.Add(office);
+                dynamic result = null;
+                // var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
+                //UserDto userInput = JsonConvert.DeserializeObject<UserDto>(input["user"].ToString());
+                result = this._officeBL.GetOfficeByName(office.Name);
+                if (result != null)
+                {
+                    this._officeBL.Update(office);
+                }
+                else
+                {
+                    this._officeBL.Add(office);
+                }
+                
             }catch(Exception ex)
             {
                 throw ex;
@@ -86,7 +98,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpPost("GetUOfficeFilter")]
-        public IEnumerable<OfficeDto> GetOfficeFilter(OfficeFilterDto dto)
+        public IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto)
         {
             try
             {

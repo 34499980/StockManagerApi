@@ -27,6 +27,8 @@ namespace Business.AutoMapper
             CreateMap<Dispatch_StockDto, Dispatch_Stock>().ReverseMap();
             CreateMap<Dispatch_StateDto, Dispatch_State>().ReverseMap();
             CreateMap<UserGetDto, User>().ReverseMap();
+            CreateMap<OfficeGetDto, Office>().ReverseMap();
+            CreateMap<CountryDto, Country>().ReverseMap();
 
         }
     }
