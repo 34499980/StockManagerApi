@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Exceptions;
 using Business.Interface;
 using DTO.Class;
 using Microsoft.AspNetCore.Mvc;
@@ -65,18 +66,17 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                dynamic result = null;
-                // var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
-                //UserDto userInput = JsonConvert.DeserializeObject<UserDto>(input["user"].ToString());
+                OfficeDto result = null;                
                 result = this._officeBL.GetOfficeByName(office.Name);
-                if (result != null)
-                {
-                    this._officeBL.Update(office);
-                }
-                else
+                if (result == null)
                 {
                     this._officeBL.Add(office);
                 }
+                else
+                {
+                    throw new BussiniessException() { ErrorCode = "errOfficeAllReadyExist", statusCode = 400 };
+                }
+                            
                 
             }catch(Exception ex)
             {
@@ -85,12 +85,21 @@ namespace StockManagerApi.Controllers
         }
 
         // PUT api/<SucursalController>/5
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put([FromBody] OfficeDto office)
         {
             try
             {
-                this._officeBL.Update(office);
+                OfficeDto result = null;               
+                result = this._officeBL.GetOfficeByName(office.Name);
+                if (result != null && result.ID == office.ID)
+                {
+                    this._officeBL.Update(office);
+                }
+                else
+                {
+                    throw new BussiniessException() { ErrorCode = "errOfficeAllReadyExist", statusCode = 400 };
+                }
             }
             catch (Exception ex)
             {

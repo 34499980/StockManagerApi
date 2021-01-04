@@ -66,7 +66,7 @@ namespace Repository.Class
             try
             {
                 this._context.OFFICE.Add(office);
-                this._context.SaveChangesAsync();                
+                this._context.SaveChanges();                
             }
             catch (Exception ex)
             {
@@ -78,8 +78,8 @@ namespace Repository.Class
         {
             try
             {
-                this._context.OFFICE.Update(office);
-                this._context.SaveChangesAsync();
+                this._context.Entry(office).State = EntityState.Modified;
+                this._context.SaveChanges();
             }catch(Exception ex)
             {
                 throw ex;
@@ -89,8 +89,8 @@ namespace Repository.Class
         {
             try
             {
-                this._context.OFFICE.Update(office);
-                this._context.SaveChangesAsync();
+                this._context.Entry(office).State = EntityState.Modified;
+                this._context.SaveChanges();
             }
             catch(Exception ex)
             {
@@ -103,6 +103,8 @@ namespace Repository.Class
             {
                 var result = this._context.OFFICE.Include(x => x.Country).Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
                                                         (dto.IdCountry == null || x.IdCountry == dto.IdCountry) &&
+                                                        (dto.Address == "" || x.Address.Contains(dto.Address)) &&
+                                                        (dto.PostalCode == null || x.PostalCode == dto.PostalCode) &&
                                                         (!dto.Active ? x.Active == true : (x.Active == true || x.Active == false))).ToList();
                                                         
                 return result;
