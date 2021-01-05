@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -9,6 +11,7 @@ using Business.AutoMapper;
 using Business.Class;
 using Business.Interface;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -61,8 +64,25 @@ namespace StockManagerApi
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+               // app.UseDeveloperExceptionPage();
             }
+            app.UseExceptionHandler(new ExceptionHandlerOptions
+            {
+                ExceptionHandler = (c) =>
+                {
+                    var exception = c.Features.Get<IExceptionHandlerFeature>();
+                    var statusCode = exception.Error.GetType().Name
+                    switch
+                    {
+                        "ArgumentException" => HttpStatusCode.NotFound,_
+                        => HttpStatusCode.ServiceUnavailable
+                    };
+                    c.Response.StatusCode = (int)statusCode;
+                    var content = Encoding.UTF8.GetBytes(exception.Error.Message);
+                    c.Response.Body.WriteAsync(content, 0, content.Length);
+                    return Task.CompletedTask;
+                }
+            });
 
             app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

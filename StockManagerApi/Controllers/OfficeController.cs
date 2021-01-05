@@ -64,8 +64,7 @@ namespace StockManagerApi.Controllers
         [HttpPost]
         public void Post([FromBody] OfficeDto office)
         {
-            try
-            {
+           
                 OfficeDto result = null;                
                 result = this._officeBL.GetOfficeByName(office.Name);
                 if (result == null)
@@ -74,14 +73,11 @@ namespace StockManagerApi.Controllers
                 }
                 else
                 {
-                    throw new BussiniessException() { ErrorCode = "errOfficeAllReadyExist", statusCode = 400 };
+                    throw new BussinessException("errOfficeAllReadyExist");
                 }
                             
                 
-            }catch(Exception ex)
-            {
-                throw ex;
-            }
+          
         }
 
         // PUT api/<SucursalController>/5
@@ -98,7 +94,7 @@ namespace StockManagerApi.Controllers
                 }
                 else
                 {
-                    throw new BussiniessException() { ErrorCode = "errOfficeAllReadyExist", statusCode = 400 };
+                    throw new BussinessException("errOfficeAllReadyExist");
                 }
             }
             catch (Exception ex)

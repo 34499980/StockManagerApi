@@ -47,5 +47,6 @@ namespace StockManagerApi.Extensions
         {
             services.AddDbContext<StockManagerContext>(op => op.UseSqlServer(Configuration["ConnectionString:StockManagerDB"]));
         }
+
     }
 }
