@@ -59,6 +59,18 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
+        [HttpGet("GetOfficesByCountry")]
+        public IEnumerable<OfficeDto> GetOfficesByCountry(int id)
+        {
+            try
+            {
+                return this._officeBL.GetOfficesByCountry(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         // POST api/<SucursalController>
         [HttpPost]

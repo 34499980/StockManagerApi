@@ -9,10 +9,13 @@ namespace Business.Interface
     {
         IEnumerable<OfficeDto> GetAllOffice();
         OfficeDto GetOfficeByName(string name);
+        IEnumerable<OfficeDto> GetOfficesByCountry(int id);
         OfficeDto GetOfficeById(int id);
         IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto);
         void Add(OfficeDto office);
         void Update(OfficeDto office);
         void Delete(int id);
+
+
     }
 }

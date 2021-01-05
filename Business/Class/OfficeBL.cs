@@ -51,6 +51,23 @@ namespace Business.Class
             }
         }
         /// <summary>
+        /// Devuelve las sucursales por un pais
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public IEnumerable<OfficeDto> GetOfficesByCountry(int id)
+        {
+            try
+            {
+                var result = this._officeRep.GetOfficesByCountry(id);
+                return _mapper.Map<IEnumerable<OfficeDto>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
         /// Devuelve sucursal por id
         /// </summary>
         /// <param name="name"></param>

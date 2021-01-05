@@ -61,6 +61,22 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        /// <summary>
+        /// Devuelve sucursales por pais 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public IEnumerable<Office> GetOfficesByCountry(int id)
+        {
+            try
+            {
+                return this._context.OFFICE.Where(x => x.IdCountry == id).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void Add(Office office)
         {
             try
