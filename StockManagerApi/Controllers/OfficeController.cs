@@ -59,7 +59,7 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
-        [HttpGet("GetOfficesByCountry")]
+        [HttpGet("GetOfficesByCountry/{id}")]
         public IEnumerable<OfficeDto> GetOfficesByCountry(int id)
         {
             try
@@ -114,7 +114,7 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
-        [HttpPost("GetUOfficeFilter")]
+        [HttpPost("GetOfficeFilter")]
         public IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto)
         {
             try

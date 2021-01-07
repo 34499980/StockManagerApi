@@ -60,6 +60,22 @@ namespace StockManagerApi.Controllers
             }
         }
 
+        [HttpPost("GetStockFilter")]
+        public IEnumerable<StockDto> GetStockFilter(StockFilterDto dto)
+        {
+            try
+            {
+                var header = Request.Headers["environment"];
+                var result = _stockBL.GetStockFilter(dto);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         // POST api/<StockController>
         [HttpPost]
         public void Post(Object value)

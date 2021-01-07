@@ -165,5 +165,17 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public IEnumerable<StockDto> GetStockFilter(StockFilterDto dto)
+        {
+            try
+            {
+                var result = this._stockRep.GetOfficeFilter(dto);
+                return _mapper.Map<IEnumerable<StockDto>>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

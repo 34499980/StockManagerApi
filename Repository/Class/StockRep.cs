@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DTO.Class;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Repository.Class.Context;
 using Repository.Entities;
@@ -110,7 +111,7 @@ namespace Repository.Class
                     stockSucursal = new Stock_Office();
                     stockSucursal.IdOffice = item.ID;
                     stockSucursal.IdStock = stock.ID;
-                    if (item.ID == stock.IdSucursal)
+                    if (item.ID == stock.IdOffice)
                     {
                         stockSucursal.Unity = stock.Unity;
                     }
@@ -220,7 +221,26 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        public IEnumerable<Stock> GetOfficeFilter(StockFilterDto dto)
+        {
+            try
+            {
+                var result = this._context.STOCK.Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
+                                                        (dto.Code == "" || x.Code.Contains(dto.Code)) &&
+                                                        (dto.Brand == "" || x.Brand.Contains(dto.Brand)) &&
+                                                        (dto.Model == "" || x.Model.Contains(dto.Model)) &&
+                                                        (dto.IdOffice == null || x.IdOffice == dto.IdOffice) &&
+                                                         (dto.IdCountry == null || x.Office.IdCountry == dto.IdOffice)).ToList();
+                                                     
 
-       
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
     }
 }

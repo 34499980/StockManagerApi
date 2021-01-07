@@ -1,4 +1,5 @@
-﻿using Repository.Entities;
+﻿using DTO.Class;
+using Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,5 +19,6 @@ namespace Repository.Interface
         Stock GetStockById(long id);
         ICollection<Stock_Office> GetStockOfficeByIdStock(Stock stock);
         Stock_Office GetStock_Office(long idStock, int idSucursal);
+        IEnumerable<Stock> GetOfficeFilter(StockFilterDto dto);
     }
 }
