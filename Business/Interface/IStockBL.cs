@@ -9,10 +9,11 @@ namespace Business.Interface
     {
         IEnumerable<StockDto> GetStockByCode(string code);
         IEnumerable<StockDto> GetAllStock();
-        void SaveStock(StockDto stock, string userInput);
+        StockDto GetStockById(int id);
+        void SaveStock(StockDto stock, int idCountry);
         void UpdateStock(StockDto stock,string userInput);
         IEnumerable<StockDto> GetStockByParams(string param);
         IEnumerable<Stock_StateDto> GetStates();
-        IEnumerable<StockDto> GetStockFilter(StockFilterDto dto);
+        IEnumerable<StockGetDto> GetStockFilter(StockFilterDto dto);
     }
 }

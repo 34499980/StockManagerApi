@@ -29,6 +29,7 @@ namespace Business.AutoMapper
             CreateMap<UserGetDto, User>().ReverseMap();
             CreateMap<OfficeGetDto, Office>().ReverseMap();
             CreateMap<CountryDto, Country>().ReverseMap();
+            CreateMap<StockGetDto, Stock>().ReverseMap();
 
         }
     }

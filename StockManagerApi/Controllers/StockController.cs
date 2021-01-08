@@ -60,8 +60,18 @@ namespace StockManagerApi.Controllers
             }
         }
 
+        [HttpGet("GetStockById/{id}")]
+        public StockDto GetStockById(int id)
+        {
+
+
+            var result = this._stockBL.GetStockById(id);
+              
+            return result;
+           
+        }
         [HttpPost("GetStockFilter")]
-        public IEnumerable<StockDto> GetStockFilter(StockFilterDto dto)
+        public IEnumerable<StockGetDto> GetStockFilter(StockFilterDto dto)
         {
             try
             {
@@ -78,13 +88,11 @@ namespace StockManagerApi.Controllers
 
         // POST api/<StockController>
         [HttpPost]
-        public void Post(Object value)
+        public void Post(StockPostDto dto)
         {
             try
             {
-                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
-                StockDto stockInput = JsonConvert.DeserializeObject<StockDto>(input["stock"].ToString());
-                this._stockBL.SaveStock(stockInput, input["user"].ToString());
+                this._stockBL.SaveStock(dto,1);
                
                
             }

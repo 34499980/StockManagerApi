@@ -52,14 +52,15 @@ namespace Repository.Class
         /// Guarda el stock nuevo
         /// </summary>
         /// <param name="stock"></param>
-        public void SaveStock(Stock stock)
+        public long SaveStock(Stock stock)
         {
             try
             {
                 this._context.STOCK.Add(stock);
                 this._context.SaveChanges();
-                stock.Code = stock.ID.ToString().PadLeft(10, '0');
-                this.UpdateStock(stock);
+
+                return stock.ID;
+                
             }
             catch (Exception ex)
             {
@@ -100,29 +101,14 @@ namespace Repository.Class
         /// Al crear el stock, se genera por cada sucursal por lo menos con valor 0
         /// </summary>
         /// <param name="stock"></param>
-        public void saveStockByOffice(Stock stock)
+        public void saveStockByOffice(IEnumerable<Stock_Office> stock_officeList)
         {
             try
             {
-                Stock_Office stockSucursal;
-                var sucursalList = this._context.OFFICE.ToList();
-                foreach (var item in sucursalList)
-                {
-                    stockSucursal = new Stock_Office();
-                    stockSucursal.IdOffice = item.ID;
-                    stockSucursal.IdStock = stock.ID;
-                    if (item.ID == stock.IdOffice)
-                    {
-                        stockSucursal.Unity = stock.Unity;
-                    }
-                    else
-                    {
-                        stockSucursal.Unity = 0;
-                    }
-                    this._context.STOCK_OFFICE.Add(stockSucursal);
+               
+                    this._context.STOCK_OFFICE.AddRange(stock_officeList);
                     this._context.SaveChanges();
-                }
-
+                
             } catch (Exception ex)
             {
                 throw ex;
@@ -215,7 +201,7 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.STOCK.Where(x => x.ID == id).FirstOrDefault();
+                return this._context.STOCK.Include(x => x.Stock_Office).Where(x => x.ID == id).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;

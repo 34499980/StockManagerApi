@@ -18,13 +18,14 @@ namespace DTO.Class
         public string Brand { get; set; }
         public string Model { get; set; }
         public int IdOffice { get; set; }
-        public int IdState { get; set; }
+        public int? IdState { get; set; }
         public string Description { get; set; }
+        public byte[] File { get; set; }
 
      
         public  Stock_StateDto State { get; set; }
      
-        public  OfficeDto Sucursal { get; set; }
+        public  OfficeDto Office { get; set; }
       
         public  ICollection<Stock_OfficeDto> Stock_Office { get; set; }
         public  ICollection<Dispatch_StockDto> Dispatch_Stock { get; set; }

@@ -10,10 +10,10 @@ namespace Repository.Interface
     {
         IEnumerable<Stock> GetStockByCode(string qr);
         IEnumerable<Stock> GetAllStock();
-        void SaveStock(Stock stock);
+        long SaveStock(Stock stock);
         void UpdateStock(Stock stock);       
         IEnumerable<Stock_State> GetAllStates();
-        void saveStockByOffice(Stock stock);
+        void saveStockByOffice(IEnumerable<Stock_Office> stock_officeList);
         IEnumerable<Stock> GetStockByParams(string param, string name);
         void UpdateStockByOffice(Stock_Office stock);
         Stock GetStockById(long id);

@@ -17,10 +17,12 @@ namespace Business.Class
         private readonly IStockRep _stockRep;
         private readonly IUserRep _userRep;
         private readonly IMapper _mapper;
-        public StockBL(IStockRep stockRep,IUserRep userRep, IMapper mapper)
+        private readonly IOfficeRep _officeRep;
+        public StockBL(IStockRep stockRep,IUserRep userRep, IOfficeRep officeRep, IMapper mapper)
         {
             this._stockRep = stockRep;
             this._userRep = userRep;
+            this._officeRep = officeRep;
             this._mapper = mapper;
         }
         /// <summary>
@@ -49,6 +51,18 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public StockDto GetStockById(int id)
+        {
+            try
+            {
+                var result = this._stockRep.GetStockById(id);
+                return _mapper.Map<StockDto>(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         /// <summary>
         /// Devuelve todo el stock
         /// </summary>
@@ -70,36 +84,38 @@ namespace Business.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <param name="userInput"></param>
-        public void SaveStock(StockDto stock,string userInput)
+        public void SaveStock(StockDto stock, int idCountry)
         {
             try
             {
                 var inputStock = _mapper.Map<Stock>(stock);
-                Stock inputDb = this._stockRep.GetStockByCode(stock.QR).FirstOrDefault();
-                var user = this._userRep.GetUserByUserName(userInput);
+                Stock inputDb = this._stockRep.GetStockByCode(stock.Code).FirstOrDefault();
+                //var user = this._userRep.GetUserByUserName(userInput);
                 if (inputDb == null)
                 {
-                 
-                  stock.IdOffice = user.IdOffice;
-                  stock.Code = stock.QR;
-                  stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
-                  this._stockRep.SaveStock(inputStock);
-                  this._stockRep.saveStockByOffice(inputStock);
+
+                    // stock.IdOffice = user.IdOffice;
+                    inputStock.QR = stock.Code;
+                //  stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
+                  long idStock = this._stockRep.SaveStock(inputStock);
+
+                    var offices = _officeRep.GetOfficesByCountry(idCountry);
+                    List<Stock_Office> stock_officeList = new List<Stock_Office>();
+                    foreach (var item in offices)
+                    {
+
+                        if (!stock.Stock_Office.Any(x => x.IdOffice == item.ID))
+                        {
+                            stock_officeList.Add(new Stock_Office() { IdOffice = item.ID, IdStock = idStock, Unity = 0 });
+                        }
+                    }
+                    var inputStock_Office = _mapper.Map<IEnumerable<Stock_Office>>(stock.Stock_Office);
+                    var stock_OfficeListMerged  = stock_officeList.Concat(inputStock_Office);
+                    this._stockRep.saveStockByOffice(stock_OfficeListMerged);
                  // this._stockRep.UpdateQR(stock);
 
                 }
-                else
-                {
-                    foreach (var item in inputStock.Stock_Office)
-                    {
-                        if(item.IdOffice == user.IdOffice)
-                        {
-                            this._stockRep.UpdateStockByOffice(item);
-                        }
-
-                    }
-                    //this._stockRep.UpdateStock(stock);
-                }
+               
                 
             }
             catch (Exception ex)
@@ -165,12 +181,12 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public IEnumerable<StockDto> GetStockFilter(StockFilterDto dto)
+        public IEnumerable<StockGetDto> GetStockFilter(StockFilterDto dto)
         {
             try
             {
                 var result = this._stockRep.GetOfficeFilter(dto);
-                return _mapper.Map<IEnumerable<StockDto>>(result);
+                return _mapper.Map<IEnumerable<StockGetDto>>(result);
             }
             catch (Exception ex)
             {
