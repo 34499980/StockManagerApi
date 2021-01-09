@@ -109,8 +109,13 @@ namespace Business.Class
                             stock_officeList.Add(new Stock_Office() { IdOffice = item.ID, IdStock = idStock, Unity = 0 });
                         }
                     }
+                    foreach (var item in stock.Stock_Office)
+                    {
+                        item.IdStock = idStock;
+
+                    }
                     var inputStock_Office = _mapper.Map<IEnumerable<Stock_Office>>(stock.Stock_Office);
-                    var stock_OfficeListMerged  = stock_officeList.Concat(inputStock_Office);
+                    var stock_OfficeListMerged  = stock_officeList.Concat(inputStock_Office).ToArray();
                     this._stockRep.saveStockByOffice(stock_OfficeListMerged);
                  // this._stockRep.UpdateQR(stock);
 

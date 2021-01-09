@@ -20,7 +20,7 @@ namespace DTO.Class
         public int IdOffice { get; set; }
         public int? IdState { get; set; }
         public string Description { get; set; }
-        public byte[] File { get; set; }
+        public string File { get; set; }
 
      
         public  Stock_StateDto State { get; set; }

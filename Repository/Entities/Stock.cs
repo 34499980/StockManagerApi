@@ -20,6 +20,7 @@ namespace Repository.Entities
         public int IdOffice { get; set; }
         public int IdState { get; set; }
         public string Description { get; set; }
+        public string File { get; set; }
 
         [ForeignKey("IdState")]
         public virtual Stock_State State { get; set; }

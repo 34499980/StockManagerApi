@@ -6,6 +6,6 @@ namespace DTO.Class
 {
     public class StockGetDto: StockDto
     {
-        public string officeDescription { get; set; }
+        public string officeDescription { get { return Office.Name; } }
     }
 }
