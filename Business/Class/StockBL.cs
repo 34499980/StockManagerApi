@@ -198,5 +198,17 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public void delete(int id)
+        {
+            try
+            {
+                 this._stockRep.delete(id);
+              
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

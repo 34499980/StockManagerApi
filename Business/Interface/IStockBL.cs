@@ -15,5 +15,6 @@ namespace Business.Interface
         IEnumerable<StockDto> GetStockByParams(string param);
         IEnumerable<Stock_StateDto> GetStates();
         IEnumerable<StockGetDto> GetStockFilter(StockFilterDto dto);
+        void delete(int id);
     }
 }

@@ -227,6 +227,24 @@ namespace Repository.Class
             }
         }
 
+        public void delete(int id)
+        {
+            try
+            {
+                var stock_office =  this._context.STOCK_OFFICE.Where(x => x.IdStock == id).ToList();
+                var stock_dispatch =  this._context.DISPATCH_STOCK.Where(x => x.IdStock == id).ToList();
+                var stock = this._context.STOCK.Where(x => x.ID == id).FirstOrDefault();
+                this._context.STOCK_OFFICE.RemoveRange(stock_office);
+                this._context.DISPATCH_STOCK.RemoveRange(stock_dispatch);
+                this._context.STOCK.Remove(stock);
+                this._context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
     }
 }

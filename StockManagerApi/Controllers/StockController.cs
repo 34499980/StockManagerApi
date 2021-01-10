@@ -112,6 +112,7 @@ namespace StockManagerApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            this._stockBL.delete(id);
         }
     }
 }
