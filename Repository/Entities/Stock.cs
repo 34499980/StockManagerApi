@@ -25,8 +25,7 @@ namespace Repository.Entities
         [ForeignKey("IdState")]
         public virtual Stock_State State { get; set; }
         [ForeignKey("IdOffice")]
-        public virtual Office Office { get; set; }
-        [NotMapped]
+        public virtual Office Office { get; set; }       
         public virtual ICollection<Stock_Office> Stock_Office { get; set; }
         [NotMapped]
         public virtual ICollection<Dispatch_Stock> Dispatch_Stock { get; set; }

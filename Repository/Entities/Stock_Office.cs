@@ -16,10 +16,10 @@ namespace Repository.Entities
         public int Unity { get; set; }
 
 
-        //[ForeignKey("IdSucursal")]
-        //public virtual OfficeDto Sucursal { get; set; }
-        //[ForeignKey("IdStock")]
-        //public virtual StockDto Stock { get; set; }
+        [ForeignKey("IdOffice")]
+        public virtual Office Office { get; set; }
+       [ForeignKey("IdStock")]
+        public virtual Stock Stock { get; set; }
     }
 
 }
