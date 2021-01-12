@@ -211,7 +211,7 @@ namespace Repository.Class
         {
             try
             {
-                var result = this._context.STOCK.Include(x => x.Office).Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
+                var result = this._context.STOCK.Include(x => x.Office).Include(x => x.Stock_Office).Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
                                                         (dto.Code == "" || x.Code.Contains(dto.Code)) &&
                                                         (dto.Brand == "" || x.Brand.Contains(dto.Brand)) &&
                                                         (dto.Model == "" || x.Model.Contains(dto.Model)) &&
