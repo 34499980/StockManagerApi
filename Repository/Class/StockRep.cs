@@ -201,7 +201,7 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.STOCK.Include(x => x.Stock_Office).Where(x => x.ID == id).FirstOrDefault();
+                return this._context.STOCK.Include(x => x.Stock_Office).Include(x => x.Office).Where(x => x.ID == id).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;
