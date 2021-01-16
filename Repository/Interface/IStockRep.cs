@@ -19,7 +19,7 @@ namespace Repository.Interface
         Stock GetStockById(long id);
         ICollection<Stock_Office> GetStockOfficeByIdStock(Stock stock);
         Stock_Office GetStock_Office(long idStock, int idSucursal);
-        IEnumerable<Stock> GetOfficeFilter(StockFilterDto dto);
+        IEnumerable<Stock_Office> GetOfficeFilter(StockFilterDto dto);
         void delete(int id);
     }
 }

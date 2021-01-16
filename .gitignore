@@ -331,3 +331,7 @@ ASALocalRun/
 
 # Projects logs folder
 **/**/logs
+src/.sonarqube
+
+# SonarQube files
+src/.sonarqube

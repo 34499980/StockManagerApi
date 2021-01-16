@@ -96,10 +96,20 @@ namespace Business.Class
 
                     // stock.IdOffice = user.IdOffice;
                     inputStock.QR = stock.Code;
-                //  stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
-                  long idStock = this._stockRep.SaveStock(inputStock);
-
                     var offices = _officeRep.GetOfficesByCountry(idCountry);
+                    List<Stock_Office> stock_officeList = new List<Stock_Office>();
+                    foreach (var item in offices)
+                    {
+
+                        if (!stock.Stock_Office.Any(x => x.IdOffice == item.ID))
+                        {
+                            inputStock.Stock_Office.Add(new Stock_Office() { IdOffice = item.ID, Unity = 0 });
+                        }
+                    }
+                    //  stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
+                    long idStock = this._stockRep.SaveStock(inputStock);
+
+                   /* var offices = _officeRep.GetOfficesByCountry(idCountry);
                     List<Stock_Office> stock_officeList = new List<Stock_Office>();
                     foreach (var item in offices)
                     {
@@ -116,7 +126,7 @@ namespace Business.Class
                     }
                     var inputStock_Office = _mapper.Map<IEnumerable<Stock_Office>>(stock.Stock_Office);
                     var stock_OfficeListMerged  = stock_officeList.Concat(inputStock_Office).ToArray();
-                    this._stockRep.saveStockByOffice(stock_OfficeListMerged);
+                    this._stockRep.saveStockByOffice(stock_OfficeListMerged);*/
                  // this._stockRep.UpdateQR(stock);
 
                 }
@@ -133,14 +143,11 @@ namespace Business.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <param name="user"></param>
-        public void UpdateStock(StockDto stock,string user)
+        public void UpdateStock(StockDto stock)
         {
             try
             {
                 var inputSock = _mapper.Map<Stock>(stock);
-                Stock_Office stock_Sucursal =  this._stockRep.GetStockOfficeByIdStock(inputSock).Where(x => x.IdStock == stock.ID && x.IdOffice == stock.IdOffice).FirstOrDefault();
-                stock_Sucursal.Unity = stock.Unity;
-                this._stockRep.UpdateStockByOffice(stock_Sucursal);
                 this._stockRep.UpdateStock(inputSock);
                 
             }
@@ -180,18 +187,19 @@ namespace Business.Class
             try
             {
              var result =  this._stockRep.GetAllStates();
-                return _mapper.Map<IEnumerable<Stock_StateDto>>(result);
+             return _mapper.Map<IEnumerable<Stock_StateDto>>(result);
             }catch(Exception ex)
             {
                 throw ex;
             }
         }
-        public IEnumerable<StockGetDto> GetStockFilter(StockFilterDto dto)
+        public IEnumerable<Stock_OfficeDto> GetStockFilter(StockFilterDto dto)
         {
             try
             {
-                var result = this._stockRep.GetOfficeFilter(dto);
-                return _mapper.Map<IEnumerable<StockGetDto>>(result);
+                var stockList = this._stockRep.GetOfficeFilter(dto);
+               
+                return _mapper.Map<IEnumerable<Stock_OfficeDto>>(stockList);
             }
             catch (Exception ex)
             {

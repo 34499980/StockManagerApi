@@ -71,7 +71,7 @@ namespace StockManagerApi.Controllers
            
         }
         [HttpPost("GetStockFilter")]
-        public IEnumerable<StockGetDto> GetStockFilter(StockFilterDto dto)
+        public IEnumerable<Stock_OfficeDto> GetStockFilter([FromBody] StockFilterDto dto)
         {
             try
             {
@@ -103,9 +103,10 @@ namespace StockManagerApi.Controllers
         }
 
         // PUT api/<StockController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public void Put(StockPostDto dto)
         {
+            this._stockBL.UpdateStock(dto);
         }
 
         // DELETE api/<StockController>/5

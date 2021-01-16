@@ -70,7 +70,7 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.OFFICE.Where(x => x.IdCountry == id).ToList();
+                return this._context.OFFICE.Where(x => x.IdCountry == id && x.Active).ToList();
             }
             catch (Exception ex)
             {

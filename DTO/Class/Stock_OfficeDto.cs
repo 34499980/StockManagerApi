@@ -14,8 +14,11 @@ namespace DTO.Class
         public long IdStock { get; set; }
         public int Unity { get; set; }
 
+       
+        public virtual OfficeDto Office { get; set; }
+    
+        public virtual StockDto Stock { get; set; }
 
-   
     }
 
 }

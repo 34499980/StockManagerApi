@@ -139,7 +139,7 @@ namespace Repository.Class
         {
             try
             {
-                var result = this._context.STOCK_OFFICE.Where(x => x.IdStock == stock.ID ).ToList();
+                var result = this._context.STOCK_OFFICE.Include(x => x.Office).Include(x => x.Stock).Where(x => x.IdStock == stock.ID ).ToList();
                 return result;
             }
             catch (Exception ex)
@@ -147,6 +147,7 @@ namespace Repository.Class
                 throw ex;
             }
         }
+
         /// <summary>
         /// Devuelve un listado de stock por parametros puestos en un where
         /// </summary>
@@ -201,22 +202,52 @@ namespace Repository.Class
         {
             try
             {
-                return this._context.STOCK.Include(x => x.Stock_Office).Include(x => x.Office).Where(x => x.ID == id).FirstOrDefault();
+                return this._context.STOCK.Include(x => x.Stock_Office)
+                                          .Include(x => x.Office)
+                                          .Where(x => x.ID == id)
+                                          .Select(stock => new Stock
+                                          {
+                                              ID = stock.ID,
+                                              Code = stock.Code,
+                                              QR = stock.QR,
+                                              Name = stock.Name,
+                                              Brand = stock.Brand,
+                                              Model = stock.Model,
+                                              Description = stock.Description,
+                                              File = stock.File,
+                                              IdOffice = stock.IdOffice,
+                                              IdState = stock.IdState,
+                                              State = stock.State,
+                                              Stock_Office = stock.Stock_Office,
+                                              Office = stock.Office
+                                          }).FirstOrDefault();
             }catch(Exception ex)
             {
                 throw ex;
             }
         }
-        public IEnumerable<Stock> GetOfficeFilter(StockFilterDto dto)
+        public IEnumerable<Stock_Office> GetOfficeFilter(StockFilterDto dto)
         {
             try
             {
-                var result = this._context.STOCK.Include(x => x.Office).Include(x => x.Stock_Office).Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
-                                                        (dto.Code == "" || x.Code.Contains(dto.Code)) &&
-                                                        (dto.Brand == "" || x.Brand.Contains(dto.Brand)) &&
-                                                        (dto.Model == "" || x.Model.Contains(dto.Model)) &&
-                                                        (dto.IdOffice == null || x.IdOffice == dto.IdOffice) &&
-                                                         (dto.IdCountry == null || x.Office.IdCountry == dto.IdOffice)).ToList();
+                var result = this._context.STOCK_OFFICE.Include(x => x.Stock)
+                                                       .Include(x => x.Office)
+                                                      .Where(x => (dto.Name == null || x.Stock.Name.Contains(dto.Name)) &&
+                                                        (dto.Code == null || x.Stock.Code.Contains(dto.Code)) &&
+                                                        (dto.Brand == null || x.Stock.Brand.Contains(dto.Brand)) &&
+                                                        (dto.Model == null || x.Stock.Model.Contains(dto.Model)) &&                                                       
+                                                        (dto.IdCountry == null || x.Office.IdCountry == dto.IdCountry) &&
+                                                        (dto.IdOffice == null || x.IdOffice == dto.IdOffice)).
+                                                        Select( stock => new Stock_Office
+                                                        {
+                                                            ID = stock.ID,
+                                                            IdOffice = stock.IdOffice,
+                                                            IdStock = stock.IdStock,
+                                                            Unity = stock.Unity,
+                                                            Office = stock.Office,
+                                                            Stock = stock.Stock
+                                                        })
+                                                        .ToList();
                                                      
 
                 return result;
