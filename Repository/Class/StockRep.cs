@@ -170,20 +170,11 @@ namespace Repository.Class
         /// Actualizo unidades de stock por sucursal
         /// </summary>
         /// <param name="stock"></param>
-        public  void UpdateStockByOffice(Stock_Office stock)
+        public  void UpdateStockByOffice(ICollection<Stock_Office> stock)
         {
             try
             {
-                //var result = this._context.STOCK_SUCURSAL.ToList();
-                var stockDB = this._context.STOCK_OFFICE.Where(x => x.IdStock == stock.IdStock && x.IdOffice == stock.IdOffice).FirstOrDefault();
-                //var stock1 = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == 1 && x.IdSucursal == 1).FirstOrDefault();
-                //var stock2 = this._context.STOCK_SUCURSAL.Where(x => x.IdStock == 2 && x.IdSucursal == 1).FirstOrDefault();
-                stockDB.Unity = stock.Unity;
-                //this._context.STOCK_SUCURSAL.Remove(stockDB);
-                this._context.Entry(stockDB).State = EntityState.Modified;
-                //this._context.STOCK_SUCURSAL.UpdateRange(stockDB);              
-                //this._context.SaveChanges();
-                //this._context.STOCK_SUCURSAL.Add(stock);
+                this._context.STOCK_OFFICE.UpdateRange(stock);
                  this._context.SaveChanges();
                
 

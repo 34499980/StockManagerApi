@@ -15,7 +15,7 @@ namespace Repository.Interface
         IEnumerable<Stock_State> GetAllStates();
         void saveStockByOffice(IEnumerable<Stock_Office> stock_officeList);
         IEnumerable<Stock> GetStockByParams(string param, string name);
-        void UpdateStockByOffice(Stock_Office stock);
+        void UpdateStockByOffice(ICollection<Stock_Office> stock);
         Stock GetStockById(long id);
         ICollection<Stock_Office> GetStockOfficeByIdStock(Stock stock);
         Stock_Office GetStock_Office(long idStock, int idSucursal);

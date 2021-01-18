@@ -149,6 +149,7 @@ namespace Business.Class
             {
                 var inputSock = _mapper.Map<Stock>(stock);
                 this._stockRep.UpdateStock(inputSock);
+                this._stockRep.UpdateStockByOffice(inputSock.Stock_Office);
                 
             }
             catch (Exception ex)

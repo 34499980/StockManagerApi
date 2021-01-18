@@ -166,7 +166,7 @@ namespace Business.Class
                             Stock_Office stock_officeDB = this._stockRep.GetStock_Office(dispatch_stock.IdStock, dispatchInput.Origin);
                             stock_officeDB.Unity = stock_officeDB.Unity - item.Unity;
                          
-                            this._stockRep.UpdateStockByOffice(stock_officeDB);
+                         //   this._stockRep.UpdateStockByOffice(stock_officeDB);
 
                         }
                         else
@@ -195,7 +195,7 @@ namespace Business.Class
                         {
                           var stock_officeDB =  this._stockRep.GetStock_Office(item.IdStock, dispatchInput.Destiny);
                           stock_officeDB.Unity += item.UnityRead;
-                          this._stockRep.UpdateStockByOffice(stock_officeDB);
+                       //   this._stockRep.UpdateStockByOffice(stock_officeDB);
                         }
                         
                         break;
