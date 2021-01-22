@@ -23,6 +23,7 @@ namespace DTO.Class
         public int PostalCode { get; set; }
         public int IdOffice { get; set; }
         public int IdRole { get; set; }
+        public string File { get; set; }
         public bool Active { get; set; }
         public int IdCountry { get; set; }
 
