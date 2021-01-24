@@ -9,6 +9,7 @@ using System.Text;
 using ConstantControl;
 using Repository.Entities;
 using AutoMapper;
+using StockManagerApi.Extensions;
 
 namespace Business.Class
 {
@@ -84,7 +85,7 @@ namespace Business.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <param name="userInput"></param>
-        public void SaveStock(StockDto stock, int idCountry)
+        public void SaveStock(StockDto stock)
         {
             try
             {
@@ -96,7 +97,7 @@ namespace Business.Class
 
                     // stock.IdOffice = user.IdOffice;
                     inputStock.QR = stock.Code;
-                    var offices = _officeRep.GetOfficesByCountry(idCountry);
+                    var offices = _officeRep.GetOfficesByCountry(ContextProvider.SelectedCountry);
                     List<Stock_Office> stock_officeList = new List<Stock_Office>();
                     foreach (var item in offices)
                     {

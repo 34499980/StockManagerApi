@@ -3,6 +3,7 @@ using Business.Interface;
 using DTO.Class;
 using Repository.Entities;
 using Repository.Interface;
+using StockManagerApi.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -138,6 +139,19 @@ namespace Business.Class
             {
                 var result = this._userRep.GetImageByUser(name);
                 return new ImageDto { Image = result };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void SetAuthorization(UserDto dto)
+        {
+            try
+            {
+                ContextProvider.RoleId = dto.IdRole;
+                ContextProvider.SelectedCountry = dto.IdCountry;
+                ContextProvider.UserId = dto.ID;
             }
             catch (Exception ex)
             {

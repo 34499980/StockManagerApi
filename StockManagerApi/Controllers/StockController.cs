@@ -92,7 +92,7 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                this._stockBL.SaveStock(dto,1);
+                this._stockBL.SaveStock(dto);
                
                
             }

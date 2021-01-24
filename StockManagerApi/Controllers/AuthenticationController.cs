@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ServiceStack.Web;
+using StockManagerApi.Extensions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -80,5 +81,20 @@ namespace StockManagerApi.Controllers
         public void Delete(int id)
         {
         }
+        [HttpPost("SetAuthorization")]
+        public void SetAuthorization(UserDto dto)
+        {
+
+            try
+            {
+                _userBL.SetAuthorization(dto);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
