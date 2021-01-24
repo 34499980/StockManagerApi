@@ -15,6 +15,7 @@ namespace Repository.Interface
         void SaveUser(User user);
         void RemoveUser(User id);
         IEnumerable<User> GetUserFilter(UserFilterDto dto);
+        string GetImageByUser(string name);
 
 
     }

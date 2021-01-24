@@ -32,10 +32,12 @@ namespace StockManagerApi.Controllers
         }
 
         // GET api/<AuthenticationController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{name}")]
+        public ImageDto Get(string name)
         {
-            return "value";
+          
+           return this._userBL.GetImageByUser(name);
+
         }
 
         // POST api/<AuthenticationController>

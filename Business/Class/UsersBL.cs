@@ -132,6 +132,18 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public ImageDto GetImageByUser(string name)
+        {
+            try
+            {
+                var result = this._userRep.GetImageByUser(name);
+                return new ImageDto { Image = result };
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

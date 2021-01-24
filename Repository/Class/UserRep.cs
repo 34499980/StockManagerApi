@@ -144,6 +144,15 @@ namespace Repository.Class
             }
         }
 
-
+        public string GetImageByUser(string name)
+        {
+            try
+            {
+                return this._context.USERS.Where(q => q.UserName == name).FirstOrDefault()?.File; ;
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

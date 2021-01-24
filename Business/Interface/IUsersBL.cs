@@ -14,6 +14,7 @@ namespace Business.Interface
         void SaveUser(UserDto user);
         void RemoveUser(int user);
         IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto);
+        ImageDto GetImageByUser(string name);
 
     }
 }
