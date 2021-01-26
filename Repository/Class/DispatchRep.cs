@@ -7,6 +7,7 @@ using System.Linq;
 using ConstantControl;
 using System.Text;
 using Repository.Entities;
+using DTO.Class;
 
 namespace Repository.Class
 {
@@ -34,36 +35,22 @@ namespace Repository.Class
             {
                 throw ex;
             }
-        }
-        /// <summary>
-        /// Devuelve todos los estados que puede tener un despacho
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Dispatch_State> GetStates()
-        {
-            try
-            {
-                return this._context.DISPATCH_STATE.ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        }        
         /// <summary>
         /// Devuelve todos los despachos
         /// </summary>
         /// <returns></returns>
+        /// 
         public IEnumerable<Dispatch> GetAllDispatchesByOffice(int idOffice)
         {
             try
             {
                 //TODO probar despacho con sucursal
                 dynamic result = null;
-               result = this._context.DISPATCH.Include(q => q.UsuarioDestiny)
-                                              .Include(q => q.UsuarioOrigin)
+               result = this._context.DISPATCH.Include(q => q.UserDestiny)
+                                              .Include(q => q.UserOrigin)
                                               .Include(q => q.State)
-                                              .Where(x => x.Origin == idOffice|| x.Destiny == idOffice).ToList();
+                                              .Where(x => x.IdOrigin == idOffice|| x.IdDestiny == idOffice).ToList();
                 return result;
             }catch(Exception ex)
             {
@@ -80,8 +67,8 @@ namespace Repository.Class
             try
             {
                 //TODO PROBAR traer despacho con stock              
-                return this._context.DISPATCH .Include(q => q.UsuarioDestiny)
-                                              .Include(q => q.UsuarioOrigin)
+                return this._context.DISPATCH .Include(q => q.UserDestiny)
+                                              .Include(q => q.UserOrigin)
                                               .Include(q => q.State)
                                               .Include(q => q.Dispatch_stock)
                                               .Where(x => x.ID == id).FirstOrDefault();
@@ -199,6 +186,32 @@ namespace Repository.Class
 
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public IEnumerable<Dispatch> GetDispatchFilter(DispatchFilterDto dto)
+        {
+            try
+            {
+                var result = this._context.DISPATCH.Include(q => q.UserDestiny)
+                                                   .Include(q => q.UserOrigin)
+                                                  .Where(x => (dto.UserName == "" || x.UserOrigin.UserName.Contains(dto.UserName) ||
+                                                               dto.UserName == "" || x.UserDestiny.UserName.Contains(dto.UserName)) &&
+                                                               dto.CreatedDateFrom == null || x.DateCreate == dto.CreatedDateFrom &&
+                                                               dto.CreatedDateTo == null || x.DateCreate == dto.CreatedDateTo &&
+                                                               dto.DispatchedDateFrom == null || x.DateDispatched == dto.DispatchedDateFrom &&
+                                                               dto.DispatchedDateTo == null || x.DateDispatched == dto.DispatchedDateTo &&
+                                                               dto.RecceivedDateFrom == null || x.DateReceived == dto.RecceivedDateFrom &&
+                                                               dto.ReceivedDateTo == null || x.DateReceived == dto.ReceivedDateTo && 
+                                                               dto.IdState == null || x.IdState == dto.IdState &&
+                                                               dto.Code == null || x.Code == dto.Code &&
+                                                               dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny &&
+                                                               dto.IdCountry == null || x.Origin.IdCountry == dto.IdCountry
+                                                        ).ToListAsync();
+                return result.Result;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }

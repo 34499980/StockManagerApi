@@ -7,10 +7,10 @@ namespace Business.Interface
 {
     public interface IDispatchBL
     {
-        DispatchDto saveDispatch(DispatchDto dispatch,string user);
-        IEnumerable<Dispatch_StateDto> GetStates();
-        IEnumerable<DispatchDto> GetAllDispatchesByOffice(string user);
+        DispatchDto saveDispatch(DispatchDto dispatch);
+        IEnumerable<DispatchDto> GetAllDispatchesByOffice();
         IEnumerable<DispatchDto>GetDispatchById(int id);
-        void UpdateDispatch(DispatchDto dispatch, string user);
+        void UpdateDispatch(DispatchDto dispatch);
+        IEnumerable<DispatchDto> GetDispatchFilter(DispatchFilterDto dto);
     }
 }

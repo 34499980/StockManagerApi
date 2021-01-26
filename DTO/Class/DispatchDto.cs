@@ -16,22 +16,25 @@ namespace DTO.Class
         public DateTime DateCreate { get; set; }
         public int IdUserOrigin { get; set; }
         public int? IdUserDestiny { get; set; }
-        public int Origin { get; set; }
-        public int Destiny { get; set; }
+        public int IdOrigin { get; set; }
+        public int IdDestiny { get; set; }
         public int IdState { get; set; }
         public DateTime? DateDispatched { get; set; }
         public DateTime? DateRecived { get; set; }
         public int? Unity { get; set; }
 
+        public string UserOriginDescription { get { return UserOrigin.UserName; } }
+        public string UserDestinyDescription { get { return UserDestiny.UserName; } }
+        public string OfficeOriginDescription { get { return OfficeOrigin.Name; } }
+        public string OfficeDestinyDescription { get { return OfficeDestiny.Name; } }
 
-     
-        public  UserDto UsuarioOrigin { get; set; }
+        public  UserDto UserOrigin { get; set; }
       
-        public  UserDto UsuarioDestiny { get; set; }
+        public  UserDto UserDestiny { get; set; }
         
-        public  OfficeDto SucOrigin { get; set; }
+        public  OfficeDto OfficeOrigin { get; set; }
       
-        public  OfficeDto SucDestiny { get; set; }
+        public  OfficeDto OfficeDestiny { get; set; }
       
         public  Dispatch_StateDto State { get; set; }
         

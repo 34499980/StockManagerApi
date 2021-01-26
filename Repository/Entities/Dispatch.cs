@@ -16,22 +16,22 @@ namespace Repository.Entities
         public DateTime DateCreate { get; set; }
         public int IdUserOrigin { get; set; }
         public int? IdUserDestiny { get; set; }
-        public int Origin { get; set; }
-        public int Destiny { get; set; }
+        public int IdOrigin { get; set; }
+        public int IdDestiny { get; set; }
         public int IdState { get; set; }
         public DateTime? DateDispatched { get; set; }
-        public DateTime? DateRecived { get; set; }
+        public DateTime? DateReceived { get; set; }
         public int? Unity { get; set; }
 
 
         [ForeignKey("IdUserOrigin")]
-        public virtual User UsuarioOrigin { get; set; }
+        public virtual User UserOrigin { get; set; }
         [ForeignKey("IdUserDestiny")]
-        public virtual User UsuarioDestiny { get; set; }
-        [NotMapped]
-        public virtual Office IdOrigin { get; set; }
-        [NotMapped]
-        public virtual Office IdDestiny { get; set; }
+        public virtual User UserDestiny { get; set; }
+        [ForeignKey("IdOrigin")]
+        public virtual Office Origin { get; set; }
+        [ForeignKey("IdDestiny")]
+        public virtual Office Destiny { get; set; }
         [ForeignKey("IdState")]
         public virtual Dispatch_State State { get; set; }
         [NotMapped]

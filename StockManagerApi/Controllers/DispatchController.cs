@@ -26,7 +26,7 @@ namespace StockManagerApi.Controllers
         {
             try
             {
-                return null;//this._dispatchBL.GetAllDispatches();
+                return this._dispatchBL.GetAllDispatchesByOffice();
             }
             catch (Exception ex)
             {
@@ -35,27 +35,29 @@ namespace StockManagerApi.Controllers
             }
             
         }
+        [HttpPost("GetDispatchFilter")]
+        public IEnumerable<DispatchDto> Get(DispatchFilterDto dto)
+        {
+            try
+            {
+                return this._dispatchBL.GetDispatchFilter(dto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
 
         // GET api/<DispatchController>/5
         [HttpGet("{id}")]
         public IEnumerable<DispatchDto> Get(int id)
         {
             try
-            {
-                dynamic result = null;
-                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(id.ToString());
-                if (input.ContainsKey("dispatch"))
-                {
-                    int dispatchSearch = int.Parse(input["dispatch"].ToString());
-                    result = this._dispatchBL.GetDispatchById(dispatchSearch);
-                }
-                else
-                {
-
-                    string userSearch = input["UserName"].ToString();
-                    result = this._dispatchBL.GetAllDispatchesByOffice(userSearch);
-                }
-                return result;
+            {                   
+                return  this._dispatchBL.GetDispatchById(id);
+               
             }catch(Exception ex)
             {
                 throw ex;
@@ -65,26 +67,11 @@ namespace StockManagerApi.Controllers
 
         // POST api/<DispatchController>
         [HttpPost]
-        public DispatchDto Post(Object value)
+        public DispatchDto Post(DispatchDto dto)
         {           
             try
-            {
-                dynamic result = null;
-                var input = JsonConvert.DeserializeObject<Dictionary<string,object>>(value.ToString());
-                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
-                
-                    if (dispatchInput.Origin != dispatchInput.Destiny)
-                    {
-                        result = this._dispatchBL.saveDispatch(dispatchInput, input["user"].ToString());
-                    }
-                    else
-                    {
-                        throw new Exception("No se puede crear un despacho con mismo origen y destino.");
-                    }
-                
-               
-                return result;
-
+            {    
+              return this._dispatchBL.saveDispatch(dto);
             }
             catch(Exception ex)
             {
@@ -93,16 +80,14 @@ namespace StockManagerApi.Controllers
         }
 
         // PUT api/<DispatchController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Object value)
+        [HttpPut]
+        public void Put(DispatchDto dto)
         {
             try
             {
-              
-                var input = JsonConvert.DeserializeObject<Dictionary<string, object>>(value.ToString());
-                DispatchDto dispatchInput = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
-                this._dispatchBL.UpdateDispatch(dispatchInput, input["user"].ToString());
-                // = JsonConvert.DeserializeObject<DispatchDto>(input["dispatch"].ToString());
+             
+                this._dispatchBL.UpdateDispatch(dto);
+             
 
             }catch(Exception ex)
             {

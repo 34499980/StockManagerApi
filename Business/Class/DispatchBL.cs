@@ -8,6 +8,7 @@ using ConstantControl;
 using System.Text;
 using AutoMapper;
 using Repository.Entities;
+using StockManagerApi.Extensions;
 
 namespace Business.Class
 {
@@ -32,7 +33,7 @@ namespace Business.Class
         /// <param name="dispatch"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public DispatchDto saveDispatch(DispatchDto dispatch,string user)
+        public DispatchDto saveDispatch(DispatchDto dispatch)
         {
             try
             {
@@ -40,9 +41,9 @@ namespace Business.Class
                 dynamic result = this._dispatchRep.GetDispatchByOffice(dispatchInput);
                 if(result == null)
                 {
-                    dispatchInput.IdUserOrigin = this._userhRep.GetUserByUserName(user).ID;
+                    dispatchInput.IdUserOrigin = ContextProvider.UserId;
                     dispatchInput.DateCreate = DateTime.Now;
-                    dispatchInput.IdState = this._dispatchRep.GetStates().Where(x => x.ID == (int)Constants.Dispatch_State.Creado).FirstOrDefault().ID;
+                    dispatchInput.IdState =  (int)Constants.Dispatch_State.Creado;
                     dispatchInput.Unity = 0;
                     result = this._dispatchRep.saveDispatch(dispatchInput);
                   
@@ -58,48 +59,18 @@ namespace Business.Class
             {
                 throw ex;
             }
-        }
-        /// <summary>
-        /// Trae todos los estados de un despacho
-        /// </summary>
-        /// <returns></returns>
-
-        public IEnumerable<Dispatch_StateDto> GetStates()
-        {
-            try
-            {
-                var result = this._dispatchRep.GetStates();
-                return _mapper.Map <IEnumerable<Dispatch_StateDto>> (result);
-            }catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
+        }       
         /// <summary>
         /// Devuelve todos los despachos
         /// </summary>
         /// <returns></returns>
 
-        public IEnumerable<DispatchDto> GetAllDispatchesByOffice(string user)
+        public IEnumerable<DispatchDto> GetAllDispatchesByOffice()
         {
             try
             {
-                User userOrigin = this._userhRep.GetUserByUserName(user);
-                var listDispatches = this._dispatchRep.GetAllDispatchesByOffice(userOrigin.IdOffice);
-                if(listDispatches.Where(x => x.Destiny == userOrigin.IdOffice).Any())
-                {
-                    listDispatches = listDispatches.Where( x => (x.Origin == userOrigin.IdOffice) || (x.Destiny == userOrigin.IdOffice && x.IdState != (int)Constants.Dispatch_State.Creado));
-                }
-                foreach (var item in listDispatches)
-                {                    
-                    item.UsuarioOrigin = this._userhRep.GetUserById(item.IdUserOrigin);
-                    item.UsuarioDestiny = item.IdUserDestiny != null ? this._userhRep.GetUserById(item.IdUserDestiny.Value) : null;
-                    //TODO si funciono el traer automatico, sacar
-                    item.IdDestiny = this._officeRep.GetOfficeById(item.Destiny);
-                    item.IdOrigin = this._officeRep.GetOfficeById(item.Origin);
-                    item.State = this._dispatchRep.GetStates().Where(x => x.ID == item.IdState).FirstOrDefault();
-                }
-                return _mapper.Map<IEnumerable<DispatchDto>>(listDispatches);
+                var result = this._dispatchRep.GetAllDispatchesByOffice(ContextProvider.OfficeId);
+                return _mapper.Map<IEnumerable<DispatchDto>>(result);
             }
             catch (Exception ex)
             {
@@ -127,7 +98,7 @@ namespace Business.Class
                     var stock = this._stockRep.GetStockById(item.IdStock);
                     stock.Stock_Office = this._stockRep.GetStockOfficeByIdStock(stock);
                     dispatch.Stock.Add(stock);
-                    listStock_office.Add(this._stockRep.GetStock_Office(item.IdStock, dispatch.Origin));
+                //    listStock_office.Add(this._stockRep.GetStock_Office(item.IdStock, dispatch.Origin));
                   
                 }
                 listDispatch.Add(dispatch);
@@ -140,7 +111,7 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public void UpdateDispatch(DispatchDto dispatch, string user)
+        public void UpdateDispatch(DispatchDto dispatch)
         {
             try
             {
@@ -163,8 +134,8 @@ namespace Business.Class
                         if (dispatchInput.IdState == (int)Constants.Dispatch_State.Creado
                             || dispatchInput.IdState == (int)Constants.Dispatch_State.Despachado && dispatchInput.DateDispatched == null)
                         {
-                            Stock_Office stock_officeDB = this._stockRep.GetStock_Office(dispatch_stock.IdStock, dispatchInput.Origin);
-                            stock_officeDB.Unity = stock_officeDB.Unity - item.Unity;
+                          //  Stock_Office stock_officeDB = this._stockRep.GetStock_Office(dispatch_stock.IdStock, dispatchInput.Origin);
+                        //    stock_officeDB.Unity = stock_officeDB.Unity - item.Unity;
                          
                          //   this._stockRep.UpdateStockByOffice(stock_officeDB);
 
@@ -193,8 +164,8 @@ namespace Business.Class
                         dispatchInput.IdState = (int)Constants.Dispatch_State.Finalizado;
                         foreach (var item in dispatchInput.Dispatch_stock)
                         {
-                          var stock_officeDB =  this._stockRep.GetStock_Office(item.IdStock, dispatchInput.Destiny);
-                          stock_officeDB.Unity += item.UnityRead;
+                       //   var stock_officeDB =  this._stockRep.GetStock_Office(item.IdStock, dispatchInput.Destiny);
+                      //    stock_officeDB.Unity += item.UnityRead;
                        //   this._stockRep.UpdateStockByOffice(stock_officeDB);
                         }
                         
@@ -204,9 +175,9 @@ namespace Business.Class
                         break;
                     case (int)Constants.Dispatch_State.Recibido:
                         dispatchInput.IdState = (int)Constants.Dispatch_State.Recibido;
-                        if (dispatchInput.DateRecived == null)
-                            dispatchInput.DateRecived = DateTime.Now;
-                        dispatchInput.IdUserDestiny = this._userhRep.GetUserByUserName(user).ID;
+                        if (dispatchInput.DateReceived == null)
+                            dispatchInput.DateReceived = DateTime.Now;
+                        dispatchInput.IdUserDestiny = ContextProvider.UserId;
 
                         break;
                 }               
@@ -215,6 +186,12 @@ namespace Business.Class
             {
                 throw ex;
             }
+        }
+        public IEnumerable<DispatchDto> GetDispatchFilter(DispatchFilterDto dto)
+        {
+            var result = this._dispatchRep.GetDispatchFilter(dto);
+
+            return this._mapper.Map<IEnumerable<DispatchDto>>(result);
         }
     }
 }

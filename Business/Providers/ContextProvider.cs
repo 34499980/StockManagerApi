@@ -10,5 +10,6 @@ namespace StockManagerApi.Extensions
         public static int SelectedCountry { get; set; }
         public static int UserId { get; set; }
         public static int RoleId { get; set; }
+        public static int OfficeId { get; set; }
     }
 }

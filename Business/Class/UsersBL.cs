@@ -152,6 +152,7 @@ namespace Business.Class
                 ContextProvider.RoleId = dto.IdRole;
                 ContextProvider.SelectedCountry = dto.IdCountry;
                 ContextProvider.UserId = dto.ID;
+                ContextProvider.OfficeId = dto.IdOffice;
             }
             catch (Exception ex)
             {
