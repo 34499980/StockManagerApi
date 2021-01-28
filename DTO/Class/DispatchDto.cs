@@ -18,6 +18,7 @@ namespace DTO.Class
         public int? IdUserDestiny { get; set; }
         public int IdOrigin { get; set; }
         public int IdDestiny { get; set; }
+        public int IdCountry { get; set; }
         public int IdState { get; set; }
         public DateTime? DateDispatched { get; set; }
         public DateTime? DateRecived { get; set; }
