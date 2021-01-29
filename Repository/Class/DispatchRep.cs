@@ -8,6 +8,7 @@ using ConstantControl;
 using System.Text;
 using Repository.Entities;
 using DTO.Class;
+using System.Threading.Tasks;
 
 namespace Repository.Class
 {
@@ -125,9 +126,12 @@ namespace Repository.Class
             try
             {
                 dynamic result = null;              
-               result = this._context.DISPATCH.Where(x => x.Origin == dispatch.Origin && 
-                                                    x.Destiny == dispatch.Destiny && 
-                                                    x.IdState == (int)Constants.Dispatch_State.Creado).FirstOrDefault();
+               result = this._context.DISPATCH.Include(q => q.UserOrigin)
+                                              .Include(q => q.UserDestiny)
+                                              .Where(x => x.IdOrigin == dispatch.IdOrigin && 
+                                                    x.IdDestiny == dispatch.IdDestiny && 
+                                                    x.IdState == (int)Constants.Dispatch_State.Creado)
+                                              .FirstOrDefault();
                 return result;
             }catch(Exception ex)
             {
@@ -190,13 +194,16 @@ namespace Repository.Class
                 throw ex;
             }
         }
-        public IEnumerable<Dispatch> GetDispatchFilter(DispatchFilterDto dto)
+        public async Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto)
         {
             try
             {
-                var result = this._context.DISPATCH.Include(q => q.UserDestiny)
-                                                   .Include(q => q.UserOrigin)
-                                                  .Where(x => (dto.UserName == "" || x.UserOrigin.UserName.Contains(dto.UserName) ||
+                var result = await this._context.DISPATCH.Include(q => q.UserOrigin)
+                                                          .Include(q => q.UserDestiny)
+                                                          .Include(q => q.OfficeOrigin)
+                                                          .Include(q => q.officeDestiny)
+                                                          .Include(q => q.State)
+                                                          .Where(x => (dto.UserName == "" || x.UserOrigin.UserName.Contains(dto.UserName) ||
                                                                dto.UserName == "" || x.UserDestiny.UserName.Contains(dto.UserName)) &&
                                                                dto.CreatedDateFrom == null || x.DateCreate == dto.CreatedDateFrom &&
                                                                dto.CreatedDateTo == null || x.DateCreate == dto.CreatedDateTo &&
@@ -205,11 +212,11 @@ namespace Repository.Class
                                                                dto.RecceivedDateFrom == null || x.DateReceived == dto.RecceivedDateFrom &&
                                                                dto.ReceivedDateTo == null || x.DateReceived == dto.ReceivedDateTo && 
                                                                dto.IdState == null || x.IdState == dto.IdState &&
-                                                               dto.Code == null || x.Code == dto.Code &&
+                                                               dto.Code == "" || x.ID.ToString() == dto.Code &&
                                                                dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny &&
-                                                               dto.IdCountry == null || x.Origin.IdCountry == dto.IdCountry
+                                                               x.OfficeOrigin.IdCountry == dto.IdCountry
                                                         ).ToListAsync();
-                return result.Result;
+                return result;
             }
             catch (Exception ex)
             {

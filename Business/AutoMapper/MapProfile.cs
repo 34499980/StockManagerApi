@@ -23,7 +23,7 @@ namespace Business.AutoMapper
             CreateMap<RolesDto, Roles>().ReverseMap();
             CreateMap<Roles_PermissionDto, Roles_Permission>().ReverseMap();
             CreateMap<PermissionDto, Permission>().ReverseMap();
-            CreateMap<DispatchDto, Dispatch>().ReverseMap();
+            CreateMap<Dispatch, DispatchDto>().ReverseMap();
             CreateMap<Dispatch_StockDto, Dispatch_Stock>().ReverseMap();
             CreateMap<Dispatch_StateDto, Dispatch_State>().ReverseMap();
             CreateMap<UserGetDto, User>().ReverseMap();

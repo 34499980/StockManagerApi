@@ -9,6 +9,7 @@ using System.Text;
 using AutoMapper;
 using Repository.Entities;
 using StockManagerApi.Extensions;
+using System.Threading.Tasks;
 
 namespace Business.Class
 {
@@ -37,6 +38,8 @@ namespace Business.Class
         {
             try
             {
+                if (dispatch.IdOrigin == dispatch.IdDestiny) throw new Business.Exceptions.BussinessException("errSameDestinationAndOrigin");
+                
                 var dispatchInput = _mapper.Map<Dispatch>(dispatch);
                 dynamic result = this._dispatchRep.GetDispatchByOffice(dispatchInput);
                 if(result == null)
@@ -47,11 +50,7 @@ namespace Business.Class
                     dispatchInput.Unity = 0;
                     result = this._dispatchRep.saveDispatch(dispatchInput);
                   
-                }
-                else
-                {
-                  result = GetDispatchById(result.ID).FirstOrDefault();
-                }
+                }                
 
                 return _mapper.Map<DispatchDto>(result);
             }
@@ -187,9 +186,12 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public IEnumerable<DispatchDto> GetDispatchFilter(DispatchFilterDto dto)
+        public async Task<IEnumerable<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto)
         {
-            var result = this._dispatchRep.GetDispatchFilter(dto);
+            int number;
+            Int32.TryParse(dto.Code, out number);
+            dto.Code = number != 0 ? number.ToString() : "";
+            var result = await this._dispatchRep.GetDispatchFilter(dto);
 
             return this._mapper.Map<IEnumerable<DispatchDto>>(result);
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Interface
 {
@@ -11,6 +12,6 @@ namespace Business.Interface
         IEnumerable<DispatchDto> GetAllDispatchesByOffice();
         IEnumerable<DispatchDto>GetDispatchById(int id);
         void UpdateDispatch(DispatchDto dispatch);
-        IEnumerable<DispatchDto> GetDispatchFilter(DispatchFilterDto dto);
+        Task<IEnumerable<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto);
     }
 }

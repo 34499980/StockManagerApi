@@ -36,11 +36,11 @@ namespace StockManagerApi.Controllers
             
         }
         [HttpPost("GetDispatchFilter")]
-        public IEnumerable<DispatchDto> Get(DispatchFilterDto dto)
+        public async Task<IEnumerable<DispatchDto>> Get(DispatchFilterDto dto)
         {
             try
             {
-                return this._dispatchBL.GetDispatchFilter(dto);
+                return await this._dispatchBL.GetDispatchFilter(dto);
             }
             catch (Exception ex)
             {

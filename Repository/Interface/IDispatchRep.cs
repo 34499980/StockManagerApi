@@ -3,6 +3,7 @@ using Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Interface
 {
@@ -15,6 +16,6 @@ namespace Repository.Interface
         Dispatch GetDispatchByOffice(Dispatch dispatch);
         void UpdateDispatch(Dispatch dispatch);
         ICollection<Stock> GetStockByIdDispatch(int id);
-        IEnumerable<Dispatch> GetDispatchFilter(DispatchFilterDto dto);
+        Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto);
     }
 }

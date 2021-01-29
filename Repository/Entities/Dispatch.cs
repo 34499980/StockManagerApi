@@ -21,7 +21,7 @@ namespace Repository.Entities
         public int IdState { get; set; }
         public DateTime? DateDispatched { get; set; }
         public DateTime? DateReceived { get; set; }
-        public int? Unity { get; set; }
+        public int Unity { get; set; }
 
 
         [ForeignKey("IdUserOrigin")]
@@ -29,9 +29,9 @@ namespace Repository.Entities
         [ForeignKey("IdUserDestiny")]
         public virtual User UserDestiny { get; set; }
         [ForeignKey("IdOrigin")]
-        public virtual Office Origin { get; set; }
+        public virtual Office OfficeOrigin { get; set; }
         [ForeignKey("IdDestiny")]
-        public virtual Office Destiny { get; set; }
+        public virtual Office officeDestiny { get; set; }
         [ForeignKey("IdState")]
         public virtual Dispatch_State State { get; set; }
         [NotMapped]

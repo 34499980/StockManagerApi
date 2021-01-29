@@ -24,10 +24,11 @@ namespace DTO.Class
         public DateTime? DateRecived { get; set; }
         public int? Unity { get; set; }
 
-        public string UserOriginDescription { get { return UserOrigin.UserName; } }
-        public string UserDestinyDescription { get { return UserDestiny.UserName; } }
-        public string OfficeOriginDescription { get { return OfficeOrigin.Name; } }
-        public string OfficeDestinyDescription { get { return OfficeDestiny.Name; } }
+        public string UserOriginDescription { get { return UserOrigin?.UserName; } }
+        public string UserDestinyDescription { get { return UserDestiny?.UserName; } }
+        public string OfficeOriginDescription { get { return OfficeOrigin?.Name; } }
+        public string OfficeDestinyDescription { get { return OfficeDestiny?.Name; } }
+        public string StateDescription { get { return State?.Description; } }
 
         public  UserDto UserOrigin { get; set; }
       
