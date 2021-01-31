@@ -146,54 +146,40 @@ namespace Repository.Class
         {
             try
             {
-
-                var Dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == dispatch.ID).ToList();
-                //var dispatchDB = this._context.DISPATCH.Where(x => x.ID == dispatch.ID).FirstOrDefault();
-                if (dispatch.Dispatch_stock != null)
-                {
-                    foreach (var item in dispatch.Dispatch_stock)
-                    {
-                        var dispatch_stockDB = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == item.IdDispatch && x.IdStock == item.IdStock).FirstOrDefault();
-                        if (dispatch_stockDB != null)
-                        {
-                            if (item.Unity > 0)
-                            {
-                                dispatch_stockDB.Unity = item.Unity;
-                                dispatch_stockDB.UnityRead = item.UnityRead;
-                                this._context.Entry(dispatch_stockDB).State = EntityState.Modified;
-                            }
-                            else
-                            {
-                                this._context.DISPATCH_STOCK.Remove(dispatch_stockDB);
-                            }
-
-                        }
-                        else
-                        {
-                            this._context.DISPATCH_STOCK.Add(item);
-                        }
-                        this._context.SaveChanges();
-                    }
-                }
-                //dispatchDB.Unity = dispatch.Unity;
-                //dispatchDB.IdState = dispatch.IdState;
-                //dispatchDB.DateDispatched = dispatch.DateDispatched;
-                //dispatchDB.DateRecived = dispatch.DateRecived;
-                //dispatchDB.IdUserDestiny = dispatch.IdUserDestiny;
-                //dispatchDB.IdState = dispatch.IdState;
-
-                this._context.Entry(dispatch).State = EntityState.Modified;
-
+                this._context.Update(dispatch);
                 this._context.SaveChanges();
-
-
-
             }
             catch(Exception ex)
             {
                 throw ex;
             }
         }
+        public void addDispatch_stock(Dispatch_Stock dispatch_stock)
+        {
+            try
+            {
+                this._context.DISPATCH_STOCK.Add(dispatch_stock);
+                 this._context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void removeDispatch(Dispatch_Stock dispatch_stock)
+        {
+            try
+            {
+                this._context.DISPATCH_STOCK.Remove(dispatch_stock);
+                this._context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public async Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto)
         {
             try

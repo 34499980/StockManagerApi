@@ -34,8 +34,7 @@ namespace Repository.Entities
         public virtual Office officeDestiny { get; set; }
         [ForeignKey("IdState")]
         public virtual Dispatch_State State { get; set; }
-        [NotMapped]
-        public  ICollection<Stock> Stock { get; set; }       
+          
         public virtual ICollection<Dispatch_Stock> Dispatch_stock { get; set; }
         public virtual string Code
         {

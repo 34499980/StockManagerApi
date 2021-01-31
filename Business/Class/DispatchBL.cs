@@ -82,29 +82,16 @@ namespace Business.Class
         /// <param name="id"></param>
         /// <returns></returns>
 
-        public IEnumerable<DispatchDto> GetDispatchById(int id)
+        public DispatchDto GetDispatchById(int id)
         {
             try
-            {
-                List<Dispatch> listDispatch = new List<Dispatch>();                
+            {                          
                 Dispatch dispatch =  this._dispatchRep.GetDispatchById(id);
-                // var dirStock = this._dispatchRep.GetStockIdByDispatch(dispatch.ID);             
-                // dispatch.Stock = this._dispatchRep.GetStockByIdDispatch(dispatch.ID);
-                List<Stock_Office> listStock_office = new List<Stock_Office>();
-                dispatch.Stock = new List<Stock>();
-                foreach (var item in dispatch.Dispatch_stock)
-                {
-                    var stock = this._stockRep.GetStockById(item.IdStock);
-                    stock.Stock_Office = this._stockRep.GetStockOfficeByIdStock(stock);
-                    dispatch.Stock.Add(stock);
-                //    listStock_office.Add(this._stockRep.GetStock_Office(item.IdStock, dispatch.Origin));
-                  
-                }
-                listDispatch.Add(dispatch);
-              
+               
+                
 
                
-                return _mapper.Map<IEnumerable<DispatchDto>>(listDispatch);
+                return _mapper.Map<DispatchDto>(dispatch);
             }catch(Exception ex)
             {
                 throw ex;
@@ -112,9 +99,64 @@ namespace Business.Class
         }
         public void UpdateDispatch(DispatchDto dispatch)
         {
+            int cantItems = 0;
             try
             {
-                var dispatchInput = _mapper.Map<Dispatch>(dispatch);
+                Dispatch dispatchDB = null;
+                dispatchDB = this._dispatchRep.GetDispatchById(dispatch.ID);
+                var exist = dispatchDB;
+                if(dispatchDB == null)
+                {
+                   dispatchDB = this._mapper.Map<Dispatch>(dispatch);
+                } else
+                {
+                    dispatchDB.Dispatch_stock = this._mapper.Map<ICollection<Dispatch_Stock>>(dispatch.Dispatch_stock);
+                }              
+                foreach (var item in dispatchDB.Dispatch_stock)
+                {
+                    cantItems += item.Unity;
+                    if (item.Unity == 0)
+                    {
+                        this._dispatchRep.removeDispatch(item);
+                    }
+                }
+                switch (dispatchDB.IdState)
+                {
+                    case (int)Constants.Dispatch_State.Creado:
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Creado;
+                        dispatchDB.Unity = cantItems;
+                        break;
+                    case (int)Constants.Dispatch_State.Despachado:
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Despachado;
+                        if (dispatchDB.DateDispatched == null)
+                            dispatchDB.DateDispatched = DateTime.Now;
+                        break;
+                    case (int)Constants.Dispatch_State.Finalizado:
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Finalizado;                       
+
+                        break;
+                    case (int)Constants.Dispatch_State.Incompleto:
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Incompleto;
+                        break;
+                    case (int)Constants.Dispatch_State.Recibido:
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Recibido;
+                        if (dispatchDB.DateReceived == null)
+                            dispatchDB.DateReceived = DateTime.Now;
+                        dispatchDB.IdUserDestiny = ContextProvider.UserId;
+
+                        break;
+                }
+                if (exist == null)
+                {
+                    this._dispatchRep.saveDispatch(dispatchDB);
+                }
+                else
+                {
+                    this._dispatchRep.UpdateDispatch(dispatchDB);
+                }
+
+                
+               /* var dispatchInput = _mapper.Map<Dispatch>(dispatch);
                 int countBult = 0;
                 Dispatch_Stock dispatch_stock;
              
@@ -148,39 +190,8 @@ namespace Business.Class
                     dispatchInput.Dispatch_stock = listDispatch_Stock;
                 }
                 
-                switch (dispatchInput.IdState)
-                {
-                    case (int)Constants.Dispatch_State.Creado:
-                        dispatchInput.IdState = (int)Constants.Dispatch_State.Creado;
-                        dispatchInput.Unity = countBult;
-                        break;
-                    case (int)Constants.Dispatch_State.Despachado:
-                        dispatchInput.IdState = (int)Constants.Dispatch_State.Despachado;
-                        if (dispatchInput.DateDispatched == null)
-                            dispatchInput.DateDispatched = DateTime.Now;
-                        break;
-                    case (int)Constants.Dispatch_State.Finalizado:
-                        dispatchInput.IdState = (int)Constants.Dispatch_State.Finalizado;
-                        foreach (var item in dispatchInput.Dispatch_stock)
-                        {
-                       //   var stock_officeDB =  this._stockRep.GetStock_Office(item.IdStock, dispatchInput.Destiny);
-                      //    stock_officeDB.Unity += item.UnityRead;
-                       //   this._stockRep.UpdateStockByOffice(stock_officeDB);
-                        }
-                        
-                        break;
-                    case (int)Constants.Dispatch_State.Incompleto:
-                        dispatchInput.IdState = (int)Constants.Dispatch_State.Incompleto;
-                        break;
-                    case (int)Constants.Dispatch_State.Recibido:
-                        dispatchInput.IdState = (int)Constants.Dispatch_State.Recibido;
-                        if (dispatchInput.DateReceived == null)
-                            dispatchInput.DateReceived = DateTime.Now;
-                        dispatchInput.IdUserDestiny = ContextProvider.UserId;
-
-                        break;
-                }               
-                this._dispatchRep.UpdateDispatch(dispatchInput);
+               
+                this._dispatchRep.UpdateDispatch(dispatchInput);*/
             }catch(Exception ex)
             {
                 throw ex;

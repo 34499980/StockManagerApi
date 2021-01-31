@@ -8,7 +8,7 @@ namespace Repository.Interface
 {
     public interface IStockRep
     {
-        IEnumerable<Stock> GetStockByCode(string qr);
+        Stock GetStockByCode(string qr);
         IEnumerable<Stock> GetAllStock();
         long SaveStock(Stock stock);
         void UpdateStock(Stock stock);       

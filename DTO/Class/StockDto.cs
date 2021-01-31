@@ -31,7 +31,8 @@ namespace DTO.Class
         public  ICollection<Dispatch_StockDto> Dispatch_Stock { get; set; }
       
         public  int Unity { get; set; }
-       
+        public int Count { get; set; }
+
 
     }
 }

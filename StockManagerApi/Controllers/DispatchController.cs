@@ -52,7 +52,7 @@ namespace StockManagerApi.Controllers
 
         // GET api/<DispatchController>/5
         [HttpGet("{id}")]
-        public IEnumerable<DispatchDto> Get(int id)
+        public DispatchDto Get(int id)
         {
             try
             {                   

@@ -70,6 +70,16 @@ namespace StockManagerApi.Controllers
             return result;
            
         }
+        [HttpGet("GetStockByCode/{code}")]
+        public StockDto GetStockByCode(string code)
+        {
+
+
+            var result = this._stockBL.GetStockByCode(code);
+
+            return result;
+
+        }
         [HttpPost("GetStockFilter")]
         public IEnumerable<Stock_OfficeDto> GetStockFilter([FromBody] StockFilterDto dto)
         {

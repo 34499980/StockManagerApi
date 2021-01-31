@@ -10,7 +10,7 @@ namespace Business.Interface
     {
         DispatchDto saveDispatch(DispatchDto dispatch);
         IEnumerable<DispatchDto> GetAllDispatchesByOffice();
-        IEnumerable<DispatchDto>GetDispatchById(int id);
+        DispatchDto GetDispatchById(int id);
         void UpdateDispatch(DispatchDto dispatch);
         Task<IEnumerable<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto);
     }

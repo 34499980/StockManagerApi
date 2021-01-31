@@ -24,11 +24,11 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<Stock> GetStockByCode(string qr)
+        public Stock GetStockByCode(string qr)
         {
             try
             {               
-                return this._context.STOCK.Where(x => x.QR == qr).ToList();
+                return this._context.STOCK.Include(q => q.Stock_Office).Where(x => x.QR == qr).FirstOrDefault();
             } catch (Exception ex)
             {
                 throw ex;
@@ -224,7 +224,7 @@ namespace Repository.Class
                 var result = this._context.STOCK_OFFICE.Include(x => x.Stock)
                                                        .Include(x => x.Office)
                                                       .Where(x => (dto.Name == null || x.Stock.Name.Contains(dto.Name)) &&
-                                                        (dto.Code == null || x.Stock.Code.Contains(dto.Code)) &&
+                                                        (dto.Code == null || x.Stock.QR.Contains(dto.Code)) &&
                                                         (dto.Brand == null || x.Stock.Brand.Contains(dto.Brand)) &&
                                                         (dto.Model == null || x.Stock.Model.Contains(dto.Model)) &&                                                       
                                                         (dto.IdCountry == null || x.Office.IdCountry == dto.IdCountry) &&

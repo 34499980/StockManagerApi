@@ -31,21 +31,20 @@ namespace Business.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<StockDto> GetStockByCode(string code)
+        public StockDto GetStockByCode(string code)
         {
             try
             {
-                var listStock =  this._stockRep.GetStockByCode(code);
-                if (listStock != null)
+                var stock =  this._stockRep.GetStockByCode(code);
+                if (stock == null) throw new Business.Exceptions.BussinessException("errStockNotFound");
+                stock.File = null;
+                foreach (var item in stock.Stock_Office)
                 {
-                    foreach (var item in listStock)
-                    {
-                        item.Stock_Office = this._stockRep.GetStockOfficeByIdStock(item);
-                    }
+                    item.Stock = null;
+                };
+               
 
-                }
-
-                return _mapper.Map<IEnumerable<StockDto>>(listStock);
+                return _mapper.Map<StockDto>(stock);
             }
             catch (Exception ex)
             {
@@ -90,7 +89,7 @@ namespace Business.Class
             try
             {
                 var inputStock = _mapper.Map<Stock>(stock);
-                Stock inputDb = this._stockRep.GetStockByCode(stock.Code).FirstOrDefault();
+                Stock inputDb = this._stockRep.GetStockByCode(stock.Code);
                 //var user = this._userRep.GetUserByUserName(userInput);
                 if (inputDb == null)
                 {
