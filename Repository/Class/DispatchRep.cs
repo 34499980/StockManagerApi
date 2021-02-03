@@ -71,7 +71,7 @@ namespace Repository.Class
                 return this._context.DISPATCH .Include(q => q.UserDestiny)
                                               .Include(q => q.UserOrigin)
                                               .Include(q => q.State)
-                                              .Include(q => q.Dispatch_stock)
+                                              .Include(q => q.Dispatch_stock)                                             
                                               .Where(x => x.ID == id).FirstOrDefault();
             }
             catch (Exception ex)
@@ -128,6 +128,7 @@ namespace Repository.Class
                 dynamic result = null;              
                result = this._context.DISPATCH.Include(q => q.UserOrigin)
                                               .Include(q => q.UserDestiny)
+                                              .Include(q => q.Dispatch_stock)                                            
                                               .Where(x => x.IdOrigin == dispatch.IdOrigin && 
                                                     x.IdDestiny == dispatch.IdDestiny && 
                                                     x.IdState == (int)Constants.Dispatch_State.Creado)

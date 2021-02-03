@@ -42,17 +42,30 @@ namespace Business.Class
                 
                 var dispatchInput = _mapper.Map<Dispatch>(dispatch);
                 dynamic result = this._dispatchRep.GetDispatchByOffice(dispatchInput);
-                if(result == null)
+                DispatchDto dispatchOut = _mapper.Map<DispatchDto>(result);
+                if (result == null)
                 {
                     dispatchInput.IdUserOrigin = ContextProvider.UserId;
                     dispatchInput.DateCreate = DateTime.Now;
                     dispatchInput.IdState =  (int)Constants.Dispatch_State.Creado;
                     dispatchInput.Unity = 0;
-                    result = this._dispatchRep.saveDispatch(dispatchInput);
-                  
-                }                
+                    dispatchOut = _mapper.Map<DispatchDto>(this._dispatchRep.saveDispatch(dispatchInput));
 
-                return _mapper.Map<DispatchDto>(result);
+                }
+                else
+                {
+                    dispatchOut.Stock = new List<StockDto>();
+                    foreach (var item in dispatchOut.Dispatch_stock)
+                    {
+                        var stock = _mapper.Map<StockDto>(this._stockRep.GetStockById(item.IdStock));
+                        stock.Count = item.Unity;
+                        stock.Unity = stock.Stock_Office.Where(x => x.IdOffice == dispatch.IdOrigin).FirstOrDefault().Unity;
+
+                        dispatchOut.Stock.Add(stock);
+                    }
+                }
+
+                return dispatchOut;
             }
             catch(Exception ex)
             {
@@ -87,11 +100,21 @@ namespace Business.Class
             try
             {                          
                 Dispatch dispatch =  this._dispatchRep.GetDispatchById(id);
+                var dispatchOut = _mapper.Map<DispatchDto>(dispatch);
+                dispatchOut.Stock = new List<StockDto>();
+                foreach (var item in dispatchOut.Dispatch_stock)
+                {
+                   var result = _mapper.Map<StockDto>(this._stockRep.GetStockById(item.IdStock));
+                    result.Count = item.Unity;
+                    result.Unity = result.Stock_Office.Where(x => x.IdOffice == dispatch.IdOrigin).FirstOrDefault().Unity;
+
+                    dispatchOut.Stock.Add(result);
+                }
                
                 
 
                
-                return _mapper.Map<DispatchDto>(dispatch);
+                return dispatchOut;
             }catch(Exception ex)
             {
                 throw ex;
@@ -120,7 +143,7 @@ namespace Business.Class
                         this._dispatchRep.removeDispatch(item);
                     }
                 }
-                switch (dispatchDB.IdState)
+                switch (dispatch.IdState)
                 {
                     case (int)Constants.Dispatch_State.Creado:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Creado;
@@ -130,6 +153,17 @@ namespace Business.Class
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Despachado;
                         if (dispatchDB.DateDispatched == null)
                             dispatchDB.DateDispatched = DateTime.Now;
+                        List<Stock_Office> stockList = new List<Stock_Office>();
+                        foreach (var item in dispatchDB.Dispatch_stock)
+                        {
+                         var stock_office =  this._stockRep.GetStock_Office(item.IdStock, dispatchDB.IdOrigin);
+                            stock_office.Unity -= item.Unity;
+                            if (stock_office.Unity < -1) throw new Business.Exceptions.BussinessException("errStockHasChange");
+                            stockList.Add(stock_office);
+                            
+
+                        }
+                        this._stockRep.updateStockByOffice(stockList);
                         break;
                     case (int)Constants.Dispatch_State.Finalizado:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Finalizado;                       

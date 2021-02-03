@@ -13,7 +13,7 @@ namespace Repository.Interface
         long SaveStock(Stock stock);
         void UpdateStock(Stock stock);       
         IEnumerable<Stock_State> GetAllStates();
-        void saveStockByOffice(IEnumerable<Stock_Office> stock_officeList);
+        void updateStockByOffice(IEnumerable<Stock_Office> stock_officeList);
         IEnumerable<Stock> GetStockByParams(string param, string name);
         void UpdateStockByOffice(ICollection<Stock_Office> stock);
         Stock GetStockById(long id);
