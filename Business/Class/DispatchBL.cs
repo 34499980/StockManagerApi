@@ -102,14 +102,28 @@ namespace Business.Class
                 Dispatch dispatch =  this._dispatchRep.GetDispatchById(id);
                 var dispatchOut = _mapper.Map<DispatchDto>(dispatch);
                 dispatchOut.Stock = new List<StockDto>();
-                foreach (var item in dispatchOut.Dispatch_stock)
+                if(dispatchOut.IdState == (int)Constants.Dispatch_State.Creado)
                 {
-                   var result = _mapper.Map<StockDto>(this._stockRep.GetStockById(item.IdStock));
-                    result.Count = item.Unity;
-                    result.Unity = result.Stock_Office.Where(x => x.IdOffice == dispatch.IdOrigin).FirstOrDefault().Unity;
+                    foreach (var item in dispatchOut.Dispatch_stock)
+                    {
+                        var result = _mapper.Map<StockDto>(this._stockRep.GetStockById(item.IdStock));
+                        result.Count = item.Unity;
+                        result.Unity = result.Stock_Office.Where(x => x.IdOffice == dispatch.IdOrigin).FirstOrDefault().Unity;
 
-                    dispatchOut.Stock.Add(result);
+                        dispatchOut.Stock.Add(result);
+                    }
+                } else
+                {
+                    foreach (var item in dispatchOut.Dispatch_stock)
+                    {
+                        var result = _mapper.Map<StockDto>(this._stockRep.GetStockById(item.IdStock));
+                        result.Unity = item.Unity;
+                        result.Count = item.UnityRead;
+
+                        dispatchOut.Stock.Add(result);
+                    }
                 }
+               
                
                 
 
