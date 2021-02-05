@@ -101,19 +101,7 @@ namespace Repository.Class
         /// Al crear el stock, se genera por cada sucursal por lo menos con valor 0
         /// </summary>
         /// <param name="stock"></param>
-        public void updateStockByOffice(IEnumerable<Stock_Office> stock_officeList)
-        {
-            try
-            {
-               
-                    this._context.STOCK_OFFICE.UpdateRange(stock_officeList);
-                    this._context.SaveChanges();
-                
-            } catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+     
         /// <summary>
         /// Devuelve todas las unidades de stock que tiene por sucursal
         /// </summary>

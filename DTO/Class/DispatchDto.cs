@@ -21,7 +21,7 @@ namespace DTO.Class
         public int IdCountry { get; set; }
         public int IdState { get; set; }
         public DateTime? DateDispatched { get; set; }
-        public DateTime? DateRecived { get; set; }
+        public DateTime? DateReceived { get; set; }
         public int? Unity { get; set; }
 
         public string UserOriginDescription { get { return UserOrigin?.UserName; } }

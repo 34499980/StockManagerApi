@@ -147,7 +147,10 @@ namespace Business.Class
                    dispatchDB = this._mapper.Map<Dispatch>(dispatch);
                 } else
                 {
-                    dispatchDB.Dispatch_stock = this._mapper.Map<ICollection<Dispatch_Stock>>(dispatch.Dispatch_stock);
+                    if (dispatch.Dispatch_stock.Any())
+                    {
+                        dispatchDB.Dispatch_stock = this._mapper.Map<ICollection<Dispatch_Stock>>(dispatch.Dispatch_stock);
+                    }                   
                 }              
                 foreach (var item in dispatchDB.Dispatch_stock)
                 {
@@ -177,22 +180,46 @@ namespace Business.Class
                             
 
                         }
-                        this._stockRep.updateStockByOffice(stockList);
+                        this._stockRep.UpdateStockByOffice(stockList);
+                        break;
+                    case (int)Constants.Dispatch_State.Recibido:
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Recibido;
+                        if (dispatchDB.DateReceived == null)
+                        {
+                            dispatchDB.DateReceived = DateTime.Now;
+                            dispatchDB.IdUserDestiny = ContextProvider.UserId;
+                        }
+                        else
+                        {
+                            foreach (var item in dispatch.Stock)
+                            {
+                                dispatchDB.Dispatch_stock.Where(x => x.IdStock == item.ID).FirstOrDefault().UnityRead = item.Count;
+
+                            }
+                           
+                        }
+                      
+
                         break;
                     case (int)Constants.Dispatch_State.Finalizado:
-                        dispatchDB.IdState = (int)Constants.Dispatch_State.Finalizado;                       
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Finalizado;
+                        if(dispatch.Dispatch_stock.Any(x => x.Unity != x.UnityRead)) 
+                            throw new Business.Exceptions.BussinessException("errCheckDsipatchItems");
+                        List<Stock_Office> listStock = new List<Stock_Office>();
+
+                        foreach (var item in dispatch.Dispatch_stock)
+                        {
+                            var stock_office = this._stockRep.GetStock_Office(item.IdStock, ContextProvider.OfficeId);
+                            stock_office.Unity = item.Unity;
+
+                        }
+                        this._stockRep.UpdateStockByOffice(listStock);
 
                         break;
                     case (int)Constants.Dispatch_State.Incompleto:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Incompleto;
                         break;
-                    case (int)Constants.Dispatch_State.Recibido:
-                        dispatchDB.IdState = (int)Constants.Dispatch_State.Recibido;
-                        if (dispatchDB.DateReceived == null)
-                            dispatchDB.DateReceived = DateTime.Now;
-                        dispatchDB.IdUserDestiny = ContextProvider.UserId;
-
-                        break;
+                  
                 }
                 if (exist == null)
                 {
