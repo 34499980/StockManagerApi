@@ -86,8 +86,7 @@ namespace StockManagerApi.Controllers
             try
             {
              
-                this._dispatchBL.UpdateDispatch(dto);
-             
+                this._dispatchBL.UpdateDispatch(dto);                
 
             }catch(Exception ex)
             {

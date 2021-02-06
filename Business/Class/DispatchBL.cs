@@ -174,7 +174,7 @@ namespace Business.Class
                         foreach (var item in dispatchDB.Dispatch_stock)
                         {
                          var stock_office =  this._stockRep.GetStock_Office(item.IdStock, dispatchDB.IdOrigin);
-                            stock_office.Unity -= item.Unity;
+                             stock_office.Unity -= item.Unity;
                             if (stock_office.Unity < -1) throw new Business.Exceptions.BussinessException("errStockHasChange");
                             stockList.Add(stock_office);
                             
@@ -203,16 +203,18 @@ namespace Business.Class
                         break;
                     case (int)Constants.Dispatch_State.Finalizado:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Finalizado;
-                        if(dispatch.Dispatch_stock.Any(x => x.Unity != x.UnityRead)) 
-                            throw new Business.Exceptions.BussinessException("errCheckDsipatchItems");
                         List<Stock_Office> listStock = new List<Stock_Office>();
 
-                        foreach (var item in dispatch.Dispatch_stock)
+                        foreach (var item in dispatch.Stock)
                         {
-                            var stock_office = this._stockRep.GetStock_Office(item.IdStock, ContextProvider.OfficeId);
+                            dispatchDB.Dispatch_stock.Where(x => x.IdStock == item.ID).FirstOrDefault().UnityRead = item.Count;
+                            var stock_office = this._stockRep.GetStock_Office(item.ID, ContextProvider.OfficeId);
                             stock_office.Unity = item.Unity;
 
                         }
+                        if (dispatchDB.Dispatch_stock.Any(x => x.Unity != x.UnityRead)) 
+                            throw new Business.Exceptions.BussinessException("errCheckDsipatchItems");  
+                       
                         this._stockRep.UpdateStockByOffice(listStock);
 
                         break;
