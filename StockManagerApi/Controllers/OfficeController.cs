@@ -85,7 +85,7 @@ namespace StockManagerApi.Controllers
                 }
                 else
                 {
-                    throw new BussinessException("errOfficeAllReadyExist");
+                    throw new BussinessException(ConstantControl.Constants.ErrOfficeAllReadyExist);
                 }
                             
                 

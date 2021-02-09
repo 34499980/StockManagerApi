@@ -36,9 +36,9 @@ namespace Business.Class
             try
             {
                 var stock =  this._stockRep.GetStockByCode(code);
-                if (stock == null) throw new Business.Exceptions.BussinessException("errStockNotFound");               
+                if (stock == null) throw new Business.Exceptions.BussinessException(Constants.ErrStockNotFound);               
                 if (stock.Stock_Office.Where(x => x.IdOffice == ContextProvider.OfficeId).FirstOrDefault().Unity == 0)
-                    throw new Business.Exceptions.BussinessException("errProductWithoutStock");
+                    throw new Business.Exceptions.BussinessException(Constants.ErrProductWithoutStock);
                 stock.File = null;
                 foreach (var item in stock.Stock_Office)
                 {

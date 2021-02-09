@@ -78,6 +78,18 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
+        [HttpPost("FixStock")]
+        public void FixStock (DispatchDto dto)
+        {
+            try
+            {
+                 this._dispatchBL.FixStock(dto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         // PUT api/<DispatchController>/5
         [HttpPut]

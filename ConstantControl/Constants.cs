@@ -33,5 +33,11 @@ namespace ConstantControl
 
         }
 
+        public static string ErrSameDestinationAndOrigin = "errSameDestinationAndOrigin";
+        public static string ErrStockHasCHange = "errStockHasCHange";
+        public static string ErrCheckDispatchItems = "errCheckDispatchItems";
+        public static string ErrStockNotFound = "errStockNotFound";
+        public static string ErrProductWithoutStock = "errProductWithoutStock";
+        public static string ErrOfficeAllReadyExist = "errOfficeAllReadyExist";
     }
 }

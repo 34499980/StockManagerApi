@@ -19,5 +19,6 @@ namespace Repository.Interface
         Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto);
         void removeDispatch(Dispatch_Stock dispatch_stock);
         void addDispatch_stock(Dispatch_Stock dispatch_stock);
+        void UpdateDispatchStock(IEnumerable<Dispatch_Stock> stock);
     }
 }

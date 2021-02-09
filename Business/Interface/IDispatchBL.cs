@@ -13,5 +13,6 @@ namespace Business.Interface
         DispatchDto GetDispatchById(int id);
         void UpdateDispatch(DispatchDto dispatch);
         Task<IEnumerable<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto);
+        void FixStock(DispatchDto dto);
     }
 }

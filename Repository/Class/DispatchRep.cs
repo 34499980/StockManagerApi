@@ -155,6 +155,18 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        public void UpdateDispatchStock(IEnumerable<Dispatch_Stock> stock)
+        {
+            try
+            {
+                this._context.UpdateRange(stock);
+                this._context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void addDispatch_stock(Dispatch_Stock dispatch_stock)
         {
             try

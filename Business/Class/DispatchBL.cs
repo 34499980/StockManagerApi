@@ -38,7 +38,7 @@ namespace Business.Class
         {
             try
             {
-                if (dispatch.IdOrigin == dispatch.IdDestiny) throw new Business.Exceptions.BussinessException("errSameDestinationAndOrigin");
+                if (dispatch.IdOrigin == dispatch.IdDestiny) throw new Business.Exceptions.BussinessException(Constants.ErrSameDestinationAndOrigin);
                 
                 var dispatchInput = _mapper.Map<Dispatch>(dispatch);
                 dynamic result = this._dispatchRep.GetDispatchByOffice(dispatchInput);
@@ -175,7 +175,7 @@ namespace Business.Class
                         {
                          var stock_office =  this._stockRep.GetStock_Office(item.IdStock, dispatchDB.IdOrigin);
                              stock_office.Unity -= item.Unity;
-                            if (stock_office.Unity < -1) throw new Business.Exceptions.BussinessException("errStockHasChange");
+                            if (stock_office.Unity < -1) throw new Business.Exceptions.BussinessException(Constants.ErrStockHasCHange);
                             stockList.Add(stock_office);
                             
 
@@ -273,6 +273,23 @@ namespace Business.Class
             {
                 throw ex;
             }
+        }
+        public void FixStock(DispatchDto dto)
+        {
+            try
+            {
+               var list = _dispatchRep.GetStockIdByDispatch(dto.ID);
+                foreach (var item in list)
+                {
+                   var stock = dto.Stock.Where(x => x.ID == item.IdStock).FirstOrDefault();
+                    item.Unity = stock.Unity;
+                }
+                _dispatchRep.UpdateDispatchStock(list);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+
         }
         public async Task<IEnumerable<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto)
         {
