@@ -32,6 +32,17 @@ namespace ConstantControl
 
 
         }
+        public enum RoleEnum
+        {
+            Administrative = 1,
+            Manager = 2,
+            Seller = 3,
+            Buyer = 4
+
+
+
+
+        }
 
         public static string ErrSameDestinationAndOrigin = "errSameDestinationAndOrigin";
         public static string ErrStockHasCHange = "errStockHasCHange";

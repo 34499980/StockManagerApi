@@ -159,6 +159,26 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public bool Validate(UserDto dto)
+        {
+            try
+            {
+               var userDB = _userRep.GetUserByUserName(dto.UserName);
+                if(userDB.UserName == dto.UserName && userDB.Password == dto.Password &&
+                    userDB.IdRole == (int)ConstantControl.Constants.RoleEnum.Administrative ||
+                     userDB.IdRole == (int)ConstantControl.Constants.RoleEnum.Manager)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

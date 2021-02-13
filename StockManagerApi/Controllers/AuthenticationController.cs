@@ -70,6 +70,21 @@ namespace StockManagerApi.Controllers
             }
         }
 
+        [HttpPost("validate")]
+        public bool Validate(UserDto dto)
+        {
+
+            try
+            {
+              return  _userBL.Validate(dto);
+               
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         // PUT api/<AuthenticationController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

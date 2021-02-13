@@ -16,6 +16,7 @@ namespace Business.Interface
         IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto);
         ImageDto GetImageByUser(string name);
         void SetAuthorization(UserDto dto);
+        bool Validate(UserDto dto);
 
     }
 }
