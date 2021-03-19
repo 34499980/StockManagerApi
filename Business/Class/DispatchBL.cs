@@ -296,7 +296,7 @@ namespace Business.Class
             int number;
             Int32.TryParse(dto.Code, out number);
             dto.Code = number != 0 ? number.ToString() : "";
-            var result = await this._dispatchRep.GetDispatchFilter(dto);
+            var result = await this._dispatchRep.GetDispatchFilter(dto, ContextProvider.OfficeId);
 
             return this._mapper.Map<IEnumerable<DispatchDto>>(result);
         }

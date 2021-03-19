@@ -16,7 +16,7 @@ namespace Repository.Interface
         Dispatch GetDispatchByOffice(Dispatch dispatch);
         void UpdateDispatch(Dispatch dispatch);
         ICollection<Stock> GetStockByIdDispatch(int id);
-        Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto);
+        Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto, int idOrigin);
         void removeDispatch(Dispatch_Stock dispatch_stock);
         void addDispatch_stock(Dispatch_Stock dispatch_stock);
         void UpdateDispatchStock(IEnumerable<Dispatch_Stock> stock);

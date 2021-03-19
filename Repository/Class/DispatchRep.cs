@@ -193,7 +193,7 @@ namespace Repository.Class
             }
         }
 
-        public async Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto)
+        public async Task<IEnumerable<Dispatch>> GetDispatchFilter(DispatchFilterDto dto, int idOrigin)
         {
             try
             {
@@ -202,18 +202,20 @@ namespace Repository.Class
                                                           .Include(q => q.OfficeOrigin)
                                                           .Include(q => q.officeDestiny)
                                                           .Include(q => q.State)
-                                                          .Where(x => (dto.UserName == "" || x.UserOrigin.UserName.Contains(dto.UserName) ||
-                                                               dto.UserName == "" || x.UserDestiny.UserName.Contains(dto.UserName)) &&
-                                                               dto.CreatedDateFrom == null || x.DateCreate == dto.CreatedDateFrom &&
-                                                               dto.CreatedDateTo == null || x.DateCreate == dto.CreatedDateTo &&
-                                                               dto.DispatchedDateFrom == null || x.DateDispatched == dto.DispatchedDateFrom &&
-                                                               dto.DispatchedDateTo == null || x.DateDispatched == dto.DispatchedDateTo &&
-                                                               dto.RecceivedDateFrom == null || x.DateReceived == dto.RecceivedDateFrom &&
-                                                               dto.ReceivedDateTo == null || x.DateReceived == dto.ReceivedDateTo && 
-                                                               dto.IdState == null || x.IdState == dto.IdState &&
-                                                               dto.Code == "" || x.ID.ToString() == dto.Code &&
-                                                               dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny &&
-                                                               x.OfficeOrigin.IdCountry == dto.IdCountry
+                                                          .Where(x => 
+                                                                ((dto.UserName == "" || dto.UserName == null) || x.UserOrigin.UserName.Contains(dto.UserName) ||
+                                                               (dto.UserName == "" || dto.UserName == null )|| x.UserDestiny.UserName.Contains(dto.UserName)) &&
+                                                               (dto.CreatedDateFrom == null || x.DateCreate == dto.CreatedDateFrom) &&
+                                                               (dto.CreatedDateTo == null || x.DateCreate == dto.CreatedDateTo) &&
+                                                               (dto.DispatchedDateFrom == null || x.DateDispatched == dto.DispatchedDateFrom) &&
+                                                               (dto.DispatchedDateTo == null || x.DateDispatched == dto.DispatchedDateTo) &&
+                                                               (dto.RecceivedDateFrom == null || x.DateReceived == dto.RecceivedDateFrom) &&
+                                                               (dto.ReceivedDateTo == null || x.DateReceived == dto.ReceivedDateTo) && 
+                                                               (dto.IdState == null || x.IdState == dto.IdState) &&
+                                                               (dto.Code == "" || x.ID.ToString() == dto.Code) &&
+                                                               (dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny) &&
+                                                               (x.OfficeOrigin.IdCountry == dto.IdCountry) &&
+                                                               (x.IdOrigin == idOrigin)
                                                         ).ToListAsync();
                 return result;
             }
