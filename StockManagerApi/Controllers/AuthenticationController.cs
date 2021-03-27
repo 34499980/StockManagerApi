@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ServiceStack.Web;
@@ -21,9 +26,11 @@ namespace StockManagerApi.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IUsersBL _userBL;
-        public AuthenticationController(IUsersBL userBL)
+        private readonly IConfiguration _configuration;
+        public AuthenticationController(IUsersBL userBL, IConfiguration configuration)
         {
             this._userBL = userBL;
+            this._configuration = configuration;
         }
         // GET: api/<AuthenticationController>
         [HttpGet]
@@ -47,12 +54,35 @@ namespace StockManagerApi.Controllers
         {
 
             try
-            {
+            {              
+               
                 //  UserDto userInput = JsonConvert.DeserializeObject<UserDto>(value.ToString());
                 UserDto userOutput = _userBL.GetUserByName(userInput.UserName);
 
                 if (userOutput != null && userInput.Password == userOutput.Password)
                 {
+                    var key = Encoding.ASCII.GetBytes(_configuration["SecretKey"]);
+                    var claims = new[]
+                     {
+                        new Claim(ClaimTypes.NameIdentifier, userOutput.UserName)
+                    };
+
+                    var claimsIdentity = new ClaimsIdentity(claims);
+                    
+
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = claimsIdentity,
+                        // Nuestro token va a durar un día
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        // Credenciales para generar el token usando nuestro secretykey y el algoritmo hash 256
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                    };
+
+
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var createdToken = tokenHandler.CreateToken(tokenDescriptor);
+                    userOutput.token = tokenHandler.WriteToken(createdToken);
                     return Ok(userOutput);
 
 

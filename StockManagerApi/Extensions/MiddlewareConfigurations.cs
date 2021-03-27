@@ -2,15 +2,18 @@
 using Business.AutoMapper;
 using Business.Class;
 using Business.Interface;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Repository.Class;
 using Repository.Class.Context;
 using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StockManagerApi.Extensions
@@ -42,6 +45,29 @@ namespace StockManagerApi.Extensions
             services.AddScoped<IStockBL, StockBL>();
             services.AddScoped<IRuleBL, RuleBL>();
             services.AddScoped<IDataSourceBL, DataSourceBL>();
+        }
+
+        public static void Authentication(IServiceCollection services, IConfiguration Configuration)
+        {
+            var key = Encoding.ASCII.GetBytes(Configuration["SecretKey"]);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
         }
         public static void ConnectionConfiguration(IServiceCollection services, IConfiguration Configuration)
         {
