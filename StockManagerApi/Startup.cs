@@ -10,6 +10,7 @@ using AutoMapper;
 using Business.AutoMapper;
 using Business.Class;
 using Business.Interface;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -20,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Repository.Class;
 using Repository.Class.Context;
 using Repository.Interface;
@@ -29,6 +31,8 @@ namespace StockManagerApi
 {
     public class Startup
     {
+        private const string SECRET_KEY = "asdwda1d8a4sd8w4das8d*w8d*asd@#";
+        public static readonly SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,7 +44,28 @@ namespace StockManagerApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllers();
+
+            services.AddAuthentication(options =>
+            {
+               // options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = "JwtBearer";
+                options.DefaultChallengeScheme = "JwtBearer";
+            })
+                .AddJwtBearer("JwtBearer", jwtOptions =>
+                {
+                    jwtOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                    {
+                        IssuerSigningKey = SIGNING_KEY,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidIssuer = "https://localhost:44362",
+                        ValidAudience = "https://localhost:44362",
+                        ValidateLifetime = true
+                    };
+                });
+
             services.AddMvc();
 
 
@@ -53,7 +78,8 @@ namespace StockManagerApi
             MiddlewareConfigurations.DependecInjection(services);
             //Cors Configuration
             MiddlewareConfigurations.CorsConfiguration(services);
-            
+           
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
@@ -83,7 +109,7 @@ namespace StockManagerApi
                     return Task.CompletedTask;
                 }
             });
-
+          
             app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
@@ -92,6 +118,8 @@ namespace StockManagerApi
             //     .AllowAnyOrigin()
             //    .AllowAnyMethod()                
             //    .WithHeaders( "Content-Type"));
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

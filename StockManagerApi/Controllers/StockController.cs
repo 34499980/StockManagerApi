@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -23,6 +24,7 @@ namespace StockManagerApi.Controllers
         }
         // GET: api/<StockController>
         [HttpGet]
+        [Authorize]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -30,6 +32,7 @@ namespace StockManagerApi.Controllers
 
         // GET api/<StockController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public IEnumerable<StockDto> Get(string id)
         {
             try
@@ -61,6 +64,7 @@ namespace StockManagerApi.Controllers
         }
 
         [HttpGet("GetStockById/{id}")]
+        [Authorize]
         public StockDto GetStockById(int id)
         {
 
@@ -71,6 +75,7 @@ namespace StockManagerApi.Controllers
            
         }
         [HttpGet("GetStockByCode/{code}")]
+        [Authorize]
         public StockDto GetStockByCode(string code)
         {
 
@@ -81,6 +86,7 @@ namespace StockManagerApi.Controllers
 
         }
         [HttpPost("GetStockFilter")]
+        [Authorize]
         public IEnumerable<Stock_OfficeDto> GetStockFilter([FromBody] StockFilterDto dto)
         {
             try
@@ -98,6 +104,7 @@ namespace StockManagerApi.Controllers
 
         // POST api/<StockController>
         [HttpPost]
+        [Authorize]
         public void Post(StockPostDto dto)
         {
             try
@@ -114,6 +121,7 @@ namespace StockManagerApi.Controllers
 
         // PUT api/<StockController>/5
         [HttpPut]
+        [Authorize]
         public void Put(StockPostDto dto)
         {
             this._stockBL.UpdateStock(dto);
@@ -121,6 +129,7 @@ namespace StockManagerApi.Controllers
 
         // DELETE api/<StockController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(int id)
         {
             this._stockBL.delete(id);

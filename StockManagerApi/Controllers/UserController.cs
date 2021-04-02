@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -23,7 +24,7 @@ namespace StockManagerApi.Controllers
         }
         // GET: api/<UsuarioController>
         [HttpGet]
-  
+        [Authorize]
         public IEnumerable<UserDto> Get()
         {
             try
@@ -39,6 +40,7 @@ namespace StockManagerApi.Controllers
            
         }
         [HttpPost("GetUserFilter")]
+        [Authorize]
         public IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto)
         {
             try
@@ -55,6 +57,7 @@ namespace StockManagerApi.Controllers
         }
         // GET api/<UsuarioController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public UserGetDto Get(string id)
         {
             try
@@ -70,6 +73,7 @@ namespace StockManagerApi.Controllers
 
         // POST api/<UsuarioController>
         [HttpPost]
+        [Authorize]
         public void Post(UserDto value)
         {
             try
@@ -104,6 +108,7 @@ namespace StockManagerApi.Controllers
 
         // DELETE api/<UsuarioController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public bool Delete(int id)
         {
             try

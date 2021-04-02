@@ -26,6 +26,7 @@ namespace DTO.Class
         public string File { get; set; }
         public bool Active { get; set; }
         public int IdCountry { get; set; }
+        public string token { get; set; }
 
 
         public CountryDto Country { get; set; }
