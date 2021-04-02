@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,8 @@ namespace StockManagerApi.Controllers
     {
         private readonly IUsersBL _userBL;
         private readonly IConfiguration _configuration;
+        private const string SECRET_KEY = "asdwda1d8a4sd8w4das8d*w8d*asd@#";
+        public static readonly SymmetricSecurityKey SIGNING_KEY = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECRET_KEY));
         public AuthenticationController(IUsersBL userBL, IConfiguration configuration)
         {
             this._userBL = userBL;
@@ -34,6 +37,7 @@ namespace StockManagerApi.Controllers
         }
         // GET: api/<AuthenticationController>
         [HttpGet]
+        [Authorize]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -41,6 +45,7 @@ namespace StockManagerApi.Controllers
 
         // GET api/<AuthenticationController>/5
         [HttpGet("{name}")]
+        [Authorize]
         public ImageDto Get(string name)
         {
           
@@ -61,28 +66,48 @@ namespace StockManagerApi.Controllers
 
                 if (userOutput != null && userInput.Password == userOutput.Password)
                 {
-                    var key = Encoding.ASCII.GetBytes(_configuration["SecretKey"]);
-                    var claims = new[]
+                    /* var key = Encoding.ASCII.GetBytes(_configuration["SecretKey"]);
+                     var claims = new[]
+                      {
+                         new Claim(ClaimTypes.NameIdentifier, userOutput.UserName)
+                     };
+
+                     var claimsIdentity = new ClaimsIdentity(claims);
+
+
+                     var tokenDescriptor = new SecurityTokenDescriptor
                      {
-                        new Claim(ClaimTypes.NameIdentifier, userOutput.UserName)
-                    };
+                         Subject = claimsIdentity,
+                         // Nuestro token va a durar un día
+                         Expires = DateTime.UtcNow.AddMinutes(60),
+                         // Credenciales para generar el token usando nuestro secretykey y el algoritmo hash 256
+                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                     };
 
-                    var claimsIdentity = new ClaimsIdentity(claims);
-                    
 
-                    var tokenDescriptor = new SecurityTokenDescriptor
+                     var tokenHandler = new JwtSecurityTokenHandler();
+                     var createdToken = tokenHandler.CreateToken(tokenDescriptor);
+                     userOutput.token = tokenHandler.WriteToken(createdToken);*
+
+                     */
+                    var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(SIGNING_KEY, SecurityAlgorithms.HmacSha256);
+                    var header = new JwtHeader(credentials);
+                    DateTime expiry = DateTime.UtcNow.AddMinutes(60);
+                    int ts = (int)(expiry - new DateTime(1970, 1, 1)).TotalSeconds;
+                    var payload = new JwtPayload
                     {
-                        Subject = claimsIdentity,
-                        // Nuestro token va a durar un día
-                        Expires = DateTime.UtcNow.AddDays(1),
-                        // Credenciales para generar el token usando nuestro secretykey y el algoritmo hash 256
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                        {"id", userOutput.ID },
+                        { "userName", userOutput.UserName},
+                        { "exp", ts},
+                        { "iss", "https://localhost:44362"},
+                        { "aud", "https://localhost:44362"}
                     };
+                    var secToken = new JwtSecurityToken(header, payload);
+                    var handler = new JwtSecurityTokenHandler();
+                    var tokenString = handler.WriteToken(secToken);
 
+                    userOutput.token = tokenString;
 
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var createdToken = tokenHandler.CreateToken(tokenDescriptor);
-                    userOutput.token = tokenHandler.WriteToken(createdToken);
                     return Ok(userOutput);
 
 
@@ -101,6 +126,7 @@ namespace StockManagerApi.Controllers
         }
 
         [HttpPost("validate")]
+        [Authorize]
         public bool Validate(UserDto dto)
         {
 

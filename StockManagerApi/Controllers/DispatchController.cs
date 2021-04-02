@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -22,6 +23,7 @@ namespace StockManagerApi.Controllers
         }
         // GET: api/<DispatchController>
         [HttpGet]
+        [Authorize]
         public IEnumerable<DispatchDto> Get()
         {
             try
@@ -36,6 +38,7 @@ namespace StockManagerApi.Controllers
             
         }
         [HttpPost("GetDispatchFilter")]
+        [Authorize]
         public async Task<IEnumerable<DispatchDto>> Get(DispatchFilterDto dto)
         {
             try
@@ -52,6 +55,7 @@ namespace StockManagerApi.Controllers
 
         // GET api/<DispatchController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public DispatchDto Get(int id)
         {
             try
@@ -67,6 +71,7 @@ namespace StockManagerApi.Controllers
 
         // POST api/<DispatchController>
         [HttpPost]
+        [Authorize]
         public DispatchDto Post(DispatchDto dto)
         {           
             try
@@ -79,6 +84,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpPost("FixStock")]
+        [Authorize]
         public void FixStock (DispatchDto dto)
         {
             try
@@ -93,6 +99,7 @@ namespace StockManagerApi.Controllers
 
         // PUT api/<DispatchController>/5
         [HttpPut]
+        [Authorize]
         public void Put(DispatchDto dto)
         {
             try
@@ -108,6 +115,7 @@ namespace StockManagerApi.Controllers
 
         // DELETE api/<DispatchController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(int id)
         {
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Business.Exceptions;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,6 +23,7 @@ namespace StockManagerApi.Controllers
         }
         // GET: api/<SucursalController>
         [HttpGet]
+        [Authorize]
         public IEnumerable<OfficeDto> Get()
         {
             try
@@ -37,6 +39,7 @@ namespace StockManagerApi.Controllers
 
         // GET api/<SucursalController>/5
         [HttpGet("GetOfficeById/{id}")]
+        [Authorize]
         public OfficeDto GetOfficeById(int id)
         {
             try
@@ -48,6 +51,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpGet("GetOfficeByName")]
+        [Authorize]
         public OfficeDto GetOfficeByName(string name)
         {
             try
@@ -60,6 +64,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpGet("GetOfficesByCountry/{id}")]
+        [Authorize]
         public IEnumerable<OfficeDto> GetOfficesByCountry(int id)
         {
             try
@@ -74,6 +79,7 @@ namespace StockManagerApi.Controllers
 
         // POST api/<SucursalController>
         [HttpPost]
+        [Authorize]
         public void Post([FromBody] OfficeDto office)
         {
            
@@ -94,6 +100,7 @@ namespace StockManagerApi.Controllers
 
         // PUT api/<SucursalController>/5
         [HttpPut]
+        [Authorize]
         public void Put([FromBody] OfficeDto office)
         {
             try
@@ -115,6 +122,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpPost("GetOfficeFilter")]
+        [Authorize]
         public IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto)
         {
             try
@@ -131,6 +139,7 @@ namespace StockManagerApi.Controllers
         }
         // DELETE api/<SucursalController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(int id)
         {
             try

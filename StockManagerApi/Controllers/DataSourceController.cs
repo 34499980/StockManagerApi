@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -47,6 +48,7 @@ namespace StockManagerApi.Controllers
         }
 
         [HttpGet("GetAllCountries")]
+        [Authorize]
         public IEnumerable<CountryDto> GetAllCountries()
         {
             try
@@ -59,6 +61,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpGet("GetDispatchState")]
+        [Authorize]
         public IEnumerable<Dispatch_StateDto> GetDispatchState()
         {
             try
@@ -71,6 +74,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpGet("GetStockState")]
+        [Authorize]
         public IEnumerable<Stock_StateDto> GetStockchState()
         {
             try
@@ -83,6 +87,7 @@ namespace StockManagerApi.Controllers
             }
         }
         [HttpGet("GetAllRoles")]
+        [Authorize]
         public IEnumerable<RolesDto> GetAllRoles()
         {
             try
