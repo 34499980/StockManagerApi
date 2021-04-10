@@ -16,6 +16,7 @@ namespace Repository.Interface
         void RemoveUser(User id);
         IEnumerable<User> GetUserFilter(UserFilterDto dto);
         string GetImageByUser(string name);
+        IEnumerable<Permission> getPermissionsByIdRole(int id);
 
 
     }

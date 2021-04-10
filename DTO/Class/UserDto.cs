@@ -29,6 +29,7 @@ namespace DTO.Class
         public string token { get; set; }
 
 
+
         public CountryDto Country { get; set; }
 
         public  OfficeDto Office { get; set; }

@@ -154,5 +154,16 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        public IEnumerable<Permission> getPermissionsByIdRole(int id)
+        {
+            try
+            {
+              var result =  this._context.ROLES_PERMISSION.Where(x => x.IdRole == id).Select(q => q.Permission).ToList().Distinct();
+                return result;
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

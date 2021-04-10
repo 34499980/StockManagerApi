@@ -62,7 +62,9 @@ namespace Business.Class
             try
             {
                 var result = _userRep.GetUserByUserName(userName);
-                return _mapper.Map<UserGetDto>(result);
+                var userModel =  _mapper.Map<UserGetDto>(result);
+                userModel.Permissions = _mapper.Map<IEnumerable<PermissionDto>>(_userRep.getPermissionsByIdRole(result.IdRole));
+                return userModel;
             }
             catch (Exception ex)
             {
@@ -179,6 +181,7 @@ namespace Business.Class
                 throw ex;
             }
         }
+
 
     }
 }

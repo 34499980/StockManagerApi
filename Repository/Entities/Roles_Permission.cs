@@ -10,7 +10,7 @@ namespace Repository.Entities
     public class Roles_Permission
     {
         [Key]
-        public int IdRule { get; set; }
+        public int IdRole { get; set; }
         public int IdPermission {get;set;}
         public int Read { get; set; }
         public int Write { get; set; }

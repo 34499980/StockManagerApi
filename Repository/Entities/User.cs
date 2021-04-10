@@ -36,5 +36,7 @@ namespace Repository.Entities
         public virtual Office Office { get; set; }
         [ForeignKey("IdRole")]
         public virtual Roles Role { get; set; }
+
+       
     }
 }

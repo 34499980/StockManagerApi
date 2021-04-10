@@ -9,5 +9,6 @@ namespace DTO.Class
         public string RoleDescription { get { return Role.Description; } }
         public string OfficeName { get { return Office.Name; } }
         public string CountryDescription { get { return Country.Description; } }
+        public IEnumerable<PermissionDto> Permissions { get; set; }
     }
 }
