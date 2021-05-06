@@ -6,6 +6,7 @@ using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Class
 {
@@ -129,12 +130,12 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto)
+        public async Task<ResultDto<OfficeGetDto>> GetOfficeFilter(OfficeFilterDto dto)
         {
             try
             {
-                var result = this._officeRep.GetOfficeFilter(dto);
-                return _mapper.Map<IEnumerable<OfficeGetDto>>(result);
+                var result = await this._officeRep.GetOfficeFilter(dto);
+                return _mapper.Map<ResultDto<OfficeGetDto>>(result);
             }
             catch (Exception ex)
             {

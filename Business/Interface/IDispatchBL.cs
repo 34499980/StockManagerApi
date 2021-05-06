@@ -12,7 +12,7 @@ namespace Business.Interface
         IEnumerable<DispatchDto> GetAllDispatchesByOffice();
         DispatchDto GetDispatchById(int id);
         void UpdateDispatch(DispatchDto dispatch);
-        Task<IEnumerable<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto);
+        Task<ResultDto<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto);
         void FixStock(DispatchDto dto);
     }
 }

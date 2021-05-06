@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Class
 {
@@ -113,17 +114,20 @@ namespace Repository.Class
                 throw ex;
             }
         }
-        public IEnumerable<Office> GetOfficeFilter(OfficeFilterDto dto)
+        public async Task<Result<Office>> GetOfficeFilter(OfficeFilterDto dto)
         {
             try
             {
-                var result = this._context.OFFICE.Include(x => x.Country).Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
+                var query = this._context.OFFICE.Include(x => x.Country).Where(x => (dto.Name == "" || x.Name.Contains(dto.Name)) &&
                                                         (dto.IdCountry == null || x.IdCountry == dto.IdCountry) &&
                                                         (dto.Address == "" || x.Address.Contains(dto.Address)) &&
                                                         (dto.PostalCode == null || x.PostalCode == dto.PostalCode) &&
-                                                        (!dto.Active ? x.Active == true : (x.Active == true || x.Active == false))).ToList();
-                                                        
-                return result;
+                                                        (!dto.Active ? x.Active == true : (x.Active == true || x.Active == false)));
+                var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
+                     .Take(dto.PageSize)
+                    .ToListAsync();
+
+                return new Result<Office> { rowCount = query.Count(), data = page };
             }
             catch (Exception ex)
             {

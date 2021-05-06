@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DTO.Class
 {
-    public class DispatchFilterDto
+    public class DispatchFilterDto : TablePropertiesDto
     {
         public string Code { get; set; }
         public string UserName { get; set; }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Interface
 {
@@ -11,7 +12,7 @@ namespace Business.Interface
         OfficeDto GetOfficeByName(string name);
         IEnumerable<OfficeDto> GetOfficesByCountry(int id);
         OfficeDto GetOfficeById(int id);
-        IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto);
+        Task<ResultDto<OfficeGetDto>> GetOfficeFilter(OfficeFilterDto dto);
         void Add(OfficeDto office);
         void Update(OfficeDto office);
         void Delete(int id);

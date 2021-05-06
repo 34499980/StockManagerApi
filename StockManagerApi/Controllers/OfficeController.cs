@@ -123,12 +123,12 @@ namespace StockManagerApi.Controllers
         }
         [HttpPost("GetOfficeFilter")]
         [Authorize]
-        public IEnumerable<OfficeGetDto> GetOfficeFilter(OfficeFilterDto dto)
+        public async Task<ResultDto<OfficeGetDto>> GetOfficeFilter(OfficeFilterDto dto)
         {
             try
             {
                 var header = Request.Headers["environment"];
-                var result = _officeBL.GetOfficeFilter(dto);
+                var result = await _officeBL.GetOfficeFilter(dto);
                 return result;
             }
             catch (Exception ex)

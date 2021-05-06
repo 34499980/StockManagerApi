@@ -291,14 +291,14 @@ namespace Business.Class
             }
 
         }
-        public async Task<IEnumerable<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto)
+        public async Task<ResultDto<DispatchDto>> GetDispatchFilter(DispatchFilterDto dto)
         {
             int number;
             Int32.TryParse(dto.Code, out number);
             dto.Code = number != 0 ? number.ToString() : "";
             var result = await this._dispatchRep.GetDispatchFilter(dto, ContextProvider.OfficeId);
 
-            return this._mapper.Map<IEnumerable<DispatchDto>>(result);
+            return this._mapper.Map<ResultDto<DispatchDto>>(result);
         }
     }
 }

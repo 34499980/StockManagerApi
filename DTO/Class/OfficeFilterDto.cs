@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DTO.Class
 {
-    public class OfficeFilterDto
+    public class OfficeFilterDto : TablePropertiesDto
     {
         public string Name { get; set; }
         public int? PostalCode { get; set; }
