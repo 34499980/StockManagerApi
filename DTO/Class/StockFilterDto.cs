@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DTO.Class
 {
-    public class StockFilterDto
+    public class StockFilterDto: TablePropertiesDto
     {
         public string Name { get; set; }
         public string Code { get; set; }

@@ -10,6 +10,7 @@ using ConstantControl;
 using Repository.Entities;
 using AutoMapper;
 using StockManagerApi.Extensions;
+using System.Threading.Tasks;
 
 namespace Business.Class
 {
@@ -196,13 +197,13 @@ namespace Business.Class
                 throw ex;
             }
         }
-        public IEnumerable<Stock_OfficeDto> GetStockFilter(StockFilterDto dto)
+        public async Task<ResultDto<Stock_OfficeDto>> GetStockFilter(StockFilterDto dto)
         {
             try
             {
-                var stockList = this._stockRep.GetOfficeFilter(dto);
+                var stockList = await  this._stockRep.GetOfficeFilter(dto);
                
-                return _mapper.Map<IEnumerable<Stock_OfficeDto>>(stockList);
+                return _mapper.Map<ResultDto<Stock_OfficeDto>>(stockList);
             }
             catch (Exception ex)
             {

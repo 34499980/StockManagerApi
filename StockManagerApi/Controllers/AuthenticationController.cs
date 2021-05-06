@@ -44,8 +44,7 @@ namespace StockManagerApi.Controllers
         }
 
         // GET api/<AuthenticationController>/5
-        [HttpGet("{name}")]
-        [Authorize]
+        [HttpGet("{name}")]       
         public ImageDto Get(string name)
         {
           

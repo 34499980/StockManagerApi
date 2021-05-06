@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Interface
 {
@@ -14,7 +15,7 @@ namespace Business.Interface
         void UpdateStock(StockDto stock);
         IEnumerable<StockDto> GetStockByParams(string param);
         IEnumerable<Stock_StateDto> GetStates();
-        IEnumerable<Stock_OfficeDto> GetStockFilter(StockFilterDto dto);
+        Task<ResultDto<Stock_OfficeDto>> GetStockFilter(StockFilterDto dto);
         void delete(int id);
     }
 }

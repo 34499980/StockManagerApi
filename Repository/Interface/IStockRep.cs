@@ -3,6 +3,7 @@ using Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Interface
 {
@@ -18,7 +19,7 @@ namespace Repository.Interface
         Stock GetStockById(long id);
         ICollection<Stock_Office> GetStockOfficeByIdStock(Stock stock);
         Stock_Office GetStock_Office(long idStock, int idSucursal);
-        IEnumerable<Stock_Office> GetOfficeFilter(StockFilterDto dto);
+        Task<dynamic> GetOfficeFilter(StockFilterDto dto);
         void delete(int id);
     }
 }

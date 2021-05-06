@@ -87,12 +87,12 @@ namespace StockManagerApi.Controllers
         }
         [HttpPost("GetStockFilter")]
         [Authorize]
-        public IEnumerable<Stock_OfficeDto> GetStockFilter([FromBody] StockFilterDto dto)
+        public async Task<ResultDto<Stock_OfficeDto>> GetStockFilter([FromBody] StockFilterDto dto)
         {
             try
             {
                 var header = Request.Headers["environment"];
-                var result = _stockBL.GetStockFilter(dto);
+                var result = await _stockBL.GetStockFilter(dto);
                 return result;
             }
             catch (Exception ex)

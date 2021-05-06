@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Class
 {
@@ -205,31 +206,34 @@ namespace Repository.Class
                 throw ex;
             }
         }
-        public IEnumerable<Stock_Office> GetOfficeFilter(StockFilterDto dto)
+        public async Task<dynamic> GetOfficeFilter(StockFilterDto dto)
         {
             try
             {
-                var result = this._context.STOCK_OFFICE.Include(x => x.Stock)
+                var query =  this._context.STOCK_OFFICE.Include(x => x.Stock)
                                                        .Include(x => x.Office)
                                                       .Where(x => (dto.Name == null || x.Stock.Name.Contains(dto.Name)) &&
                                                         (dto.Code == null || x.Stock.QR.Contains(dto.Code)) &&
                                                         (dto.Brand == null || x.Stock.Brand.Contains(dto.Brand)) &&
-                                                        (dto.Model == null || x.Stock.Model.Contains(dto.Model)) &&                                                       
+                                                        (dto.Model == null || x.Stock.Model.Contains(dto.Model)) &&
                                                         (dto.IdCountry == null || x.Office.IdCountry == dto.IdCountry) &&
-                                                        (dto.IdOffice == null || x.IdOffice == dto.IdOffice)).
-                                                        Select( stock => new Stock_Office
-                                                        {
-                                                            ID = stock.ID,
-                                                            IdOffice = stock.IdOffice,
-                                                            IdStock = stock.IdStock,
-                                                            Unity = stock.Unity,
-                                                            Office = stock.Office,
-                                                            Stock = stock.Stock
-                                                        })
-                                                        .ToList();
-                                                     
+                                                        (dto.IdOffice == null || x.IdOffice == dto.IdOffice));
 
-                return result;
+             var page = await  query.Select(stock => new Stock_Office
+                                                {
+                                                    ID = stock.ID,
+                                                    IdOffice = stock.IdOffice,
+                                                    IdStock = stock.IdStock,
+                                                    Unity = stock.Unity,
+                                                    Office = stock.Office,
+                                                    Stock = stock.Stock
+                                                }).Skip((dto.PageIndex - 1) * dto.PageSize)
+                     .Take(dto.PageSize)
+                    .ToListAsync();
+
+            
+
+                return new Result<Stock_Office> {rowCount = query.Count(), data = page };
             }
             catch (Exception ex)
             {

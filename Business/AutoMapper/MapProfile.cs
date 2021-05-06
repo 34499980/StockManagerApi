@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DTO.Class;
+using Repository.Class;
 using Repository.Entities;
 using StructureMap;
 using System;
@@ -30,6 +31,7 @@ namespace Business.AutoMapper
             CreateMap<OfficeGetDto, Office>().ReverseMap();
             CreateMap<CountryDto, Country>().ReverseMap();
             CreateMap<StockGetDto, Stock>().ReverseMap();
+            CreateMap<ResultDto<Stock_OfficeDto>, Result<Stock_Office>>().ReverseMap();
 
         }
     }
