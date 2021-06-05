@@ -50,5 +50,6 @@ namespace ConstantControl
         public static string ErrStockNotFound = "errStockNotFound";
         public static string ErrProductWithoutStock = "errProductWithoutStock";
         public static string ErrOfficeAllReadyExist = "errOfficeAllReadyExist";
+        public static string ErrUserOrPass = "errUserOrPass";
     }
 }

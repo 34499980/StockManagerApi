@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Interface;
+using ConstantControl;
 using DTO.Class;
 using Repository.Entities;
 using Repository.Interface;
@@ -166,7 +167,9 @@ namespace Business.Class
             try
             {
                var userDB = _userRep.GetUserByUserName(dto.UserName);
-                if(userDB.UserName == dto.UserName && userDB.Password == dto.Password &&
+                if(userDB == null) throw new Business.Exceptions.BussinessException(Constants.ErrUserOrPass);
+
+                if (userDB.UserName == dto.UserName && userDB.Password == dto.Password &&
                     userDB.IdRole == (int)ConstantControl.Constants.RoleEnum.Administrative ||
                      userDB.IdRole == (int)ConstantControl.Constants.RoleEnum.Manager)
                 {
@@ -174,7 +177,7 @@ namespace Business.Class
                 }
                 else
                 {
-                    return false;
+                    throw new Business.Exceptions.BussinessException(Constants.ErrUserOrPass);
                 }
             }catch(Exception ex)
             {
