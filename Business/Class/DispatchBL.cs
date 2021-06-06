@@ -151,13 +151,14 @@ namespace Business.Class
                     {
                         dispatchDB.Dispatch_stock = this._mapper.Map<ICollection<Dispatch_Stock>>(dispatch.Dispatch_stock);
                     }                   
-                }              
+                }
+                var listToRemove = new List<Dispatch_Stock>();
                 foreach (var item in dispatchDB.Dispatch_stock)
                 {
                     cantItems += item.Unity;
                     if (item.Unity == 0)
                     {
-                        this._dispatchRep.removeDispatch(item);
+                        listToRemove.Add(item);
                     }
                 }
                 switch (dispatch.IdState)
@@ -231,45 +232,50 @@ namespace Business.Class
                 {
                     this._dispatchRep.UpdateDispatch(dispatchDB);
                 }
-
-                
-               /* var dispatchInput = _mapper.Map<Dispatch>(dispatch);
-                int countBult = 0;
-                Dispatch_Stock dispatch_stock;
-             
-                List<Dispatch_Stock> listDispatch_Stock = new List<Dispatch_Stock>();
-                if (dispatchInput.Stock != null && dispatchInput.IdState == (int)Constants.Dispatch_State.Creado 
-                    || dispatchInput.IdState == (int)Constants.Dispatch_State.Despachado && dispatchInput.DateDispatched == null)
-                {
-                    foreach (var item in dispatchInput.Stock)
-                    {
-                        dispatch_stock = new Dispatch_Stock();
-                        dispatch_stock.IdDispatch = dispatchInput.ID;
-                        dispatch_stock.IdStock = this._stockRep.GetStockByCode(item.QR).FirstOrDefault().ID;
-                        dispatch_stock.Unity = item.Unity;
-                        countBult += item.Unity;
-                    
-                        if (dispatchInput.IdState == (int)Constants.Dispatch_State.Creado
-                            || dispatchInput.IdState == (int)Constants.Dispatch_State.Despachado && dispatchInput.DateDispatched == null)
-                        {
-                          //  Stock_Office stock_officeDB = this._stockRep.GetStock_Office(dispatch_stock.IdStock, dispatchInput.Origin);
-                        //    stock_officeDB.Unity = stock_officeDB.Unity - item.Unity;
-                         
-                         //   this._stockRep.UpdateStockByOffice(stock_officeDB);
-
-                        }
-                        else
-                        {
-
-                        }
-                        listDispatch_Stock.Add(dispatch_stock);
-                    }
-                    dispatchInput.Dispatch_stock = listDispatch_Stock;
-                }
-                
                
-                this._dispatchRep.UpdateDispatch(dispatchInput);*/
-            }catch(Exception ex)
+                foreach (var item in listToRemove)
+                {
+                    this._dispatchRep.removeDispatch(item);
+                }
+               
+                /* var dispatchInput = _mapper.Map<Dispatch>(dispatch);
+                 int countBult = 0;
+                 Dispatch_Stock dispatch_stock;
+
+                 List<Dispatch_Stock> listDispatch_Stock = new List<Dispatch_Stock>();
+                 if (dispatchInput.Stock != null && dispatchInput.IdState == (int)Constants.Dispatch_State.Creado 
+                     || dispatchInput.IdState == (int)Constants.Dispatch_State.Despachado && dispatchInput.DateDispatched == null)
+                 {
+                     foreach (var item in dispatchInput.Stock)
+                     {
+                         dispatch_stock = new Dispatch_Stock();
+                         dispatch_stock.IdDispatch = dispatchInput.ID;
+                         dispatch_stock.IdStock = this._stockRep.GetStockByCode(item.QR).FirstOrDefault().ID;
+                         dispatch_stock.Unity = item.Unity;
+                         countBult += item.Unity;
+
+                         if (dispatchInput.IdState == (int)Constants.Dispatch_State.Creado
+                             || dispatchInput.IdState == (int)Constants.Dispatch_State.Despachado && dispatchInput.DateDispatched == null)
+                         {
+                           //  Stock_Office stock_officeDB = this._stockRep.GetStock_Office(dispatch_stock.IdStock, dispatchInput.Origin);
+                         //    stock_officeDB.Unity = stock_officeDB.Unity - item.Unity;
+
+                          //   this._stockRep.UpdateStockByOffice(stock_officeDB);
+
+                         }
+                         else
+                         {
+
+                         }
+                         listDispatch_Stock.Add(dispatch_stock);
+                     }
+                     dispatchInput.Dispatch_stock = listDispatch_Stock;
+                 }
+
+
+                 this._dispatchRep.UpdateDispatch(dispatchInput);*/
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }

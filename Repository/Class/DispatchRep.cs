@@ -184,7 +184,7 @@ namespace Repository.Class
         {
             try
             {
-                this._context.DISPATCH_STOCK.Remove(dispatch_stock);
+                this._context.DISPATCH_STOCK.RemoveRange(dispatch_stock);
                 this._context.SaveChanges();
             }
             catch (Exception ex)
