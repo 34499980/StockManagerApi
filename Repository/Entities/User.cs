@@ -26,6 +26,7 @@ namespace Repository.Entities
         public string File { get; set; }
         public bool Active { get; set; }
         public int IdCountry { get; set; }
+        public string Lenguage { get; set; }
 
         [ForeignKey("IdCountry")]
 

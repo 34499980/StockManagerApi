@@ -55,6 +55,21 @@ namespace StockManagerApi.Controllers
             }
 
         }
+        [HttpPost("UpdateUserLenguage")]
+        [Authorize]
+        public void UpdateUserLenguage(UserLenguageDto dto)
+        {
+            try
+            {               
+                _userBL.UpdateUserLenguage(dto);                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
         // GET api/<UsuarioController>/5
         [HttpGet("{id}")]
         [Authorize]

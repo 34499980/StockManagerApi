@@ -7,6 +7,7 @@ using Repository.Interface;
 using StockManagerApi.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -16,9 +17,11 @@ namespace Business.Class
     {
         private readonly IUserRep _userRep;
         private readonly IMapper _mapper;
-        public UsersBL(IUserRep userRep, IMapper mapper)
+        private readonly IDataSourceRep _dataSourceRep;
+        public UsersBL(IUserRep userRep, IMapper mapper, IDataSourceRep dataSourceRep)
         {
             this._userRep = userRep;
+            this._dataSourceRep = dataSourceRep;
             this._mapper = mapper;
         }
         /// <summary>
@@ -63,6 +66,7 @@ namespace Business.Class
             try
             {
                 var result = _userRep.GetUserByUserName(userName);
+                if (result == null) return null;
                 var userModel =  _mapper.Map<UserGetDto>(result);
                 userModel.Permissions = _mapper.Map<IEnumerable<PermissionDto>>(_userRep.getPermissionsByIdRole(result.IdRole));
                 return userModel;
@@ -82,6 +86,8 @@ namespace Business.Class
             try
             {
                 var userInput = _mapper.Map<User>(user);
+                var countries = (ICollection<Country>)_dataSourceRep.GetAllCountries();
+                userInput.Lenguage = countries.Where(x => x.ID == userInput.IdCountry).FirstOrDefault().Language;
                 this._userRep.SaveUser(userInput);
             }
             catch (Exception ex)
@@ -98,7 +104,8 @@ namespace Business.Class
             try
             {
 
-                var userModel = _userRep.GetUserByUserName(user.UserName);               
+                var userModel = _userRep.GetUserByUserName(user.UserName);
+                user.Lenguage = userModel.Lenguage;
                 _mapper.Map<UserDto, User>(user, userModel);
                 
                 this._userRep.UpdateUser(userModel);
@@ -184,7 +191,20 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public void UpdateUserLenguage(UserLenguageDto dto)
+        {
+            try
+            {
+                var user = _userRep.GetUserById(dto.UserId);
+                user.Lenguage = dto.Lenguage;
+                _userRep.UpdateUser(user);
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+        }
 
     }
 }

@@ -17,6 +17,7 @@ namespace Business.Interface
         ImageDto GetImageByUser(string name);
         void SetAuthorization(UserDto dto);
         bool Validate(UserDto dto);
+        void UpdateUserLenguage(UserLenguageDto dto);
 
     }
 }

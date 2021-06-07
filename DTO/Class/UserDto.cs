@@ -27,6 +27,7 @@ namespace DTO.Class
         public bool Active { get; set; }
         public int IdCountry { get; set; }
         public string token { get; set; }
+        public string Lenguage { get; set; }
 
 
 
