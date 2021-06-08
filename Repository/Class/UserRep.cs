@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Class
 {
@@ -123,11 +124,11 @@ namespace Repository.Class
             }
         }
 
-        public IEnumerable<User> GetUserFilter(UserFilterDto dto)
+        public async Task<IEnumerable<User>> GetUserFilter(UserFilterDto dto)
         {
             try
             {
-              var result  =  this._context.USERS.Include(q => q.Office)
+              var result  = await  this._context.USERS.Include(q => q.Office)
                                                 .Include(q => q.Role)
                                                 .Include(q => q.Country)
                                                 .Where(x => (dto.UserName == "" || x.UserName.Contains(dto.UserName)) &&
@@ -136,7 +137,7 @@ namespace Repository.Class
                                                       (dto.IdOffice == null || x.IdOffice == dto.IdOffice) &&
                                                       (!dto.Active? x.Active == true: (x.Active == true || x.Active == false))
                                                       ).ToListAsync();
-                return result.Result;
+                return result;
             }
             catch(Exception ex)
             {
