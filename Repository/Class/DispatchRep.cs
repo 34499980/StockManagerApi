@@ -215,7 +215,7 @@ namespace Repository.Class
                                                                (dto.Code == "" || x.ID.ToString() == dto.Code) &&
                                                                (dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny) &&
                                                                (x.OfficeOrigin.IdCountry == dto.IdCountry) &&
-                                                               (x.IdOrigin == idOrigin)
+                                                               (x.IdOrigin == idOrigin || x.IdDestiny == idOrigin)
                                                         );
                 var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
                      .Take(dto.PageSize)

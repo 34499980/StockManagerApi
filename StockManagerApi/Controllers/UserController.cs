@@ -41,12 +41,12 @@ namespace StockManagerApi.Controllers
         }
         [HttpPost("GetUserFilter")]
         [Authorize]
-        public IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto)
+        public async Task<IEnumerable<UserGetDto>> GetUserFilter(UserFilterDto dto)
         {
             try
             {
                 var header = Request.Headers["environment"];
-                var result = _userBL.GetUserFilter(dto);
+                var result = await  _userBL.GetUserFilter(dto);
                 return result;
             }
             catch (Exception ex)

@@ -15,7 +15,7 @@ namespace Repository.Interface
         void UpdateUser(User user);
         void SaveUser(User user);
         void RemoveUser(User id);
-        Task<IEnumerable<User>> GetUserFilter(UserFilterDto dto)
+        Task<IEnumerable<User>> GetUserFilter(UserFilterDto dto);
         string GetImageByUser(string name);
         IEnumerable<Permission> getPermissionsByIdRole(int id);
 

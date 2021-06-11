@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Class
 {
@@ -131,11 +132,11 @@ namespace Business.Class
             }
         }
 
-        public IEnumerable<UserGetDto> GetUserFilter(UserFilterDto dto)
+        public async Task<IEnumerable<UserGetDto>> GetUserFilter(UserFilterDto dto)
         {
             try
             {
-                var result = this._userRep.GetUserFilter(dto);
+                var result = await this._userRep.GetUserFilter(dto);
                return _mapper.Map<IEnumerable<UserGetDto>>(result);
             }
             catch(Exception ex)
