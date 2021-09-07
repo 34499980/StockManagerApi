@@ -10,6 +10,7 @@ INSERT INTO [dbo].[USERS]
            ,[PostalCode]
            ,[IdOffice]
            ,[IdRole],
+		   [IdCountry],
 		   [Active])
    SELECT 'admin',
 		  '123',
@@ -20,6 +21,7 @@ INSERT INTO [dbo].[USERS]
 		  'admin@StockManager.com',
 		  'Central',
 		  '1426',
+		   1,
 		   1,
 		   1,
 		   1
