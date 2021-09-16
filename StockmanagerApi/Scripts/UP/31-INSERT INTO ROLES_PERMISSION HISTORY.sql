@@ -1,0 +1,6 @@
+INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
+VALUES(1, 13 , 1, 1)
+INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
+VALUES(2, 13 , 1, 1)
+INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
+VALUES(3, 13 , 1, 1)

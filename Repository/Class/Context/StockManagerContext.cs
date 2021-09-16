@@ -20,6 +20,7 @@ namespace Repository.Class.Context
         }
         public DbSet<User> USERS { get; set; }
         public DbSet<Country> COUNTRY { get; set; }
+        public DbSet<History> HISTORY { get; set; }
 
         public DbSet<Dispatch> DISPATCH { get; set; }
         public DbSet<Roles> ROLES { get; set; }

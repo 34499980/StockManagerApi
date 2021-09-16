@@ -19,10 +19,12 @@ namespace Business.Class
         private readonly IUserRep _userRep;
         private readonly IMapper _mapper;
         private readonly IDataSourceRep _dataSourceRep;
-        public UsersBL(IUserRep userRep, IMapper mapper, IDataSourceRep dataSourceRep)
+        private readonly IHistoryRep _historyRep;
+        public UsersBL(IUserRep userRep, IMapper mapper, IDataSourceRep dataSourceRep, IHistoryRep historyRep)
         {
             this._userRep = userRep;
             this._dataSourceRep = dataSourceRep;
+            this._historyRep = historyRep;
             this._mapper = mapper;
         }
         /// <summary>
@@ -90,6 +92,7 @@ namespace Business.Class
                 var countries = (ICollection<Country>)_dataSourceRep.GetAllCountries();
                 userInput.Lenguage = countries.Where(x => x.ID == userInput.IdCountry).FirstOrDefault().Language;
                 this._userRep.SaveUser(userInput);
+                this._historyRep.AddHistory(Constants.HistoryUserCreate, user.UserName, user.IdOffice, ContextProvider.UserId);
             }
             catch (Exception ex)
             {
@@ -110,6 +113,7 @@ namespace Business.Class
                 _mapper.Map<UserDto, User>(user, userModel);
                 
                 this._userRep.UpdateUser(userModel);
+                this._historyRep.AddHistory(Constants.HistoryUserUpdate, user.UserName, user.IdOffice, ContextProvider.UserId);
             }
             catch (Exception ex)
             {
@@ -123,8 +127,9 @@ namespace Business.Class
             {
                 var userModel =_userRep.GetUserById(id);
                 userModel.Active = false;
-                _userRep.RemoveUser(userModel);             
-                
+                _userRep.RemoveUser(userModel);
+                this._historyRep.AddHistory(Constants.HistoryUserDelete, userModel.UserName, userModel.IdOffice, ContextProvider.UserId);
+
             }
             catch (Exception ex)
             {

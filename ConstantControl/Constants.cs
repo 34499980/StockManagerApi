@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConstantControl
 {
@@ -43,7 +44,28 @@ namespace ConstantControl
 
 
         }
+        //HISTORY        
+        public static string HistoryUserCreate = "UserCreate";
+        public static string HistoryUserUpdate = "UserUpdate";
+        public static string HistoryUserDelete = "UserDelete";
+                              
+        public static string HistoryDispatchCreate = "DispatchCreate";
+        public static string HistoryDispatchUpdate = "DispatchUpdate";
+        public static string HistoryDispatchSend = "DispatchSend";
+        public static string HistoryDispatchRecive = "DispatchRecive";
+        public static string HistoryDispatchFinish = "DispatchFinish";
+        public static string HistoryDispatchDelete = "DispatchDelete";
 
+        public static string HistoryOfficeCreate = "OfficeCreate";
+        public static string HistoryOfficeUpdate = "OfficeUpdate";
+        public static string HistoryOfficeDelete = "OfficeDelete";
+                              
+        public static string HistoryStockCreate = "StockCreate";
+        public static string HistoryStockUpdate = "StockUpdate";
+        public static string HistoryStockDelete = "StockDelete";
+
+
+        //ERRORS
         public static string ErrSameDestinationAndOrigin = "errSameDestinationAndOrigin";
         public static string ErrStockHasCHange = "errStockHasCHange";
         public static string ErrCheckDispatchItems = "errCheckDispatchItems";

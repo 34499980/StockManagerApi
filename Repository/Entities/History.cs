@@ -15,14 +15,18 @@ namespace Repository.Entities
         public int ID { get; set; }
         public DateTime DateProces { get; set; }
         public int IdUser { get; set; }
+
+        public int IdOffice { get; set; }
         public string Action { get; set; }
-        public string ActionDetail { get; set; }
-        public string Refer { get; set; }       
+        public string ActionDetail { get; set; }   
 
 
         [ForeignKey("IdUser")]
         public virtual User User { get; set; }
-      
+
+        [ForeignKey("IdOffice")]
+        public virtual Office Office { get; set; }
+
 
     }
 }

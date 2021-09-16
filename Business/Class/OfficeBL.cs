@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Business.Interface;
+using ConstantControl;
 using DTO.Class;
 using Repository.Entities;
 using Repository.Interface;
+using StockManagerApi.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,10 +15,12 @@ namespace Business.Class
     public class OfficeBL: IOfficeBL
     {
         private readonly IOfficeRep _officeRep;
+        private readonly IHistoryRep _historyRep;
         private readonly IMapper _mapper;
-        public OfficeBL(IOfficeRep sucursalRep, IMapper mapper)
+        public OfficeBL(IOfficeRep sucursalRep, IMapper mapper, IHistoryRep historyRep)
         {
             this._officeRep = sucursalRep;
+            this._historyRep = historyRep;
             this._mapper = mapper;
         }
         /// <summary>
@@ -93,7 +97,8 @@ namespace Business.Class
                 if(officeModel == null)
                 {
                     var officeInput = _mapper.Map<Office>(office);
-                     this._officeRep.Add(officeInput);                   
+                     this._officeRep.Add(officeInput);
+                    this._historyRep.AddHistory(Constants.HistoryOfficeCreate, office.Name, office.ID, ContextProvider.UserId);
                 }               
 
             }
@@ -109,6 +114,7 @@ namespace Business.Class
                 var officeModel = _officeRep.GetOfficeById(office.ID);
                 _mapper.Map<OfficeDto, Office>(office, officeModel);
                 this._officeRep.Update(officeModel);
+                this._historyRep.AddHistory(Constants.HistoryOfficeUpdate, office.Name, office.ID, ContextProvider.UserId);
             }
             catch(Exception ex)
             {
@@ -123,6 +129,7 @@ namespace Business.Class
                 var officeModel = _officeRep.GetOfficeById(id);
                 officeModel.Active = false;
                 _officeRep.Delete(officeModel);
+                this._historyRep.AddHistory(Constants.HistoryOfficeDelete, officeModel.Name, officeModel.ID, ContextProvider.UserId);
 
             }
             catch (Exception ex)

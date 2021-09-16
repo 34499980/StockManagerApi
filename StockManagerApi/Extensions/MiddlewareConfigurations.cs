@@ -38,6 +38,7 @@ namespace StockManagerApi.Extensions
             services.AddScoped<IStockRep, StockRep>();
             services.AddScoped<IRuleRep, RuleRep>();
             services.AddScoped<IDataSourceRep, DataSourceRep>();
+            services.AddScoped<IHistoryRep, HistoryRep>();
 
             services.AddScoped<IUsersBL, UsersBL>();
             services.AddScoped<IOfficeBL, OfficeBL>();
@@ -45,6 +46,7 @@ namespace StockManagerApi.Extensions
             services.AddScoped<IStockBL, StockBL>();
             services.AddScoped<IRuleBL, RuleBL>();
             services.AddScoped<IDataSourceBL, DataSourceBL>();
+            services.AddScoped<IHistoryBL, HistoryBL>();
         }
 
         public static void Authentication(IServiceCollection services, IConfiguration Configuration)

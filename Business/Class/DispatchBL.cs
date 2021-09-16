@@ -19,13 +19,15 @@ namespace Business.Class
         private readonly IUserRep _userhRep;
         private readonly IOfficeRep _officeRep;
         private readonly IStockRep _stockRep;
+        private readonly IHistoryRep _historyRep;
         private readonly IMapper _mapper;
-        public DispatchBL(IDispatchRep dispatchRep, IUserRep userRep, IOfficeRep officeRep, IStockRep stockRep, IMapper mapper)
+        public DispatchBL(IDispatchRep dispatchRep, IUserRep userRep, IOfficeRep officeRep, IStockRep stockRep, IMapper mapper, IHistoryRep historyRep)
         {
             this._dispatchRep = dispatchRep;
             this._userhRep = userRep;
             this._officeRep = officeRep;
             this._stockRep = stockRep;
+            this._historyRep = historyRep;
             this._mapper = mapper;
         }
         /// <summary>
@@ -64,7 +66,7 @@ namespace Business.Class
                         dispatchOut.Stock.Add(stock);
                     }
                 }
-
+                this._historyRep.AddHistory(Constants.HistoryDispatchCreate, dispatchOut.Code, dispatchOut.IdOrigin, ContextProvider.UserId);
                 return dispatchOut;
             }
             catch(Exception ex)
@@ -182,6 +184,7 @@ namespace Business.Class
 
                         }
                         this._stockRep.UpdateStockByOffice(stockList);
+                        this._historyRep.AddHistory(Constants.HistoryDispatchSend, dispatchDB.Code, dispatchDB.IdDestiny, ContextProvider.UserId);                
                         break;
                     case (int)Constants.Dispatch_State.Recibido:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Recibido;
@@ -199,8 +202,8 @@ namespace Business.Class
                             }
                            
                         }
-                      
 
+                        this._historyRep.AddHistory(Constants.HistoryDispatchRecive, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
                         break;
                     case (int)Constants.Dispatch_State.Finalizado:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Finalizado;
@@ -217,7 +220,7 @@ namespace Business.Class
                             throw new Business.Exceptions.BussinessException("errCheckDsipatchItems");  
                        
                         this._stockRep.UpdateStockByOffice(listStock);
-
+                        this._historyRep.AddHistory(Constants.HistoryDispatchFinish, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
                         break;
                     case (int)Constants.Dispatch_State.Incompleto:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Incompleto;
@@ -227,15 +230,16 @@ namespace Business.Class
                 if (exist == null)
                 {
                     this._dispatchRep.saveDispatch(dispatchDB);
+                    this._historyRep.AddHistory(Constants.HistoryDispatchCreate, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
                 }
                 else
                 {
                     this._dispatchRep.UpdateDispatch(dispatchDB);
+
                 }
-               
                 foreach (var item in listToRemove)
                 {
-                    this._dispatchRep.removeDispatch(item);
+                    this._dispatchRep.removeDispatch(item);                    
                 }
                
                 /* var dispatchInput = _mapper.Map<Dispatch>(dispatch);
@@ -291,7 +295,9 @@ namespace Business.Class
                     item.Unity = stock.Unity;
                 }
                 _dispatchRep.UpdateDispatchStock(list);
-            }catch(Exception ex)
+                this._historyRep.AddHistory(Constants.HistoryDispatchCreate, dto.Code, dto.IdDestiny, ContextProvider.UserId);
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }
