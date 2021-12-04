@@ -12,12 +12,13 @@ namespace Repository.Entities
     {
 
         [Key]
-        public int ID { get; set; }
+        public long ID { get; set; }
         public DateTime DateProces { get; set; }
         public int IdUser { get; set; }
 
         public int IdOffice { get; set; }
-        public string Action { get; set; }
+        public int IdAction { get; set; }
+        public string SubAction { get; set; }
         public string ActionDetail { get; set; }   
 
 
@@ -26,6 +27,8 @@ namespace Repository.Entities
 
         [ForeignKey("IdOffice")]
         public virtual Office Office { get; set; }
+        [ForeignKey("IdAction")]
+        public virtual Item Action { get; set; }
 
 
     }

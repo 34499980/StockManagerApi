@@ -98,7 +98,7 @@ namespace Business.Class
                 {
                     var officeInput = _mapper.Map<Office>(office);
                      this._officeRep.Add(officeInput);
-                    this._historyRep.AddHistory(Constants.HistoryOfficeCreate, office.Name, office.ID, ContextProvider.UserId);
+                    this._historyRep.AddHistory((int)Constants.Actions.Offices ,Constants.HistoryOfficeCreate, office.Name, office.ID, ContextProvider.UserId);
                 }               
 
             }
@@ -114,7 +114,7 @@ namespace Business.Class
                 var officeModel = _officeRep.GetOfficeById(office.ID);
                 _mapper.Map<OfficeDto, Office>(office, officeModel);
                 this._officeRep.Update(officeModel);
-                this._historyRep.AddHistory(Constants.HistoryOfficeUpdate, office.Name, office.ID, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Offices ,Constants.HistoryOfficeUpdate, office.Name, office.ID, ContextProvider.UserId);
             }
             catch(Exception ex)
             {
@@ -129,7 +129,7 @@ namespace Business.Class
                 var officeModel = _officeRep.GetOfficeById(id);
                 officeModel.Active = false;
                 _officeRep.Delete(officeModel);
-                this._historyRep.AddHistory(Constants.HistoryOfficeDelete, officeModel.Name, officeModel.ID, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Offices ,Constants.HistoryOfficeDelete, officeModel.Name, officeModel.ID, ContextProvider.UserId);
 
             }
             catch (Exception ex)

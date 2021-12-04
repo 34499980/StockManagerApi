@@ -135,7 +135,7 @@ namespace Business.Class
                  // this._stockRep.UpdateQR(stock);
 
                 }
-                this._historyRep.AddHistory(Constants.HistoryStockCreate, stock.Name, stock.IdOffice, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Stock ,Constants.HistoryStockCreate, stock.Name, stock.IdOffice, ContextProvider.UserId);
 
             }
             catch (Exception ex)
@@ -155,7 +155,7 @@ namespace Business.Class
                 var inputSock = _mapper.Map<Stock>(stock);
                 this._stockRep.UpdateStock(inputSock);
                 this._stockRep.UpdateStockByOffice(inputSock.Stock_Office);
-                this._historyRep.AddHistory(Constants.HistoryStockUpdate, stock.Name, stock.IdOffice, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Stock ,Constants.HistoryStockUpdate, stock.Name, stock.IdOffice, ContextProvider.UserId);
 
             }
             catch (Exception ex)

@@ -66,7 +66,7 @@ namespace Business.Class
                         dispatchOut.Stock.Add(stock);
                     }
                 }
-                this._historyRep.AddHistory(Constants.HistoryDispatchCreate, dispatchOut.Code, dispatchOut.IdOrigin, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Dispatch ,Constants.HistoryDispatchCreate, dispatchOut.Code, dispatchOut.IdOrigin, ContextProvider.UserId);
                 return dispatchOut;
             }
             catch(Exception ex)
@@ -184,7 +184,7 @@ namespace Business.Class
 
                         }
                         this._stockRep.UpdateStockByOffice(stockList);
-                        this._historyRep.AddHistory(Constants.HistoryDispatchSend, dispatchDB.Code, dispatchDB.IdDestiny, ContextProvider.UserId);                
+                        this._historyRep.AddHistory((int)Constants.Actions.Dispatch ,Constants.HistoryDispatchSend, dispatchDB.Code, dispatchDB.IdDestiny, ContextProvider.UserId);                
                         break;
                     case (int)Constants.Dispatch_State.Recibido:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Recibido;
@@ -203,7 +203,7 @@ namespace Business.Class
                            
                         }
 
-                        this._historyRep.AddHistory(Constants.HistoryDispatchRecive, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
+                        this._historyRep.AddHistory((int)Constants.Actions.Dispatch ,Constants.HistoryDispatchRecive, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
                         break;
                     case (int)Constants.Dispatch_State.Finalizado:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Finalizado;
@@ -220,17 +220,22 @@ namespace Business.Class
                             throw new Business.Exceptions.BussinessException("errCheckDsipatchItems");  
                        
                         this._stockRep.UpdateStockByOffice(listStock);
-                        this._historyRep.AddHistory(Constants.HistoryDispatchFinish, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
+                        this._historyRep.AddHistory((int)Constants.Actions.Dispatch ,Constants.HistoryDispatchFinish, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
                         break;
                     case (int)Constants.Dispatch_State.Incompleto:
                         dispatchDB.IdState = (int)Constants.Dispatch_State.Incompleto;
                         break;
-                  
+                    case (int)Constants.Dispatch_State.Actualizado:
+                        dispatchDB.IdState = (int)Constants.Dispatch_State.Actualizado;
+                        this._historyRep.AddHistory((int)Constants.Actions.Dispatch, Constants.HistoryDispatchUpdate, dispatchDB.Code, dispatchDB.IdDestiny, ContextProvider.UserId);
+
+                        break;
+
                 }
                 if (exist == null)
                 {
                     this._dispatchRep.saveDispatch(dispatchDB);
-                    this._historyRep.AddHistory(Constants.HistoryDispatchCreate, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
+                    this._historyRep.AddHistory((int)Constants.Actions.Dispatch, Constants.HistoryDispatchCreate, dispatchDB.Code, dispatchDB.IdOrigin, ContextProvider.UserId);
                 }
                 else
                 {
@@ -295,7 +300,7 @@ namespace Business.Class
                     item.Unity = stock.Unity;
                 }
                 _dispatchRep.UpdateDispatchStock(list);
-                this._historyRep.AddHistory(Constants.HistoryDispatchCreate, dto.Code, dto.IdDestiny, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Dispatch ,Constants.HistoryDispatchCreate, dto.Code, dto.IdDestiny, ContextProvider.UserId);
             }
             catch(Exception ex)
             {

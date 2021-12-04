@@ -10,6 +10,7 @@ namespace DTO.Class
         public DateTime DateproccesFrom { get; set; }
         public DateTime DateproccesTo { get; set; }
         public string Action { get; set; }
+        public int? IdOffice { get; set; }
        
     }
 }

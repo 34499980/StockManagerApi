@@ -1,4 +1,5 @@
-﻿using DTO.Class;
+﻿using ConstantControl;
+using DTO.Class;
 using Microsoft.EntityFrameworkCore;
 using Repository.Class.Context;
 using Repository.Entities;
@@ -31,13 +32,12 @@ namespace Repository.Class
                 var query = this._context.HISTORY.Include(q => q.User)
                                                  .Include(q => q.Office)
                                                           .Where(x =>
-                                                                (dto.UserName == "" || dto.UserName == null) || x.User.UserName.Contains(dto.UserName) &&
-                                                                  (dto.UserName == "" || dto.UserName == null) || x.User.UserName.Contains(dto.UserName) &&
-                                                                   (dto.DateproccesFrom == null || x.DateProces == dto.DateproccesFrom) &&
-                                                                   (dto.DateproccesTo == null || x.DateProces == dto.DateproccesTo) &&
-                                                                   (dto.Action == null || x.Action == dto.Action) &&                                                             
-                                                               (x.IdOffice == idOffice)
-                                                        );
+                                                                 //(dto.UserName == null) || dto.UserName == "" || x.User.UserName.Contains(dto.UserName) &&                                                                 
+                                                                // (dto.DateproccesFrom == null || x.DateProces >= dto.DateproccesFrom) &&
+                                                                // (dto.DateproccesTo == null || x.DateProces <= dto.DateproccesTo) &&
+                                                                 //(dto.Action == null || dto.Action == "" || x.Action == dto.Action) &&
+                                                                   (dto.IdOffice == null || x.IdOffice == dto.IdOffice)
+                                                                   );
                 var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
                      .Take(dto.PageSize)
                     .ToListAsync();
@@ -57,14 +57,15 @@ namespace Repository.Class
         /// <param name="IdOffice"></param>
         /// <param name="IdUser"></param>
         /// <returns></returns>
-        public History AddHistory(string action, string actionDetail, int IdOffice, int IdUser)
+        public History AddHistory(int IdAction,string subAction, string actionDetail, int IdOffice, int IdUser)
         {
             try
             {
                 History history = new History()
                 {
                     DateProces = DateTime.Now,
-                    Action = action,
+                    IdAction = IdAction,
+                    SubAction = subAction,
                     ActionDetail = actionDetail,
                     IdOffice = IdOffice,
                     IdUser = IdUser
@@ -72,7 +73,7 @@ namespace Repository.Class
                 this._context.HISTORY.Add(history);
                 this._context.SaveChanges();
                 return history;
-            }
+            }   
             catch (Exception ex)
             {
                 throw ex;

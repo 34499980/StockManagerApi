@@ -1,4 +1,5 @@
-﻿using DTO.Class;
+﻿using ConstantControl;
+using DTO.Class;
 using Repository.Class;
 using Repository.Entities;
 using System;
@@ -11,6 +12,6 @@ namespace Repository.Interface
     public interface IHistoryRep
     {
         Task<Result<History>> GetHistoryFilter(HistoryFilterDto dto, int idOffice);
-        History AddHistory(string action, string actionDetail, int IdOffice, int IdUser);
+        History AddHistory(int IdAction, string subAction, string actionDetail, int IdOffice, int IdUser);
     }
 }

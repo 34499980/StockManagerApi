@@ -92,7 +92,7 @@ namespace Business.Class
                 var countries = (ICollection<Country>)_dataSourceRep.GetAllCountries();
                 userInput.Lenguage = countries.Where(x => x.ID == userInput.IdCountry).FirstOrDefault().Language;
                 this._userRep.SaveUser(userInput);
-                this._historyRep.AddHistory(Constants.HistoryUserCreate, user.UserName, user.IdOffice, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Users ,Constants.HistoryUserCreate, user.UserName, user.IdOffice, ContextProvider.UserId);
             }
             catch (Exception ex)
             {
@@ -113,7 +113,7 @@ namespace Business.Class
                 _mapper.Map<UserDto, User>(user, userModel);
                 
                 this._userRep.UpdateUser(userModel);
-                this._historyRep.AddHistory(Constants.HistoryUserUpdate, user.UserName, user.IdOffice, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Users ,Constants.HistoryUserUpdate, user.UserName, user.IdOffice, ContextProvider.UserId);
             }
             catch (Exception ex)
             {
@@ -128,7 +128,7 @@ namespace Business.Class
                 var userModel =_userRep.GetUserById(id);
                 userModel.Active = false;
                 _userRep.RemoveUser(userModel);
-                this._historyRep.AddHistory(Constants.HistoryUserDelete, userModel.UserName, userModel.IdOffice, ContextProvider.UserId);
+                this._historyRep.AddHistory((int)Constants.Actions.Users ,Constants.HistoryUserDelete, userModel.UserName, userModel.IdOffice, ContextProvider.UserId);
 
             }
             catch (Exception ex)

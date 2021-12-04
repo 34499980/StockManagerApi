@@ -31,6 +31,7 @@ namespace Business.AutoMapper
             CreateMap<OfficeGetDto, Office>().ReverseMap();
             CreateMap<CountryDto, Country>().ReverseMap();
             CreateMap<StockGetDto, Stock>().ReverseMap();
+            CreateMap<HistoryDto, History>().ReverseMap();
 
 
             CreateMap<ResultDto<Stock_OfficeDto>, Result<Stock_Office>>().ReverseMap();

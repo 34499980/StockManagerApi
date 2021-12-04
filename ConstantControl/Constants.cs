@@ -12,7 +12,8 @@ namespace ConstantControl
             Despachado = 2,
             Recibido = 3,
             Finalizado = 4,
-            Incompleto = 5
+            Incompleto = 5,
+            Actualizado = 6
             
         }
 
@@ -30,6 +31,16 @@ namespace ConstantControl
             Habilitado = 1,
             Deshabilitado = 2
           
+
+
+        }
+        public enum Actions
+        {
+            Dispatch = 1,
+            Users = 2,
+            Offices = 3,
+            Stock = 4
+
 
 
         }
