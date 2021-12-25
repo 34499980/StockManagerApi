@@ -32,17 +32,18 @@ namespace Repository.Class
                 var query = this._context.HISTORY.Include(q => q.User)
                                                  .Include(q => q.Office)
                                                           .Where(x =>
-                                                                 //(dto.UserName == null) || dto.UserName == "" || x.User.UserName.Contains(dto.UserName) &&                                                                 
-                                                                // (dto.DateproccesFrom == null || x.DateProces >= dto.DateproccesFrom) &&
-                                                                // (dto.DateproccesTo == null || x.DateProces <= dto.DateproccesTo) &&
-                                                                 //(dto.Action == null || dto.Action == "" || x.Action == dto.Action) &&
-                                                                   (dto.IdOffice == null || x.IdOffice == dto.IdOffice)
+                                                                 // (dto.UserName == null) || dto.UserName == "" || x.User.UserName.Contains(dto.UserName) &&
+                                                                 (dto.DateproccesFrom == null || x.DateProces >= dto.DateproccesFrom) &&
+                                                                 (dto.DateproccesTo == null || x.DateProces <= dto.DateproccesTo) &&
+                                                                 (dto.Action == null || x.IdAction == dto.Action) &&
+                                                                 (dto.IdOffice == null || x.IdOffice == dto.IdOffice)
                                                                    );
-                var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
-                     .Take(dto.PageSize)
-                    .ToListAsync();
+                 var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
+                       .Take(dto.PageSize)
+                      .ToListAsync();
+               
 
-                return new Result<History> { rowCount = query.Count(), data = page };
+                 return new Result<History> { rowCount = query.Count(), data = page };
             }
             catch (Exception ex)
             {
@@ -57,7 +58,7 @@ namespace Repository.Class
         /// <param name="IdOffice"></param>
         /// <param name="IdUser"></param>
         /// <returns></returns>
-        public History AddHistory(int IdAction,string subAction, string actionDetail, int IdOffice, int IdUser)
+        public History AddHistory(int IdAction, string subAction, string actionDetail, int IdOffice, int IdUser)
         {
             try
             {
@@ -73,7 +74,7 @@ namespace Repository.Class
                 this._context.HISTORY.Add(history);
                 this._context.SaveChanges();
                 return history;
-            }   
+            }
             catch (Exception ex)
             {
                 throw ex;

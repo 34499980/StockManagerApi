@@ -68,5 +68,18 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public IEnumerable<ActionsDto> GetActions()
+        {
+            try
+            {
+                var result = this._dataSourceRep.GetActions();
+                return _mapper.Map<IEnumerable<ActionsDto>>(result);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

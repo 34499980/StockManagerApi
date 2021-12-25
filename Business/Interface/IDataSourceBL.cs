@@ -12,5 +12,6 @@ namespace Business.Interface
         IEnumerable<Dispatch_StateDto> GetAllDispatchState();
         IEnumerable<Stock_StateDto> GetAllStockState();
         IEnumerable<RolesDto> GetAllRoles();
+        IEnumerable<ActionsDto> GetActions();
     }
 }

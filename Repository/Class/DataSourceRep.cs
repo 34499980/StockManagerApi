@@ -59,5 +59,17 @@ namespace Repository.Class.Context
                 throw ex;
             }
         }
+        public IEnumerable<Actions> GetActions()
+        {
+            try
+            {
+                return this._context.ACTIONS.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

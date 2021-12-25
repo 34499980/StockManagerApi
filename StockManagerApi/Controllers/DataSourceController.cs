@@ -86,6 +86,19 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
+        [HttpGet("GetActions")]
+        [Authorize]
+        public IEnumerable<ActionsDto> GetActions()
+        {
+            try
+            {
+                return this._dataSourceBL.GetActions();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpGet("GetAllRoles")]
         [Authorize]
         public IEnumerable<RolesDto> GetAllRoles()

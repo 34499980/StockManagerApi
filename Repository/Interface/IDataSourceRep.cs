@@ -11,5 +11,6 @@ namespace Repository.Interface
         IEnumerable<Dispatch_State> GetAllDispatchState();
         IEnumerable<Stock_State> GetAllStockState();
         IEnumerable<Roles> GetAllRoles();
+        IEnumerable<Actions> GetActions();
     }
 }
