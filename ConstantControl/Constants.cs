@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConstantControl
 {
@@ -11,7 +12,8 @@ namespace ConstantControl
             Despachado = 2,
             Recibido = 3,
             Finalizado = 4,
-            Incompleto = 5
+            Incompleto = 5,
+            Actualizado = 6
             
         }
 
@@ -32,6 +34,16 @@ namespace ConstantControl
 
 
         }
+        public enum Actions
+        {
+            Dispatch = 1,
+            Users = 2,
+            Offices = 3,
+            Stock = 4
+
+
+
+        }
         public enum RoleEnum
         {
             Administrative = 1,
@@ -43,7 +55,28 @@ namespace ConstantControl
 
 
         }
+        //HISTORY        
+        public static string HistoryUserCreate = "UserCreate";
+        public static string HistoryUserUpdate = "UserUpdate";
+        public static string HistoryUserDelete = "UserDelete";
+                              
+        public static string HistoryDispatchCreate = "DispatchCreate";
+        public static string HistoryDispatchUpdate = "DispatchUpdate";
+        public static string HistoryDispatchSend = "DispatchSend";
+        public static string HistoryDispatchRecive = "DispatchRecive";
+        public static string HistoryDispatchFinish = "DispatchFinish";
+        public static string HistoryDispatchDelete = "DispatchDelete";
 
+        public static string HistoryOfficeCreate = "OfficeCreate";
+        public static string HistoryOfficeUpdate = "OfficeUpdate";
+        public static string HistoryOfficeDelete = "OfficeDelete";
+                              
+        public static string HistoryStockCreate = "StockCreate";
+        public static string HistoryStockUpdate = "StockUpdate";
+        public static string HistoryStockDelete = "StockDelete";
+
+
+        //ERRORS
         public static string ErrSameDestinationAndOrigin = "errSameDestinationAndOrigin";
         public static string ErrStockHasCHange = "errStockHasCHange";
         public static string ErrCheckDispatchItems = "errCheckDispatchItems";

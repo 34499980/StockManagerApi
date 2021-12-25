@@ -20,11 +20,13 @@ namespace Business.Class
         private readonly IUserRep _userRep;
         private readonly IMapper _mapper;
         private readonly IOfficeRep _officeRep;
-        public StockBL(IStockRep stockRep,IUserRep userRep, IOfficeRep officeRep, IMapper mapper)
+        private readonly IHistoryRep _historyRep;
+        public StockBL(IStockRep stockRep,IUserRep userRep, IOfficeRep officeRep, IMapper mapper, IHistoryRep historyRep)
         {
             this._stockRep = stockRep;
             this._userRep = userRep;
             this._officeRep = officeRep;
+            this._historyRep = historyRep;
             this._mapper = mapper;
         }
         /// <summary>
@@ -133,8 +135,8 @@ namespace Business.Class
                  // this._stockRep.UpdateQR(stock);
 
                 }
-               
-                
+                this._historyRep.AddHistory((int)Constants.Actions.Stock ,Constants.HistoryStockCreate, stock.Name, stock.IdOffice, ContextProvider.UserId);
+
             }
             catch (Exception ex)
             {
@@ -153,7 +155,8 @@ namespace Business.Class
                 var inputSock = _mapper.Map<Stock>(stock);
                 this._stockRep.UpdateStock(inputSock);
                 this._stockRep.UpdateStockByOffice(inputSock.Stock_Office);
-                
+                this._historyRep.AddHistory((int)Constants.Actions.Stock ,Constants.HistoryStockUpdate, stock.Name, stock.IdOffice, ContextProvider.UserId);
+
             }
             catch (Exception ex)
             {
