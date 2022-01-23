@@ -32,9 +32,9 @@ namespace Repository.Class
                 var query = this._context.HISTORY.Include(q => q.User)
                                                  .Include(q => q.Office)
                                                           .Where(x =>
-                                                                 // (dto.UserName == null) || dto.UserName == "" || x.User.UserName.Contains(dto.UserName) &&
-                                                                 (dto.DateproccesFrom == null || x.DateProces >= dto.DateproccesFrom) &&
-                                                                 (dto.DateproccesTo == null || x.DateProces <= dto.DateproccesTo) &&
+                                                                 (dto.UserName == "" || x.User.UserName.Contains(dto.UserName)) &&
+                                                                 (dto.DateprocesFrom == null || x.DateProces.Date >= dto.DateprocesFrom.Value.Date) &&
+                                                                 (dto.DateprocesTo == null || x.DateProces.Date <= dto.DateprocesTo.Value.Date) &&
                                                                  (dto.Action == null || x.IdAction == dto.Action) &&
                                                                  (dto.IdOffice == null || x.IdOffice == dto.IdOffice)
                                                                    );

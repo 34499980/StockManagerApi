@@ -203,18 +203,18 @@ namespace Repository.Class
                                                           .Include(q => q.officeDestiny)
                                                           .Include(q => q.State)
                                                           .Where(x =>
-                                                                ((dto.UserName == "" || dto.UserName == null) || x.UserOrigin.UserName.Contains(dto.UserName) ||
-                                                               (dto.UserName == "" || dto.UserName == null) || x.UserDestiny.UserName.Contains(dto.UserName)) &&
-                                                               (dto.CreatedDateFrom == null || x.DateCreate == dto.CreatedDateFrom) &&
-                                                               (dto.CreatedDateTo == null || x.DateCreate == dto.CreatedDateTo) &&
-                                                               (dto.DispatchedDateFrom == null || x.DateDispatched == dto.DispatchedDateFrom) &&
-                                                               (dto.DispatchedDateTo == null || x.DateDispatched == dto.DispatchedDateTo) &&
-                                                               (dto.RecceivedDateFrom == null || x.DateReceived == dto.RecceivedDateFrom) &&
-                                                               (dto.ReceivedDateTo == null || x.DateReceived == dto.ReceivedDateTo) &&
-                                                               (dto.IdState == null || x.IdState == dto.IdState) &&
-                                                               (dto.Code == "" || x.ID.ToString() == dto.Code) &&
-                                                               (dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny) &&
-                                                               (x.OfficeOrigin.IdCountry == dto.IdCountry) &&
+                                                               // ((dto.UserName == "" || dto.UserName == null) || x.UserOrigin.UserName.Contains(dto.UserName) ||
+                                                             //  (dto.UserName == "" || dto.UserName == null) || x.UserDestiny.UserName.Contains(dto.UserName)) &&
+                                                               (dto.CreatedDateFrom == null || x.DateCreate.Date == dto.CreatedDateFrom.Value.Date) &&
+                                                               (dto.CreatedDateTo == null || x.DateCreate.Date == dto.CreatedDateTo.Value.Date) &&
+                                                              // (dto.DispatchedDateFrom == null || x.DateDispatched.Value.Date == dto.DispatchedDateFrom.Value.Date) &&
+                                                              // (dto.DispatchedDateTo == null || x.DateDispatched.Value.Date == dto.DispatchedDateTo.Value.Date) &&
+                                                               (dto.RecceivedDateFrom == null || x.DateReceived.Value.Date == dto.RecceivedDateFrom.Value.Date) &&
+                                                               (dto.ReceivedDateTo == null || x.DateReceived.Value.Date == dto.ReceivedDateTo.Value.Date) &&
+                                                              // (dto.IdState == null || x.IdState == dto.IdState) &&
+                                                             //  (dto.Code == "" || x.ID.ToString() == dto.Code) &&
+                                                              // (dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny) &&
+                                                              // (x.OfficeOrigin.IdCountry == dto.IdCountry) &&
                                                                (x.IdOrigin == idOrigin || x.IdDestiny == idOrigin)
                                                         );
                 var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
