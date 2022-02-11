@@ -36,7 +36,7 @@ namespace Repository.Class
             {
                 throw ex;
             }
-        }        
+        }
         /// <summary>
         /// Devuelve todos los despachos
         /// </summary>
@@ -48,12 +48,13 @@ namespace Repository.Class
             {
                 //TODO probar despacho con sucursal
                 dynamic result = null;
-               result = this._context.DISPATCH.Include(q => q.UserDestiny)
-                                              .Include(q => q.UserOrigin)
-                                              .Include(q => q.State)
-                                              .Where(x => x.IdOrigin == idOffice|| x.IdDestiny == idOffice).ToList();
+                result = this._context.DISPATCH.Include(q => q.UserDestiny)
+                                               .Include(q => q.UserOrigin)
+                                               .Include(q => q.State)
+                                               .Where(x => x.IdOrigin == idOffice || x.IdDestiny == idOffice).ToList();
                 return result;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -68,10 +69,10 @@ namespace Repository.Class
             try
             {
                 //TODO PROBAR traer despacho con stock              
-                return this._context.DISPATCH .Include(q => q.UserDestiny)
+                return this._context.DISPATCH.Include(q => q.UserDestiny)
                                               .Include(q => q.UserOrigin)
                                               .Include(q => q.State)
-                                              .Include(q => q.Dispatch_stock)                                             
+                                              .Include(q => q.Dispatch_stock)
                                               .Where(x => x.ID == id).FirstOrDefault();
             }
             catch (Exception ex)
@@ -91,7 +92,8 @@ namespace Repository.Class
                 var result = this._context.DISPATCH_STOCK.Where(x => x.IdDispatch == id).ToList();
 
                 return result;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -105,7 +107,7 @@ namespace Repository.Class
         {
             try
             {
-              
+
                 var result = this._context.STOCK.Where(x => x.ID == id).ToList();
 
 
@@ -125,16 +127,17 @@ namespace Repository.Class
         {
             try
             {
-                dynamic result = null;              
-               result = this._context.DISPATCH.Include(q => q.UserOrigin)
-                                              .Include(q => q.UserDestiny)
-                                              .Include(q => q.Dispatch_stock)                                            
-                                              .Where(x => x.IdOrigin == dispatch.IdOrigin && 
-                                                    x.IdDestiny == dispatch.IdDestiny && 
-                                                    x.IdState == (int)Constants.Dispatch_State.Creado)
-                                              .FirstOrDefault();
+                dynamic result = null;
+                result = this._context.DISPATCH.Include(q => q.UserOrigin)
+                                               .Include(q => q.UserDestiny)
+                                               .Include(q => q.Dispatch_stock)
+                                               .Where(x => x.IdOrigin == dispatch.IdOrigin &&
+                                                     x.IdDestiny == dispatch.IdDestiny &&
+                                                     x.IdState == (int)Constants.Dispatch_State.Creado)
+                                               .FirstOrDefault();
                 return result;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -143,14 +146,14 @@ namespace Repository.Class
         /// Actualiza el stock del despacho
         /// </summary>
         /// <param name="dispatch"></param>
-        public  void UpdateDispatch(Dispatch dispatch)
+        public void UpdateDispatch(Dispatch dispatch)
         {
             try
             {
                 this._context.Update(dispatch);
                 this._context.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -172,7 +175,7 @@ namespace Repository.Class
             try
             {
                 this._context.DISPATCH_STOCK.Add(dispatch_stock);
-                 this._context.SaveChanges();
+                this._context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -197,24 +200,24 @@ namespace Repository.Class
         {
             try
             {
-                var query =  this._context.DISPATCH.Include(q => q.UserOrigin)
+                var query = this._context.DISPATCH.Include(q => q.UserOrigin)
                                                           .Include(q => q.UserDestiny)
                                                           .Include(q => q.OfficeOrigin)
                                                           .Include(q => q.officeDestiny)
                                                           .Include(q => q.State)
                                                           .Where(x =>
-                                                               // ((dto.UserName == "" || dto.UserName == null) || x.UserOrigin.UserName.Contains(dto.UserName) ||
-                                                             //  (dto.UserName == "" || dto.UserName == null) || x.UserDestiny.UserName.Contains(dto.UserName)) &&
-                                                               (dto.CreatedDateFrom == null || x.DateCreate.Date == dto.CreatedDateFrom.Value.Date) &&
-                                                               (dto.CreatedDateTo == null || x.DateCreate.Date == dto.CreatedDateTo.Value.Date) &&
-                                                              // (dto.DispatchedDateFrom == null || x.DateDispatched.Value.Date == dto.DispatchedDateFrom.Value.Date) &&
-                                                              // (dto.DispatchedDateTo == null || x.DateDispatched.Value.Date == dto.DispatchedDateTo.Value.Date) &&
-                                                               (dto.RecceivedDateFrom == null || x.DateReceived.Value.Date == dto.RecceivedDateFrom.Value.Date) &&
-                                                               (dto.ReceivedDateTo == null || x.DateReceived.Value.Date == dto.ReceivedDateTo.Value.Date) &&
-                                                              // (dto.IdState == null || x.IdState == dto.IdState) &&
-                                                             //  (dto.Code == "" || x.ID.ToString() == dto.Code) &&
-                                                              // (dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny) &&
-                                                              // (x.OfficeOrigin.IdCountry == dto.IdCountry) &&
+                                                                ((dto.UserName == "" || dto.UserName == null) || x.UserOrigin.UserName.Contains(dto.UserName) ||
+                                                                (dto.UserName == "" || dto.UserName == null) || x.UserDestiny.UserName.Contains(dto.UserName)) &&
+                                                               (dto.CreatedDateFrom == null || x.DateCreate.Date >= dto.CreatedDateFrom.Value.Date) &&
+                                                               (dto.CreatedDateTo == null || x.DateCreate.Date <= dto.CreatedDateTo.Value.Date) &&
+                                                               // (dto.DispatchedDateFrom == null || x.DateDispatched.Value.Date == dto.DispatchedDateFrom.Value.Date) &&
+                                                               // (dto.DispatchedDateTo == null || x.DateDispatched.Value.Date == dto.DispatchedDateTo.Value.Date) &&
+                                                               (dto.RecceivedDateFrom == null || x.DateReceived.Value.Date >= dto.RecceivedDateFrom.Value.Date) &&
+                                                               (dto.ReceivedDateTo == null || x.DateReceived.Value.Date <= dto.ReceivedDateTo.Value.Date) &&
+                                                               (dto.IdState == null || x.IdState == dto.IdState) &&
+                                                               (dto.Code == "" || x.ID.ToString() == dto.Code) &&
+                                                               (dto.IdDestiny == null || x.IdDestiny == dto.IdDestiny) &&
+                                                               (x.OfficeOrigin.IdCountry == dto.IdCountry) &&
                                                                (x.IdOrigin == idOrigin || x.IdDestiny == idOrigin)
                                                         );
                 var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
