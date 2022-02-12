@@ -4,6 +4,7 @@ using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository.Class
 {
@@ -20,12 +21,12 @@ namespace Repository.Class
         /// </summary>
         /// <param name="sale"></param>
         /// <returns></returns>
-        public Sale save(Sale sale)
+        public async Task<Sale> save(Sale sale)
         {
             try
             {
                 this._context.SALE.Add(sale);
-                this._context.SaveChanges();
+                await this._context.SaveChangesAsync();
                 return sale;
             }
             catch (Exception ex)

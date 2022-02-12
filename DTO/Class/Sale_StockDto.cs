@@ -10,6 +10,7 @@ namespace DTO.Class
     {
         public int IdSale { get; set; }
         public long IdStock { get; set; }
+        public int Unity { get; set; }
 
     
         public SaleDto Sale { get; set; }

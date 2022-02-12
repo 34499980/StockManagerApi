@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Business.Interface
 {
     public interface ISaleBL
     {
-        SaleDto save(SaleDto dto);
+        Task save(SaleDto dto);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Interface;
 using DTO.Class;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -34,12 +35,13 @@ namespace StockManagerApi.Controllers
         }
 
         // POST api/<SalesController>
-        [HttpPost]
-        public SaleDto Post(SaleDto dto)
+        [HttpPost("Save")]
+        [Authorize]
+        public async Task Post(SaleDto dto)
         {
             try
             {
-                return this._service.save(dto);
+                await this._service.save(dto);                
             }
             catch (Exception ex)
             {
