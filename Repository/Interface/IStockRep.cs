@@ -12,7 +12,7 @@ namespace Repository.Interface
         Stock GetStockByCode(string qr);
         IEnumerable<Stock> GetAllStock();
         long SaveStock(Stock stock);
-        void UpdateStock(Stock stock);       
+        Task UpdateStock(Stock stock);
         IEnumerable<Stock_State> GetAllStates();      
         IEnumerable<Stock> GetStockByParams(string param, string name);
         void UpdateStockByOffice(ICollection<Stock_Office> stock);

@@ -39,7 +39,8 @@ namespace ConstantControl
             Dispatch = 1,
             Users = 2,
             Offices = 3,
-            Stock = 4
+            Stock = 4,
+            Sale = 5
 
 
 
@@ -74,6 +75,8 @@ namespace ConstantControl
         public static string HistoryStockCreate = "StockCreate";
         public static string HistoryStockUpdate = "StockUpdate";
         public static string HistoryStockDelete = "StockDelete";
+
+        public static string HistorySaleCreate = "SaleCreate";
 
 
         //ERRORS

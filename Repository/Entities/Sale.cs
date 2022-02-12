@@ -13,19 +13,21 @@ namespace Repository.Entities
         public int ID { get; set; }
         public DateTime DateProces { get; set; }
         public int IdUser { get; set; }
-        public float Amount { get; set; }
+        public decimal Amount { get; set; }
         public string Refer { get; set; }
-        public int IdSucursal { get; set; }
+        public int IdOffice{ get; set; }
         public int IdState { get; set; }
 
 
-        [ForeignKey("IdSucursal")]
-        public virtual Office Sucursal { get; set; }
+        [ForeignKey("IdOffice")]
+        public virtual Office Office { get; set; }
 
         [ForeignKey("IdState")]
         public virtual Sale_State State { get; set; }
         [ForeignKey("IdUser")]
         public virtual User User { get; set; }
+
+        public virtual ICollection<Sale_Stock> Sale_stock { get; set; }
 
     }
 }

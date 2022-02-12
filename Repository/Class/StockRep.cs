@@ -72,12 +72,12 @@ namespace Repository.Class
         /// Actualiza los datos de stock
         /// </summary>
         /// <param name="stock"></param>
-        public void UpdateStock(Stock stock)
+        public async Task UpdateStock(Stock stock)
         {
             try
             {
                 this._context.Entry(stock).State = EntityState.Modified;               
-                this._context.SaveChanges();
+               await  this._context.SaveChangesAsync();
             } catch (Exception ex)
             {
                 throw ex;
