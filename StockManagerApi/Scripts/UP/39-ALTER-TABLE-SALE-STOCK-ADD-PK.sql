@@ -1,0 +1,2 @@
+alter table Sale_stock ADD ID INT NOT NULL IDENTITY(1,1)
+alter table Sale_stock ADD CONSTRAINT PK_SALE_STOCK PRIMARY KEY NONCLUSTERED (ID);

@@ -1,0 +1,1 @@
+alter table stock_office add Price decimal not null default(0)

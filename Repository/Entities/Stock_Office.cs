@@ -13,7 +13,9 @@ namespace Repository.Entities
         public int ID { get; set; }
         public int IdOffice { get; set; }
         public long IdStock { get; set; }
+
         public int Unity { get; set; }
+        public decimal Price { get; set; }
 
 
         [ForeignKey("IdOffice")]

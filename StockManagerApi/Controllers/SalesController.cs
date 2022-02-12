@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Interface;
+using DTO.Class;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,6 +14,11 @@ namespace StockManagerApi.Controllers
     [ApiController]
     public class SalesController : ControllerBase
     {
+        private readonly ISaleBL _service;
+        public SalesController(ISaleBL service)
+        {
+            this._service = service;
+        }
         // GET: api/<SalesController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -28,8 +35,16 @@ namespace StockManagerApi.Controllers
 
         // POST api/<SalesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public SaleDto Post(SaleDto dto)
         {
+            try
+            {
+                return this._service.save(dto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // PUT api/<SalesController>/5
