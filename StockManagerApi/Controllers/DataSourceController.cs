@@ -112,5 +112,18 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
+        [HttpGet("GetSaleStates")]
+        [Authorize]
+        public IEnumerable<Sale_StateDto> GetSaleStates()
+        {
+            try
+            {
+                return this._dataSourceBL.GetSaleStates();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -18,9 +18,11 @@ namespace DTO.Class
         public int IdOffice { get; set; }
         public int IdState { get; set; }
 
+        public string OfficeDescription { get { return Office?.Name; } }
+        public string UseDescription { get { return User?.UserName; } }
+        public string StateDescription { get { return State?.Descripcion; } }
 
-       
-        public  OfficeDto Sucursal { get; set; }
+        public  OfficeDto Office { get; set; }
         public ICollection<Sale_StockDto> Sale_stock { get; set; }
         public ICollection<StockDto> Stock { get; set; }
 

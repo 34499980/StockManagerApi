@@ -71,5 +71,17 @@ namespace Repository.Class.Context
                 throw ex;
             }
         }
+        public IEnumerable<Sale_State> GetSaleStates()
+        {
+            try
+            {
+                return this._context.SALE_SATETE.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

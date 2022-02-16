@@ -81,5 +81,18 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public IEnumerable<Sale_StateDto> GetSaleStates()
+        {
+            try
+            {
+                var result = this._dataSourceRep.GetSaleStates();
+                return _mapper.Map<IEnumerable<Sale_StateDto>>(result);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

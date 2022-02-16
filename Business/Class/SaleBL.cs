@@ -2,6 +2,7 @@
 using Business.Interface;
 using ConstantControl;
 using DTO.Class;
+using Repository.Class;
 using Repository.Entities;
 using Repository.Interface;
 using StockManagerApi.Extensions;
@@ -67,6 +68,20 @@ namespace Business.Class
                 
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<ResultDto<SaleDto>> GetSalesByFilters(SaleFilterDto dto)
+        {
+            try
+            {
+                var result = await _saleRep.GetSalesByFilters(dto);
+
+                return this._mapper.Map<ResultDto<SaleDto>>(result);
+
+            }
+            catch(Exception ex)
             {
                 throw ex;
             }
