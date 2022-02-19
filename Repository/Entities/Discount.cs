@@ -28,7 +28,7 @@ namespace Repository.Entities
         [ForeignKey("IdUser")]
         public virtual User User { get; set; }
 
-        public virtual ICollection<Discount_Office> Discount_Office { get; set; }
+      //  public virtual ICollection<Discount_Office> Discount_Office { get; set; }
     }
 
  }

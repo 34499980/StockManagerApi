@@ -14,11 +14,18 @@ namespace DTO.Class
         public long IdStock { get; set; }
         public int IdUser { get; set; }
 
-       
+        public virtual string PaymentTypeDescription { get { return PaymentType.Description; } }
+
+        public virtual string StockDescription { get { return Stock?.Description; } }
+
+        public virtual string UserDescription { get { return User.UserName; } }
+
+
         public virtual PaymentTypeDto PaymentType { get; set; }  
        
         public virtual StockDto Stock { get; set; }
       
         public virtual UserDto User { get; set; }
+        public virtual ICollection<OfficeDto> Office { get; set; }
     }
 }

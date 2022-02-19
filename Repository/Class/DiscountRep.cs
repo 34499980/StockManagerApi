@@ -37,10 +37,10 @@ namespace Repository.Class
             var query = this._context.DISCOUNT.Include(q => q.User)
                                                           .Include(q => q.Stock)
                                                           .Include(q => q.PaymentType)
-                                                          .Include(q => q.Discount_Office)
+                                                         // .Include(q => q.Discount_Office)
                                                           .Where(x =>
-                                                                    dto.CreateFrom == null || x.DateFrom.Date >= dto.CreateFrom.Date &&
-                                                                    dto.CreateTo == null || x.DateTo.Date <= dto.CreateTo.Date &&
+                                                                    dto.CreateFrom == null || x.DateFrom.Date >= dto.CreateFrom.Value.Date &&
+                                                                    dto.CreateTo == null || x.DateTo.Date <= dto.CreateTo.Value.Date &&
                                                                     dto.PercentFrom == null || x.Percent >= dto.PercentFrom &&
                                                                     dto.PercentTo == null || x.Percent <= dto.PercentTo
                                                           
