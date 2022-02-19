@@ -21,5 +21,7 @@ namespace Repository.Entities
         //[ForeignKey("IdStock")]
         [ForeignKey("IdDiscount")]
         public virtual Discount DISCOUNT { get; set; }
+
+        public virtual ICollection<Discount_Office> DISCOUNT_OFFICE { get; set; }
     }
 }

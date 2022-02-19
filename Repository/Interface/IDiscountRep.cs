@@ -16,7 +16,7 @@ namespace Repository.Interface
     
         Task UpdateDiscount(Discount discount);
      
-        Task<Result<Discount>> GetDiscountFilter(DiscountFilterDto dto, int idOrigin);
+        Task<Result<Discount>> GetDiscountFilter(DiscountFilterDto dto);
         Task removeDiscount(int IdDiscount);
       
     }

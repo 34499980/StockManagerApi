@@ -35,6 +35,8 @@ namespace Repository.Class.Context
         public DbSet<Stock_State> STOCK_STATE { get; set; }
         public DbSet<Stock_Office> STOCK_OFFICE { get; set; }
         public DbSet<Actions> ACTIONS { get; set; }
+        public DbSet<Discount> DISCOUNT { get; set; }
+        public DbSet<Discount_Office> DISCOUNT_OFFICE { get; set; }
 
 
         //public IEnumerable<TEntity> ExecuteStoredProcedure<TEntity>(string storedProcedure, params object[] parameters) where TEntity : class

@@ -9,12 +9,12 @@ namespace Business.Interface
     public interface IDiscountBL
     {
         Task<DiscountDto> saveDiscount(DiscountDto discount);
-        Task<IEnumerable<DiscountDto>> GetAllDiscountByOffice(int idOffice);
+        Task<IEnumerable<DiscountDto>> GetAllDiscountByOffice();
         Task<DiscountDto> GetDiscountById(int id);
 
         Task UpdateDiscount(DiscountDto discount);
 
-        Task<ResultDto<DiscountDto>> GetDiscountFilter(DiscountFilterDto dto, int idOrigin);
+        Task<ResultDto<DiscountDto>> GetDiscountFilter(DiscountFilterDto dto);
         Task removeDiscount(int IdDiscount);
     }
 }

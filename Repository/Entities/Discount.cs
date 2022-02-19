@@ -27,6 +27,8 @@ namespace Repository.Entities
         public virtual Stock Stock { get; set; }
         [ForeignKey("IdUser")]
         public virtual User User { get; set; }
+
+        public virtual ICollection<Discount_Office> Discount_Office { get; set; }
     }
 
  }
