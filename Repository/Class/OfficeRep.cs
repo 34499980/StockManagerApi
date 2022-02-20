@@ -37,11 +37,11 @@ namespace Repository.Class
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Office GetOfficeById(int id)
+        public async Task<Office> GetOfficeById(int id)
         {
             try
             {
-                return this._context.OFFICE.Include(x => x.Country).Where(x => x.ID == id).FirstOrDefault();
+                return await this._context.OFFICE.Include(x => x.Country).Where(x => x.ID == id).FirstOrDefaultAsync();
             }catch(Exception ex)
             {
                 throw ex;
@@ -52,11 +52,13 @@ namespace Repository.Class
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public Office GetOfficeByName(string name)
+        public async Task<IEnumerable<Office>> GetOfficeByName(string name, int idCountry)
         {           
             try
             {
-                 return this._context.OFFICE.Include(x => x.Country).Where(x => x.Name == name).FirstOrDefault();
+                 return await this._context.OFFICE.Include(x => x.Country)
+                                            .Where(x => x.Name.Contains(name) && x.IdCountry == idCountry)
+                                            .ToListAsync();
             }catch(Exception ex)
             {
                 throw ex;
