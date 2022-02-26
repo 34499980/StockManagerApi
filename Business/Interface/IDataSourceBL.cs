@@ -13,5 +13,6 @@ namespace Business.Interface
         IEnumerable<Stock_StateDto> GetAllStockState();
         IEnumerable<RolesDto> GetAllRoles();
         IEnumerable<ActionsDto> GetActions();
+        IEnumerable<ItemDto> GetPaytmentTypes();
     }
 }

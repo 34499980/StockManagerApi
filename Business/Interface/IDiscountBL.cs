@@ -8,7 +8,7 @@ namespace Business.Interface
 {
     public interface IDiscountBL
     {
-        Task<DiscountDto> saveDiscount(DiscountDto discount);
+        Task<DiscountDto> saveDiscount(DiscountPostDto discount);
         Task<IEnumerable<DiscountDto>> GetAllDiscountByOffice();
         Task<DiscountDto> GetDiscountById(int id);
 

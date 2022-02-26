@@ -72,7 +72,7 @@ namespace StockManagerApi.Controllers
         // POST api/<DiscountController>
         [HttpPost]
         [Authorize]
-        public async Task<DiscountDto> Post(DiscountDto dto)
+        public async Task<DiscountDto> Post(DiscountPostDto dto)
         {           
             try
             {    

@@ -6,27 +6,31 @@ using Repository.Interface;
 using StockManagerApi.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Class
 {
-    public class DiscountBL: IDiscountBL
+    public class DiscountBL : IDiscountBL
     {
         private readonly IDiscountRep _discountRep;
+        private readonly IOfficeRep _officeRep;
         private readonly IMapper _mapper;
-        public DiscountBL(IDiscountRep discountRep, IMapper mapper)
+        public DiscountBL(IDiscountRep discountRep, IMapper mapper, IOfficeRep officeRep)
         {
             this._mapper = mapper;
             this._discountRep = discountRep;
+            this._officeRep = officeRep;
         }
         public async Task<IEnumerable<DiscountDto>> GetAllDiscountByOffice()
         {
             try
             {
-               var result = await _discountRep.GetAllDiscountByOffice(ContextProvider.OfficeId);
+                var result = await _discountRep.GetAllDiscountByOffice(ContextProvider.OfficeId);
                 return _mapper.Map<IEnumerable<DiscountDto>>(result);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -64,19 +68,52 @@ namespace Business.Class
             {
                 await _discountRep.removeDiscount(IdDiscount);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-        public async Task<DiscountDto> saveDiscount(DiscountDto discount)
+        public async Task<DiscountDto> saveDiscount(DiscountPostDto dto)
         {
             try
             {
-                var entity = _mapper.Map<Discount>(discount);
+                List<Discount_Office> discountOfficeList = new List<Discount_Office>();
+                List<Discount_PaymentType> paymentType = new List<Discount_PaymentType>();
+                Discount entity = new Discount()
+                {
+                    ID = dto.ID,
+                    DateFrom = dto.DateFrom,
+                    DateTo = dto.DateTo,
+                    IdStock = dto.IdStock,
+                    Percent = dto.Percent,
+                    IdUser = ContextProvider.UserId,
+
+                };
+                if (dto.Offices.Length == 0)
+                {
+                    dto.Offices = (int[])_officeRep.GetOfficesByCountry(ContextProvider.SelectedCountry).Select(x => x.ID);
+                }
+                foreach (var item in dto.Offices)
+                {
+                    Discount_Office entityDiscountOffices = new Discount_Office()
+                    {
+                        IdOffice = item
+                    };
+                    discountOfficeList.Add(entityDiscountOffices);
+                }
+                foreach (var item in dto.PaymentType)
+                {
+                    Discount_PaymentType entityPaymentType = new Discount_PaymentType()
+                    {
+                        IdPaymentType = item
+                    };
+                paymentType.Add(entityPaymentType);
+                }
+                entity.PaymentTypeList = paymentType;
+               
                 var result = await _discountRep.saveDiscount(entity);
-               return _mapper.Map<DiscountDto>(result);
+                return _mapper.Map<DiscountDto>(result);
             }
             catch (Exception ex)
             {

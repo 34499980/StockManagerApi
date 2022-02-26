@@ -34,6 +34,7 @@ namespace Business.AutoMapper
             CreateMap<HistoryDto, History>().ReverseMap();
             CreateMap<ActionsDto, Actions>().ReverseMap();
             CreateMap<DiscountDto, Discount>().ReverseMap();
+            CreateMap<ItemDto, PaymentType>().ReverseMap();
 
 
             CreateMap<ResultDto<Stock_OfficeDto>, Result<Stock_Office>>().ReverseMap();

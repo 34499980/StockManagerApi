@@ -71,5 +71,17 @@ namespace Repository.Class.Context
                 throw ex;
             }
         }
+        public IEnumerable<PaymentType> GetPaytmentTypes()
+        {
+            try
+            {
+                return this._context.PAYMENTTYPE.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
