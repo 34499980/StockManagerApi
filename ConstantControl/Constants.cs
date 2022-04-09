@@ -34,6 +34,14 @@ namespace ConstantControl
 
 
         }
+        public enum Discount_State
+        {
+            Habilitado = 0,
+            Deshabilitado = 1
+
+
+
+        }
         public enum Actions
         {
             Dispatch = 1,
@@ -87,5 +95,6 @@ namespace ConstantControl
         public static string ErrProductWithoutStock = "errProductWithoutStock";
         public static string ErrOfficeAllReadyExist = "errOfficeAllReadyExist";
         public static string ErrUserOrPass = "errUserOrPass";
+        public static string ErrDiscountExistsDates = "errDiscountExistsDates";
     }
 }

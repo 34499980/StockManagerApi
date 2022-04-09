@@ -16,12 +16,13 @@ namespace Repository.Entities
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
         public int Percent { get; set; }
-        public int IdPaymentType { get; set; }
-        public long IdStock { get; set; }
+      //  public int IdPaymentType { get; set; }
+        public long? IdStock { get; set; }
         public int IdUser { get; set; }
+        public bool State { get; set; }
 
-        [ForeignKey("IdPaymentType")]
-        public virtual PaymentType PaymentType { get; set; }
+      //  [ForeignKey("IdPaymentType")]
+      //  public virtual PaymentType PaymentType { get; set; }
         public virtual ICollection<Discount_PaymentType> PaymentTypeList { get; set; }
 
         public virtual ICollection<Discount_Office> Discount_Office { get; set; }

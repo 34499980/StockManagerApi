@@ -36,7 +36,7 @@ namespace Repository.Class
         {
             var query = this._context.DISCOUNT.Include(q => q.User)
                                                           .Include(q => q.Stock)
-                                                          .Include(q => q.PaymentType)
+                                                        //  .Include(q => q.PaymentTypeList)
                                                          // .Include(q => q.Discount_Office)
                                                           .Where(x =>
                                                                     dto.CreateFrom == null || x.DateFrom.Date >= dto.CreateFrom.Value.Date &&
@@ -84,6 +84,14 @@ namespace Repository.Class
         {
              _context.DISCOUNT.Update(discount);
             await _context.SaveChangesAsync();
+        }
+        public async Task<Discount> GetDiscountsByDates(DateTime start, DateTime end,long? idStock)
+        {
+            return await _context.DISCOUNT.Include(q => q.Discount_Office)
+                                    .Where(x => start.Date >= x.DateFrom.Date && start.Date <= x.DateTo.Date ||
+                                    end.Date >= x.DateFrom.Date || end.Date <= x.DateTo.Date
+                                    && x.State
+                                    && x.IdStock == idStock).FirstOrDefaultAsync();
         }
     }
 }

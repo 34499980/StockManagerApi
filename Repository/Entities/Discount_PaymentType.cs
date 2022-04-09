@@ -22,6 +22,6 @@ namespace Repository.Entities
         [ForeignKey("IdDiscount")]
         public virtual Discount DISCOUNT { get; set; }
 
-        public virtual ICollection<Discount_PaymentType> DISCOUNT_PAYMENTTYPE { get; set; }
+       // public virtual ICollection<Discount_PaymentType> DISCOUNT_PAYMENTTYPE { get; set; }
     }
 }
