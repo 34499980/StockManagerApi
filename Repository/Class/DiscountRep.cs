@@ -36,8 +36,8 @@ namespace Repository.Class
         {
             var query = this._context.DISCOUNT.Include(q => q.User)
                                                           .Include(q => q.Stock)
-                                                        //  .Include(q => q.PaymentTypeList)
-                                                         // .Include(q => q.Discount_Office)
+                                                          .Include(q => q.PaymentTypeList)
+                                                          .Include(q => q.Discount_Office)
                                                           .Where(x =>
                                                                     dto.CreateFrom == null || x.DateFrom.Date >= dto.CreateFrom.Value.Date &&
                                                                     dto.CreateTo == null || x.DateTo.Date <= dto.CreateTo.Value.Date &&
@@ -92,6 +92,10 @@ namespace Repository.Class
                                     end.Date >= x.DateFrom.Date || end.Date <= x.DateTo.Date
                                     && x.State
                                     && x.IdStock == idStock).FirstOrDefaultAsync();
+        }
+        public async Task<PaymentType> GetPaymentTypeById(int Id)
+        {
+            return await _context.PAYMENTTYPE.Where(x => x.ID == Id).FirstOrDefaultAsync();
         }
     }
 }

@@ -26,6 +26,7 @@ namespace DTO.Class
         public virtual StockDto Stock { get; set; }
       
         public virtual UserDto User { get; set; }
-        public virtual ICollection<OfficeDto> Office { get; set; }
+        public virtual IEnumerable<OfficeDto> Offices { get; set; }
+        public virtual IEnumerable<PaymentTypeDto> PaymentType { get; set; }
     }
 }

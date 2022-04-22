@@ -15,7 +15,11 @@ namespace Business.Exceptions
        : base(message)
         {
             if (code.HasValue)
+            {
                 statusCode = code.Value;
+            }
+               
+           
            
 
 

@@ -56,7 +56,39 @@ namespace Business.Class
             try
             {
                 var result = await _discountRep.GetDiscountFilter(dto);
-                return _mapper.Map<ResultDto<DiscountDto>>(result);
+             //   var dtoResultList = _mapper.Map<IEnumerable<DiscountDto>>(result.data);
+                List<DiscountDto> discountDtoList = new List<DiscountDto>();
+                List<Office> officeList = new List<Office>();
+                List<PaymentType> paymentTypeList = new List<PaymentType>();
+                var discountList = result.data;                
+                foreach (var discount in discountList)
+                {
+                    foreach (Discount_Office item in discount.Discount_Office)
+                    {
+                        officeList.Add(await _officeRep.GetOfficeById(item.IdOffice));
+                    }
+                    foreach (Discount_PaymentType item in discount.PaymentTypeList)
+                    {
+                        paymentTypeList.Add(await _discountRep.GetPaymentTypeById(item.IdPaymentType));
+                    }
+                    var dtoReturn = _mapper.Map<DiscountDto>(discount);
+                    dtoReturn.Offices = _mapper.Map<IEnumerable<OfficeDto>>(officeList);
+                    dtoReturn.PaymentType = _mapper.Map<IEnumerable<PaymentTypeDto>>(paymentTypeList);
+                    discountDtoList.Add(dtoReturn);
+
+
+                }
+                var dataTodReturn = _mapper.Map<ResultDto<DiscountDto>>(result);
+                dataTodReturn.data = discountDtoList;
+
+
+
+
+              //  var dtoResult = _mapper.Map<DiscountDto>(discount);
+               // dtoResult.PaymentType = _mapper.Map<ICollection<PaymentTypeDto>>(paymentTypeList);
+               // dtoResult.Offices = _mapper.Map<ICollection<OfficeDto>>(officeList);
+               // result.data = _mapper.Map<Discount>(dtoResult);
+                return dataTodReturn;
             }
             catch (Exception ex)
             {

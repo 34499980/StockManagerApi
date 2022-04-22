@@ -19,6 +19,7 @@ namespace Repository.Interface
         Task<Result<Discount>> GetDiscountFilter(DiscountFilterDto dto);
         Task removeDiscount(int IdDiscount);
         Task<Discount> GetDiscountsByDates(DateTime start, DateTime end, long? idStock);
+        Task<PaymentType> GetPaymentTypeById(int Id);
 
 
     }

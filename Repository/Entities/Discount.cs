@@ -23,9 +23,9 @@ namespace Repository.Entities
 
       //  [ForeignKey("IdPaymentType")]
       //  public virtual PaymentType PaymentType { get; set; }
-        public virtual ICollection<Discount_PaymentType> PaymentTypeList { get; set; }
+        public virtual IEnumerable<Discount_PaymentType> PaymentTypeList { get; set; }
 
-        public virtual ICollection<Discount_Office> Discount_Office { get; set; }
+        public virtual IEnumerable<Discount_Office> Discount_Office { get; set; }
         //[ForeignKey("IdStock")]
         [ForeignKey("IdStock")]
         public virtual Stock Stock { get; set; }
