@@ -34,13 +34,22 @@ namespace ConstantControl
 
 
         }
+        public enum Discount_State
+        {
+            Habilitado = 0,
+            Deshabilitado = 1
+
+
+
+        }
         public enum Actions
         {
             Dispatch = 1,
             Users = 2,
             Offices = 3,
             Stock = 4,
-            Sale = 5
+            Sale = 5,
+            Discount = 6
 
 
 
@@ -78,6 +87,8 @@ namespace ConstantControl
 
         public static string HistorySaleCreate = "SaleCreate";
 
+        public static string HistoryDiscountCreate = "DiscountCreate";
+        public static string HistoryDiscountDisabled = "DiscountDisabled";
 
         //ERRORS
         public static string ErrSameDestinationAndOrigin = "errSameDestinationAndOrigin";
@@ -87,5 +98,6 @@ namespace ConstantControl
         public static string ErrProductWithoutStock = "errProductWithoutStock";
         public static string ErrOfficeAllReadyExist = "errOfficeAllReadyExist";
         public static string ErrUserOrPass = "errUserOrPass";
+        public static string ErrDiscountExistsDates = "errDiscountExistsDates";
     }
 }

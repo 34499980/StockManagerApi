@@ -9,6 +9,21 @@ namespace Business.Exceptions
         public BussinessException(string message)
        : base(message)
         {
+          
+        }
+        public BussinessException(string message, int? code)
+       : base(message)
+        {
+            if (code.HasValue)
+            {
+                statusCode = code.Value;
+            }
+               
+           
+           
+
+
+
 
         }
         public string ErrorCode { get; set; }

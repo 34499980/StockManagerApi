@@ -9,14 +9,15 @@ namespace Business.Interface
     public interface IOfficeBL
     {
         IEnumerable<OfficeDto> GetAllOffice();
-        OfficeDto GetOfficeByName(string name);
+        Task<IEnumerable<OfficeDto>> GetOfficeByName(string name);
         IEnumerable<OfficeDto> GetOfficesByCountry(int id);
         OfficeDto GetOfficeById(int id);
         Task<ResultDto<OfficeGetDto>> GetOfficeFilter(OfficeFilterDto dto);
-        void Add(OfficeDto office);
-        void Update(OfficeDto office);
-        void Delete(int id);
-
+        Task Add(OfficeDto office);
+        Task Update(OfficeDto office);
+        Task Delete(int id);
+        Task<IEnumerable<ItemDto>> GetOfficeChipByName(string name);
+        IEnumerable<ItemDto> GetOfficesChipByCountry();
 
     }
 }

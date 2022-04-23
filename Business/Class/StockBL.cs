@@ -42,7 +42,7 @@ namespace Business.Class
                 if (stock == null) throw new Business.Exceptions.BussinessException(Constants.ErrStockNotFound);               
                 if (stock.Stock_Office.Where(x => x.IdOffice == ContextProvider.OfficeId).FirstOrDefault().Unity == 0)
                     throw new Business.Exceptions.BussinessException(Constants.ErrProductWithoutStock);
-                stock.File = null;
+               // stock.File = null;
                 foreach (var item in stock.Stock_Office)
                 {
                     item.Stock = null;
