@@ -19,11 +19,13 @@ namespace Business.Class
         private readonly IDiscountRep _discountRep;
         private readonly IOfficeRep _officeRep;
         private readonly IMapper _mapper;
-        public DiscountBL(IDiscountRep discountRep, IMapper mapper, IOfficeRep officeRep)
+        private readonly IHistoryRep _historyRep;
+        public DiscountBL(IDiscountRep discountRep, IMapper mapper, IOfficeRep officeRep, IHistoryRep historyRep)
         {
             this._mapper = mapper;
             this._discountRep = discountRep;
             this._officeRep = officeRep;
+            this._historyRep = historyRep;
         }
         public async Task<IEnumerable<DiscountDto>> GetAllDiscountByOffice()
         {
@@ -134,6 +136,8 @@ namespace Business.Class
                 {
                     discountExists.State = Convert.ToBoolean(Discount_State.Deshabilitado);
                     await _discountRep.UpdateDiscount(discountExists);
+                    this._historyRep.AddHistory((int)Constants.Actions.Discount, Constants.HistoryDiscountDisabled, discountExists.ID.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
+
                     flag = false;
                     dto.Override = false;
                 }
@@ -173,6 +177,8 @@ namespace Business.Class
                     entity.PaymentTypeList = paymentType;
                     entity.Discount_Office = discountOfficeList;
                     var result = await _discountRep.saveDiscount(entity);
+                    this._historyRep.AddHistory((int)Constants.Actions.Discount, Constants.HistoryDiscountCreate, result.ID.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
+
                     return _mapper.Map<DiscountDto>(result);
                 }
                 else

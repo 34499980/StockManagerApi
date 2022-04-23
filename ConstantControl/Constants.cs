@@ -48,7 +48,8 @@ namespace ConstantControl
             Users = 2,
             Offices = 3,
             Stock = 4,
-            Sale = 5
+            Sale = 5,
+            Discount = 6
 
 
 
@@ -86,6 +87,8 @@ namespace ConstantControl
 
         public static string HistorySaleCreate = "SaleCreate";
 
+        public static string HistoryDiscountCreate = "DiscountCreate";
+        public static string HistoryDiscountDisabled = "DiscountDisabled";
 
         //ERRORS
         public static string ErrSameDestinationAndOrigin = "errSameDestinationAndOrigin";
