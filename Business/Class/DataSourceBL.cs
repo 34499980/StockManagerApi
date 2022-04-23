@@ -81,5 +81,18 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public IEnumerable<ItemDto> GetPaytmentTypes()
+        {
+            try
+            {
+                var result = this._dataSourceRep.GetPaytmentTypes();
+                return _mapper.Map<IEnumerable<ItemDto>>(result);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

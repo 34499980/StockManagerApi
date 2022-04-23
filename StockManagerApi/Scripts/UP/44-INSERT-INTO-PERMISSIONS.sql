@@ -1,0 +1,6 @@
+INSERT INTO PERMISSION (Description, ValueId, ModuleId)
+						VALUES('Discount', 6, 1)
+INSERT INTO PERMISSION (Description, ValueId, ModuleId)
+						VALUES('DiscountList', 7, 1)
+INSERT INTO PERMISSION (Description, ValueId, ModuleId)
+						VALUES('SaleList', 17, 10)

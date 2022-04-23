@@ -50,13 +50,13 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
-        [HttpGet("GetOfficeByName")]
+        [HttpGet("GetOfficeChipByName/{name}")]
         [Authorize]
-        public OfficeDto GetOfficeByName(string name)
+        public async Task<IEnumerable<ItemDto>> GetOfficeChipByName(string name)
         {
             try
             {
-                return this._officeBL.GetOfficeByName(name);
+                return await this._officeBL.GetOfficeChipByName(name);
             }
             catch (Exception ex)
             {
@@ -76,45 +76,37 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
+        [HttpGet("GetOfficesChipByCountry")]
+        [Authorize]
+        public IEnumerable<ItemDto> GetOfficesChipByCountry()
+        {
+            try
+            {
+                return this._officeBL.GetOfficesChipByCountry();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         // POST api/<SucursalController>
         [HttpPost]
         [Authorize]
-        public void Post([FromBody] OfficeDto office)
+        public Task Post([FromBody] OfficeDto office)
         {
-           
-                OfficeDto result = null;                
-                result = this._officeBL.GetOfficeByName(office.Name);
-                if (result == null)
-                {
-                    this._officeBL.Add(office);
-                }
-                else
-                {
-                    throw new BussinessException(ConstantControl.Constants.ErrOfficeAllReadyExist);
-                }
-                            
-                
-          
+          return  this._officeBL.Add(office);
         }
 
         // PUT api/<SucursalController>/5
         [HttpPut]
         [Authorize]
-        public void Put([FromBody] OfficeDto office)
+        public Task Put([FromBody] OfficeDto dto)
         {
             try
             {
-                OfficeDto result = null;               
-                result = this._officeBL.GetOfficeByName(office.Name);
-                if (result != null && result.ID == office.ID)
-                {
-                    this._officeBL.Update(office);
-                }
-                else
-                {
-                    throw new BussinessException("errOfficeAllReadyExist");
-                }
+               return  _officeBL.Update(dto);             
+               
             }
             catch (Exception ex)
             {

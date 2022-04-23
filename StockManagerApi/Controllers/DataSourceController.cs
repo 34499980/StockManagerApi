@@ -112,5 +112,18 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
+        [HttpGet("GetPaytmentTypes")]
+        [Authorize]
+        public IEnumerable<ItemDto> GetPaytmentTypes()
+        {
+            try
+            {
+                return this._dataSourceBL.GetPaytmentTypes();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
