@@ -58,11 +58,13 @@ namespace Business.Class
                 var result = await _discountRep.GetDiscountFilter(dto);
              //   var dtoResultList = _mapper.Map<IEnumerable<DiscountDto>>(result.data);
                 List<DiscountDto> discountDtoList = new List<DiscountDto>();
-                List<Office> officeList = new List<Office>();
-                List<PaymentType> paymentTypeList = new List<PaymentType>();
+                List<Office> officeList = null;
+                List<PaymentType> paymentTypeList = null;
                 var discountList = result.data;                
                 foreach (var discount in discountList)
                 {
+                    officeList = new List<Office>();
+                    paymentTypeList = new List<PaymentType>();
                     foreach (Discount_Office item in discount.Discount_Office)
                     {
                         officeList.Add(await _officeRep.GetOfficeById(item.IdOffice));

@@ -13,8 +13,8 @@ namespace DTO.Class
        // public int IdPaymentType { get; set; }
         public long IdStock { get; set; }
         public int IdUser { get; set; }
-
-    //    public virtual string PaymentTypeDescription { get { return PaymentType.Description; } }
+        public bool State { get; set; }
+        //    public virtual string PaymentTypeDescription { get { return PaymentType.Description; } }
 
         public virtual string StockDescription { get { return Stock?.Description; } }
 
