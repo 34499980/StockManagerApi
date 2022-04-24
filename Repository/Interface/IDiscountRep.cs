@@ -11,7 +11,7 @@ namespace Repository.Interface
     public interface IDiscountRep
     {
         Task<Discount> saveDiscount(Discount discount);      
-        Task<IEnumerable<Discount>> GetAllDiscountByOffice(int idOffice);
+        Task<IEnumerable<Discount>> GetAllDiscountByOffice(int idOffice, DateTime today);
         Task<Discount> GetDiscountById(int id);
     
         Task UpdateDiscount(Discount discount);

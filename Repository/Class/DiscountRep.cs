@@ -20,11 +20,12 @@ namespace Repository.Class
             this._context = context;
         }
 
-        public async Task<IEnumerable<Discount>> GetAllDiscountByOffice(int idOffice)
+        public async Task<IEnumerable<Discount>> GetAllDiscountByOffice(int idOffice, DateTime today)
         {
             return await _context.DISCOUNT_OFFICE.Include(q => q.DISCOUNT)
-                                                 .Where(x => x.IdOffice == idOffice)
-                                                 .Select(x => x.DISCOUNT).ToListAsync();
+                                                 .Where(x => x.IdOffice == idOffice &&
+                                                    x.DISCOUNT.DateFrom.Date <= today.Date && x.DISCOUNT.DateTo >= today.Date)
+                                                 .Select(x => x.DISCOUNT).Where(z => z.State).ToListAsync();
         }
 
         public async Task<Discount> GetDiscountById(int id)

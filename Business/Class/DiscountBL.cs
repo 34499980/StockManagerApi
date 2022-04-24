@@ -31,7 +31,8 @@ namespace Business.Class
         {
             try
             {
-                var result = await _discountRep.GetAllDiscountByOffice(ContextProvider.OfficeId);
+
+                var result = await _discountRep.GetAllDiscountByOffice(ContextProvider.OfficeId, DateTime.Now);
                 return _mapper.Map<IEnumerable<DiscountDto>>(result);
             }
             catch (Exception ex)
