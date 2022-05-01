@@ -20,6 +20,7 @@ namespace Repository.Interface
         Task removeDiscount(int IdDiscount);
         Task<Discount> GetDiscountsByDates(DateTime start, DateTime end, long? idStock);
         Task<PaymentType> GetPaymentTypeById(int Id);
+        Task<IEnumerable<Discount_PaymentType>> GetPaymentTypeByDiscount(long Id);
 
 
     }

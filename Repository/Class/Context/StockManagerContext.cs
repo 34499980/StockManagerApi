@@ -37,6 +37,7 @@ namespace Repository.Class.Context
         public DbSet<Actions> ACTIONS { get; set; }
         public DbSet<Discount> DISCOUNT { get; set; }
         public DbSet<Discount_Office> DISCOUNT_OFFICE { get; set; }
+        public DbSet<Discount_PaymentType> DISCOUNT_PAYMENTTYPE { get; set; }
         public DbSet<PaymentType> PAYMENTTYPE { get; set; }
 
 

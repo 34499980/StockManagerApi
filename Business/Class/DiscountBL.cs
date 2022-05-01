@@ -33,6 +33,10 @@ namespace Business.Class
             {
 
                 var result = await _discountRep.GetAllDiscountByOffice(ContextProvider.OfficeId, DateTime.Now);
+                foreach (var item in result)
+                {
+                    item.PaymentTypeList = await this._discountRep.GetPaymentTypeByDiscount(item.ID);
+                }
                 return _mapper.Map<IEnumerable<DiscountDto>>(result);
             }
             catch (Exception ex)
@@ -78,7 +82,7 @@ namespace Business.Class
                     }
                     var dtoReturn = _mapper.Map<DiscountDto>(discount);
                     dtoReturn.Offices = _mapper.Map<IEnumerable<OfficeDto>>(officeList);
-                    dtoReturn.PaymentType = _mapper.Map<IEnumerable<PaymentTypeDto>>(paymentTypeList);
+                    dtoReturn.PaymentType = _mapper.Map<IEnumerable<ItemDto>>(paymentTypeList);
                     discountDtoList.Add(dtoReturn);
 
 

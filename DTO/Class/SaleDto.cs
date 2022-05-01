@@ -17,6 +17,7 @@ namespace DTO.Class
         public string Refer { get; set; }
         public int IdOffice { get; set; }
         public int IdState { get; set; }
+        public PaymentTypeDto PaymentTypeDto { get; set; }
 
         public string OfficeDescription { get { return Office?.Name; } }
         public string UseDescription { get { return User?.UserName; } }
