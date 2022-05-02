@@ -36,16 +36,16 @@ namespace Business.Class
         {
             try
             {
-                decimal total = 0;
+                double total = 0;
                 Stock stock = null;
                 List<Sale_Stock> saleStockList = new List<Sale_Stock>();
                 foreach (var item in dto.Sale_stock)
                 {
-                    decimal subTotal = 0;
+                    double subTotal = 0;
                     stock = _stockRep.GetStockById(item.IdStock);
                     var stock_office = stock.Stock_Office.Where(x => x.IdStock == item.IdStock && x.IdOffice == ContextProvider.OfficeId).FirstOrDefault();
                     stock_office.Unity -= item.Unity;
-                    subTotal = item.Unity * stock_office.Price;
+                    subTotal = double.Parse((item.Unity * stock_office.Price).ToString());
                     total += subTotal;
                     saleStockList.Add(new Sale_Stock() { IdStock = item.IdStock, Unity = item.Unity });
                     await _stockRep.UpdateStock(stock);
