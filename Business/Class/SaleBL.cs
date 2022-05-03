@@ -86,5 +86,27 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public async Task<SaleDto> GetStockBySaleId(long id)
+        {
+            List<StockDto> stockList = new List<StockDto>();
+            Stock stockEntity = null;
+            try
+            {
+                var saleEntity = await this._saleRep.GetStockBySaleId(id);
+                foreach (var item in saleEntity.Sale_stock)
+                {
+                    item.Sale = null;
+                    stockEntity =  this._stockRep.GetStockById(item.IdStock);
+                    stockEntity.Unity = item.Unity;
+                    stockList.Add(_mapper.Map<StockDto>(stockEntity));
+                }
+                var result = _mapper.Map<SaleDto>(saleEntity);
+                result.Stock = stockList;
+                return result;
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

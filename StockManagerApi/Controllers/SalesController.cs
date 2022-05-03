@@ -28,10 +28,10 @@ namespace StockManagerApi.Controllers
         }
 
         // GET api/<SalesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetStockBySaleId/{id}")]
+        public async Task<SaleDto> GetStockBySaleId(long id)
         {
-            return "value";
+            return await this._service.GetStockBySaleId(id);
         }
 
         // POST api/<SalesController>

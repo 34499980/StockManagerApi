@@ -37,7 +37,11 @@ namespace Repository.Class
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Trae las ventas filtradas
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         public async Task<Result<Sale>> GetSalesByFilters(SaleFilterDto dto)
         {
             try
@@ -60,6 +64,16 @@ namespace Repository.Class
                 return new Result<Sale> { rowCount = query.Count(), data = page };
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<Sale> GetStockBySaleId(long id)
+        {
+            try
+            {
+                return await this._context.SALE.Include(q => q.Sale_stock).Where(x => x.ID == id).FirstOrDefaultAsync();
+            }catch(Exception ex)
             {
                 throw ex;
             }
