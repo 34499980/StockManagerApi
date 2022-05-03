@@ -102,6 +102,8 @@ namespace Business.Class
                 }
                 var result = _mapper.Map<SaleDto>(saleEntity);
                 result.Stock = stockList;
+                result.Sale_stock = null;
+
                 return result;
             }catch(Exception ex)
             {
