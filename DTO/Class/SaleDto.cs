@@ -13,14 +13,17 @@ namespace DTO.Class
         public int ID { get; set; }
         public DateTime DateProces { get; set; }
         public int IdUser { get; set; }
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
         public string Refer { get; set; }
         public int IdOffice { get; set; }
         public int IdState { get; set; }
+        public PaymentTypeDto PaymentTypeDto { get; set; }
 
+        public string OfficeDescription { get { return Office?.Name; } }
+        public string UserDescription { get { return User?.UserName; } }
+        public string StateDescription { get { return State?.Description; } }
 
-       
-        public  OfficeDto Sucursal { get; set; }
+        public  OfficeDto Office { get; set; }
         public ICollection<Sale_StockDto> Sale_stock { get; set; }
         public ICollection<StockDto> Stock { get; set; }
 

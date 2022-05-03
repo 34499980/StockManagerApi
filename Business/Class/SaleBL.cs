@@ -2,6 +2,7 @@
 using Business.Interface;
 using ConstantControl;
 using DTO.Class;
+using Repository.Class;
 using Repository.Entities;
 using Repository.Interface;
 using StockManagerApi.Extensions;
@@ -35,16 +36,16 @@ namespace Business.Class
         {
             try
             {
-                decimal total = 0;
+                double total = 0;
                 Stock stock = null;
                 List<Sale_Stock> saleStockList = new List<Sale_Stock>();
                 foreach (var item in dto.Sale_stock)
                 {
-                    decimal subTotal = 0;
+                    double subTotal = 0;
                     stock = _stockRep.GetStockById(item.IdStock);
                     var stock_office = stock.Stock_Office.Where(x => x.IdStock == item.IdStock && x.IdOffice == ContextProvider.OfficeId).FirstOrDefault();
                     stock_office.Unity -= item.Unity;
-                    subTotal = item.Unity * stock_office.Price;
+                    subTotal = double.Parse((item.Unity * stock_office.Price).ToString());
                     total += subTotal;
                     saleStockList.Add(new Sale_Stock() { IdStock = item.IdStock, Unity = item.Unity });
                     await _stockRep.UpdateStock(stock);
@@ -67,6 +68,44 @@ namespace Business.Class
                 
             }
             catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<ResultDto<SaleDto>> GetSalesByFilters(SaleFilterDto dto)
+        {
+            try
+            {
+                var result = await _saleRep.GetSalesByFilters(dto);
+
+                return this._mapper.Map<ResultDto<SaleDto>>(result);
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<SaleDto> GetStockBySaleId(long id)
+        {
+            List<StockDto> stockList = new List<StockDto>();
+            Stock stockEntity = null;
+            try
+            {
+                var saleEntity = await this._saleRep.GetStockBySaleId(id);
+                foreach (var item in saleEntity.Sale_stock)
+                {
+                    item.Sale = null;
+                    stockEntity =  this._stockRep.GetStockById(item.IdStock);
+                    stockEntity.Unity = item.Unity;
+                    stockList.Add(_mapper.Map<StockDto>(stockEntity));
+                }
+                var result = _mapper.Map<SaleDto>(saleEntity);
+                result.Stock = stockList;
+                result.Sale_stock = null;
+
+                return result;
+            }catch(Exception ex)
             {
                 throw ex;
             }

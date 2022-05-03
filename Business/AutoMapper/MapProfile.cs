@@ -35,13 +35,14 @@ namespace Business.AutoMapper
             CreateMap<ActionsDto, Actions>().ReverseMap();
             CreateMap<DiscountDto, Discount>().ReverseMap();
             CreateMap<ItemDto, PaymentType>().ReverseMap();
-            CreateMap<PaymentTypeDto, PaymentType>().ReverseMap();
+            CreateMap<Discount_PaymentTypeDto, Discount_PaymentType>().ReverseMap();
 
             CreateMap<ResultDto<Stock_OfficeDto>, Result<Stock_Office>>().ReverseMap();
             CreateMap<ResultDto<HistoryDto>, Result<History>>().ReverseMap();
             CreateMap<ResultDto<DispatchDto>, Result<Dispatch>>().ReverseMap();
             CreateMap<ResultDto<OfficeGetDto>, Result<Office>>().ReverseMap();
             CreateMap<ResultDto<DiscountDto>, Result<Discount>>().ReverseMap();
+            CreateMap<ResultDto<SaleDto>, Result<Sale>>().ReverseMap();
 
         }
     }

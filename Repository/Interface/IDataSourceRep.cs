@@ -13,5 +13,6 @@ namespace Repository.Interface
         IEnumerable<Roles> GetAllRoles();
         IEnumerable<Actions> GetActions();
         IEnumerable<PaymentType> GetPaytmentTypes();
+        IEnumerable<Sale_State> GetSaleStates();
     }
 }

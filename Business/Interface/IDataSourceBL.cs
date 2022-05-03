@@ -14,5 +14,6 @@ namespace Business.Interface
         IEnumerable<RolesDto> GetAllRoles();
         IEnumerable<ActionsDto> GetActions();
         IEnumerable<ItemDto> GetPaytmentTypes();
+        IEnumerable<Sale_StateDto> GetSaleStates();
     }
 }

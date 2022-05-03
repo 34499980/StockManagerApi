@@ -20,10 +20,11 @@ namespace Repository.Class
             this._context = context;
         }
 
-        public async Task<IEnumerable<Discount>> GetAllDiscountByOffice(int idOffice)
+        public async Task<IEnumerable<Discount>> GetAllDiscountByOffice(int idOffice, DateTime today)
         {
             return await _context.DISCOUNT_OFFICE.Include(q => q.DISCOUNT)
-                                                 .Where(x => x.IdOffice == idOffice)
+                                                 .Where(x => x.IdOffice == idOffice &&
+                                                    x.DISCOUNT.DateFrom.Date <= today.Date && x.DISCOUNT.DateTo.Date >= today.Date)
                                                  .Select(x => x.DISCOUNT).ToListAsync();
         }
 
@@ -96,6 +97,10 @@ namespace Repository.Class
         public async Task<PaymentType> GetPaymentTypeById(int Id)
         {
             return await _context.PAYMENTTYPE.Where(x => x.ID == Id).FirstOrDefaultAsync();
+        }
+        public async Task<IEnumerable<Discount_PaymentType>> GetPaymentTypeByDiscount(long Id)
+        {
+            return await _context.DISCOUNT_PAYMENTTYPE.Where(x => x.IdDiscount == Id).ToListAsync();
         }
     }
 }

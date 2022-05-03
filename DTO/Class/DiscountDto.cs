@@ -20,13 +20,13 @@ namespace DTO.Class
 
         public virtual string UserDescription { get { return User?.UserName; } }
 
+        public virtual IEnumerable<Discount_PaymentTypeDto> PaymentTypeList { get; set; }
+        // public virtual PaymentTypeDto PaymentType { get; set; }  
 
-       // public virtual PaymentTypeDto PaymentType { get; set; }  
-       
         public virtual StockDto Stock { get; set; }
       
         public virtual UserDto User { get; set; }
         public virtual IEnumerable<OfficeDto> Offices { get; set; }
-        public virtual IEnumerable<PaymentTypeDto> PaymentType { get; set; }
+        public virtual IEnumerable<ItemDto> PaymentType { get; set; }
     }
 }

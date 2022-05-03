@@ -9,5 +9,7 @@ namespace Business.Interface
     public interface ISaleBL
     {
         Task save(SaleDto dto);
+        Task<ResultDto<SaleDto>> GetSalesByFilters(SaleFilterDto dto);
+        Task<SaleDto> GetStockBySaleId(long id);
     }
 }

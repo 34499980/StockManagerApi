@@ -13,7 +13,7 @@ namespace Repository.Entities
         public int ID { get; set; }
         public DateTime DateProces { get; set; }
         public int IdUser { get; set; }
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
         public string Refer { get; set; }
         public int IdOffice{ get; set; }
         public int IdState { get; set; }
