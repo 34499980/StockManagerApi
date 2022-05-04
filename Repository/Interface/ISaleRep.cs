@@ -13,5 +13,7 @@ namespace Repository.Interface
         Task<Sale> save(Sale sale);
         Task<Result<Sale>> GetSalesByFilters(SaleFilterDto dto);
         Task<Sale> GetStockBySaleId(long id);
+        Task<Sale> GetSaleById(long id);
+        Task Update(Sale sale);
     }
 }

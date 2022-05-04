@@ -110,5 +110,44 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public async Task ReturnAllSale(long idSale)
+        {
+            try
+            {
+                List<Stock_Office> stockOfficeList = new List<Stock_Office>();
+                Stock_Office stock_office = null;
+                var saleEntity =  await _saleRep.GetSaleById(idSale);
+                //Agrego stock a la nueva sucursal;
+                foreach (var item in saleEntity.Sale_stock)
+                {
+                  stock_office =  _stockRep.GetStock_Office(item.IdStock, ContextProvider.OfficeId);
+                    if(stock_office != null)
+                    {
+                        stock_office.Unity += item.Unity;
+                    } else
+                    {
+                        var price = _stockRep.GetStock_Office(item.IdStock, saleEntity.IdOffice).Price;
+                        stock_office = new Stock_Office()
+                        {
+                            IdOffice = ContextProvider.OfficeId,
+                            IdStock = item.IdStock,
+                            Price = price,
+                            Unity = item.Unity
+                        };
+                    }
+                    stockOfficeList.Add(stock_office);
+                    stock_office = null;
+
+                }
+                _stockRep.UpdateStockByOffice(stockOfficeList);
+                //Actualizo estado de la venta
+                saleEntity.IdState = (int)Constants.Sale_State.Devuelto;
+                await _saleRep.Update(saleEntity);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

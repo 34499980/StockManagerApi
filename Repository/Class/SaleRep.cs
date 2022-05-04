@@ -78,5 +78,28 @@ namespace Repository.Class
                 throw ex;
             }
         }
+        public async Task<Sale> GetSaleById(long id)
+        {
+            try
+            {
+                return await _context.SALE.Include(q => q.Sale_stock)
+                                    .Where(x => x.ID == id).FirstOrDefaultAsync();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task Update(Sale sale)
+        {
+            try
+            {
+                this._context.Update(sale);
+                await _context.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+           
+        }
     }
 }
