@@ -26,6 +26,8 @@ using Repository.Class;
 using Repository.Class.Context;
 using Repository.Interface;
 using StockManagerApi.Extensions;
+using Microsoft.OpenApi.Models;
+
 
 namespace StockManagerApi
 {
@@ -46,7 +48,7 @@ namespace StockManagerApi
         {
             
             services.AddControllers();
-
+            AddSwagger(services);
             services.AddAuthentication(options =>
             {
                // options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -84,7 +86,26 @@ namespace StockManagerApi
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
         }
+        private void AddSwagger(IServiceCollection services)
+        {
+            services.AddSwaggerGen(options =>
+            {
+                var groupName = "v1";
 
+                options.SwaggerDoc(groupName, new OpenApiInfo
+                {
+                    Title = $"StockManagment",
+                    Version = groupName,
+                    Description = "StockManagment API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "",
+                        Email = string.Empty,
+                        Url = new Uri("https://foo.com/"),
+                    }
+                });
+            });
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -92,6 +113,11 @@ namespace StockManagerApi
             {
                // app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "StockManagment API V1");
+            });
             app.UseExceptionHandler(new ExceptionHandlerOptions
             {
                 ExceptionHandler = (c) =>
