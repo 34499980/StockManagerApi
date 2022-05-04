@@ -39,6 +39,11 @@ namespace StockManagerApi.Controllers
         {
             await this._service.ReturnAllSale(id);
         }
+        [HttpGet("GetSaleById/{id}")]
+        public async Task<SaleDto> GetSaleById(long id)
+        {
+           return await this._service.GetSaleById(id);
+        }
         // POST api/<SalesController>
         [HttpPost("Save")]
         [Authorize]

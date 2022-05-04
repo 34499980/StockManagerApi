@@ -149,5 +149,17 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public async Task<SaleDto> GetSaleById(long idSale)
+        {
+            try
+            {
+                var saleEntity = await _saleRep.GetSaleById(idSale);
+                return _mapper.Map<SaleDto>(saleEntity);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
