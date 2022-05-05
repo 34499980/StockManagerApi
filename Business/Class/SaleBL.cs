@@ -154,7 +154,20 @@ namespace Business.Class
             try
             {
                 var saleEntity = await _saleRep.GetSaleById(idSale);
-                return _mapper.Map<SaleDto>(saleEntity);
+                SaleDto result = _mapper.Map<SaleDto>(saleEntity);
+                List<StockDto> stockList = new List<StockDto>();
+                Stock stockEntity = null;
+                foreach (var item in saleEntity.Sale_stock)
+                {
+                    stockEntity =  _stockRep.GetStockById(item.IdStock);
+                    stockEntity.Unity = item.Unity;
+                    stockList.Add(_mapper.Map<StockDto>(stockEntity));
+
+                    
+                }
+                result.Sale_stock = null;
+                result.Stock = stockList;
+                return result;
             }
             catch(Exception ex)
             {
