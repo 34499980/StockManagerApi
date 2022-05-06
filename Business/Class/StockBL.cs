@@ -148,12 +148,12 @@ namespace Business.Class
         /// </summary>
         /// <param name="stock"></param>
         /// <param name="user"></param>
-        public void UpdateStock(StockDto stock)
+        public async Task UpdateStock(StockDto stock)
         {
             try
             {
                 var inputSock = _mapper.Map<Stock>(stock);
-                this._stockRep.UpdateStock(inputSock);
+               await this._stockRep.UpdateStock(inputSock);
                 this._stockRep.UpdateStockByOffice(inputSock.Stock_Office);
                 this._historyRep.AddHistory((int)Constants.Actions.Stock ,Constants.HistoryStockUpdate, stock.Name, stock.IdOffice, ContextProvider.UserId);
 

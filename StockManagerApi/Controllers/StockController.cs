@@ -122,9 +122,9 @@ namespace StockManagerApi.Controllers
         // PUT api/<StockController>/5
         [HttpPut]
         [Authorize]
-        public void Put(StockPostDto dto)
+        public async Task Put(StockPostDto dto)
         {
-            this._stockBL.UpdateStock(dto);
+           await this._stockBL.UpdateStock(dto);
         }
 
         // DELETE api/<StockController>/5
