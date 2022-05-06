@@ -12,5 +12,7 @@ namespace Business.Interface
         Task<ResultDto<SaleDto>> GetSalesByFilters(SaleFilterDto dto);
         Task<SaleDto> GetStockBySaleId(long id);
         Task ReturnAllSale(long idSale);
+        Task<SaleDto> GetSaleById(long idSale);
+        Task GenerateChanges(CalculateChangesDto dto);
     }
 }

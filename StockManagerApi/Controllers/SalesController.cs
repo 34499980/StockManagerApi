@@ -39,6 +39,11 @@ namespace StockManagerApi.Controllers
         {
             await this._service.ReturnAllSale(id);
         }
+        [HttpGet("GetSaleById/{id}")]
+        public async Task<SaleDto> GetSaleById(long id)
+        {
+           return await this._service.GetSaleById(id);
+        }
         // POST api/<SalesController>
         [HttpPost("Save")]
         [Authorize]
@@ -47,6 +52,19 @@ namespace StockManagerApi.Controllers
             try
             {
                 await this._service.save(dto);                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost("GenerateChanges")]
+        [Authorize]
+        public async Task GenerateChanges(CalculateChangesDto dto)
+        {
+            try
+            {
+                await this._service.GenerateChanges(dto);
             }
             catch (Exception ex)
             {
