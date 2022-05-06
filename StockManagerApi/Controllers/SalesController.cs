@@ -58,6 +58,19 @@ namespace StockManagerApi.Controllers
                 throw ex;
             }
         }
+        [HttpPost("GenerateChanges")]
+        [Authorize]
+        public async Task GenerateChanges(CalculateChangesDto dto)
+        {
+            try
+            {
+                await this._service.GenerateChanges(dto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         [HttpPost("GetSalesByFilters")]
         [Authorize]
         public async Task<ResultDto<SaleDto>> GetSalesByFilters(SaleFilterDto dto)

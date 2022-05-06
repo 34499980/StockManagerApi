@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Business.Class
 {
-    public class SaleBL: ISaleBL
+    public class SaleBL : ISaleBL
     {
         private readonly ISaleRep _saleRep;
         private readonly IUserRep _userhRep;
@@ -63,9 +63,9 @@ namespace Business.Class
                 };
 
                 await _saleRep.save(entity);
-              
+
                 this._historyRep.AddHistory((int)Constants.Actions.Sale, Constants.HistorySaleCreate, entity.ID.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
-                
+
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@ namespace Business.Class
                 return this._mapper.Map<ResultDto<SaleDto>>(result);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -96,7 +96,7 @@ namespace Business.Class
                 foreach (var item in saleEntity.Sale_stock)
                 {
                     item.Sale = null;
-                    stockEntity =  this._stockRep.GetStockById(item.IdStock);
+                    stockEntity = this._stockRep.GetStockById(item.IdStock);
                     stockEntity.Unity = item.Unity;
                     stockList.Add(_mapper.Map<StockDto>(stockEntity));
                 }
@@ -105,7 +105,8 @@ namespace Business.Class
                 result.Sale_stock = null;
 
                 return result;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -116,15 +117,16 @@ namespace Business.Class
             {
                 List<Stock_Office> stockOfficeList = new List<Stock_Office>();
                 Stock_Office stock_office = null;
-                var saleEntity =  await _saleRep.GetSaleById(idSale);
+                var saleEntity = await _saleRep.GetSaleById(idSale);
                 //Agrego stock a la nueva sucursal;
                 foreach (var item in saleEntity.Sale_stock)
                 {
-                  stock_office =  _stockRep.GetStock_Office(item.IdStock, ContextProvider.OfficeId);
-                    if(stock_office != null)
+                    stock_office = _stockRep.GetStock_Office(item.IdStock, ContextProvider.OfficeId);
+                    if (stock_office != null)
                     {
                         stock_office.Unity += item.Unity;
-                    } else
+                    }
+                    else
                     {
                         var price = _stockRep.GetStock_Office(item.IdStock, saleEntity.IdOffice).Price;
                         stock_office = new Stock_Office()
@@ -144,7 +146,7 @@ namespace Business.Class
                 saleEntity.IdState = (int)Constants.Sale_State.Devuelto;
                 await _saleRep.Update(saleEntity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -159,17 +161,62 @@ namespace Business.Class
                 Stock stockEntity = null;
                 foreach (var item in saleEntity.Sale_stock)
                 {
-                    stockEntity =  _stockRep.GetStockById(item.IdStock);
+                    stockEntity = _stockRep.GetStockById(item.IdStock);
                     stockEntity.Unity = item.Unity;
                     stockList.Add(_mapper.Map<StockDto>(stockEntity));
 
-                    
+
                 }
                 result.Sale_stock = null;
                 result.Stock = stockList;
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task GenerateChanges(CalculateChangesDto dto)
+        {
+            try
+            {
+                //Se genera la venta
+                if (dto.sale.Sale_stock.Count() > 0)
+                {
+                    await save(dto.sale);
+                }
+
+                //Proceso de devolucion
+                List<Stock_Office> stockOfficeList = new List<Stock_Office>();
+                Stock_Office stock_office = null;
+                // var saleEntity = await _saleRep.GetSaleById(idSale);
+                //Agrego stock a la nueva sucursal;
+                foreach (var item in dto.changes.Stock)
+                {
+                    stock_office = _stockRep.GetStock_Office(item.ID, ContextProvider.OfficeId);
+                    if (stock_office != null)
+                    {
+                        stock_office.Unity += item.Unity;
+                    }
+                    else
+                    {
+                        var price = _stockRep.GetStock_Office(item.ID, dto.changes.IdOffice).Price;
+                        stock_office = new Stock_Office()
+                        {
+                            IdOffice = ContextProvider.OfficeId,
+                            IdStock = item.ID,
+                            Price = price,
+                            Unity = item.Unity
+                        };
+                    }
+                    stockOfficeList.Add(stock_office);
+                    stock_office = null;
+
+                }
+                _stockRep.UpdateStockByOffice(stockOfficeList);
+
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
