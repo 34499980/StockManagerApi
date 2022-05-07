@@ -86,9 +86,12 @@ namespace ConstantControl
         public static string HistoryStockDelete = "StockDelete";
 
         public static string HistorySaleCreate = "SaleCreate";
+        public static string HistorySaleReturned = "SaleReturned";
+        public static string HistoryChangeGenerate = "ChangeGenerate";
 
         public static string HistoryDiscountCreate = "DiscountCreate";
         public static string HistoryDiscountDisabled = "DiscountDisabled";
+        public static string HistoryDiscountUpdated = "DiscountUpdated";
 
         //ERRORS
         public static string ErrSameDestinationAndOrigin = "errSameDestinationAndOrigin";

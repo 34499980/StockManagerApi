@@ -145,6 +145,8 @@ namespace Business.Class
                 //Actualizo estado de la venta
                 saleEntity.IdState = (int)Constants.Sale_State.Devuelto;
                 await _saleRep.Update(saleEntity);
+                this._historyRep.AddHistory((int)Constants.Actions.Sale, Constants.HistorySaleReturned, saleEntity.ID.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
+
             }
             catch (Exception ex)
             {
@@ -214,6 +216,8 @@ namespace Business.Class
 
                 }
                 _stockRep.UpdateStockByOffice(stockOfficeList);
+                this._historyRep.AddHistory((int)Constants.Actions.Sale, Constants.HistoryChangeGenerate, dto.changes.ID.ToString() + " -> " + dto.sale.ID.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
+
 
             }
             catch (Exception ex)

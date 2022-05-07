@@ -110,6 +110,8 @@ namespace Business.Class
             try
             {
                 await _discountRep.removeDiscount(IdDiscount);
+                this._historyRep.AddHistory((int)Constants.Actions.Discount, Constants.HistoryDiscountDisabled, IdDiscount.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
+
             }
             catch (Exception ex)
             {
@@ -204,6 +206,8 @@ namespace Business.Class
         {
             var entity = _mapper.Map<Discount>(discount);
             await _discountRep.UpdateDiscount(entity);
+            this._historyRep.AddHistory((int)Constants.Actions.Discount, Constants.HistoryDiscountUpdated, discount.ID.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
+
         }
     }
 }

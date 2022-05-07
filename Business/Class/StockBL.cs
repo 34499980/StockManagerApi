@@ -218,7 +218,9 @@ namespace Business.Class
             try
             {
                  this._stockRep.delete(id);
-              
+                this._historyRep.AddHistory((int)Constants.Actions.Stock, Constants.HistoryStockDelete, id.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
+
+
             }
             catch (Exception ex)
             {
