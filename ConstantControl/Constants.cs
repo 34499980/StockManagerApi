@@ -36,8 +36,8 @@ namespace ConstantControl
         }
         public enum Discount_State
         {
-            Habilitado = 0,
-            Deshabilitado = 1
+            Habilitado = 1,
+            Deshabilitado = 0
 
 
 

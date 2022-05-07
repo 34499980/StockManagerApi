@@ -109,7 +109,9 @@ namespace Business.Class
         {
             try
             {
-                await _discountRep.removeDiscount(IdDiscount);
+                var discount = await _discountRep.GetDiscountById(IdDiscount);
+                discount.State = Convert.ToBoolean(Discount_State.Deshabilitado);
+                await _discountRep.UpdateDiscount(discount);
                 this._historyRep.AddHistory((int)Constants.Actions.Discount, Constants.HistoryDiscountDisabled, IdDiscount.ToString(), ContextProvider.OfficeId, ContextProvider.UserId);
 
             }
