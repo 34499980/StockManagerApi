@@ -21,6 +21,7 @@ namespace Repository.Interface
         Task<Discount> GetDiscountsByDates(DateTime start, DateTime end, long? idStock);
         Task<PaymentType> GetPaymentTypeById(int Id);
         Task<IEnumerable<Discount_PaymentType>> GetPaymentTypeByDiscount(long Id);
+        Task<IEnumerable<Discount>> GetDiscountsByEndDate(DateTime endData);
 
 
     }

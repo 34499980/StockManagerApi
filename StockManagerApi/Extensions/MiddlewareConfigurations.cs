@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BackgroundServices;
 using Business.AutoMapper;
 using Business.Class;
 using Business.Interface;
@@ -51,6 +52,7 @@ namespace StockManagerApi.Extensions
             services.AddScoped<IHistoryBL, HistoryBL>();
             services.AddScoped<ISaleBL, SaleBL>();
             services.AddScoped<IDiscountBL, DiscountBL>();
+            services.AddScoped<IDisabledDiscountService, DisabledDiscountService>();
         }
 
         public static void Authentication(IServiceCollection services, IConfiguration Configuration)

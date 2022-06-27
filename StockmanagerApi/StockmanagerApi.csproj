@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BackgroundServices\BackgroundServices.csproj" />
     <ProjectReference Include="..\Business\Business.csproj" />
   </ItemGroup>
 

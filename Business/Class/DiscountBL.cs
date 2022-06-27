@@ -104,6 +104,21 @@ namespace Business.Class
                 throw ex;
             }
         }
+        public async Task DisabledDiscount()
+        {
+            try
+            {
+              var discountLIst = await _discountRep.GetDiscountsByEndDate(DateTime.Now);
+                foreach (var item in discountLIst)
+                {
+                    item.State = false;
+                    await _discountRep.UpdateDiscount(item);
+                }
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public async Task removeDiscount(int IdDiscount)
         {

@@ -16,5 +16,6 @@ namespace Business.Interface
 
         Task<ResultDto<DiscountDto>> GetDiscountFilter(DiscountFilterDto dto);
         Task removeDiscount(int IdDiscount);
+        Task DisabledDiscount();
     }
 }

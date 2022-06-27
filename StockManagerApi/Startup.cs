@@ -27,7 +27,7 @@ using Repository.Class.Context;
 using Repository.Interface;
 using StockManagerApi.Extensions;
 using Microsoft.OpenApi.Models;
-
+using BackgroundServices;
 
 namespace StockManagerApi
 {
@@ -80,7 +80,10 @@ namespace StockManagerApi
             MiddlewareConfigurations.DependecInjection(services);
             //Cors Configuration
             MiddlewareConfigurations.CorsConfiguration(services);
-           
+            //BackgroundService
+            services.AddHostedService<ScopeDisabledDIscountService>();
+
+
 
             var builder = new ContainerBuilder();
             builder.Populate(services);

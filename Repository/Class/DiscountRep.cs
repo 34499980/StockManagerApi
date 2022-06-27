@@ -102,5 +102,15 @@ namespace Repository.Class
         {
             return await _context.DISCOUNT_PAYMENTTYPE.Where(x => x.IdDiscount == Id).ToListAsync();
         }
+        public async Task<IEnumerable<Discount>> GetDiscountsByEndDate(DateTime endData)
+        {
+            try
+            {
+                return await _context.DISCOUNT.Where(x => x.DateTo.Date == endData.Date).ToListAsync();
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

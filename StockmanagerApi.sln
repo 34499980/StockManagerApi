@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockManagerApi", "StockManagerApi\StockManagerApi.csproj", "{61562F55-A3C5-4084-88C7-487930E66AB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstantControl", "ConstantControl\ConstantControl.csproj", "{DC08F829-1A04-41EA-8699-1442C90D41BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConstantControl", "ConstantControl\ConstantControl.csproj", "{DC08F829-1A04-41EA-8699-1442C90D41BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundServices", "BackgroundServices\BackgroundServices.csproj", "{AE2EFDC1-7513-4069-B9FE-283F5519DCB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DC08F829-1A04-41EA-8699-1442C90D41BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC08F829-1A04-41EA-8699-1442C90D41BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC08F829-1A04-41EA-8699-1442C90D41BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE2EFDC1-7513-4069-B9FE-283F5519DCB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2EFDC1-7513-4069-B9FE-283F5519DCB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2EFDC1-7513-4069-B9FE-283F5519DCB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2EFDC1-7513-4069-B9FE-283F5519DCB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
