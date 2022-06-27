@@ -24,7 +24,8 @@ namespace Repository.Class
         {
             return await _context.DISCOUNT_OFFICE.Include(q => q.DISCOUNT)
                                                  .Where(x => x.IdOffice == idOffice &&
-                                                    x.DISCOUNT.DateFrom.Date <= today.Date && x.DISCOUNT.DateTo.Date >= today.Date)
+                                                    x.DISCOUNT.DateFrom.Date <= today.Date && x.DISCOUNT.DateTo.Date >= today.Date
+                                                    && x.DISCOUNT.State)
                                                  .Select(x => x.DISCOUNT).ToListAsync();
         }
 
