@@ -9,7 +9,7 @@ namespace BackgroundServices
 {
     public sealed class ScopeDisabledDIscountService : BackgroundService
     {
-        private readonly IServiceScopeFactory _ServiceScopeFactory;
+      // private readonly IServiceScopeFactory _ServiceScopeFactory;
         private readonly IServiceProvider _serviceProvider;
 
         public ScopeDisabledDIscountService(IServiceProvider serviceProvider)

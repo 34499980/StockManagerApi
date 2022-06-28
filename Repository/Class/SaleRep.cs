@@ -55,7 +55,7 @@ namespace Repository.Class
                                                    dto.IdState == null || x.IdState == dto.IdState &&
                                                    dto.IdUser == null || x.IdUser == dto.IdUser &&
                                                    dto.DateProcesFrom == null || x.DateProces.Date >= dto.DateProcesFrom.Value.Date &&
-                                                   dto.DateProcesTo == null || x.DateProces.Date <= dto.DateProcesTo.Value.Date);
+                                                   dto.DateProcesTo == null || x.DateProces.Date <= dto.DateProcesTo.Value.Date).OrderByDescending(x => x.DateProces);
 
                 var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
                     .Take(dto.PageSize)

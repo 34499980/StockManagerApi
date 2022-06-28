@@ -7,6 +7,6 @@ namespace DTO.Class
     public class PaymentTypeDto
     {
         public int ID { get; set; }
-        public CreditCardDto CreditCard { get; set; }
+      //  public CreditCardDto CreditCard { get; set; }
     }
 }

@@ -37,7 +37,7 @@ namespace Repository.Class
                                                                  (dto.DateprocesTo == null || x.DateProces.Date <= dto.DateprocesTo.Value.Date) &&
                                                                  (dto.Action == null || x.IdAction == dto.Action) &&
                                                                  (dto.IdOffice == null || x.IdOffice == dto.IdOffice)
-                                                                   );
+                                                                   ).OrderByDescending(x => x.DateProces);
                  var page = await query.Skip((dto.PageIndex - 1) * dto.PageSize)
                        .Take(dto.PageSize)
                       .ToListAsync();
