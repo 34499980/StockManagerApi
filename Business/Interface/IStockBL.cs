@@ -1,6 +1,9 @@
 ﻿using DTO.Class;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,5 +20,7 @@ namespace Business.Interface
         IEnumerable<Stock_StateDto> GetStates();
         Task<ResultDto<Stock_OfficeDto>> GetStockFilter(StockFilterDto dto);
         void delete(int id);
+        Stream generateBarCode(string value);
+        Task DeleteBarcodeFiles();
     }
 }

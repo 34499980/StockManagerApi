@@ -65,6 +65,8 @@ namespace ConstantControl
 
 
         }
+        //BARCODE
+        public static string BarcodeFolder = "StockManagmentBarcodeImage";
         //HISTORY        
         public static string HistoryUserCreate = "UserCreate";
         public static string HistoryUserUpdate = "UserUpdate";

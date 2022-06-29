@@ -53,6 +53,7 @@ namespace StockManagerApi.Extensions
             services.AddScoped<ISaleBL, SaleBL>();
             services.AddScoped<IDiscountBL, DiscountBL>();
             services.AddScoped<IDisabledDiscountService, DisabledDiscountService>();
+            services.AddScoped<IDeleteBarcodeService, DeleteBarcodeService>();
         }
 
         public static void Authentication(IServiceCollection services, IConfiguration Configuration)

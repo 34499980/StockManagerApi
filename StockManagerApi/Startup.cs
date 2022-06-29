@@ -82,6 +82,7 @@ namespace StockManagerApi
             MiddlewareConfigurations.CorsConfiguration(services);
             //BackgroundService
             services.AddHostedService<ScopeDisabledDIscountService>();
+            services.AddHostedService<ScropeDeleteBarcodeService>();
 
 
 

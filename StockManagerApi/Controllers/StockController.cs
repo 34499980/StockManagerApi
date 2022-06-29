@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Business.Interface;
@@ -73,6 +76,17 @@ namespace StockManagerApi.Controllers
               
             return result;
            
+        }
+        [HttpGet("GenerateBarcode/{value}")]
+        [Authorize]
+        public Stream GenerateBarcode(string value)
+        {
+
+
+            var result = this._stockBL.generateBarCode(value);
+
+            return result;
+
         }
         [HttpGet("GetStockByCode/{code}")]
         [Authorize]

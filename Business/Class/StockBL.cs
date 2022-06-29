@@ -11,6 +11,11 @@ using Repository.Entities;
 using AutoMapper;
 using StockManagerApi.Extensions;
 using System.Threading.Tasks;
+using IronBarCode;
+using System.Drawing;
+using System.IO;
+using System.Net.Http;
+using System.Net;
 
 namespace Business.Class
 {
@@ -111,28 +116,36 @@ namespace Business.Class
                             inputStock.Stock_Office.Add(new Stock_Office() { IdOffice = item.ID, Unity = 0 });
                         }
                     }
-                    //  stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;                  
+                    //  stock.IdState = this._stockRep.GetAllStates().Where(x => x.ID == (int)Constants.Stock_State.Habilitado).FirstOrDefault().ID;    
+                   
+
                     long idStock = this._stockRep.SaveStock(inputStock);
+                    Random random = new Random();
+                    int value = random.Next(0000000000, int.MaxValue);
+                    string fmt = "00000000##";                    
+                    GeneratedBarcode barcode = BarcodeWriter.CreateBarcode(value.ToString(fmt), BarcodeWriterEncoding.Code128);
+                    inputStock.Code = barcode.ToString();
+                    this._stockRep.UpdateStock(inputStock);
 
-                   /* var offices = _officeRep.GetOfficesByCountry(idCountry);
-                    List<Stock_Office> stock_officeList = new List<Stock_Office>();
-                    foreach (var item in offices)
-                    {
+                    /* var offices = _officeRep.GetOfficesByCountry(idCountry);
+                     List<Stock_Office> stock_officeList = new List<Stock_Office>();
+                     foreach (var item in offices)
+                     {
 
-                        if (!stock.Stock_Office.Any(x => x.IdOffice == item.ID))
-                        {
-                            stock_officeList.Add(new Stock_Office() { IdOffice = item.ID, IdStock = idStock, Unity = 0 });
-                        }
-                    }
-                    foreach (var item in stock.Stock_Office)
-                    {
-                        item.IdStock = idStock;
+                         if (!stock.Stock_Office.Any(x => x.IdOffice == item.ID))
+                         {
+                             stock_officeList.Add(new Stock_Office() { IdOffice = item.ID, IdStock = idStock, Unity = 0 });
+                         }
+                     }
+                     foreach (var item in stock.Stock_Office)
+                     {
+                         item.IdStock = idStock;
 
-                    }
-                    var inputStock_Office = _mapper.Map<IEnumerable<Stock_Office>>(stock.Stock_Office);
-                    var stock_OfficeListMerged  = stock_officeList.Concat(inputStock_Office).ToArray();
-                    this._stockRep.saveStockByOffice(stock_OfficeListMerged);*/
-                 // this._stockRep.UpdateQR(stock);
+                     }
+                     var inputStock_Office = _mapper.Map<IEnumerable<Stock_Office>>(stock.Stock_Office);
+                     var stock_OfficeListMerged  = stock_officeList.Concat(inputStock_Office).ToArray();
+                     this._stockRep.saveStockByOffice(stock_OfficeListMerged);*/
+                    // this._stockRep.UpdateQR(stock);
 
                 }
                 this._historyRep.AddHistory((int)Constants.Actions.Stock ,Constants.HistoryStockCreate, stock.Name, stock.IdOffice, ContextProvider.UserId);
@@ -226,6 +239,59 @@ namespace Business.Class
             {
                 throw ex;
             }
+        }
+        public async Task DeleteBarcodeFiles()
+        {
+            try
+            {
+                var folder = "/App_Data/" + Constants.BarcodeFolder;
+                if (Directory.Exists(folder))
+                {
+                    foreach (var item in Directory.GetFiles(folder))
+                    {
+                        File.Delete(item);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public Stream generateBarCode(string value)
+        {
+            try
+            {
+                FileStream fileStream;
+                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+                GeneratedBarcode barcode = BarcodeWriter.CreateBarcode(value, BarcodeWriterEncoding.Code128);
+                barcode.ResizeTo(50, 25);
+                barcode.AddBarcodeValueTextBelowBarcode();
+                barcode.SetMargins(10);
+                var folder = "/App_Data/" + Constants.BarcodeFolder;
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+               
+                string filePath = folder + "/" + value + ".jpeg";
+                if (Directory.Exists(filePath))
+                {
+                    fileStream = new FileStream(filePath, FileMode.Open);
+                   
+                    return fileStream;
+                }
+                barcode.SaveAsJpeg(filePath);
+               // var b = File.ReadAllBytes(Path.Combine(folder + "/" + value + ".png"));
+                fileStream = new FileStream(filePath, FileMode.Open);
+              
+                return fileStream;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }
