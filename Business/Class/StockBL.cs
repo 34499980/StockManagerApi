@@ -252,6 +252,7 @@ namespace Business.Class
                         File.Delete(item);
                     }
                 }
+                await Task.Delay(1);
             }
             catch(Exception ex)
             {

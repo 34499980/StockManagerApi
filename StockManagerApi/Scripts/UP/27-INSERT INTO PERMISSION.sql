@@ -34,3 +34,6 @@ INSERT INTO PERMISSION (Description, ValueId, ModuleId)
 
 INSERT INTO PERMISSION (Description, ValueId, ModuleId)
 						VALUES('DispatchList', 23, 20)
+
+INSERT INTO PERMISSION (Description, ValueId, ModuleId)
+						VALUES('Dashboard', 8, 1)

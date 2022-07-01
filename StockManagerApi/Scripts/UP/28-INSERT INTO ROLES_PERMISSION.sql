@@ -33,6 +33,8 @@ VALUES(1, 11 , 1, 1)
 
 INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
 VALUES(1, 12 , 1, 1)
+INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
+VALUES(1, 17 , 1, 1)
 
 --Manager
 INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
@@ -69,6 +71,8 @@ VALUES(2, 11 , 1, 1)
 INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
 VALUES(2, 12 , 1, 1)
 
+INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
+VALUES(2, 17 , 1, 1)
 --Seller
 
 INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
@@ -97,3 +101,7 @@ VALUES(3, 11 , 1, 1)
 
 INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
 VALUES(3, 12 , 1, 1)
+
+INSERT INTO ROLES_PERMISSION(IdRole, IdPermission, [Read], Write)
+VALUES(3, 17 , 1, 1)
+
