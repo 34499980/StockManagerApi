@@ -8,6 +8,6 @@ namespace Repository.Interface
 {
     public interface IDashboardRep
     {
-        Task<List<DashboardData>> GetDataChart(DateTime start, DateTime end, int idOffice);
+        Task<List<DashboardData>> GetDataChart(DateTime start, DateTime end, int? idOffice);
     }
 }
