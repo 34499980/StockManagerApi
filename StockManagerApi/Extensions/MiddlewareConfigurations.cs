@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BackgroundServices;
+using Business;
 using Business.AutoMapper;
 using Business.Class;
 using Business.Interface;
@@ -42,6 +43,7 @@ namespace StockManagerApi.Extensions
             services.AddScoped<IHistoryRep, HistoryRep>();
             services.AddScoped<ISaleRep, SaleRep>();
             services.AddScoped<IDiscountRep, DiscountRep>();
+            services.AddScoped<IDashboardRep, DashboardRep>();
 
             services.AddScoped<IUsersBL, UsersBL>();
             services.AddScoped<IOfficeBL, OfficeBL>();
@@ -52,6 +54,8 @@ namespace StockManagerApi.Extensions
             services.AddScoped<IHistoryBL, HistoryBL>();
             services.AddScoped<ISaleBL, SaleBL>();
             services.AddScoped<IDiscountBL, DiscountBL>();
+            services.AddScoped<IDashboardBL, DashboardBL>();
+
             services.AddScoped<IDisabledDiscountService, DisabledDiscountService>();
             services.AddScoped<IDeleteBarcodeService, DeleteBarcodeService>();
         }
